@@ -1,27 +1,33 @@
-# Hipster
+# Hipster: compartilhe experiências musicais.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
+![Hipster logo](https://github.com/jvmafra/hipster/blob/master/H.png?raw=true)
 
-## Development server
+## Visualizar execução
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Execute `ng serve` e vá para `http://localhost:4200/`. A aplicação recarrega automaticamente se qualquer arquivo-fonte for modificado.
 
-## Code scaffolding
+# Requisitos
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Node v8.9.1
+- Caso esteja com uma versão desatualizada, faça o download em https://nodejs.org/en/
 
-## Build
+Npm v5.5.1
+- Caso esteja com uma versão desatualizada, faça a atualização: npm install npm@latest -g
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Instale o angular-cli através do npm:
+- npm install -g @angular/cli
 
-## Running unit tests
+# Clone o repositório:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- git clone https://github.com/jvmafra/hipster.git
 
-## Running end-to-end tests
+- Em seguida:
+ > - cd hipster
+ 
+ > - npm install
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+- Para executar:
+ > - ng build (espere terminar)
 
-## Further help
+ > - node server.js
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
