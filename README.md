@@ -29,5 +29,5 @@ Instale o angular-cli através do npm:
 - Para executar:
  > - ng build (espere terminar)
 
- > - node server.js
+ > - babel-node server.js
 

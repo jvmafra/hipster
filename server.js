@@ -1,11 +1,14 @@
 // Get dependencies
-const express = require('express');
-const path = require('path');
-const http = require('http');
-const bodyParser = require('body-parser');
+import express from 'express';
+import path from 'path';
+import http from 'http';
+import bodyParser from 'body-parser';
+const api = require('./server/routes/api');
+
+
 
 // Get our API routes
-const api = require('./server/routes/api');
+
 
 const app = express();
 
@@ -14,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Point static path to dist
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'src')));
 
 // Set our api routes
 app.use('/api', api);
@@ -22,7 +25,7 @@ app.use('/api', api);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
+  res.sendFile(path.join(__dirname, 'src/index.html'));
 });
 
 /**
