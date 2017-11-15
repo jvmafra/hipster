@@ -58,4 +58,25 @@ export class UsuarioService {
     })
 
   }
+
+  /**
+   * Edita um Usuario
+   *
+   * @param   {Object}  novo usuario contendo os campos preenchidos
+   * @return  {Promise} Promise resolvida com o objeto Usuario
+   * da forma que o mongo retorna
+   */
+
+  static editaUsuario(username, novoUsuario) {
+    return new Promise((resolve, reject) =>
+      Usuario.findOneAndUpdate({username: username}, novoUsuario, (err, result) => {
+        if (err || !result) return reject(err);
+        return resolve(result);
+      })
+    );
+
+  }
+
+
+
 }

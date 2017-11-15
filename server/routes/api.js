@@ -51,4 +51,19 @@ router.post('/usuario', async (req, res) => {
   }
 });
 
+/**
+ * PUT edita usuário
+ */
+router.put('/usuario/:username', async (req, res) => {
+  const usuario = req.body;
+  const username = req.params.username;
+  try {
+    const retorno = await UsuarioService.editaUsuario(username, usuario);
+    res.status(200).json(retorno);
+  }catch(err) {
+    console.log(err)
+    res.status(400).json(err.message);
+  }
+});
+
 module.exports = router;
