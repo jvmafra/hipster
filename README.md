@@ -38,3 +38,6 @@ Antes é recomendado instalar o nodemon globalmente:
 Para executar com o nodemon:
 > - nodemon --exec npm run babel-node -- ./server.js
 
+Ou você pode simplesmente executar:
+> - npm start
+

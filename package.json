@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "babel-node": "babel-node --presets=env",
-    "start": "ng serve",
+    "start": "nodemon --exec npm run babel-node -- ./server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
