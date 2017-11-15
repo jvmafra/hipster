@@ -3,6 +3,17 @@
  */
 let _ = require('lodash');
 
+_.CONSTANTES_LOCAL = {
+    URI: `${_.API_URI}/locais`,
+
+    ERRO_VALIDACAO_NOME: 'Usuário deve ter um nome',
+    ERRO_VALIDACAO_EMAIL: 'Usuário deve ter um email',
+    ERRO_VALIDACAO_SENHA: 'Usuário deve ter uma senha',
+    ERRO_VALIDACAO_USERNAME: 'Usuário deve ter um username',
+    ERRO_VALIDACAO_DATA_NASCIMENTO: 'Usuário deve ter uma data de nascimento',    
+    
+};
+
 /**
  * Lida com o erro de validação do mongoose.
  *
@@ -15,7 +26,8 @@ _.handleValidationError = (err, next) => {
         if (message.indexOf(': ') !== message.length - ': '.length)
             message += ', ';
         message += value.message;
-    });    
+    });
+    message += ".";
     return next(new Error(message));
 };
 
