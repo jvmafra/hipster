@@ -6,12 +6,12 @@ const router = express.Router();
 
 /* GET api listing. */
 router.get('/', (req, res) => {
-  res.send('api works');
+  res.send('api works!');
 });
 
-router.post('/cerveja', (req, res) => {
+router.get('/cerveja', (req, res) => {
 
-  res.send('vamos beber');
+  res.send('vamos beber!');
 });
 
 /**
