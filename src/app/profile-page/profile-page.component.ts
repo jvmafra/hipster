@@ -10,8 +10,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class ProfilePageComponent implements OnInit {
 
-  profile: string;
-  events: [any] = [];
+  profile: any;
+  events: [any];
   selected_tab: number = 0;
 
   constructor(private sanitizer: DomSanitizer,
