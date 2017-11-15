@@ -48,7 +48,9 @@ const usuarioSchema = new Schema({
 usuarioSchema.post('save', (err, doc, next) => {
   if (err.name === 'ValidationError') {
     util.handleValidationError(err, next);
-    }
+  } else if (err.name === 'MongoError'){
+    util.handleMongoError(err, next);
+  }
   return next(err);
 });
 

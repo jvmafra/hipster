@@ -31,5 +31,14 @@ _.handleValidationError = (err, next) => {
     return next(new Error(message));
 };
 
+_.handleMongoError = (err, next) => {
+    let message = 'Erro de criação: ';
+    if(err.code === 11000) { // duplicate key error
+        message += 'Esse username já existe';
+    }
+    message += ".";
+    return next(new Error(message));
+};
+
 
 module.exports = _;
