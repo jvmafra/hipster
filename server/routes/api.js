@@ -1,6 +1,7 @@
 import express from 'express';
 import {UsuarioService}  from '../service/UsuarioService';
 
+
 const router = express.Router();
 
 /* GET api listing. */
@@ -13,21 +14,41 @@ router.post('/cerveja', (req, res) => {
   res.send('vamos beber');
 });
 
+/**
+ * @FIXME cada conjunto de rotas deverá ser extraido desse documento
+ * para ser criado seus respectivos documentos de acordo com o módulo
+ * ao qual pertence. Por exemplo: userRote.js (todas as rotas de usuario)
+ */
 
-router.get('/usuario/:username', (req, res) => {
-  const id = req.params.id;
-  // res.send(UsuarioService.consultaUsuario('gustavo.hqo@gmail.com'))
-  res.send(`O id Passado foi ${id}`);
+/**
+ * GET consulta todos os usuários
+ *
+ * @FIXME rota de teste, deverá ser desativada
+ */
+router.get('/usuario', async (req, res) => {
+  res.status(200).json(await UsuarioService.consultaUsuarios());
 });
 
-router.post('/usuario', async (req, res) => {
-  const usuario = {
-    nome: 'Gustavo Oliveira', email: 'gustavo.hqo@gmail.com',
-    senha: '12345678', dataNascimento: '18/09/1990'
-  };
+/**
+ * GET consulta usuário por username
+ */
+router.get('/usuario/:username', async (req, res) => {
+  const username = req.params.username;
+  res.status(200).json(await UsuarioService.consultaUsuario(username));
+});
 
-  const retorno = await UsuarioService.cadastraUsuario(usuario);
-  res.send(retorno);
+
+/**
+ * POST cadastra usuário
+ */
+router.post('/usuario', async (req, res) => {
+  const usuario = req.body;
+  try {
+    const retorno = await UsuarioService.cadastraUsuario(usuario);
+    res.status(200).json(retorno);
+  }catch(err) {
+    res.status(400).json(err.message);
+  }
 });
 
 module.exports = router;

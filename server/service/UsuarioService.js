@@ -11,20 +11,50 @@ db_config();
 export class UsuarioService {
 
   /**
-   * Consulta um Usuário dado um email.
+   * Consulta um Usuário dado um username.
    *
-   * @param   {String}  email do usuário no qual quer recuperar.
-   * @returns {Promise}  Promise de consulta Usuario no banco de dados.
+   * @param   {String}  username do usuário no qual quer recuperar.
+   * @returns {Promise}  Promise resolvida com o objeto Usuario
+   * da forma que o mongo retorna.
    */
-  static consultaUsuario(email) {
-    console.log(db_config());
-    console.log(email);
+  static consultaUsuario(username) {
+    return new Promise((resolve, reject) =>
+      Usuario.findOne({username: username}, (err, result) => {
+        if (err || !result) return reject(err);
+        return resolve(result);
+      })
+    );
   }
 
+
+  /**
+   * Consulta todos os Usuários dado um email.
+   *
+   *
+   * @returns {Promise}  Promise resolvida com uma lista de objetos Usuario
+   * da forma que o mongo retorna.
+   */
+  static consultaUsuarios() {
+    return new Promise((resolve, reject) => {
+      Usuario.find({}, (err, results) => {
+        if (err) return reject(err);
+        return resolve(results);
+      });
+    });
+  }
+
+
+  /**
+   * Cadastra um Usuario
+   *
+   * @param   {Object}  usuario contendo os campos preenchidos
+   * @return  {Promise} Promise resolvida com o objeto Usuario
+   * da forma que o mongo retorna
+   */
   static cadastraUsuario(usuario) {
     const usuarioMongoose = new Usuario(usuario);
     return  new Promise((resolve, reject) => {
-      usuarioMongoose.save((err, result) => (err) ? reject(err.message) : resolve(result));
+      usuarioMongoose.save((err, result) => (err) ? reject(err) : resolve(result));
     })
 
   }
