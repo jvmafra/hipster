@@ -25,6 +25,7 @@
     "LIKES": "Curtidas"
   },
   "REGISTER": {
+    "UPDATE": "Atualizar",
     "SUBMIT": "Registrar",
     "INVITE": "Junte-se a nós!",
     "CANCEL": "Cancelar",

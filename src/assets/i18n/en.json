@@ -25,6 +25,7 @@
     "LIKES": "Likes"
   },
   "REGISTER": {
+    "UPDATE": "Update",
     "SUBMIT": "Register",
     "INVITE": "Join us!",
     "CANCEL": "Cancel",

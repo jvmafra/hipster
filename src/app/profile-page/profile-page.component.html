@@ -7,7 +7,7 @@
         </a>
         <div class="content">
           <i class="right floated write icon"></i>
-          <div class="header">{{ profile.username }}'s {{ 'PROFILEPAGE.PROFILE' | translate }}</div>
+          <div class="header">{{ profile.nome }}'s {{ 'PROFILEPAGE.PROFILE' | translate }}</div>
           <div class="meta">{{ events.length }} {{ 'PROFILEPAGE.POSTS' | translate }}</div>
           <div class="description">
             <div class="ui list">
@@ -54,6 +54,33 @@
           <div *ngFor="let event of events" >
             <app-user-post [event]="event"></app-user-post>
           </div>
+        </div>
+        <div *ngIf="selected_tab === 1">
+          <form class="ui form" style="padding: 5%;">
+            <h4 class="ui horizontal divider header">
+              <i class="child icon"></i>
+              {{ 'REGISTER.PERSONAL' | translate }}
+            </h4>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="child icon"></i>
+                <input type="text" name="name" [(ngModel)]="name" attr.placeholder="{{ 'REGISTER.NAME' | translate }}">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="mail icon"></i>
+                <input type="text" name="email" [(ngModel)]="email" attr.placeholder="{{ 'REGISTER.EMAIL' | translate }}">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="calendar icon"></i>
+                <input type="text" name="birthDate" [(ngModel)]="birthDate" attr.placeholder="{{ 'REGISTER.BIRTHDATE' | translate }}">
+              </div>
+            </div>
+            <div class="ui fluid large blue submit button" (click)="updateProfile()">{{ 'REGISTER.UPDATE' | translate }}</div>
+          </form>
         </div>
       </div>
     </div>

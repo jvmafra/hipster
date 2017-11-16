@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile-page',
@@ -15,20 +16,54 @@ export class ProfilePageComponent implements OnInit {
   events: [any];
   selected_tab: number = 0;
 
+  name: string;
+  email: string;
+  username: string;
+  birthDate: string;
+
   constructor(private sanitizer: DomSanitizer,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private http: HttpClient) {}
+
+  updateProfile() {
+    const headers = new HttpHeaders()
+      .set('Authorization', 'my-auth-token')
+      .set('Content-Type', 'application/json');
+
+    const usuario = {
+      dataNascimento: this.birthDate,
+      email: this.email,
+      nome: this.name,
+      username: this.username
+    };
+
+    this.http.put('http://127.0.0.1:3000/api/usuario/' + this.profile.username, JSON.stringify(usuario), {
+      headers: headers
+    }).subscribe(data => {
+      this.profile = data
+    });
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
         let username = params['username'];
-        this.profile = {
-          username: username,
-          youtube: username,
-          spotify: username,
-          email: "hipster@gmail.com",
-          data_nascimento: "01/06/1990",
-          data_criacao: "13/11/2017"
-        }
+
+        const headers = new HttpHeaders()
+          .set('Authorization', 'my-auth-token')
+          .set('Content-Type', 'application/json');
+
+        this.http.get('http://127.0.0.1:3000/api/usuario/' + username, {
+          headers: headers
+        }).subscribe(data => {
+          this.profile = data;
+          this.profile.youtube = this.profile.username
+          this.profile.spotify = this.profile.username
+          this.name = this.profile.nome;
+          this.username = this.profile.username;
+          this.birthDate = this.profile.dataNascimento;
+          this.email = this.profile.email;
+
+        });
      });
 
      this.events = [

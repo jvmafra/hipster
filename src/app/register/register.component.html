@@ -52,7 +52,7 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
-              <input type="password" name="password" attr.placeholder="{{ 'REGISTER.PASSWORD' | translate }}">
+              <input type="password" name="password" [(ngModel)]="password" attr.placeholder="{{ 'REGISTER.PASSWORD' | translate }}">
             </div>
           </div>
           <div class="ui fluid large blue submit button" (click)="registerUser()">{{ 'REGISTER.SUBMIT' | translate }}</div>

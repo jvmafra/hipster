@@ -10,8 +10,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class RegisterComponent implements OnInit {
 
-  $('.dropdown').dropdown();
-
   private birthDate: string;
   private email: string;
   private name: string;
@@ -43,6 +41,7 @@ export class RegisterComponent implements OnInit {
     this.http.post('http://127.0.0.1:3000/api/usuario', JSON.stringify(usuario), {
       headers: headers
     }).subscribe(data => {
+      window.location.href = "/user/" + usuario.username;
       console.log(data);
     });
 
