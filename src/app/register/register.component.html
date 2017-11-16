@@ -1,70 +1,84 @@
-<div class="ui container" id="register-form" style="width:500px; margin-top:15%;">
-  <div class="ui equal width form">
-    <div class="fields">
-      <div class="field">
-        <label>
-          <i class="quote left icon"></i>Nome
-        </label>
-        <input type="text"
-               placeholder="Digite seu nome"
-               [(ngModel)]="nome">
-      </div>
-      <div class="field required">
-        <label>
-          <i class="at icon"></i>E-mail
-        </label>
-        <input placeholder="Digite seu e-mail"
-               type="email"
-               [(ngModel)]="email">
-      </div>
-    </div>
-    <div class="fields">
-      <div class="field">
-        <label>
-          <i class="calendar icon"></i>Data de nascimento
-        </label>
-        <input placeholder="Digite sua data de nascimento"
-               type="text"
-               [(ngModel)]="dataNascimento">
-      </div>
-    </div>
-    <div class="fields required">
-      <div class="field">
-        <label>
-          <i class="user icon"></i>Username
-        </label>
-        <input placeholder="Digite o seu nome de usuário"
-               type="text"
-               [value]="username"
-               [(ngModel)]="username">
-      </div>
-      <div class="field required">
-        <label>
-          <i class="asterisk icon"></i>Senha
-        </label>
-        <input #password
-               type="password"
-               [value]="senha"
-               placeholder="Digite sua senha"
-               (mouseover)="showPwdTip()"
-               (mouseleave)="hidePwdTip()"
-               [(ngModel)]="senha">
-        <div class="ui pointing label"
-             *ngIf="passwordElemIsHover">
-          Senha deve ter pelo menos 8 caracteres
+
+<div style="margin-top: 20%; text-align: left; ">
+  <span id="registrar"
+          (click)="abrirCadastro()">Entre nessa festa. Registre-se
+  </span>
+</div>
+
+<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" (click)="fecharCadastro()">&times;</a>
+  <div class="overlay-content">
+    <div class="ui container" id="register-form" style="width:500px;">
+      <div class="ui equal width form">
+        <div class="fields">
+          <div class="field">
+            <label>
+              <i class="quote left icon"></i>Nome
+            </label>
+            <input type="text"
+                   placeholder="Digite seu nome"
+                   [(ngModel)]="nome">
+          </div>
+          <div class="field required">
+            <label>
+              <i class="at icon"></i>E-mail
+            </label>
+            <input placeholder="Digite seu e-mail"
+                   type="email"
+                   [(ngModel)]="email">
+          </div>
+        </div>
+        <div class="fields" style="width:50%;">
+          <div class="field">
+            <label>
+              <i class="calendar icon"></i>Data de nascimento
+            </label>
+            <input placeholder="Digite sua data de nascimento"
+                   type="text"
+                   [(ngModel)]="dataNascimento">
+          </div>
+        </div>
+        <div class="fields required">
+          <div class="field">
+            <label>
+              <i class="user icon"></i>Username
+            </label>
+            <input placeholder="Digite o seu nome de usuário"
+                   type="text"
+                   [value]="username"
+                   [(ngModel)]="username">
+          </div>
+          <div class="field required">
+            <label>
+              <i class="asterisk icon"></i>Senha
+            </label>
+            <input #password
+                   type="password"
+                   [value]="senha"
+                   placeholder="Digite sua senha"
+                   (mouseover)="mostrarInfoSenha()"
+                   (mouseleave)="esconderInfoSenha()"
+                   [(ngModel)]="senha">
+            <div class="ui pointing label"
+                 *ngIf="passwordElemIsHover">
+              Senha deve ter pelo menos 8 caracteres
+            </div>
+          </div>
+        </div>
+        <div class="ui buttons" style="margin-top: 20px;">
+          <button class="ui button">
+            <i class="ban icon"
+               (click)="finalizarCadastro()"></i>Cancelar
+          </button>
+          <div class="or"></div>
+          <button class="ui positive button"
+                  (click)="fazerPostDosDados()">
+            <i class="add user icon"></i>Registrar
+          </button>
         </div>
       </div>
     </div>
-    <div class="ui buttons">
-      <button class="ui button">
-        <i class="ban icon"
-           (click)="cancel()"></i>Cancelar
-      </button>
-      <div class="or"></div>
-      <button class="ui positive button"
-              (click)="submit()">
-        <i class="add user icon"></i>Registrar
-      </button>
-    </div>
   </div>
 </div>
+
+

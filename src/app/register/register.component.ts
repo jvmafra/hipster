@@ -20,28 +20,32 @@ export class RegisterComponent implements OnInit {
   private senha: string;
   private username: string;
 
+
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-
   }
 
-  showPwdTip() {
+  mostrarInfoSenha() {
     this.passwordElemIsHover = true;
   }
 
-  hidePwdTip() {
+  esconderInfoSenha() {
     this.passwordElemIsHover = false;
   }
 
-  submit() {
-    const usuario = {
+  private getDadosUsuario() {
+    return  {
       dataNascimento: this.dataNascimento,
       email: this.email,
       nome: this.nome,
       senha: this.senha,
       username: this.username
     };
+  }
+
+  fazerPostDosDados() {
+    const usuario = this.getDadosUsuario();
 
     const headers = new HttpHeaders()
       .set('Authorization', 'my-auth-token')
@@ -52,9 +56,28 @@ export class RegisterComponent implements OnInit {
     }).subscribe(data => {
       console.log(data);
     });
+
+    this.finalizarCadastro();
   }
 
-  cancel() {
+  private limparCamposDoForm() {
+    this.dataNascimento = '';
+    this.email = '';
+    this.nome = '';
+    this.username = '';
+    this.senha = '';
+  }
 
+  abrirCadastro() {
+    document.getElementById('myNav').style.height = '100%';
+  }
+
+  fecharCadastro() {
+  document.getElementById('myNav').style.height = '0%';
+  }
+
+  finalizarCadastro() {
+    this.fecharCadastro();
+    this.limparCamposDoForm();
   }
 }
