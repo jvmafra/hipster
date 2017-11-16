@@ -8,7 +8,6 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { routes } from './app.router';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from "@angular/common/http";
 import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserPostComponent } from './user-post/user-post.component';
 
