@@ -2,41 +2,69 @@
   <div class="ui equal width form">
     <div class="fields">
       <div class="field">
-        <label><i class="quote left icon"></i>Nome</label>
-        <input placeholder="Digite seu nome" type="text">
+        <label>
+          <i class="quote left icon"></i>Nome
+        </label>
+        <input type="text"
+               placeholder="Digite seu nome"
+               [(ngModel)]="nome">
       </div>
       <div class="field required">
-        <label><i class="at icon"></i>E-mail</label>
-        <input placeholder="Digite seu e-mail" type="email">
+        <label>
+          <i class="at icon"></i>E-mail
+        </label>
+        <input placeholder="Digite seu e-mail"
+               type="email"
+               [(ngModel)]="email">
       </div>
     </div>
     <div class="fields">
       <div class="field">
-        <label><i class="calendar icon"></i>Data de nascimento</label>
-        <input placeholder="Digite sua data de nascimento" type="text">
+        <label>
+          <i class="calendar icon"></i>Data de nascimento
+        </label>
+        <input placeholder="Digite sua data de nascimento"
+               type="text"
+               [(ngModel)]="dataNascimento">
       </div>
     </div>
     <div class="fields required">
       <div class="field">
-        <label><i class="user icon"></i>Username</label>
-        <input placeholder="Digite o seu nome de usuário" type="text">
+        <label>
+          <i class="user icon"></i>Username
+        </label>
+        <input placeholder="Digite o seu nome de usuário"
+               type="text"
+               [value]="username"
+               [(ngModel)]="username">
       </div>
       <div class="field required">
-        <label><i class="asterisk icon"></i>Senha</label>
+        <label>
+          <i class="asterisk icon"></i>Senha
+        </label>
         <input #password
                type="password"
+               [value]="senha"
                placeholder="Digite sua senha"
                (mouseover)="showPwdTip()"
-               (mouseleave)="hidePwdTip()">
-        <div class="ui pointing label" *ngIf="passwordIsFocused" >
+               (mouseleave)="hidePwdTip()"
+               [(ngModel)]="senha">
+        <div class="ui pointing label"
+             *ngIf="passwordElemIsHover">
           Senha deve ter pelo menos 8 caracteres
         </div>
       </div>
     </div>
     <div class="ui buttons">
-      <button class="ui button"><i class="ban icon"></i>Cancel</button>
+      <button class="ui button">
+        <i class="ban icon"
+           (click)="cancel()"></i>Cancelar
+      </button>
       <div class="or"></div>
-      <button class="ui positive button"><i class="add user icon"></i>Register</button>
+      <button class="ui positive button"
+              (click)="submit()">
+        <i class="add user icon"></i>Registrar
+      </button>
     </div>
   </div>
 </div>

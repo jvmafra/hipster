@@ -8,10 +8,16 @@ import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angu
 })
 export class RegisterComponent implements OnInit {
 
-  passwordIsFocused = false;
+  private passwordElemIsHover = false;
 
   @ViewChild
-  ('password') password: ElementRef;
+  ('passwordElem') passwordElem: ElementRef;
+
+  private dataNascimento: string;
+  private email: string;
+  private nome: string;
+  private senha: string;
+  private username: string;
 
   constructor() { }
 
@@ -20,11 +26,25 @@ export class RegisterComponent implements OnInit {
   }
 
   showPwdTip() {
-    this.passwordIsFocused = true;
+    this.passwordElemIsHover = true;
   }
 
   hidePwdTip() {
-    this.passwordIsFocused = false;
+    this.passwordElemIsHover = false;
   }
 
+  submit() {
+    const usuario = {
+      dataNascimento: this.dataNascimento,
+      email: this.email,
+      nome: this.nome,
+      senha: this.senha,
+      username: this.username
+    };
+    console.log(usuario);
+  }
+
+  cancel() {
+
+  }
 }
