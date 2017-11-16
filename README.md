@@ -21,7 +21,7 @@ Instale o angular-cli através do npm:
 
 - git clone https://github.com/jvmafra/hipster.git
 
-- Para funcionar o post, é necessário instalar o curs:
+- Para funcionar o post, é necessário instalar o cors:
 > - npm install cors
 
 - Em seguida:
