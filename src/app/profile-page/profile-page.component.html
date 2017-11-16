@@ -1,5 +1,3 @@
-
-
 <div class="ui container" style="margin-top: 1%;">
   <div class="ui grid">
     <div class="five wide column">
@@ -34,12 +32,12 @@
             </div>
           </div>
         </div>
-        <div class="extra content">
+        <!-- <div class="extra content">
           <span class="right floated star">
             <i class="star icon"></i>
             {{ 'PROFILEPAGE.FAVORITE' | translate }}
           </span>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="eleven wide column">
@@ -52,24 +50,9 @@
         </a>
       </div>
       <div class="ui segment">
-        <div class="ui feed" *ngIf="selected_tab === 0" >
-          <div class="event" *ngFor="let event of events" >
-            <div class="label">
-              <img src="../assets/guga-hipster.jpg">
-            </div>
-            <div class="content">
-              <div class="summary">
-                <span> {{ 'PROFILEPAGE.EVENT_POST' | translate }} <a> {{event.title}}</a></span>
-                <div class="date">
-                  {{ event.date }}
-                </div>
-              </div>
-              <div class="meta">
-                <a class="like">
-                  <i class="like icon"></i> {{ event.likes }}
-                </a>
-              </div>
-            </div>
+        <div *ngIf="selected_tab === 0" >
+          <div *ngFor="let event of events" >
+            <app-user-post [event]="event"></app-user-post>
           </div>
         </div>
       </div>

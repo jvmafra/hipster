@@ -1,0 +1,74 @@
+<div class="ui feed">
+  <div class="event">
+    <div class="label">
+      <img src="../assets/guga-hipster.jpg">
+    </div>
+    <div class="content">
+      <div class="summary">
+        <span> {{ 'PROFILEPAGE.EVENT_POST' | translate }} <a> {{ event.title }}</a></span>
+        <div class="date">
+          {{ event.date }}
+        </div>
+      </div>
+      <div class="extra text">
+        {{ event.text }}
+      </div>
+      <div class="meta">
+        <a class="like">
+          <i class="like icon"></i> {{ event.likes }} {{ 'POST.LIKES' | translate }}
+        </a>
+      </div>
+      <div class="ui comments">
+        <div *ngFor="let comment of event.comments" class="comment">
+          <a class="avatar">
+            <img [src]="comment.owner.img">
+          </a>
+          <div class="content">
+            <a class="author">{{ comment.owner.name }}</a>
+            <div class="metadata">
+              <span class="date">Yesterday at 12:30AM</span>
+            </div>
+            <div class="text">
+              <p>{{ comment.text }}</p>
+            </div>
+            <div class="actions">
+              <a class="reply">{{ 'POST.REPLY' | translate }}</a>
+            </div>
+          </div>
+          <div class="comments">
+            <div *ngFor="let subcomment of comment.comments" class="comment">
+              <a class="avatar">
+                <img [src]="subcomment.owner.img">
+              </a>
+              <div class="content">
+                <a class="author">{{ subcomment.owner.name }}</a>
+                <div class="metadata">
+                  <span class="date">Just now</span>
+                </div>
+                <div class="text">
+                  {{ subcomment.text }}
+                </div>
+              </div>
+            </div>
+            <form class="ui reply form">
+              <div class="field">
+                <div class="ui icon input">
+                  <input type="text" attr.placeholder="{{ 'POST.REPLY' | translate }} a {{ comment.owner.name }}">
+                  <i class="reply link icon"></i>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <form class="ui reply form">
+          <div class="field">
+            <div class="ui icon input">
+              <input type="text" attr.placeholder="{{ 'POST.SEND' | translate }}">
+              <i class="send link icon"></i>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

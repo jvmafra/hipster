@@ -1,6 +1,36 @@
-<router-outlet>
-  <div>
-    <button type="button" class="ui button" (click)="changeLanguage('pt')"> <i class="br flag"></i></button>
-    <button type="button" class="ui button" (click)="changeLanguage('en')"> <i class="us flag"></i></button>
+<div class="ui top attached menu">
+  <div class="ui container">
+    <a href="/" class="header item" style="">
+      <img class="logo" src="assets/hipster-logo.png">
+      Hipster
+    </a>
+    <div class="item">
+      {{ 'HIPSTER.LANGUAGE' | translate }}:
+      <div (click)="changeLanguage('pt')" class="item"><i class="br flag"></i>{{ 'HIPSTER.LANGUAGES.PT' | translate }}</div>
+      <div (click)="changeLanguage('en')" class="item"><i class="us flag"></i>{{ 'HIPSTER.LANGUAGES.EN' | translate }}</div>
+    </div>
+    <div class="right menu">
+      <a href="/" class="item">{{ 'HIPSTER.HOME' | translate }}</a>
+      <a href="/user/gabriel" class="item">{{ 'HIPSTER.PROFILE' | translate }}</a>
+      <!-- <div class="ui right aligned category search item">
+        <div class="ui transparent icon input">
+          <input class="prompt" type="text" attr.placeholder="{{ 'HIPSTER.SEARCH' | translate }}">
+          <i class="search link icon"></i>
+        </div>
+        <div class="results"></div>
+      </div>
+      <div class="item">
+        <div class="ui dropdown icon simple">
+          <i class="wrench icon"></i>
+          <div class="menu">
+            <div class="item">Choice 1</div>
+            <div class="item">Choice 2</div>
+            <div class="item">Choice 3</div>
+          </div>
+        </div>
+      </div> -->
+    </div>
   </div>
-</router-outlet>
+</div>
+
+<router-outlet></router-outlet>
