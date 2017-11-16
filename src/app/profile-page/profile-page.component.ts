@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile-page',
@@ -15,7 +16,10 @@ export class ProfilePageComponent implements OnInit {
   selected_tab: number = 0;
 
   constructor(private sanitizer: DomSanitizer,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+
+
+               }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -28,26 +32,27 @@ export class ProfilePageComponent implements OnInit {
           data_nascimento: "01/06/1990",
           data_criacao: "13/11/2017"
         }
+
+
      });
 
      this.events = [
        {
-         title: "You posted <a>Rafael's Song</a>",
+         title: "Rafael's Song",
          date: "2 days ago",
          likes: "41 Likes"
        },
        {
-         title: "You posted <a>Gilekel's Song</a>",
+         title: "Gilekel's Song",
          date: "4 days ago",
          likes: "31 Likes"
        },
        {
-         title: "You posted <a>Mafraboy's Song</a>",
+         title: "Mafraboy's Song",
          date: "5 days ago",
          likes: "67 Likes"
        },
      ]
 
   }
-
 }
