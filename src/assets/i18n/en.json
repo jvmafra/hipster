@@ -1,4 +1,14 @@
 {
+  "HIPSTER": {
+    "HOME": "Home",
+    "SEARCH": "Search in Hipster",
+    "PROFILE": "Profile",
+    "LANGUAGE": "Language",
+    "LANGUAGES": {
+      "PT": "Portuguese",
+      "EN": "English"
+    }
+  },
   "PROFILEPAGE": {
     "ABOUT": "About",
     "TIMELINE": "Timeline",
@@ -7,5 +17,23 @@
     "FAVORITE": "Favorite",
     "POSTS": "Posts",
     "PROFILE": "Profile"
+  },
+  "POST": {
+    "REPLY": "Reply",
+    "SEND": "Send",
+    "LIKE": "Like",
+    "LIKES": "Likes"
+  },
+  "REGISTER": {
+    "SUBMIT": "Register",
+    "INVITE": "Join us!",
+    "CANCEL": "Cancel",
+    "PERSONAL": "Personal info",
+    "USER": "User info",
+    "EMAIL": "E-mail address",
+    "USERNAME": "Username",
+    "BIRTHDATE": "Birth date",
+    "PASSWORD": "Password",
+    "NAME": "Name"
   }
 }

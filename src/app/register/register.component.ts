@@ -1,5 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -9,43 +10,31 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class RegisterComponent implements OnInit {
 
-  private passwordElemIsHover = false;
+  $('.dropdown').dropdown();
 
-  @ViewChild
-  ('passwordElem') passwordElem: ElementRef;
-
-  private dataNascimento: string;
+  private birthDate: string;
   private email: string;
-  private nome: string;
-  private senha: string;
+  private name: string;
+  private password: string;
   private username: string;
-
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
 
-  mostrarInfoSenha() {
-    this.passwordElemIsHover = true;
-  }
-
-  esconderInfoSenha() {
-    this.passwordElemIsHover = false;
-  }
-
-  private getDadosUsuario() {
+  private getUserForm() {
     return  {
-      dataNascimento: this.dataNascimento,
+      dataNascimento: this.birthDate,
       email: this.email,
-      nome: this.nome,
-      senha: this.senha,
+      nome: this.name,
+      senha: this.password,
       username: this.username
     };
   }
 
-  fazerPostDosDados() {
-    const usuario = this.getDadosUsuario();
+  registerUser() {
+    const usuario = this.getUserForm();
 
     const headers = new HttpHeaders()
       .set('Authorization', 'my-auth-token')
@@ -57,27 +46,18 @@ export class RegisterComponent implements OnInit {
       console.log(data);
     });
 
-    this.finalizarCadastro();
+    this.finishRegister();
   }
 
-  private limparCamposDoForm() {
-    this.dataNascimento = '';
+  private clearRegisterForm() {
+    this.birthDate = '';
     this.email = '';
-    this.nome = '';
+    this.name = '';
     this.username = '';
-    this.senha = '';
+    this.password = '';
   }
 
-  abrirCadastro() {
-    document.getElementById('myNav').style.height = '100%';
-  }
-
-  fecharCadastro() {
-  document.getElementById('myNav').style.height = '0%';
-  }
-
-  finalizarCadastro() {
-    this.fecharCadastro();
-    this.limparCamposDoForm();
+  finishRegister() {
+    this.clearRegisterForm();
   }
 }

@@ -1,84 +1,63 @@
+<div class="hipster-bg-image">
 
-<div style="margin-top: 20%; text-align: left; ">
-  <span id="registrar"
-          (click)="abrirCadastro()">Entre nessa festa. Registre-se
-  </span>
 </div>
-
-<div id="myNav" class="overlay">
-  <a href="javascript:void(0)" class="closebtn" (click)="fecharCadastro()">&times;</a>
-  <div class="overlay-content">
-    <div class="ui container" id="register-form" style="width:500px;">
-      <div class="ui equal width form">
-        <div class="fields">
-          <div class="field">
-            <label>
-              <i class="quote left icon"></i>Nome
-            </label>
-            <input type="text"
-                   placeholder="Digite seu nome"
-                   [(ngModel)]="nome">
-          </div>
-          <div class="field required">
-            <label>
-              <i class="at icon"></i>E-mail
-            </label>
-            <input placeholder="Digite seu e-mail"
-                   type="email"
-                   [(ngModel)]="email">
-          </div>
+<div class="ui container" style="margin-top: 1%;">
+  <div class="ui grid">
+    <div class="ten wide column">
+      <img class="ui centered small image" src="../assets/hipster-logo.png">
+      <h2 class="ui center aligned icon header">
+        <i class="circular users icon"></i>
+        {{ 'REGISTER.INVITE' | translate }}
+      </h2>
+    </div>
+    <div class="six wide column">
+      <div class="ui centered card">
+        <div class="content">
+          <div class="right floated meta">Hispter</div>
+          <img class="ui avatar image" src="../assets/hipster-logo.png">
         </div>
-        <div class="fields" style="width:50%;">
+        <form class="ui form" style="padding: 5%;">
+          <h4 class="ui horizontal divider header">
+            <i class="child icon"></i>
+            {{ 'REGISTER.PERSONAL' | translate }}
+          </h4>
           <div class="field">
-            <label>
-              <i class="calendar icon"></i>Data de nascimento
-            </label>
-            <input placeholder="Digite sua data de nascimento"
-                   type="text"
-                   [(ngModel)]="dataNascimento">
-          </div>
-        </div>
-        <div class="fields required">
-          <div class="field">
-            <label>
-              <i class="user icon"></i>Username
-            </label>
-            <input placeholder="Digite o seu nome de usuário"
-                   type="text"
-                   [value]="username"
-                   [(ngModel)]="username">
-          </div>
-          <div class="field required">
-            <label>
-              <i class="asterisk icon"></i>Senha
-            </label>
-            <input #password
-                   type="password"
-                   [value]="senha"
-                   placeholder="Digite sua senha"
-                   (mouseover)="mostrarInfoSenha()"
-                   (mouseleave)="esconderInfoSenha()"
-                   [(ngModel)]="senha">
-            <div class="ui pointing label"
-                 *ngIf="passwordElemIsHover">
-              Senha deve ter pelo menos 8 caracteres
+            <div class="ui left icon input">
+              <i class="child icon"></i>
+              <input type="text" name="name" [(ngModel)]="name" attr.placeholder="{{ 'REGISTER.NAME' | translate }}">
             </div>
           </div>
-        </div>
-        <div class="ui buttons" style="margin-top: 20px;">
-          <button class="ui button">
-            <i class="ban icon"
-               (click)="finalizarCadastro()"></i>Cancelar
-          </button>
-          <div class="or"></div>
-          <button class="ui positive button"
-                  (click)="fazerPostDosDados()">
-            <i class="add user icon"></i>Registrar
-          </button>
-        </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="mail icon"></i>
+              <input type="text" name="email" [(ngModel)]="email" attr.placeholder="{{ 'REGISTER.EMAIL' | translate }}">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="calendar icon"></i>
+              <input type="text" name="birthDate" [(ngModel)]="birthDate" attr.placeholder="{{ 'REGISTER.BIRTHDATE' | translate }}">
+            </div>
+          </div>
+          <h4 class="ui horizontal divider header">
+            <i class="user icon"></i>
+            {{ 'REGISTER.USER' | translate }}
+          </h4>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input type="text" name="username" [(ngModel)]="username" attr.placeholder="{{ 'REGISTER.USERNAME' | translate }}">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" name="password" attr.placeholder="{{ 'REGISTER.PASSWORD' | translate }}">
+            </div>
+          </div>
+          <div class="ui fluid large blue submit button" (click)="registerUser()">{{ 'REGISTER.SUBMIT' | translate }}</div>
+        </form>
       </div>
     </div>
   </div>
 </div>
-
-
