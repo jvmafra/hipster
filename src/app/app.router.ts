@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 export const router: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: ProfilePageComponent },
   { path: 'user/:username', component: ProfilePageComponent },
   { path: '**', redirectTo: '' }
 ];
