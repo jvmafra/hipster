@@ -21,6 +21,9 @@ Instale o angular-cli através do npm:
 
 - git clone https://github.com/jvmafra/hipster.git
 
+- Para funcionar o post, é necessário instalar o cors:
+> - npm install cors
+
 - Em seguida:
  > - cd hipster
  
@@ -29,5 +32,15 @@ Instale o angular-cli através do npm:
 - Para executar:
  > - ng build (espere terminar)
 
- > - node server.js
+ > - babel-node server.js
+
+- Para executar com o nodemon (atualização do server a cada modificação):
+Antes é recomendado instalar o nodemon globalmente:
+    - npm install -g nodemon
+
+Para executar com o nodemon:
+> - nodemon --exec npm run babel-node -- ./server.js
+
+Ou você pode simplesmente executar:
+> - npm start
 

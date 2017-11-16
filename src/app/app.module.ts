@@ -6,6 +6,8 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { routes } from './app.router';
+import { RegisterComponent } from './register/register.component';
+import { FormsModule } from '@angular/forms';
 import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserPostComponent } from './user-post/user-post.component';
 
@@ -17,10 +19,16 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     ProfilePageComponent,
+    RegisterComponent,
     UserPostComponent
+  ],
+  providers: [
+    HttpClientModule,
+    HipsterTranslate
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     routes,
     HttpClientModule,
     TranslateModule.forRoot({
@@ -31,7 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [HipsterTranslate],
+    
   bootstrap: [AppComponent]
 })
 export class AppModule { }
