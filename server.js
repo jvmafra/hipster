@@ -4,13 +4,14 @@ import path from 'path';
 import http from 'http';
 import bodyParser from 'body-parser';
 const api = require('./server/routes/api');
-
+const cors = require('cors');
 
 
 // Get our API routes
 
-
 const app = express();
+
+app.use(cors());
 
 // Parsers for POST data
 app.use(bodyParser.json({
