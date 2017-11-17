@@ -11,7 +11,6 @@ import { UserService } from '../services/user.service';
   encapsulation: ViewEncapsulation.None
 })
 export class RegisterComponent implements OnInit {
-  private $ : any;
   private user : Object;
   private day : String;
   private month : String;
