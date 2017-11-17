@@ -2,8 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@an
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../services/user.service';
-declare var jquery:any;
-declare var $ :any;
+
 
 @Component({
   selector: 'app-register',
@@ -13,23 +12,30 @@ declare var $ :any;
 })
 export class RegisterComponent implements OnInit {
   private $ : any;
-  private user = {};
-  private day = '';
-  private month = '';
-  private year = '';
-  private days = Array.from(Array(31).keys())
-  private months = Array.from(Array(12).keys())
-  private years = this.userService.getYearsArray('1905');
+  private user : Object;
+  private day : String;
+  private month : String;
+  private year : String;
+  private days : Array<number>;
+  private months : Array<number>;
+  private years : Array<number>;
 
   constructor(private http: HttpClient,
-              private userService: UserService,
-              private elementRef: ElementRef) { }
+              private userService: UserService) {
+    this.user = {};
+    this.day = 'Day';
+    this.month = 'Month';
+    this.year = 'Year'
+    this.days = Array.from(Array(31).keys());
+    this.months = Array.from(Array(12).keys());
+    this.years = this.userService.getBirthdayYearsArray('1905');
+  }
 
   ngOnInit() {
   }
 
   private registerUser(user) {
-    user.birthDate = "" + this.month + '/' + this.day + '/'+  this.year;
+    user.birthDate = this.userService.getBirthDate(this.day, this.month, this.year);
 
     this.userService.registerUser(user).subscribe(
       data => {

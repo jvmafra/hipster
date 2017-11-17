@@ -9,15 +9,21 @@ export class UserService {
   }
 
   public registerUser(user) {
-    console.log(user.birthDate)
     user.birthDate = new Date(user.birthDate);
-    console.log(user.birthDate)
+
     return this.http.post('http://127.0.0.1:3000/api/usuario', JSON.stringify(user), {
       headers: this.headers
     });
   }
 
-  public getYearsArray(startYear) {
+  public getBirthDate(day, month, year) {
+    let birthDate = "" + month + '/' + day + '/'+  year;
+
+    return new Date(birthDate);
+  }
+
+  //@TODO: Analyse if this function would be better in another service
+  public getBirthdayYearsArray(startYear) {
     var currentYear = new Date().getFullYear(), years = [];
     startYear = startYear || 1980;
 
@@ -27,6 +33,5 @@ export class UserService {
 
     return years;
   }
-
 
 }

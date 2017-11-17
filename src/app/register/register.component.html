@@ -37,19 +37,19 @@
           <div class="three fields">
             <div class="seven wide field">
               <select class="font-select-size" [(ngModel)]="day" name="day">
-                <option value="null"> Day </option>
+                <option selected> Day </option>
                 <option *ngFor="let day of days" value="{{day + 1}}">{{day + 1}}</option>
               </select>
             </div>
             <div class="eight wide field">
               <select class="font-select-size" [(ngModel)]="month" name="month">
-                <option value="null">Month </option>
+                <option selected>Month </option>
                 <option *ngFor="let month of months" value="{{month + 1}}">{{month + 1}}</option>
               </select>
             </div>
             <div class="seven wide field">
               <select class="font-select-size" [(ngModel)]="year" name="year">
-                <option> Year </option>
+                <option selected> Year </option>
                 <option *ngFor="let year of years" value="{{year + 1}}">{{year}}</option>
               </select>
             </div>
