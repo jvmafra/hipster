@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserPostComponent } from './user-post/user-post.component';
+import { UserService } from './services/user.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -24,7 +25,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     HttpClientModule,
-    HipsterTranslate
+    HipsterTranslate,
+    UserService
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-    
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

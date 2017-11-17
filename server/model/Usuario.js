@@ -17,7 +17,7 @@ const getExistentEntityErroMenssage = (entidade) => `${entidade} já existente`;
  * @author Gustavo Oliveira
  */
 const usuarioSchema = new Schema({
-    nome : {
+    name : {
       type: String,
       required: [true, util.CONSTANTES_LOCAL.ERRO_VALIDACAO_NOME]
     },
@@ -27,7 +27,7 @@ const usuarioSchema = new Schema({
       required: [true, util.CONSTANTES_LOCAL.ERRO_VALIDACAO_EMAIL]
     },
 
-    senha : {
+    password : {
       type: String,
       required: [true, util.CONSTANTES_LOCAL.ERRO_VALIDACAO_SENHA]
     },
@@ -39,8 +39,8 @@ const usuarioSchema = new Schema({
       unique: [true, getExistentEntityErroMenssage("username")] // para garantir que é o indíce é unico
     },
 
-    dataNascimento : {
-      type: String,
+    birthDate : {
+      type: Date,
       required: [true, util.CONSTANTES_LOCAL.ERRO_VALIDACAO_DATA_NASCIMENTO]
     }
 });

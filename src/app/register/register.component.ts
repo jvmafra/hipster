@@ -1,6 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { UserService } from '../services/user.service';
+declare var jquery:any;
+declare var $ :any;
 
 @Component({
   selector: 'app-register',
@@ -9,54 +12,34 @@ import { TranslateService } from '@ngx-translate/core';
   encapsulation: ViewEncapsulation.None
 })
 export class RegisterComponent implements OnInit {
+  private $ : any;
+  private user = {};
+  private day = '';
+  private month = '';
+  private year = '';
+  private days = Array.from(Array(31).keys())
+  private months = Array.from(Array(12).keys())
+  private years = this.userService.getYearsArray('1905');
 
-  private birthDate: string;
-  private email: string;
-  private name: string;
-  private password: string;
-  private username: string;
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private userService: UserService,
+              private elementRef: ElementRef) { }
 
   ngOnInit() {
   }
 
-  private getUserForm() {
-    return  {
-      dataNascimento: this.birthDate,
-      email: this.email,
-      nome: this.name,
-      senha: this.password,
-      username: this.username
-    };
+  private registerUser(user) {
+    user.birthDate = "" + this.month + '/' + this.day + '/'+  this.year;
+
+    this.userService.registerUser(user).subscribe(
+      data => {
+        window.location.href = "/user/" + user.username;
+      }, err => {
+        this.user = {}
+        //handle error
+        console.log(err);
+      }
+    );
   }
 
-  registerUser() {
-    const usuario = this.getUserForm();
-
-    const headers = new HttpHeaders()
-      .set('Authorization', 'my-auth-token')
-      .set('Content-Type', 'application/json');
-
-    this.http.post('http://127.0.0.1:3000/api/usuario', JSON.stringify(usuario), {
-      headers: headers
-    }).subscribe(data => {
-      window.location.href = "/user/" + usuario.username;
-      console.log(data);
-    });
-
-    this.finishRegister();
-  }
-
-  private clearRegisterForm() {
-    this.birthDate = '';
-    this.email = '';
-    this.name = '';
-    this.username = '';
-    this.password = '';
-  }
-
-  finishRegister() {
-    this.clearRegisterForm();
-  }
 }

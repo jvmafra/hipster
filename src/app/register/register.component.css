@@ -1,9 +1,13 @@
 body {
-  background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/fQQuhtM/young-hipster-guy-relaxing-listening-music-laying-down-next-to-a-tree-in-a-park_417kqidjg__F0000.png");
+  background-image: url("/assets/images/front-page.png");;
   background-repeat: no-repeat;
   background-position: center;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
+}
+
+.font-select-size {
+  font-size: 12px;
 }
