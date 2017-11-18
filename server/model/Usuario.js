@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import util from '../util/util';
+import crypt from 'crypto';
+import bcrypt from 'bcrypt-nodejs'
 
 
 const Schema = mongoose.Schema;
@@ -45,6 +47,19 @@ const usuarioSchema = new Schema({
     }
 });
 
+usuarioSchema.pre("save", function(next) {
+  const user = this;
+  if (!user.isModified("senha")) {
+    return next();
+  }
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(user.senha, salt, null, function(err, hash) {
+      user.senha = hash;
+      next();
+    });
+  });
+});
+
 usuarioSchema.post('save', (err, doc, next) => {
   if (err.name === 'ValidationError') {
     util.handleValidationError(err, next);
@@ -53,5 +68,11 @@ usuarioSchema.post('save', (err, doc, next) => {
   }
   return next(err);
 });
+
+usuarioSchema.options.toJSON = {
+  transform: function(doc, ret) {
+    delete ret.senha;
+  }
+};
 
 module.exports = mongoose.model('Usuario', usuarioSchema);
