@@ -1,5 +1,34 @@
 import express from 'express';
 import {UsuarioService}  from '../service/UsuarioService';
+import jwt from 'express-jwt';
+import jwks from 'jwks-rsa';
+
+/*
+ |--------------------------------------
+ | Authentication Middleware
+ |--------------------------------------
+ */
+
+module.exports = function(app, config) {
+  // Authentication middleware
+  const jwtCheck = jwt({
+    secret: jwks.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: `https://${config.AUTH0_DOMAIN}/.well-known/jwks.json`
+    }),
+    audience: config.AUTH0_API_AUDIENCE,
+    issuer: `https://${config.AUTH0_DOMAIN}/`,
+    algorithm: 'RS256'
+  });
+}
+
+/*
+ |--------------------------------------
+ | API Routes
+ |--------------------------------------
+ */
 
 
 const router = express.Router();

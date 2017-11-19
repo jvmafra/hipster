@@ -5,6 +5,7 @@ import http from 'http';
 import bodyParser from 'body-parser';
 const api = require('./server/routes/api');
 const cors = require('cors');
+const config = require('./server/config')
 
 
 // Get our API routes
