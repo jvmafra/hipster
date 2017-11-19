@@ -77,6 +77,24 @@ export class UsuarioService {
 
   }
 
+  /**
+   * Remove um Usuario
+   *
+   * @param   {username}  username do usuário a ser removido
+   * @return  {Promise} Promise resolvida com o objeto Usuario
+   * da forma que o mongo retorna
+   */
+
+  static removeUsuario(username) {
+    return new Promise((resolve, reject) =>
+      Usuario.findOneAndRemove({username: username}, (err, result) => {
+        if (err || !result) return reject(err);
+        return resolve(result);
+      })
+    );
+
+  }
+
 
 
 }

@@ -34,7 +34,12 @@ router.get('/usuario', async (req, res) => {
  */
 router.get('/usuario/:username', async (req, res) => {
   const username = req.params.username;
-  res.status(200).json(await UsuarioService.consultaUsuario(username));
+  try {
+    const retorno = await UsuarioService.consultaUsuario(username);
+    res.status(200).json(retorno);
+  } catch (err){
+    res.status(400).json(err.message);
+  }
 });
 
 
@@ -61,9 +66,24 @@ router.put('/usuario/:username', async (req, res) => {
     const retorno = await UsuarioService.editaUsuario(username, usuario);
     res.status(200).json(retorno);
   }catch(err) {
-    console.log(err)
     res.status(400).json(err.message);
   }
 });
+
+/**
+ * DELETE remove usuário
+ */
+router.delete('/usuario/:username', async (req, res) => {
+  const username = req.params.username;
+
+  try {
+    const retorno = await UsuarioService.removeUsuario(username);
+    res.status(200).json(retorno);
+  } catch(err) {
+    res.status(400).json(err.message);
+  }
+
+});
+
 
 module.exports = router;
