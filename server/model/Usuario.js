@@ -37,8 +37,8 @@ const usuarioSchema = new Schema({
     username : {
       type: String,
       required:[true, erro.CADASTRO.VALIDACAO_USERNAME],
-      index: true,                                              // indexa pra facilitar na busca
-      unique: [true, getExistentEntityErroMenssage("username")] // para garantir que é o indíce é unico
+      index: true,                                              // "chave-primária" pra facilitar na busca
+      unique: [true, getExistentEntityErroMenssage("username")]
     },
 
     dataNascimento : {
@@ -52,8 +52,8 @@ usuarioSchema.pre("save", function(next) {
   if (!user.isModified("senha")) {
     return next();
   }
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(user.senha, salt, null, function(err, hash) {
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(user.senha, salt, null, (err, hash) => {
       user.senha = hash;
       next();
     });
@@ -70,9 +70,7 @@ usuarioSchema.post('save', (err, doc, next) => {
 });
 
 usuarioSchema.options.toJSON = {
-  transform: function(doc, ret) {
-    delete ret.senha;
-  }
+  transform: (doc, ret) => {delete ret.senha;}
 };
 
 module.exports = mongoose.model('Usuario', usuarioSchema);
