@@ -36,5 +36,13 @@
     "BIRTHDATE": "Birth date",
     "PASSWORD": "Password",
     "NAME": "Name"
+  },
+  "ERRORS": {
+    "REGISTER": {
+      "NAME": "Please, provide a name",
+      "USERNAME": "Please, provide an username",
+      "PASSWORD": "Please, provide a password",
+      "EMAIL": "Please, provide an email"
+    }
   }
 }

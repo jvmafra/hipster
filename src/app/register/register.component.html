@@ -1,5 +1,4 @@
 <div class="hipster-bg-image">
-
 </div>
 <div class="ui container" style="margin-top: 1%;">
   <div class="ui grid">
@@ -24,13 +23,13 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="child icon"></i>
-              <input type="text" name="name" [(ngModel)]="user.name" attr.placeholder="{{ 'REGISTER.NAME' | translate }}">
+              <input type="text" name="name" [(ngModel)]="user.name" required attr.placeholder="{{ 'REGISTER.NAME' | translate }}">
             </div>
           </div>
           <div class="field">
             <div class="ui left icon input">
               <i class="mail icon"></i>
-              <input type="text" name="email" [(ngModel)]="user.email" attr.placeholder="{{ 'REGISTER.EMAIL' | translate }}">
+              <input type="text" name="email" [(ngModel)]="user.email" required attr.placeholder="{{ 'REGISTER.EMAIL' | translate }}">
             </div>
           </div>
           <p> <b> Birthday: </b> </p>

@@ -36,5 +36,13 @@
     "BIRTHDATE": "Data de nasc.",
     "PASSWORD": "Senha",
     "NAME": "Nome"
+  },
+  "ERRORS": {
+    "REGISTER": {
+      "NAME": "Um nome precisa ser informado",
+      "USERNAME": "Um nome de usuário precisa ser informado",
+      "PASSWORD": "Um password precisa ser informado",
+      "EMAIL": "Um email precisa ser informado"
+    }
   }
 }
