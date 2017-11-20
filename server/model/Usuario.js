@@ -49,12 +49,12 @@ const usuarioSchema = new Schema({
 
 usuarioSchema.pre("save", function(next) {
   const user = this;
-  if (!user.isModified("senha")) {
+  if (!user.isModified("password")) {
     return next();
   }
   bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(user.senha, salt, null, (err, hash) => {
-      user.senha = hash;
+    bcrypt.hash(user.password, salt, null, (err, hash) => {
+      user.password = hash;
       next();
     });
   });
@@ -70,7 +70,7 @@ usuarioSchema.post('save', (err, doc, next) => {
 });
 
 usuarioSchema.options.toJSON = {
-  transform: (doc, ret) => {delete ret.senha;}
+  transform: (doc, ret) => {delete ret.password;}
 };
 
 module.exports = mongoose.model('Usuario', usuarioSchema);
