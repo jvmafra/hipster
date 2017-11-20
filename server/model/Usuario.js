@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
-import util from '../util/util';
+import * as erro from '../util/ErroHandler';
+import crypt from 'crypto';
+import bcrypt from 'bcrypt-nodejs'
 
 
 const Schema = mongoose.Schema;
@@ -19,39 +21,56 @@ const getExistentEntityErroMenssage = (entidade) => `${entidade} já existente`;
 const usuarioSchema = new Schema({
     name : {
       type: String,
-      required: [true, util.CONSTANTES_LOCAL.ERRO_VALIDACAO_NOME]
+      required: [true, erro.CADASTRO.VALIDACAO_NOME]
     },
 
     email : {
       type: String,
-      required: [true, util.CONSTANTES_LOCAL.ERRO_VALIDACAO_EMAIL]
+      required: [true, erro.CADASTRO.VALIDACAO_EMAIL]
     },
 
     password : {
       type: String,
-      required: [true, util.CONSTANTES_LOCAL.ERRO_VALIDACAO_SENHA]
+      required: [true, erro.CADASTRO.VALIDACAO_SENHA]
     },
 
     username : {
       type: String,
-      required:[true, util.CONSTANTES_LOCAL.ERRO_VALIDACAO_USERNAME],
-      index: true,                                              // indexa pra facilitar na busca
-      unique: [true, getExistentEntityErroMenssage("username")] // para garantir que é o indíce é unico
+      required:[true, erro.CADASTRO.VALIDACAO_USERNAME],
+      index: true,                                              // "chave-primária" pra facilitar na busca
+      unique: [true, getExistentEntityErroMenssage("username")]
     },
 
-    birthDate : {
+    dataNascimento : {
       type: Date,
-      required: [true, util.CONSTANTES_LOCAL.ERRO_VALIDACAO_DATA_NASCIMENTO]
+      required: [true, erro.CADASTRO.VALIDACAO_DATA_NASCIMENTO]
     }
+});
+
+usuarioSchema.pre("save", function(next) {
+  const user = this;
+  if (!user.isModified("senha")) {
+    return next();
+  }
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(user.senha, salt, null, (err, hash) => {
+      user.senha = hash;
+      next();
+    });
+  });
 });
 
 usuarioSchema.post('save', (err, doc, next) => {
   if (err.name === 'ValidationError') {
-    util.handleValidationError(err, next);
+    erro.handleValidationError(err, next);
   } else if (err.name === 'MongoError'){
-    util.handleMongoError(err, next);
+    erro.handleMongoError(err, next);
   }
   return next(err);
 });
+
+usuarioSchema.options.toJSON = {
+  transform: (doc, ret) => {delete ret.senha;}
+};
 
 module.exports = mongoose.model('Usuario', usuarioSchema);
