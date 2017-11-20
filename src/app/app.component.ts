@@ -12,7 +12,6 @@ export class AppComponent {
   constructor(private hipsterTranslate: HipsterTranslate) {}
 
   public changeLanguage(language) {
-    console.log(navigator.language.split('-')[0])
     this.hipsterTranslate.setLanguage(language);
   }
 }

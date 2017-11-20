@@ -24,19 +24,34 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="child icon"></i>
-              <input type="text" name="name" [(ngModel)]="name" attr.placeholder="{{ 'REGISTER.NAME' | translate }}">
+              <input type="text" name="name" [(ngModel)]="user.name" attr.placeholder="{{ 'REGISTER.NAME' | translate }}">
             </div>
           </div>
           <div class="field">
             <div class="ui left icon input">
               <i class="mail icon"></i>
-              <input type="text" name="email" [(ngModel)]="email" attr.placeholder="{{ 'REGISTER.EMAIL' | translate }}">
+              <input type="text" name="email" [(ngModel)]="user.email" attr.placeholder="{{ 'REGISTER.EMAIL' | translate }}">
             </div>
           </div>
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="calendar icon"></i>
-              <input type="text" name="birthDate" [(ngModel)]="birthDate" attr.placeholder="{{ 'REGISTER.BIRTHDATE' | translate }}">
+          <p> <b> Birthday: </b> </p>
+          <div class="three fields">
+            <div class="seven wide field">
+              <select class="font-select-size" [(ngModel)]="day" name="day">
+                <option selected> Day </option>
+                <option *ngFor="let day of days" value="{{day + 1}}">{{day + 1}}</option>
+              </select>
+            </div>
+            <div class="eight wide field">
+              <select class="font-select-size" [(ngModel)]="month" name="month">
+                <option selected>Month </option>
+                <option *ngFor="let month of months" value="{{month + 1}}">{{month + 1}}</option>
+              </select>
+            </div>
+            <div class="seven wide field">
+              <select class="font-select-size" [(ngModel)]="year" name="year">
+                <option selected> Year </option>
+                <option *ngFor="let year of years" value="{{year + 1}}">{{year}}</option>
+              </select>
             </div>
           </div>
           <h4 class="ui horizontal divider header">
@@ -46,16 +61,16 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input type="text" name="username" [(ngModel)]="username" attr.placeholder="{{ 'REGISTER.USERNAME' | translate }}">
+              <input type="text" name="username" [(ngModel)]="user.username" attr.placeholder="{{ 'REGISTER.USERNAME' | translate }}">
             </div>
           </div>
           <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
-              <input type="password" name="password" [(ngModel)]="password" attr.placeholder="{{ 'REGISTER.PASSWORD' | translate }}">
+              <input type="password" name="password" [(ngModel)]="user.password" attr.placeholder="{{ 'REGISTER.PASSWORD' | translate }}">
             </div>
           </div>
-          <div class="ui fluid large blue submit button" (click)="registerUser()">{{ 'REGISTER.SUBMIT' | translate }}</div>
+          <div class="ui fluid large blue submit button" (click)="registerUser(user)">{{ 'REGISTER.SUBMIT' | translate }}</div>
         </form>
       </div>
     </div>
