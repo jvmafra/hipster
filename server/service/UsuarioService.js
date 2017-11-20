@@ -51,7 +51,7 @@ export class UsuarioService {
    * @return  {Promise} Promise resolvida com o objeto Usuario
    * da forma que o mongo retorna
    */
-  static cadastraUsuario(usuario) {
+  static registerUser(usuario) {
     const usuarioMongoose = new Usuario(usuario);
     return  new Promise((resolve, reject) => {
       usuarioMongoose.save((err, result) => (err) ? reject(err) : resolve(result));
