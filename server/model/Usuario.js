@@ -41,7 +41,7 @@ const usuarioSchema = new Schema({
       unique: [true, getExistentEntityErroMenssage("username")]
     },
 
-    dataNascimento : {
+    birthDate : {
       type: Date,
       required: [true, erro.CADASTRO.VALIDACAO_DATA_NASCIMENTO]
     }

@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserPostComponent } from './user-post/user-post.component';
 import { UserService } from './services/user.service';
+import { GlobalService} from './services/global.service'
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -26,7 +27,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     HttpClientModule,
     HipsterTranslate,
-    UserService
+    UserService,
+    GlobalService
   ],
   imports: [
     BrowserModule,

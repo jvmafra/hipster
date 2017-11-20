@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { GlobalService} from './global.service'
 
 @Injectable()
 export class UserService {
-  private headers = new HttpHeaders().set('Authorization', 'my-auth-token').set('Content-Type', 'application/json');
+  private headers : HttpHeaders;
+  private serverHost : String;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private globalService: GlobalService) {
+
+    this.headers = new HttpHeaders().set('Authorization', 'my-auth-token').set('Content-Type', 'application/json');
+    this.serverHost = globalService.getServerHost();
   }
 
   public registerUser(user) {
     user.birthDate = new Date(user.birthDate);
 
-    return this.http.post('http://127.0.0.1:3000/api/usuario', JSON.stringify(user), {
+    return this.http.post(this.serverHost + 'usuario', JSON.stringify(user), {
       headers: this.headers
     });
   }
