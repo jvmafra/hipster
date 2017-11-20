@@ -66,14 +66,14 @@ router.get('/cerveja', (req, res) => {
  *
  * @FIXME rota de teste, deverá ser desativada
  */
-router.get('/usuario', async (req, res) => {
+router.get('/usuario', jwtCheck, async (req, res) => {
   res.status(200).json(await UsuarioService.consultaUsuarios());
 });
 
 /**
  * GET consulta usuário por username
  */
-router.get('/usuario/:username', async (req, res) => {
+router.get('/usuario/:username', jwtCheck, async (req, res) => {
   const username = req.params.username;
   res.status(200).json(await UsuarioService.consultaUsuario(username));
 });
@@ -82,7 +82,7 @@ router.get('/usuario/:username', async (req, res) => {
 /**
  * POST cadastra usuário
  */
-router.post('/usuario', async (req, res) => {
+router.post('/usuario', jwtCheck, async (req, res) => {
   const usuario = req.body;
   try {
     const retorno = await UsuarioService.cadastraUsuario(usuario);
@@ -95,7 +95,7 @@ router.post('/usuario', async (req, res) => {
 /**
  * PUT edita usuário
  */
-router.put('/usuario/:username', async (req, res) => {
+router.put('/usuario/:username', jwtCheck, async (req, res) => {
   const usuario = req.body;
   const username = req.params.username;
   try {
