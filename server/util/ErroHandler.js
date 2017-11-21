@@ -54,9 +54,5 @@ _.handleMongoError = (err, next) => {
     return next(new Error(message));
 };
 
-_.handleEditError = (message) => {
-    return next(new Error(message));
-};
-
 
 module.exports = _;

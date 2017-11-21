@@ -1,6 +1,5 @@
 import db_config from '../config/db_config';
 import Usuario from '../model/Usuario'
-import UserValidator from '../util/UserValidator'
 
 db_config();
 
@@ -69,7 +68,6 @@ export class UsuarioService {
    */
 
   static editaUsuario(username, novoUsuario) {
-
     return new Promise((resolve, reject) =>
       Usuario.findOneAndUpdate({username: username}, novoUsuario, (err, result) => {
         if (err || !result) return reject(err);
