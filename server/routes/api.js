@@ -1,7 +1,6 @@
 import express from 'express';
 import { UsuarioService }  from '../service/UsuarioService';
-import config from '../config'
-
+import auth from './auth';
 /*
  |--------------------------------------
  | API Routes
@@ -55,18 +54,21 @@ router.post('/usuario', async (req, res) => {
 /**
  * PUT autentica usario
  */
-router.put('/login', async (req, res) => {
-  const usuario = req.body;
-  const username = req.params.username;
-  const password = req.params.password;
-  try {
-    const retorno = await UsuarioService.autenticaUsuario(username, password);
-    res.status(200).json(retorno);
-  } catch(err) {
-    console.log(err)
-    res.status(404).json(err.message);
-  }
-});
+// router.put('/login', async (req, res) => {
+//   const usuario = req.body;
+//   const username = req.params.username;
+//   const password = req.params.password;
+//   try {
+//     const retorno = await UsuarioService.autenticaUsuario(username, password);
+//     res.status(200).json(retorno);
+//   } catch(err) {
+//     console.log(err)
+//     res.status(404).json(err.message);
+//   }
+// });
+
+router.post('/login', auth.login);
+
 
 /**
  * PUT edita usuário
@@ -84,5 +86,4 @@ router.put('/usuario/:username', async (req, res) => {
 });
 
 module.exports = router;
-// module.exports = jwtCheck;
-//module.exports = adminCheck;
+
