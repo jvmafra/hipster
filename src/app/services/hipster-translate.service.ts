@@ -22,7 +22,6 @@ export class HipsterTranslate {
     return localStorage.getItem('language');
   }
 
-
   public setLanguage(language) {
     this.translate.use(language);
     localStorage.setItem('language', language);

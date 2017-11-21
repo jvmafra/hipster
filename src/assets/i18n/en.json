@@ -1,11 +1,13 @@
 {
   "HIPSTER": {
+    "LOGIN": "Log In",
+    "LOGOUT": "Log Out",
     "HOME": "Home",
     "SEARCH": "Search in Hipster",
     "PROFILE": "Profile",
     "LANGUAGE": "Language",
     "LANGUAGES": {
-      "PT": "Portuguese",
+      "PT": "Português",
       "EN": "English"
     }
   },
@@ -26,7 +28,7 @@
   },
   "REGISTER": {
     "UPDATE": "Update",
-    "SUBMIT": "Register",
+    "SUBMIT": "Sign In",
     "INVITE": "Join us!",
     "CANCEL": "Cancel",
     "PERSONAL": "Personal info",

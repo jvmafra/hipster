@@ -9,9 +9,37 @@
       <div (click)="changeLanguage('pt')" class="item"><i class="br flag"></i>{{ 'HIPSTER.LANGUAGES.PT' | translate }}</div>
       <div (click)="changeLanguage('en')" class="item"><i class="us flag"></i>{{ 'HIPSTER.LANGUAGES.EN' | translate }}</div>
     </div>
-    <div class="right menu">
-      <a href="/" class="item">{{ 'HIPSTER.HOME' | translate }}</a>
+    <div class="right menu" *ngIf="!userService.isAuthenticated()">
+      <div class="ui form" style="margin-top: 2.5%">
+        <div class="fields">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input type="text" name="username" [(ngModel)]="username" attr.placeholder="{{ 'REGISTER.USERNAME' | translate }}">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" name="password" [(ngModel)]="password" attr.placeholder="{{ 'REGISTER.PASSWORD' | translate }}">
+            </div>
+          </div>
+          <div class="ui fluid blue submit button" (click)="loginUser(username, password)">{{ 'HIPSTER.LOGIN' | translate }}</div>
+        </div>
+      </div>
     </div>
+
+    <div class="right menu " *ngIf="userService.isAuthenticated()">
+      <a [attr.href]="'/user/' + auth.userProfile?.name" class="item">
+        <img class="ui avatar image" src="./assets/elliot.jpg">
+        <span>{{ auth.userProfile?.name }}</span>
+      </a>
+      <a href="/" class="item">{{ 'HIPSTER.HOME' | translate }}</a>
+      <a href="/" class="item">
+        <div (click)="logoutUser()">{{ 'HIPSTER.LOGOUT' | translate }}</div>
+      </a>
+    </div>
+
   </div>
 </div>
 

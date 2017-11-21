@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GlobalService} from './global.service'
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class UserService {
@@ -10,7 +11,7 @@ export class UserService {
   constructor(private http: HttpClient,
               private globalService: GlobalService) {
 
-    this.headers = new HttpHeaders().set('Authorization', 'my-auth-token').set('Content-Type', 'application/json');
+    this.headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.serverHost = globalService.getServerHost();
   }
 
@@ -20,6 +21,47 @@ export class UserService {
     return this.http.post(this.serverHost + 'usuario', JSON.stringify(user), {
       headers: this.headers
     });
+  }
+
+  public updateUser(user, username) {
+    return this.http.put(this.serverHost + 'usuario/' + username, JSON.stringify(user), {
+      headers: this.headers
+    });
+  }
+
+  public retrieveUser(username) {
+    return this.http.get(this.serverHost + 'usuario/' + username, {
+      headers: this.headers
+    });
+  }
+
+  public loginUser(username, password) {
+    let user = {
+      username: username,
+      password: password
+    };
+
+    return this.http.post(this.serverHost + 'login', JSON.stringify(user), {
+      headers: this.headers
+    });
+  }
+
+  public logoutUser() {
+    localStorage.removeItem('username');
+    localStorage.removeItem('access_token');
+  }
+
+  public isAuthenticated() {
+    let access_token = localStorage.getItem('access_token');
+    return access_token;
+  }
+
+  public getAccessToken() {
+    if (this.isAuthenticated) {
+      return localStorage.getItem('access_token');
+    } else {
+      return undefined;
+    }
   }
 
   public getBirthDate(day, month, year) {

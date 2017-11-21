@@ -28,7 +28,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     HipsterTranslate,
     UserService,
-    GlobalService
+    GlobalService,
   ],
   imports: [
     BrowserModule,

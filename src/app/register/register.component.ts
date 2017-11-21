@@ -33,7 +33,6 @@ export class RegisterComponent implements OnInit {
 
   private registerUser(user) {
     user.birthDate = this.userService.getBirthDate(this.day, this.month, this.year);
-    console.log(user.birthDate)
     this.userService.registerUser(user).subscribe(
       data => {
         window.location.href = "/user/" + user.username;

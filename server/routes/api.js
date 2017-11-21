@@ -1,47 +1,12 @@
 import express from 'express';
-import {UsuarioService}  from '../service/UsuarioService';
-import jwt from 'express-jwt';
-import jwks from 'jwks-rsa';
+import { UsuarioService }  from '../service/UsuarioService';
 import config from '../config'
-
-/*
- |--------------------------------------
- | Authentication Middleware
- |--------------------------------------
- */
-
-
-  // Authentication middleware
-  const jwtCheck = jwt({
-    secret: jwks.expressJwtSecret({
-      cache: true,
-      rateLimit: true,
-      jwksRequestsPerMinute: 5,
-      jwksUri: `https://${config.AUTH0_DOMAIN}/.well-known/jwks.json`
-    }),
-    audience: config.AUTH0_API_AUDIENCE,
-    issuer: `https://${config.AUTH0_DOMAIN}/`,
-    algorithm: 'RS256'
-  });
-
-  // Check for an authenticated admin user
-  const adminCheck = (req, res, next) => {
-    const roles = req.user[config.NAMESPACE] || [];
-    if (roles.indexOf('admin') > -1) {
-      next();
-    } else {
-      res.status(401).send({message: 'Not authorized for admin access'});
-    }
-  }
-  
-
 
 /*
  |--------------------------------------
  | API Routes
  |--------------------------------------
  */
-
 
 const router = express.Router();
 
@@ -61,14 +26,14 @@ router.get('/', (req, res) => {
  *
  * @FIXME rota de teste, deverá ser desativada
  */
-router.get('/usuario', jwtCheck, async (req, res) => {
+router.get('/usuario', async (req, res) => {
   res.status(200).json(await UsuarioService.consultaUsuarios());
 });
 
 /**
  * GET consulta usuário por username
  */
-router.get('/usuario/:username', jwtCheck, async (req, res) => {
+router.get('/usuario/:username', async (req, res) => {
   const username = req.params.username;
   res.status(200).json(await UsuarioService.consultaUsuario(username));
 });
@@ -77,7 +42,7 @@ router.get('/usuario/:username', jwtCheck, async (req, res) => {
 /**
  * POST cadastra usuário
  */
-router.post('/usuario', jwtCheck, async (req, res) => {
+router.post('/usuario', async (req, res) => {
   const usuario = req.body;
   try {
     const data = await UsuarioService.registerUser(usuario);
@@ -88,9 +53,25 @@ router.post('/usuario', jwtCheck, async (req, res) => {
 });
 
 /**
+ * PUT autentica usario
+ */
+router.put('/login', async (req, res) => {
+  const usuario = req.body;
+  const username = req.params.username;
+  const password = req.params.password;
+  try {
+    const retorno = await UsuarioService.autenticaUsuario(username, password);
+    res.status(200).json(retorno);
+  } catch(err) {
+    console.log(err)
+    res.status(404).json(err.message);
+  }
+});
+
+/**
  * PUT edita usuário
  */
-router.put('/usuario/:username', jwtCheck, async (req, res) => {
+router.put('/usuario/:username', async (req, res) => {
   const usuario = req.body;
   const username = req.params.username;
   try {
@@ -103,5 +84,5 @@ router.put('/usuario/:username', jwtCheck, async (req, res) => {
 });
 
 module.exports = router;
-//module.exports = jwtCheck;
+// module.exports = jwtCheck;
 //module.exports = adminCheck;

@@ -26,6 +26,22 @@ export class UsuarioService {
     );
   }
 
+  /**
+   * Autentica um Usuário dado um username e password.
+   *
+   * @param   {String}  username do usuário no qual quer autenticar.
+   * @param   {String}  password do usuário no qual quer autenticar.
+   * @returns {Promise}  Promise resolvida com o objeto Usuario
+   * da forma que o mongo retorna.
+   */
+  static autenticaUsuario(username, password) {
+    return new Promise((resolve, reject) =>
+      Usuario.findOne({ username: username, password: password }, (err, result) => {
+        if (err || !result) return reject(err);
+        return resolve(result);
+      })
+    );
+  }
 
   /**
    * Consulta todos os Usuários dado um email.

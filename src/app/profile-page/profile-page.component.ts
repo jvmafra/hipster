@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -23,13 +23,9 @@ export class ProfilePageComponent implements OnInit {
 
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
-              private http: HttpClient) {}
+              private userService: UserService) {}
 
   updateProfile() {
-    const headers = new HttpHeaders()
-      .set('Authorization', 'my-auth-token')
-      .set('Content-Type', 'application/json');
-
     const usuario = {
       dataNascimento: this.birthDate,
       email: this.email,
@@ -37,32 +33,23 @@ export class ProfilePageComponent implements OnInit {
       username: this.username
     };
 
-    this.http.put('http://127.0.0.1:3000/api/usuario/' + this.profile.username, JSON.stringify(usuario), {
-      headers: headers
-    }).subscribe(data => {
-      this.profile = data
+    this.userService.updateUser(usuario, this.profile.username).subscribe(data => {
+      this.profile = data;
+      window.location.href = "/user/" + this.profile.username;
     });
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
         let username = params['username'];
-
-        const headers = new HttpHeaders()
-          .set('Authorization', 'my-auth-token')
-          .set('Content-Type', 'application/json');
-
-        this.http.get('http://127.0.0.1:3000/api/usuario/' + username, {
-          headers: headers
-        }).subscribe(data => {
+        this.userService.retrieveUser(username).subscribe(data => {
           this.profile = data;
-          this.profile.youtube = this.profile.username
-          this.profile.spotify = this.profile.username
-          this.name = this.profile.nome;
+          this.profile.youtube = this.profile.username;
+          this.profile.spotify = this.profile.username;
+          this.name = this.profile.name;
           this.username = this.profile.username;
-          this.birthDate = this.profile.dataNascimento;
+          this.birthDate = this.profile.birthDate;
           this.email = this.profile.email;
-
         });
      });
 

@@ -1,12 +1,14 @@
 {
   "HIPSTER": {
+    "LOGIN": "Entrar",
+    "LOGOUT": "Sair",
     "HOME": "Início",
     "SEARCH": "Buscar no Hipster",
     "PROFILE": "Perfil",
     "LANGUAGE": "Idioma",
     "LANGUAGES": {
       "PT": "Português",
-      "EN": "Inglês"
+      "EN": "English"
     }
   },
   "PROFILEPAGE": {
