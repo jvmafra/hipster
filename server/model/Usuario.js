@@ -37,8 +37,8 @@ const usuarioSchema = new Schema({
     username : {
       type: String,
       required:[true, erro.CADASTRO.VALIDACAO_USERNAME],
-      index: true,                                              // indexa pra facilitar na busca
-      unique: [true, getExistentEntityErroMenssage("username")] // para garantir que é o indíce é unico
+      index: true,                                              // primary-key
+      unique: [true, getExistentEntityErroMenssage("username")]
     },
 
     dataNascimento : {
@@ -70,9 +70,7 @@ usuarioSchema.post('save', (err, doc, next) => {
 });
 
 usuarioSchema.options.toJSON = {
-  transform: function(doc, ret) {
-    delete ret.senha;
-  }
+  transform: (doc, ret) => {delete ret.senha;}
 };
 
 module.exports = mongoose.model('Usuario', usuarioSchema);
