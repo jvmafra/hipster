@@ -1,5 +1,6 @@
 import express from 'express';
 import {UsuarioService}  from '../service/UsuarioService';
+import {UserValidator} from '../util/UserValidator'
 
 
 const router = express.Router();
@@ -61,12 +62,24 @@ router.post('/usuario', async (req, res) => {
  */
 router.put('/usuario/:username', async (req, res) => {
   const usuario = req.body;
-  const username = req.params.username;
+  let result;
+  let validacao;
   try {
-    const retorno = await UsuarioService.editaUsuario(username, usuario);
-    res.status(200).json(retorno);
-  }catch(err) {
-    res.status(400).json(err.message);
+    validacao = UserValidator.isValido(usuario);
+    result = validacao.retorno;
+  } catch (err){
+    console.log(err);
+  }
+
+  if (!result) res.status(400).json(validacao.mensagem);
+  else{
+    const username = req.params.username;
+    try {
+      const retorno = await UsuarioService.editaUsuario(username, usuario);
+      res.status(200).json(retorno);
+    }catch(err) {
+      res.status(400).json(err.message);
+    }
   }
 });
 
