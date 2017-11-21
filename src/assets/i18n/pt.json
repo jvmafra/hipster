@@ -35,14 +35,20 @@
     "USERNAME": "Nome de usuário",
     "BIRTHDATE": "Data de nasc.",
     "PASSWORD": "Senha",
-    "NAME": "Nome"
+    "NAME": "Nome",
+    "DAY": "Dia",
+    "MONTH": "Mês",
+    "YEAR": "Ano"
   },
   "ERRORS": {
     "REGISTER": {
       "NAME": "Um nome precisa ser informado",
       "USERNAME": "Um nome de usuário precisa ser informado",
       "PASSWORD": "Um password precisa ser informado",
-      "EMAIL": "Um email precisa ser informado"
+      "EMAIL": "Um email precisa ser informado",
+      "DAY": "Um dia precisa ser informado",
+      "MONTH": "Um mês precisa ser informado",
+      "YEAR": "Um ano precisa ser informado"
     }
   }
 }

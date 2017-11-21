@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../services/user.service';
+import { FormValidationService } from '../services/form-validation.service';
+import { TranslateService } from '@ngx-translate/core';
+
 declare var jquery:any;
 declare var $ :any;
 
@@ -20,13 +22,17 @@ export class RegisterComponent implements OnInit {
   private days : Array<number>;
   private months : Array<number>;
   private years : Array<number>;
+  private errorInfo: Array<Object>;
 
   constructor(private http: HttpClient,
-              private userService: UserService) {
+              private userService: UserService,
+              private formValidation: FormValidationService,
+              private translate: TranslateService ) {
+
     this.user = {};
-    this.day = 'Day';
-    this.month = 'Month';
-    this.year = 'Year'
+    this.day = 'day';
+    this.month = 'month';
+    this.year = 'year'
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
     this.years = this.userService.getBirthdayYearsArray('1905');
@@ -38,62 +44,32 @@ export class RegisterComponent implements OnInit {
   }
 
   private registerUser(user) {
-    user.birthDate = this.userService.getBirthDate(this.day, this.month, this.year);
+    let data = this.formValidation.getFormValidationVariables(this.errorInfo);
 
-    if ($('form').form('is valid')) {
+    $('.ui.form').form(data);
+
+    user.birthDate = this.userService.getBirthDate(this.day, this.month, this.year);
+    if (this.isFormValid()) {
       this.userService.registerUser(user).subscribe(
-        data => {
-          window.location.href = "/user/" + user.username;
-        }, err => {
-          //handle error
-          //@TODO: Need to do this part
-          console.log(err);
-        }
+        data => { window.location.href = "/user/" + user.username;},
+        err => {console.log(err);}
       );
-    } else {
     }
+
+  }
+
+  private isFormValid() {
+    return false
   }
 
   private initSemanticValidationForm() {
-    $('.ui.form')
-    .form({
-      inline : true,
-      fields: {
-        name: {
-          rules: [
-          {
-            type   : 'empty',
-            prompt : "fff"
-          }
-          ]
-        },
-        username: {
-          rules: [
-          {
-            type   : 'empty',
-            prompty: 'message'
-          }
-          ]
-        },
-        email: {
-          rules: [
-          {
-            type   : 'empty',
-            prompty: 'message'
-          }
-          ]
-        },
-        password: {
-          rules: [
-          {
-            type   : 'empty',
-            prompty: 'message'
-          }
-          ]
-        },
-      }
-    });
-
+    this.errorInfo = [{"input": "day", errors: ['not[day]'], prompt : ["ERRORS.REGISTER.DAY"]},
+                      {"input": "month", errors: ['not[month]'], prompt : ["ERRORS.REGISTER.MONTH"]},
+                      {"input": "year", errors: ['not[year]'], prompt : ["ERRORS.REGISTER.YEAR"]},
+                      {"input": "name", errors: ['empty'], prompt : ["ERRORS.REGISTER.NAME"]},
+                      {"input": "email", errors: ['empty'], prompt : ["ERRORS.REGISTER.EMAIL"]},
+                      {"input": "username", errors: ['empty'], prompt : ["ERRORS.REGISTER.USERNAME"]},
+                      {"input": "password", errors: ['empty'], prompt : ["ERRORS.REGISTER.PASSWORD"]}]
 
   }
 
