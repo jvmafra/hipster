@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { UserService } from '../services/user.service';
+
 
 @Component({
   selector: 'app-register',
@@ -9,54 +11,40 @@ import { TranslateService } from '@ngx-translate/core';
   encapsulation: ViewEncapsulation.None
 })
 export class RegisterComponent implements OnInit {
+  private user : Object;
+  private day : String;
+  private month : String;
+  private year : String;
+  private days : Array<number>;
+  private months : Array<number>;
+  private years : Array<number>;
 
-  private birthDate: string;
-  private email: string;
-  private name: string;
-  private password: string;
-  private username: string;
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private userService: UserService) {
+    this.user = {};
+    this.day = 'Day';
+    this.month = 'Month';
+    this.year = 'Year'
+    this.days = Array.from(Array(31).keys());
+    this.months = Array.from(Array(12).keys());
+    this.years = this.userService.getBirthdayYearsArray('1905');
+  }
 
   ngOnInit() {
   }
 
-  private getUserForm() {
-    return  {
-      dataNascimento: this.birthDate,
-      email: this.email,
-      nome: this.name,
-      senha: this.password,
-      username: this.username
-    };
+  private registerUser(user) {
+    user.birthDate = this.userService.getBirthDate(this.day, this.month, this.year);
+    console.log(user.birthDate)
+    this.userService.registerUser(user).subscribe(
+      data => {
+        window.location.href = "/user/" + user.username;
+      }, err => {
+        //handle error
+        //@TODO: Need to do this part
+        console.log(err);
+      }
+    );
   }
 
-  registerUser() {
-    const usuario = this.getUserForm();
-
-    const headers = new HttpHeaders()
-      .set('Authorization', 'my-auth-token')
-      .set('Content-Type', 'application/json');
-
-    this.http.post('http://127.0.0.1:3000/api/usuario', JSON.stringify(usuario), {
-      headers: headers
-    }).subscribe(data => {
-      window.location.href = "/user/" + usuario.username;
-      console.log(data);
-    });
-
-    this.finishRegister();
-  }
-
-  private clearRegisterForm() {
-    this.birthDate = '';
-    this.email = '';
-    this.name = '';
-    this.username = '';
-    this.password = '';
-  }
-
-  finishRegister() {
-    this.clearRegisterForm();
-  }
 }

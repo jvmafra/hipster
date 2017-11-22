@@ -11,7 +11,7 @@ export class HipsterTranslate {
   }
 
   public getCurrentLanguage() {
-    var browserLanguage = navigator.language;
+    let browserLanguage = navigator.language;
     //For languages like en-US, en-CA, etc.
     browserLanguage = browserLanguage.split('-')[0]
 

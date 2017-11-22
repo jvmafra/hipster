@@ -10,11 +10,6 @@ router.get('/', (req, res) => {
   res.send('api works!');
 });
 
-router.get('/cerveja', (req, res) => {
-
-  res.send('vamos beber!');
-});
-
 /**
  * @FIXME cada conjunto de rotas deverá ser extraido desse documento
  * para ser criado seus respectivos documentos de acordo com o módulo
@@ -50,9 +45,9 @@ router.get('/usuario/:username', async (req, res) => {
 router.post('/usuario', async (req, res) => {
   const usuario = req.body;
   try {
-    const retorno = await UsuarioService.cadastraUsuario(usuario);
-    res.status(200).json(retorno);
-  }catch(err) {
+    const data = await UsuarioService.registerUser(usuario);
+    res.status(200).json(data);
+  } catch(err) {
     res.status(400).json(err.message);
   }
 });

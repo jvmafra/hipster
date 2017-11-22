@@ -19,7 +19,7 @@ const getExistentEntityErroMenssage = (entidade) => `${entidade} já existente`;
  * @author Gustavo Oliveira
  */
 const usuarioSchema = new Schema({
-    nome : {
+    name : {
       type: String,
       required: [true, erro.CADASTRO.VALIDACAO_NOME]
     },
@@ -29,7 +29,7 @@ const usuarioSchema = new Schema({
       required: [true, erro.CADASTRO.VALIDACAO_EMAIL]
     },
 
-    senha : {
+    password : {
       type: String,
       required: [true, erro.CADASTRO.VALIDACAO_SENHA]
     },
@@ -37,24 +37,26 @@ const usuarioSchema = new Schema({
     username : {
       type: String,
       required:[true, erro.CADASTRO.VALIDACAO_USERNAME],
+
       index: true,                                              // primary-key
+
       unique: [true, getExistentEntityErroMenssage("username")]
     },
 
-    dataNascimento : {
-      type: String,
+    birthDate : {
+      type: Date,
       required: [true, erro.CADASTRO.VALIDACAO_DATA_NASCIMENTO]
     }
 });
 
 usuarioSchema.pre("save", function(next) {
   const user = this;
-  if (!user.isModified("senha")) {
+  if (!user.isModified("password")) {
     return next();
   }
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(user.senha, salt, null, function(err, hash) {
-      user.senha = hash;
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(user.password, salt, null, (err, hash) => {
+      user.password = hash;
       next();
     });
   });
