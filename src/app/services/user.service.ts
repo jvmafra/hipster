@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { GlobalService} from './global.service'
-import { AuthService } from '../services/auth.service';
+import { GlobalService } from './global.service'
+import { StorageService } from './storage.service'
 
 @Injectable()
 export class UserService {
@@ -9,7 +9,8 @@ export class UserService {
   private serverHost : String;
 
   constructor(private http: HttpClient,
-              private globalService: GlobalService) {
+              private globalService: GlobalService,
+              private storageService: StorageService) {
 
     this.headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.serverHost = globalService.getServerHost();
@@ -24,8 +25,8 @@ export class UserService {
   }
 
   public updateUser(user, username) {
-    if (this.isAuthenticated) {
-      this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('x-access-token', this.getAccessToken());
+    if (this.isAuthenticated()) {
+      this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('x-access-token', this.storageService.getAccessToken());
     }
 
     return this.http.put(this.serverHost + 'v1/usuario/' + username, JSON.stringify(user), {
@@ -34,8 +35,8 @@ export class UserService {
   }
 
   public retrieveUser(username) {
-    if (this.isAuthenticated) {
-      this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('x-access-token', this.getAccessToken());
+    if (this.isAuthenticated()) {
+      this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('x-access-token', this.storageService.getAccessToken());
     }
 
     return this.http.get(this.serverHost + 'v1/usuario/' + username, {
@@ -54,25 +55,25 @@ export class UserService {
     });
   }
 
-  public logoutUser() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('name');
-    localStorage.removeItem('username');
+  public storeUser(authUser) {
+    this.storageService.storeUser(authUser);
+  }
 
+  public getStoreName() {
+    return this.storageService.getStoreName();
+  }
+
+  public getStoreUsername() {
+    return this.storageService.getStoreUsername();
+  }
+
+  public logoutUser() {
+    this.storageService.removeUser();
     window.location.href = "";
   }
 
   public isAuthenticated() {
-    let access_token = localStorage.getItem('access_token');
-    return access_token;
-  }
-
-  public getAccessToken() {
-    if (this.isAuthenticated) {
-      return localStorage.getItem('access_token');
-    } else {
-      return undefined;
-    }
+    return this.storageService.getAccessToken();
   }
 
   public getBirthDateString(birthDate) {

@@ -1,6 +1,6 @@
 <div class="ui top attached menu">
   <div class="ui container">
-    <a href="/" class="header item" style="">
+    <a href="/" class="header item">
       <img class="logo" src="assets/hipster-logo.png">
       Hipster
     </a>
@@ -10,7 +10,7 @@
       <div (click)="changeLanguage('en')" class="item"><i class="us flag"></i>{{ 'HIPSTER.LANGUAGES.EN' | translate }}</div>
     </div>
     <div class="right menu" *ngIf="!userService.isAuthenticated()">
-      <div class="ui form" style="margin-top: 2.5%">
+      <div class="ui form hipster-register-form">
         <div class="fields">
           <div class="field">
             <div class="ui left icon input">

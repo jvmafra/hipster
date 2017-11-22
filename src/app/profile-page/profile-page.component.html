@@ -1,4 +1,4 @@
-<div class="ui container" style="margin-top: 1%;">
+<div class="ui container hipster-profile-container">
   <div class="ui floating negative message" *ngIf="!foundUser">
     <p>{{ 'PROFILEPAGE.PROFILE_NOT_FOUND' | translate }}</p>
   </div>
@@ -53,7 +53,7 @@
           </div>
         </div>
         <div *ngIf="selected_tab === 1">
-          <form class="ui form" style="padding: 5%;">
+          <form class="ui form hipster-profile-form">
             <h4 class="ui horizontal divider header">
               <i class="child icon"></i>
               {{ 'REGISTER.PERSONAL' | translate }}
@@ -76,7 +76,7 @@
                   <label>{{ 'REGISTER.DAY' | translate }}</label>
                   <div class="ui left icon input">
                     <i class="calendar icon"></i>
-                    <select style="padding-left: 34px !important;" class="select-style font-select-size" [(ngModel)]="day" name="day">
+                    <select class="hipster-select" [(ngModel)]="day" name="day">
                       <option selected> {{ 'REGISTER.DAY' | translate }} </option>
                       <option *ngFor="let day of days" value="{{day + 1}}">{{ day + 1 }}</option>
                     </select>
@@ -86,7 +86,7 @@
                   <label>{{ 'REGISTER.MONTH' | translate }}</label>
                   <div class="ui left icon input">
                     <i class="calendar icon"></i>
-                    <select style="padding-left: 34px !important;"  class="font-select-size" [(ngModel)]="month" name="month">
+                    <select class="hipster-select" [(ngModel)]="month" name="month">
                       <option selected> {{ 'REGISTER.MONTH' | translate }} </option>
                       <option *ngFor="let month of months" value="{{month + 1}}">{{ month + 1 }}</option>
                     </select>
@@ -96,7 +96,7 @@
                   <label>{{ 'REGISTER.YEAR' | translate }}</label>
                   <div class="ui left icon input">
                     <i class="calendar icon"></i>
-                    <select style="padding-left: 34px !important;" class="font-select-size" [(ngModel)]="year" name="year">
+                    <select class="hipster-select" [(ngModel)]="year" name="year">
                       <option selected> {{ 'REGISTER.YEAR' | translate }} </option>
                       <option *ngFor="let year of years" value="{{year + 1}}">{{ year + 1 }}</option>
                     </select>

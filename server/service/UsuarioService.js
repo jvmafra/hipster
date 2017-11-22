@@ -28,14 +28,13 @@ export class UsuarioService {
   }
 
   /**
-   * Autentica um Usuário dado um username e password.
+   * Auth and user by passing username and password.
    *
-   * @param   {String}  username do usuário no qual quer autenticar.
-   * @param   {String}  password do usuário no qual quer autenticar.
-   * @returns {Promise}  Promise resolvida com o objeto Usuario
-   * da forma que o mongo retorna.
+   * @param   {String}  username from the user who needs to auth.
+   * @param   {String}  password from the user who needs to auth.
+   * @returns {Promise} Promise resolved with the user object as like mongo returns.
    */
-  static autenticaUsuario(username, password) {
+  static authUser(username, password) {
     return new Promise((resolve, reject) =>
       Usuario.findOne({ username: username }, (err, result) => {
         if (err || !result) {

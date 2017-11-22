@@ -13,6 +13,7 @@ import { UserPostComponent } from './user-post/user-post.component';
 import { UserService } from './services/user.service';
 import { GlobalService} from './services/global.service'
 import { AuthService } from './services/auth.service';
+import { StorageService } from './services/storage.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -30,7 +31,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HipsterTranslate,
     UserService,
     GlobalService,
-    AuthService
+    AuthService,
+    StorageService
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,14 @@ body {
   height: 100%;
 }
 
-.font-select-size {
+.hipster-register-container {
+  margin-top: 1%;
+}
+
+.hipster-register-form {
+  padding: 5%;
+}
+
+.hipster-font-select {
   font-size: 12px;
 }

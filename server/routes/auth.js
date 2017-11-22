@@ -37,7 +37,7 @@ var auth = {
 
  validate: function(username, password) {
    // spoofing the DB response for simplicity
-   var dbUserObj = UsuarioService.autenticaUsuario(username, password);
+   var dbUserObj = UsuarioService.authUser(username, password);
 
    return dbUserObj;
  },
