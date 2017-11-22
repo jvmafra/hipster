@@ -18,7 +18,7 @@ export class UserService {
   public registerUser(user) {
     user.birthDate = new Date(user.birthDate);
 
-    return this.http.post(this.serverHost + 'v1/usuario/', JSON.stringify(user), {
+    return this.http.post(this.serverHost + 'usuario/', JSON.stringify(user), {
       headers: this.headers
     });
   }
@@ -58,6 +58,7 @@ export class UserService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('name');
     localStorage.removeItem('username');
+
     window.location.href = "";
   }
 

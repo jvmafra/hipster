@@ -26,6 +26,9 @@ export class AuthService implements CanActivate {
       }
     } else {
       if (state.url !== "/" && state.url !== "/register") {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('name');
+        localStorage.removeItem('username');
         this.router.navigate(["/"]);
         return false;
       }

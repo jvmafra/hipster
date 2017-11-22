@@ -53,7 +53,6 @@ router.post('/usuario', async (req, res) => {
 
 router.post('/login', auth.login);
 
-
 /**
  * PUT edita usuário
  */

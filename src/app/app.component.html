@@ -35,8 +35,10 @@
         <span>{{ getName() }}</span>
       </a>
       <a href="/" class="item">{{ 'HIPSTER.HOME' | translate }}</a>
-      <a href="/" class="item">
-        <div (click)="logoutUser()">{{ 'HIPSTER.LOGOUT' | translate }}</div>
+      <a class="item">
+        <div (click)="logoutUser()">
+          {{ 'HIPSTER.LOGOUT' | translate }}
+        </div>
       </a>
     </div>
 

@@ -21,8 +21,9 @@ export class AppComponent {
         localStorage.setItem('access_token', authUser.token);
         localStorage.setItem('username', authUser.user.username);
         localStorage.setItem('name', authUser.user.name);
+        window.location.href = "/user/" + authUser.user.username;
       }, err => {
-        
+        //TODO: show toast
       }
     );
   }

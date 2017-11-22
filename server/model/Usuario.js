@@ -46,20 +46,6 @@ const usuarioSchema = new Schema({
     }
 });
 
-usuarioSchema.methods.compareHashPassword = function(callback) {
-  var hashPassword = this.password;
-  bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(password, salt, null, (err, hash) => {
-        hashPassword = hash;
-      });
-  });
-
-  console.log(this.password);
-  console.log(hashPassword);
-
-  return this.model('Usuario').find({ password: this.password, username: this.username }, callback);
-};
-
 usuarioSchema.pre("save", function(next) {
   const user = this;
   if (!user.isModified("password")) {

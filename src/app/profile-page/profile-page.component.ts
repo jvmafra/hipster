@@ -28,18 +28,17 @@ export class ProfilePageComponent implements OnInit {
 
   updateProfile() {
     const usuario = {
-      dataNascimento: this.birthDate,
+      birthDate: this.birthDate,
       email: this.email,
-      nome: this.name,
+      name: this.name,
       username: this.username
     };
 
     this.userService.updateUser(usuario, this.profile.username).subscribe(
       data => {
-        this.profile = data;
+        localStorage.setItem('name', usuario.name);
         window.location.href = "/user/" + this.profile.username;
       }, err => {
-        this.foundUser = false;
         if (err.statusText === "Unauthorized") {
           this.userService.logoutUser();
         }
@@ -52,7 +51,6 @@ export class ProfilePageComponent implements OnInit {
         let username = params['username'];
         this.userService.retrieveUser(username).subscribe(
           data => {
-            console.log(data);
             this.foundUser = true;
             this.profile = data;
             this.profile.youtube = this.profile.username;

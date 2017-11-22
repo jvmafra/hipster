@@ -1,5 +1,6 @@
 import db_config from '../config/db_config';
 import Usuario from '../model/Usuario'
+import bcrypt from 'bcrypt-nodejs'
 
 db_config();
 
@@ -35,10 +36,21 @@ export class UsuarioService {
    * da forma que o mongo retorna.
    */
   static autenticaUsuario(username, password) {
-    Usuario.compareHashPassword((err, result) => {
-      if (err || !result) return reject(err);
-      return resolve(result);
-    });
+    return new Promise((resolve, reject) =>
+      Usuario.findOne({ username: username }, (err, result) => {
+        if (err || !result) {
+          return resolve(err);
+        } else {
+          bcrypt.compare(password, result.password, function(err, res) {
+            if (res) {
+              return resolve(result);
+            } else {
+              return resolve(err);
+            }
+          });
+        }
+      })
+    );
   }
 
   /**

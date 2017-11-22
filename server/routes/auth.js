@@ -18,7 +18,7 @@ var auth = {
    }
 
    // Fire a query to your DB and check if the credentials are valid
-   var dbUserObj = auth.validate(username, password);
+   var dbUserObj = await auth.validate(username, password);
 
    if (!dbUserObj) { // If authentication fails, we send a 401 back
      res.status(401);
@@ -45,9 +45,9 @@ var auth = {
  validateUser: function(username) {
    // spoofing the DB response for simplicity
    var dbUserObj = { // spoofing a userobject from the DB.
-     name: 'Gabriel',
+     name: 'admin',
      role: 'admin',
-     username: '123123'
+     username: 'admin'
    };
 
    return dbUserObj;
