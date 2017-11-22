@@ -62,14 +62,11 @@ router.post('/usuario', async (req, res) => {
  */
 router.put('/usuario/:username', async (req, res) => {
   const usuario = req.body;
+  
   let result;
   let validacao;
-  try {
-    validacao = UserValidator.isValido(usuario);
-    result = validacao.retorno;
-  } catch (err){
-    console.log(err);
-  }
+  validacao = UserValidator.isValid(usuario);
+  result = validacao.retorno;
 
   if (!result) res.status(400).json(validacao.mensagem);
   else{
