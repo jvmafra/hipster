@@ -37,8 +37,6 @@ export class RegisterComponent implements OnInit {
       data => {
         window.location.href = "/user/" + user.username;
       }, err => {
-        //handle error
-        //@TODO: Need to do this part
         console.log(err);
       }
     );

@@ -20,6 +20,7 @@ export class ProfilePageComponent implements OnInit {
   email: string;
   username: string;
   birthDate: string;
+  foundUser: boolean;
 
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
@@ -33,24 +34,40 @@ export class ProfilePageComponent implements OnInit {
       username: this.username
     };
 
-    this.userService.updateUser(usuario, this.profile.username).subscribe(data => {
-      this.profile = data;
-      window.location.href = "/user/" + this.profile.username;
-    });
+    this.userService.updateUser(usuario, this.profile.username).subscribe(
+      data => {
+        this.profile = data;
+        window.location.href = "/user/" + this.profile.username;
+      }, err => {
+        this.foundUser = false;
+        if (err.statusText === "Unauthorized") {
+          this.userService.logoutUser();
+        }
+      }
+    );
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
         let username = params['username'];
-        this.userService.retrieveUser(username).subscribe(data => {
-          this.profile = data;
-          this.profile.youtube = this.profile.username;
-          this.profile.spotify = this.profile.username;
-          this.name = this.profile.name;
-          this.username = this.profile.username;
-          this.birthDate = this.profile.birthDate;
-          this.email = this.profile.email;
-        });
+        this.userService.retrieveUser(username).subscribe(
+          data => {
+            console.log(data);
+            this.foundUser = true;
+            this.profile = data;
+            this.profile.youtube = this.profile.username;
+            this.profile.spotify = this.profile.username;
+            this.name = this.profile.name;
+            this.username = this.profile.username;
+            this.birthDate = this.profile.birthDate;
+            this.email = this.profile.email;
+          }, err => {
+            this.foundUser = false;
+            if (err.statusText === "Unauthorized") {
+              this.userService.logoutUser();
+            }
+          }
+        );
      });
 
      this.events = [

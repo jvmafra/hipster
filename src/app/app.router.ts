@@ -7,8 +7,8 @@ import { RegisterComponent } from './register/register.component';
 import { AuthService } from './services/auth.service';
 
 export const router: Routes = [
-  { path: 'register', component: RegisterComponent },
-  { path: 'user/:username', component: ProfilePageComponent },
+  { path: '', component: RegisterComponent, canActivate: [AuthService] },
+  { path: 'user/:username', component: ProfilePageComponent, canActivate: [AuthService] },
   { path: '**', redirectTo: '' }
 ];
 

@@ -12,6 +12,7 @@
     }
   },
   "PROFILEPAGE": {
+    "PROFILE_NOT_FOUND": "User not found",
     "ABOUT": "About",
     "TIMELINE": "Timeline",
     "GENREFAVORITES": "Favorite Genres",

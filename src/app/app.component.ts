@@ -17,13 +17,22 @@ export class AppComponent {
   loginUser(username, password) {
     this.userService.loginUser(username, password).subscribe(
       data => {
-        console.log(data);
+        let authUser: any = data;
+        localStorage.setItem('access_token', authUser.token);
+        localStorage.setItem('username', authUser.user.username);
+        localStorage.setItem('name', authUser.user.name);
       }, err => {
-        //handle error
-        //@TODO: Need to do this part
-        console.log(err);
+        
       }
     );
+  }
+
+  getName() {
+    return localStorage.getItem('name');
+  }
+
+  getUsername() {
+    return localStorage.getItem('username');
   }
 
   logoutUser(username, password) {

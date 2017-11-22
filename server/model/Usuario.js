@@ -3,7 +3,6 @@ import * as erro from '../util/ErroHandler';
 import crypt from 'crypto';
 import bcrypt from 'bcrypt-nodejs'
 
-
 const Schema = mongoose.Schema;
 
 /**
@@ -46,6 +45,20 @@ const usuarioSchema = new Schema({
       required: [true, erro.CADASTRO.VALIDACAO_DATA_NASCIMENTO]
     }
 });
+
+usuarioSchema.methods.compareHashPassword = function(callback) {
+  var hashPassword = this.password;
+  bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(password, salt, null, (err, hash) => {
+        hashPassword = hash;
+      });
+  });
+
+  console.log(this.password);
+  console.log(hashPassword);
+
+  return this.model('Usuario').find({ password: this.password, username: this.username }, callback);
+};
 
 usuarioSchema.pre("save", function(next) {
   const user = this;

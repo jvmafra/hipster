@@ -41,7 +41,7 @@ router.get('/v1/usuario/:username', async (req, res) => {
 /**
  * POST cadastra usuário
  */
-router.post('/v1/usuario', async (req, res) => {
+router.post('/usuario', async (req, res) => {
   const usuario = req.body;
   try {
     const data = await UsuarioService.registerUser(usuario);
@@ -50,22 +50,6 @@ router.post('/v1/usuario', async (req, res) => {
     res.status(400).json(err.message);
   }
 });
-
-/**
- * PUT autentica usario
- */
-// router.put('/login', async (req, res) => {
-//   const usuario = req.body;
-//   const username = req.params.username;
-//   const password = req.params.password;
-//   try {
-//     const retorno = await UsuarioService.autenticaUsuario(username, password);
-//     res.status(200).json(retorno);
-//   } catch(err) {
-//     console.log(err)
-//     res.status(404).json(err.message);
-//   }
-// });
 
 router.post('/login', auth.login);
 
@@ -86,4 +70,3 @@ router.put('/v1/usuario/:username', async (req, res) => {
 });
 
 module.exports = router;
-

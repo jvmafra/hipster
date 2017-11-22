@@ -35,12 +35,10 @@ export class UsuarioService {
    * da forma que o mongo retorna.
    */
   static autenticaUsuario(username, password) {
-    return new Promise((resolve, reject) =>
-      Usuario.findOne({ username: username, password: password }, (err, result) => {
-        if (err || !result) return reject(err);
-        return resolve(result);
-      })
-    );
+    Usuario.compareHashPassword((err, result) => {
+      if (err || !result) return reject(err);
+      return resolve(result);
+    });
   }
 
   /**

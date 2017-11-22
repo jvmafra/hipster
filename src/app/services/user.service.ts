@@ -18,19 +18,27 @@ export class UserService {
   public registerUser(user) {
     user.birthDate = new Date(user.birthDate);
 
-    return this.http.post(this.serverHost + 'usuario', JSON.stringify(user), {
+    return this.http.post(this.serverHost + 'v1/usuario/', JSON.stringify(user), {
       headers: this.headers
     });
   }
 
   public updateUser(user, username) {
-    return this.http.put(this.serverHost + 'usuario/' + username, JSON.stringify(user), {
+    if (this.isAuthenticated) {
+      this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('x-access-token', this.getAccessToken());
+    }
+
+    return this.http.put(this.serverHost + 'v1/usuario/' + username, JSON.stringify(user), {
       headers: this.headers
     });
   }
 
   public retrieveUser(username) {
-    return this.http.get(this.serverHost + 'usuario/' + username, {
+    if (this.isAuthenticated) {
+      this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('x-access-token', this.getAccessToken());
+    }
+
+    return this.http.get(this.serverHost + 'v1/usuario/' + username, {
       headers: this.headers
     });
   }
@@ -47,8 +55,10 @@ export class UserService {
   }
 
   public logoutUser() {
-    localStorage.removeItem('username');
     localStorage.removeItem('access_token');
+    localStorage.removeItem('name');
+    localStorage.removeItem('username');
+    window.location.href = "";
   }
 
   public isAuthenticated() {

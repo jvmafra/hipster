@@ -1,5 +1,8 @@
 <div class="ui container" style="margin-top: 1%;">
-  <div class="ui grid">
+  <div class="ui floating negative message" *ngIf="!foundUser">
+    <p>{{ 'PROFILEPAGE.PROFILE_NOT_FOUND' | translate }}</p>
+  </div>
+  <div class="ui grid" *ngIf="foundUser">
     <div class="five wide column">
       <div class="ui card">
         <a class="image" href="#">
@@ -23,21 +26,16 @@
                   /{{ profile.spotify }}
                 </div>
               </div>
-              <div class="item">
+              <!-- THIS SECTION WILL BE AVAILABLE SOON, WAITING FOR THE NEXT US -->
+              <!-- <div class="item">
                 <i class="orange large sound icon"></i>
                 <div class="content">
                   {{ 'PROFILEPAGE.GENREFAVORITES' | translate }}: <a>Pop</a>, <a>Rock</a>, <a>Folk</a>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
-        <!-- <div class="extra content">
-          <span class="right floated star">
-            <i class="star icon"></i>
-            {{ 'PROFILEPAGE.FAVORITE' | translate }}
-          </span>
-        </div> -->
       </div>
     </div>
     <div class="eleven wide column">

@@ -12,6 +12,7 @@ import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserPostComponent } from './user-post/user-post.component';
 import { UserService } from './services/user.service';
 import { GlobalService} from './services/global.service'
+import { AuthService } from './services/auth.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -29,6 +30,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HipsterTranslate,
     UserService,
     GlobalService,
+    AuthService
   ],
   imports: [
     BrowserModule,
