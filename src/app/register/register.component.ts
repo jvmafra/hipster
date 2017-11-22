@@ -19,11 +19,21 @@ export class RegisterComponent implements OnInit {
   private years : Array<number>;
 
   constructor(private http: HttpClient,
-              private userService: UserService) {
+              private userService: UserService,
+              private translateService: TranslateService) {
+    translateService.get('REGISTER.DAY').subscribe((res: string) => {
+      this.day = res;
+    });
+
+    translateService.get('REGISTER.MONTH').subscribe((res: string) => {
+      this.month = res;
+    });
+
+    translateService.get('REGISTER.YEAR').subscribe((res: string) => {
+      this.year = res;
+    });
+
     this.user = {};
-    this.day = 'Day';
-    this.month = 'Month';
-    this.year = 'Year'
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
     this.years = this.userService.getBirthdayYearsArray('1905');

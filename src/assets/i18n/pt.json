@@ -28,6 +28,9 @@
     "LIKES": "Curtidas"
   },
   "REGISTER": {
+    "DAY": "Dia",
+    "MONTH": "Mês",
+    "YEAR": "Ano",
     "UPDATE": "Atualizar",
     "SUBMIT": "Registrar",
     "INVITE": "Junte-se a nós!",

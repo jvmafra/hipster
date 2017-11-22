@@ -75,6 +75,15 @@ export class UserService {
     }
   }
 
+  public getBirthDateString(birthDate) {
+    let splittedBirthDate = birthDate.split("-");
+    let year = String(Number(splittedBirthDate[0]));
+    let month = String(Number(splittedBirthDate[1]));
+    let day = String(Number(splittedBirthDate[2].split("T")[0]));
+
+    return [day, month, year];
+  }
+
   public getBirthDate(day, month, year) {
     let birthDate = "" + month + '/' + day + '/'+  year;
 

@@ -28,6 +28,9 @@
     "LIKES": "Likes"
   },
   "REGISTER": {
+    "DAY": "Day",
+    "MONTH": "Month",
+    "YEAR": "Year",
     "UPDATE": "Update",
     "SUBMIT": "Sign In",
     "INVITE": "Join us!",
