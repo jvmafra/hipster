@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -12,58 +12,114 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ProfilePageComponent implements OnInit {
 
-  profile: any;
-  events: [any];
-  selected_tab: number = 0;
+  private profile: any;
+  private events: [any];
+  private selected_tab: number = 0;
+  private isMyProfile: boolean;
 
-  name: string;
-  email: string;
-  username: string;
-  birthDate: string;
+  private name: string;
+  private email: string;
+  private username: string;
+  private foundUser: boolean;
+  private day : String;
+  private month : String;
+  private year : String;
+  private days : Array<number>;
+  private months : Array<number>;
+  private years : Array<number>;
 
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
-              private http: HttpClient) {}
+              private userService: UserService,
+              private translateService: TranslateService) {
 
-  updateProfile() {
-    const headers = new HttpHeaders()
-      .set('Authorization', 'my-auth-token')
-      .set('Content-Type', 'application/json');
-
-    const usuario = {
-      dataNascimento: this.birthDate,
-      email: this.email,
-      nome: this.name,
-      username: this.username
-    };
-
-    this.http.put('http://127.0.0.1:3000/api/usuario/' + this.profile.username, JSON.stringify(usuario), {
-      headers: headers
-    }).subscribe(data => {
-      this.profile = data
+    translateService.get('REGISTER.DAY').subscribe((res: string) => {
+      this.day = res;
     });
+
+    translateService.get('REGISTER.MONTH').subscribe((res: string) => {
+      this.month = res;
+    });
+
+    translateService.get('REGISTER.YEAR').subscribe((res: string) => {
+      this.year = res;
+    });
+
+    this.days = Array.from(Array(31).keys());
+    this.months = Array.from(Array(12).keys());
+    this.years = this.userService.getBirthdayYearsArray('1905');
+  }
+
+  public updateProfile() {
+    var isValidDate: boolean = true;
+    this.translateService.get('REGISTER.DAY').subscribe((res: string) => {
+      if (this.day === res) {
+        isValidDate = false;
+      }
+    });
+
+    this.translateService.get('REGISTER.MONTH').subscribe((res: string) => {
+      if (this.day === res) {
+        isValidDate = false;
+      }
+    });
+
+    this.translateService.get('REGISTER.YEAR').subscribe((res: string) => {
+      if (this.day === res) {
+        isValidDate = false;
+      }
+    });
+
+    if (isValidDate) {
+      const usuario = {
+        birthDate: this.userService.getBirthDate(this.day, this.month, this.year),
+        email: this.email,
+        name: this.name,
+        username: this.username
+      };
+
+      this.userService.updateUser(usuario, this.profile.username).subscribe(
+        data => {
+          this.userService.storeName(usuario.name);
+          window.location.href = "/user/" + this.profile.username;
+        }, err => {
+          if (err.statusText === "Unauthorized") {
+            this.userService.logoutUser();
+          }
+        }
+      );
+    } else {
+      console.log("Data invalida");
+    }
+
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
         let username = params['username'];
 
-        const headers = new HttpHeaders()
-          .set('Authorization', 'my-auth-token')
-          .set('Content-Type', 'application/json');
+        this.isMyProfile = this.userService.compareUsername(username);
 
-        this.http.get('http://127.0.0.1:3000/api/usuario/' + username, {
-          headers: headers
-        }).subscribe(data => {
-          this.profile = data;
-          this.profile.youtube = this.profile.username
-          this.profile.spotify = this.profile.username
-          this.name = this.profile.nome;
-          this.username = this.profile.username;
-          this.birthDate = this.profile.dataNascimento;
-          this.email = this.profile.email;
+        this.userService.retrieveUser(username).subscribe(
+          data => {
+            this.foundUser = true;
+            this.profile = data;
+            this.profile.youtube = this.profile.username;
+            this.profile.spotify = this.profile.username;
+            this.name = this.profile.name;
+            this.username = this.profile.username;
 
-        });
+            let birthDateArray = this.userService.getBirthDateString(this.profile.birthDate);
+
+            this.day = birthDateArray[0];
+            this.month = birthDateArray[1];
+            this.year = birthDateArray[2];
+
+            this.email = this.profile.email;
+          }, err => {
+            this.foundUser = false;
+          }
+        );
      });
 
      this.events = [

@@ -12,6 +12,11 @@ import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserPostComponent } from './user-post/user-post.component';
 import { UserService } from './services/user.service';
 import { GlobalService} from './services/global.service'
+import { AuthService } from './services/auth.service';
+import { StorageService } from './services/storage.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HeaderTokenInterceptor } from './services/interceptor/handle-header-token.interceptor';
+import { RequestTokenInterceptor } from './services/interceptor/handle-request-token.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -25,10 +30,22 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserPostComponent
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderTokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestTokenInterceptor,
+      multi: true
+    },
     HttpClientModule,
     HipsterTranslate,
     UserService,
-    GlobalService
+    GlobalService,
+    AuthService,
+    StorageService
   ],
   imports: [
     BrowserModule,

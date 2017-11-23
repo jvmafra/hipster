@@ -1,5 +1,6 @@
 import db_config from '../config/db_config';
 import Usuario from '../model/Usuario'
+import bcrypt from 'bcrypt-nodejs'
 
 db_config();
 
@@ -26,6 +27,30 @@ export class UsuarioService {
     );
   }
 
+  /**
+   * Auth and user by passing username and password.
+   *
+   * @param   {String}  username from the user who needs to auth.
+   * @param   {String}  password from the user who needs to auth.
+   * @returns {Promise} Promise resolved with the user object as like mongo returns.
+   */
+  static authUser(username, password) {
+    return new Promise((resolve, reject) =>
+      Usuario.findOne({ username: username }, (err, result) => {
+        if (err || !result) {
+          return resolve(err);
+        } else {
+          bcrypt.compare(password, result.password, function(err, res) {
+            if (res) {
+              return resolve(result);
+            } else {
+              return resolve(err);
+            }
+          });
+        }
+      })
+    );
+  }
 
   /**
    * Consulta todos os Usuários dado um email.

@@ -1,13 +1,15 @@
-<div class="ui container" style="margin-top: 1%;">
-  <div class="ui grid">
+<div class="ui container hipster-profile-container">
+  <div class="ui floating negative message" *ngIf="!foundUser">
+    <p>{{ 'PROFILEPAGE.PROFILE_NOT_FOUND' | translate }}</p>
+  </div>
+  <div class="ui grid" *ngIf="foundUser">
     <div class="five wide column">
       <div class="ui card">
         <a class="image" href="#">
-          <img src="../assets/guga-hipster.jpg">
+          <img src="../assets/elliot.jpg">
         </a>
         <div class="content">
-          <i class="right floated write icon"></i>
-          <div class="header">{{ profile.nome }}'s {{ 'PROFILEPAGE.PROFILE' | translate }}</div>
+          <div class="header">{{ profile.name }}'s {{ 'PROFILEPAGE.PROFILE' | translate }}</div>
           <div class="meta">{{ events.length }} {{ 'PROFILEPAGE.POSTS' | translate }}</div>
           <div class="description">
             <div class="ui list">
@@ -23,21 +25,16 @@
                   /{{ profile.spotify }}
                 </div>
               </div>
-              <div class="item">
+              <!-- THIS SECTION WILL BE AVAILABLE SOON, WAITING FOR THE NEXT US -->
+              <!-- <div class="item">
                 <i class="orange large sound icon"></i>
                 <div class="content">
                   {{ 'PROFILEPAGE.GENREFAVORITES' | translate }}: <a>Pop</a>, <a>Rock</a>, <a>Folk</a>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
-        <!-- <div class="extra content">
-          <span class="right floated star">
-            <i class="star icon"></i>
-            {{ 'PROFILEPAGE.FAVORITE' | translate }}
-          </span>
-        </div> -->
       </div>
     </div>
     <div class="eleven wide column">
@@ -56,30 +53,58 @@
           </div>
         </div>
         <div *ngIf="selected_tab === 1">
-          <form class="ui form" style="padding: 5%;">
+          <form class="ui form hipster-profile-form">
             <h4 class="ui horizontal divider header">
               <i class="child icon"></i>
               {{ 'REGISTER.PERSONAL' | translate }}
             </h4>
-            <div class="field">
+            <div class="field" [ngClass]="{'disabled': !isMyProfile}">
               <div class="ui left icon input">
                 <i class="child icon"></i>
                 <input type="text" name="name" [(ngModel)]="name" attr.placeholder="{{ 'REGISTER.NAME' | translate }}">
               </div>
             </div>
-            <div class="field">
+            <div class="field" [ngClass]="{'disabled': !isMyProfile}">
               <div class="ui left icon input">
                 <i class="mail icon"></i>
                 <input type="text" name="email" [(ngModel)]="email" attr.placeholder="{{ 'REGISTER.EMAIL' | translate }}">
               </div>
             </div>
-            <div class="field">
-              <div class="ui left icon input">
-                <i class="calendar icon"></i>
-                <input type="text" name="birthDate" [(ngModel)]="birthDate" attr.placeholder="{{ 'REGISTER.BIRTHDATE' | translate }}">
+            <div class="field" [ngClass]="{'disabled': !isMyProfile}">
+              <div class="four fields">
+                <div class="three wide field">
+                  <label>{{ 'REGISTER.DAY' | translate }}</label>
+                  <div class="ui left icon input">
+                    <i class="calendar icon"></i>
+                    <select class="hipster-select" [(ngModel)]="day" name="day">
+                      <option selected> {{ 'REGISTER.DAY' | translate }} </option>
+                      <option *ngFor="let day of days" value="{{day + 1}}">{{ day + 1 }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="three wide field">
+                  <label>{{ 'REGISTER.MONTH' | translate }}</label>
+                  <div class="ui left icon input">
+                    <i class="calendar icon"></i>
+                    <select class="hipster-select" [(ngModel)]="month" name="month">
+                      <option selected> {{ 'REGISTER.MONTH' | translate }} </option>
+                      <option *ngFor="let month of months" value="{{month + 1}}">{{ month + 1 }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="three wide field">
+                  <label>{{ 'REGISTER.YEAR' | translate }}</label>
+                  <div class="ui left icon input">
+                    <i class="calendar icon"></i>
+                    <select class="hipster-select" [(ngModel)]="year" name="year">
+                      <option selected> {{ 'REGISTER.YEAR' | translate }} </option>
+                      <option *ngFor="let year of years" value="{{year + 1}}">{{ year + 1 }}</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="ui fluid large blue submit button" (click)="updateProfile()">{{ 'REGISTER.UPDATE' | translate }}</div>
+            <div *ngIf="isMyProfile" class="ui fluid large blue submit button" (click)="updateProfile()">{{ 'REGISTER.UPDATE' | translate }}</div>
           </form>
         </div>
       </div>

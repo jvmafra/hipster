@@ -1,7 +1,12 @@
 import express from 'express';
-import {UsuarioService}  from '../service/UsuarioService';
 import {UserValidator} from '../util/UserValidator'
-
+import { UsuarioService }  from '../service/UsuarioService';
+import auth from './auth';
+/*
+ |--------------------------------------
+ | API Routes
+ |--------------------------------------
+ */
 
 const router = express.Router();
 
@@ -21,14 +26,14 @@ router.get('/', (req, res) => {
  *
  * @FIXME rota de teste, deverá ser desativada
  */
-router.get('/usuario', async (req, res) => {
+router.get('/v1/usuario', async (req, res) => {
   res.status(200).json(await UsuarioService.consultaUsuarios());
 });
 
 /**
  * GET consulta usuário por username
  */
-router.get('/usuario/:username', async (req, res) => {
+router.get('/v1/usuario/:username', async (req, res) => {
   const username = req.params.username;
   try {
     const retorno = await UsuarioService.consultaUsuario(username);
@@ -52,10 +57,12 @@ router.post('/usuario', async (req, res) => {
   }
 });
 
+router.post('/login', auth.login);
+
 /**
  * PUT edita usuário
  */
-router.put('/usuario/:username', async (req, res) => {
+router.put('/v1/usuario/:username', async (req, res) => {
   const usuario = req.body;
   
   let result;

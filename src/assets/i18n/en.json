@@ -1,15 +1,18 @@
 {
   "HIPSTER": {
+    "LOGIN": "Log In",
+    "LOGOUT": "Log Out",
     "HOME": "Home",
     "SEARCH": "Search in Hipster",
     "PROFILE": "Profile",
     "LANGUAGE": "Language",
     "LANGUAGES": {
-      "PT": "Portuguese",
+      "PT": "Português",
       "EN": "English"
     }
   },
   "PROFILEPAGE": {
+    "PROFILE_NOT_FOUND": "User not found",
     "ABOUT": "About",
     "TIMELINE": "Timeline",
     "GENREFAVORITES": "Favorite Genres",
@@ -25,8 +28,11 @@
     "LIKES": "Likes"
   },
   "REGISTER": {
+    "DAY": "Day",
+    "MONTH": "Month",
+    "YEAR": "Year",
     "UPDATE": "Update",
-    "SUBMIT": "Register",
+    "SUBMIT": "Sign In",
     "INVITE": "Join us!",
     "CANCEL": "Cancel",
     "PERSONAL": "Personal info",

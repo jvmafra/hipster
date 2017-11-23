@@ -3,7 +3,6 @@ import * as erro from '../util/ErroHandler';
 import crypt from 'crypto';
 import bcrypt from 'bcrypt-nodejs'
 
-
 const Schema = mongoose.Schema;
 
 /**

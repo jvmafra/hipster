@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class HipsterTranslate {
@@ -21,7 +21,6 @@ export class HipsterTranslate {
 
     return localStorage.getItem('language');
   }
-
 
   public setLanguage(language) {
     this.translate.use(language);

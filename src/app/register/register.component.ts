@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../services/user.service';
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -20,28 +19,42 @@ export class RegisterComponent implements OnInit {
   private years : Array<number>;
 
   constructor(private http: HttpClient,
-              private userService: UserService) {
+              private userService: UserService,
+              private translateService: TranslateService) {
+    translateService.get('REGISTER.DAY').subscribe((res: string) => {
+      this.day = res;
+    });
+
+    translateService.get('REGISTER.MONTH').subscribe((res: string) => {
+      this.month = res;
+    });
+
+    translateService.get('REGISTER.YEAR').subscribe((res: string) => {
+      this.year = res;
+    });
+
     this.user = {};
-    this.day = 'Day';
-    this.month = 'Month';
-    this.year = 'Year'
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
     this.years = this.userService.getBirthdayYearsArray('1905');
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   private registerUser(user) {
     user.birthDate = this.userService.getBirthDate(this.day, this.month, this.year);
-    console.log(user.birthDate)
     this.userService.registerUser(user).subscribe(
       data => {
-        window.location.href = "/user/" + user.username;
+        this.userService.loginUser(user.username, user.password).subscribe(
+          data => {
+            let authUser: any = data;
+            this.userService.storeUser(authUser);
+            window.location.href = "/user/" + authUser.user.username;
+          }, err => {
+            //TODO: show toast
+          }
+        );
       }, err => {
-        //handle error
-        //@TODO: Need to do this part
         console.log(err);
       }
     );
