@@ -8,8 +8,11 @@ _.CADASTRO = {
 
     VALIDACAO_NOME: 'Usuário deve ter um nome',
     VALIDACAO_EMAIL: 'Usuário deve ter um email',
+    VALIDACAO_EMAIL_FORMATO: 'O email nao é valido',
     VALIDACAO_SENHA: 'Usuário deve ter uma senha',
+    VALIDACAO_SENHA_TAMANHO: 'A senha deve ter no mínimo 8 caracteres',
     VALIDACAO_USERNAME: 'Usuário deve ter um username',
+    VALIDACAO_DATA_NASCIMENTO_FORMATO: 'A data não é valida',
     VALIDACAO_DATA_NASCIMENTO: 'Usuário deve ter uma data de nascimento'
 };
 
