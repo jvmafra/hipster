@@ -20,7 +20,12 @@ app.use(bodyParser.json({
 }));
 
 // Point static path to dist
-app.use(express.static(path.join(__dirname, 'src')));
+//app.use(express.static(path.join(__dirname, 'src')));
+
+// Create link to Angular build directory
+var distDir = __dirname + "/dist/";
+app.use(express.static(distDir));
+
 
 // Auth Middleware - This will check if the token is valid
 // Only the requests that start with /api/* will be checked for the token.
@@ -36,9 +41,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'src/index.html'));
 });
 
-// Create link to Angular build directory
-var distDir = __dirname + "/dist/";
-app.use(express.static(distDir));
 
 /**
  * Get port from environment and store in Express.
