@@ -14,6 +14,8 @@ import { UserService } from './services/user.service';
 import { GlobalService} from './services/global.service'
 import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './services/interceptor/token.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -27,6 +29,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserPostComponent
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     HttpClientModule,
     HipsterTranslate,
     UserService,

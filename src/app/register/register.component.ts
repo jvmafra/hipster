@@ -48,9 +48,7 @@ export class RegisterComponent implements OnInit {
         this.userService.loginUser(user.username, user.password).subscribe(
           data => {
             let authUser: any = data;
-            localStorage.setItem('access_token', authUser.token);
-            localStorage.setItem('username', authUser.user.username);
-            localStorage.setItem('name', authUser.user.name);
+            this.userService.storeUser(authUser);
             window.location.href = "/user/" + authUser.user.username;
           }, err => {
             //TODO: show toast

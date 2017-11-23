@@ -59,6 +59,14 @@ export class UserService {
     this.storageService.storeUser(authUser);
   }
 
+  public storeName(name) {
+    this.storageService.storeName(name);
+  }
+
+  public compareUsername(username) {
+    return this.getStoreUsername() === username;
+  }
+
   public getStoreName() {
     return this.storageService.getStoreName();
   }

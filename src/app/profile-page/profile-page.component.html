@@ -58,19 +58,19 @@
               <i class="child icon"></i>
               {{ 'REGISTER.PERSONAL' | translate }}
             </h4>
-            <div class="field">
+            <div class="field" [ngClass]="{'disabled': !isMyProfile}">
               <div class="ui left icon input">
                 <i class="child icon"></i>
                 <input type="text" name="name" [(ngModel)]="name" attr.placeholder="{{ 'REGISTER.NAME' | translate }}">
               </div>
             </div>
-            <div class="field">
+            <div class="field" [ngClass]="{'disabled': !isMyProfile}">
               <div class="ui left icon input">
                 <i class="mail icon"></i>
                 <input type="text" name="email" [(ngModel)]="email" attr.placeholder="{{ 'REGISTER.EMAIL' | translate }}">
               </div>
             </div>
-            <div class="field">
+            <div class="field" [ngClass]="{'disabled': !isMyProfile}">
               <div class="four fields">
                 <div class="three wide field">
                   <label>{{ 'REGISTER.DAY' | translate }}</label>
@@ -104,7 +104,7 @@
                 </div>
               </div>
             </div>
-            <div class="ui fluid large blue submit button" (click)="updateProfile()">{{ 'REGISTER.UPDATE' | translate }}</div>
+            <div *ngIf="isMyProfile" class="ui fluid large blue submit button" (click)="updateProfile()">{{ 'REGISTER.UPDATE' | translate }}</div>
           </form>
         </div>
       </div>

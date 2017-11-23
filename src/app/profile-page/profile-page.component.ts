@@ -15,6 +15,7 @@ export class ProfilePageComponent implements OnInit {
   private profile: any;
   private events: [any];
   private selected_tab: number = 0;
+  private isMyProfile: boolean;
 
   private name: string;
   private email: string;
@@ -79,7 +80,7 @@ export class ProfilePageComponent implements OnInit {
 
       this.userService.updateUser(usuario, this.profile.username).subscribe(
         data => {
-          localStorage.setItem('name', usuario.name);
+          this.userService.storeName(usuario.name);
           window.location.href = "/user/" + this.profile.username;
         }, err => {
           if (err.statusText === "Unauthorized") {
@@ -96,6 +97,9 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
         let username = params['username'];
+
+        this.isMyProfile = this.userService.compareUsername(username);
+
         this.userService.retrieveUser(username).subscribe(
           data => {
             this.foundUser = true;
