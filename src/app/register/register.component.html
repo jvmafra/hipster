@@ -3,15 +3,15 @@
 
 <div class="ui container hipster-register-container">
   <div class="ui grid">
-    <div class="ten wide column">
+    <div class="six wide column">
       <img class="ui centered small image" src="../assets/hipster-logo.png">
       <h2 class="ui center aligned icon header">
         <i class="circular users icon"></i>
         {{ 'REGISTER.INVITE' | translate }}
       </h2>
     </div>
-    <div class="six wide column">
-      <div class="ui centered card">
+    <div class="ten wide column">
+      <div class="ui centered card form-width">
         <div class="content">
           <div class="right floated meta">Hispter</div>
           <img class="ui avatar image" src="../assets/hipster-logo.png">
@@ -21,6 +21,7 @@
             <i class="child icon"></i>
             {{ 'REGISTER.PERSONAL' | translate }}
           </h4>
+
           <div class="field">
             <div class="ui left icon input">
               <i class="child icon"></i>
@@ -33,26 +34,24 @@
               <input type="text" name="email" [(ngModel)]="user.email" attr.placeholder="{{ 'REGISTER.EMAIL' | translate }}">
             </div>
           </div>
-          <p class="ui label basic">
-            <i class="calendar icon"></i> <b> {{ 'REGISTER.BIRTHDATE' | translate }} </b>
-          </p>
+          <p> <b> {{ 'REGISTER.BIRTHDATE' | translate }} : </b> </p>
           <div class="three fields">
             <div class="seven wide field">
-              <select class="select-style hipster-font-select" [(ngModel)]="day" name="day">
-                <option selected> {{ 'REGISTER.DAY' | translate }} </option>
-                <option *ngFor="let day of days" value="{{day + 1}}">{{ day + 1 }}</option>
+              <select class="font-select-size" [(ngModel)]="day" name="day">
+                <option selected value="day"> {{ 'REGISTER.DAY' | translate }} </option>
+                <option *ngFor="let day of days" value="{{day + 1}}">{{day + 1}}</option>
               </select>
             </div>
             <div class="eight wide field">
-              <select class="hipster-font-select" [(ngModel)]="month" name="month">
-                <option selected> {{ 'REGISTER.MONTH' | translate }} </option>
-                <option *ngFor="let month of months" value="{{month + 1}}">{{ month + 1 }}</option>
+              <select class="font-select-size" [(ngModel)]="month" name="month">
+                <option selected value="month"> {{ 'REGISTER.MONTH' | translate }} </option>
+                <option *ngFor="let month of months" value="{{month + 1}}">{{month + 1}}</option>
               </select>
             </div>
             <div class="seven wide field">
-              <select class="hipster-font-select" [(ngModel)]="year" name="year">
-                <option selected> {{ 'REGISTER.YEAR' | translate }} </option>
-                <option *ngFor="let year of years" value="{{year + 1}}">{{ year + 1 }}</option>
+              <select class="font-select-size" [(ngModel)]="year" name="year">
+                <option selected value="year"> {{ 'REGISTER.YEAR' | translate }} </option>
+                <option *ngFor="let year of years" value="{{year + 1}}">{{year}}</option>
               </select>
             </div>
           </div>
@@ -72,7 +71,7 @@
               <input type="password" name="password" [(ngModel)]="user.password" attr.placeholder="{{ 'REGISTER.PASSWORD' | translate }}">
             </div>
           </div>
-          <div class="ui fluid large blue submit button" (click)="registerUser(user)">{{ 'REGISTER.SUBMIT' | translate }}</div>
+          <div class="ui fluid large blue submit button" (click)="registerUser(user, $event)">{{ 'REGISTER.SUBMIT' | translate }}</div>
         </form>
       </div>
     </div>
