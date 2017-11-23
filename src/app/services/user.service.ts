@@ -25,20 +25,12 @@ export class UserService {
   }
 
   public updateUser(user, username) {
-    if (this.isAuthenticated()) {
-      this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('x-access-token', this.storageService.getAccessToken());
-    }
-
     return this.http.put(this.serverHost + 'v1/usuario/' + username, JSON.stringify(user), {
       headers: this.headers
     });
   }
 
   public retrieveUser(username) {
-    if (this.isAuthenticated()) {
-      this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('x-access-token', this.storageService.getAccessToken());
-    }
-
     return this.http.get(this.serverHost + 'v1/usuario/' + username, {
       headers: this.headers
     });
