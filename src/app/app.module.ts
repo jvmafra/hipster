@@ -15,7 +15,8 @@ import { GlobalService} from './services/global.service'
 import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './services/interceptor/token.interceptor';
+import { HeaderTokenInterceptor } from './services/interceptor/handle-header-token.interceptor';
+import { RequestTokenInterceptor } from './services/interceptor/handle-request-token.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -31,7 +32,12 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
+      useClass: HeaderTokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestTokenInterceptor,
       multi: true
     },
     HttpClientModule,

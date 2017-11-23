@@ -118,9 +118,6 @@ export class ProfilePageComponent implements OnInit {
             this.email = this.profile.email;
           }, err => {
             this.foundUser = false;
-            if (err.statusText === "Unauthorized") {
-              this.userService.logoutUser();
-            }
           }
         );
      });

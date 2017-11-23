@@ -15,9 +15,9 @@ module.exports = function(req, res, next) {
       var decoded = jwt.decode(token, require('../config/secret.js')());
 
       if (decoded.exp <= Date.now()) {
-        res.status(401);
+        res.status(498);
         res.json({
-          "status": 401,
+          "status": 498,
           "message": "Token Expired"
         });
         return;
