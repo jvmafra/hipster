@@ -5,7 +5,8 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100%;
+  background-size: 100% 110%;
+
 }
 
 .hipster-register-container {
@@ -18,4 +19,8 @@ body {
 
 .hipster-font-select {
   font-size: 12px;
+}
+
+.form-width {
+  width: 55% !important;
 }
