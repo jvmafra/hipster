@@ -53,10 +53,6 @@ export class ProfilePageComponent implements OnInit {
     $('.ui.form').form(data);
 
     if (this.isFormValid()) {
-      console.log(this.day)
-      console.log(this.month)
-      console.log(this.year)
-
       const usuario = {
         birthDate: this.userService.getBirthDate(this.day, this.month, this.year),
         email: this.email,

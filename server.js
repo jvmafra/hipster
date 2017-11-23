@@ -23,13 +23,13 @@ app.use(bodyParser.json({
 //app.use(express.static(path.join(__dirname, 'src')));
 
 // Create link to Angular build directory
-var distDir = __dirname + "/dist/";
+var distDir = __dirname + "/dist";
 app.use(express.static(distDir));
 
 
 // Auth Middleware - This will check if the token is valid
 // Only the requests that start with /api/* will be checked for the token.
-// Any URL's that do not follow the below pattern should be avoided unless you 
+// Any URL's that do not follow the below pattern should be avoided unless you
 // are sure that authentication is not needed
 app.all('/api/v1/*', [require('./server/middleware/validateRequest')]);
 
@@ -38,7 +38,7 @@ app.use('/api', api);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'src/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
 
