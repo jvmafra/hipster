@@ -4,6 +4,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { FormValidationService } from '../services/form-validation.service';
+
+declare var jquery:any;
+declare var $ :any;
 
 @Component({
   selector: 'app-profile-page',
@@ -12,7 +16,7 @@ import { Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class ProfilePageComponent implements OnInit {
-
+  private $ : any;
   private profile: any;
   private events: [any];
   private selected_tab: number = 0;
@@ -28,51 +32,31 @@ export class ProfilePageComponent implements OnInit {
   private days : Array<number>;
   private months : Array<number>;
   private years : Array<number>;
+  private errorInfo: Array<Object>;
 
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
               private userService: UserService,
               private translateService: TranslateService,
+              private formValidation: FormValidationService,
               private router: Router) {
-
-    translateService.get('REGISTER.DAY').subscribe((res: string) => {
-      this.day = res;
-    });
-
-    translateService.get('REGISTER.MONTH').subscribe((res: string) => {
-      this.month = res;
-    });
-
-    translateService.get('REGISTER.YEAR').subscribe((res: string) => {
-      this.year = res;
-    });
-
+    this.day = 'day';
+    this.month = 'month';
+    this.year = 'year';
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
     this.years = this.userService.getBirthdayYearsArray('1905');
   }
 
   public updateProfile() {
-    var isValidDate: boolean = true;
-    this.translateService.get('REGISTER.DAY').subscribe((res: string) => {
-      if (this.day === res) {
-        isValidDate = false;
-      }
-    });
+    let data = this.formValidation.getFormValidationVariables(this.errorInfo);
+    $('.ui.form').form(data);
 
-    this.translateService.get('REGISTER.MONTH').subscribe((res: string) => {
-      if (this.day === res) {
-        isValidDate = false;
-      }
-    });
+    if (this.isFormValid()) {
+      console.log(this.day)
+      console.log(this.month)
+      console.log(this.year)
 
-    this.translateService.get('REGISTER.YEAR').subscribe((res: string) => {
-      if (this.day === res) {
-        isValidDate = false;
-      }
-    });
-
-    if (isValidDate) {
       const usuario = {
         birthDate: this.userService.getBirthDate(this.day, this.month, this.year),
         email: this.email,
@@ -86,18 +70,34 @@ export class ProfilePageComponent implements OnInit {
 
           this.router.navigate(['/user/' + this.profile.username]);
         }, err => {
+          console.log(err)
           if (err.statusText === "Unauthorized") {
             this.userService.logoutUser();
           }
         }
       );
-    } else {
-      console.log("Data invalida");
     }
 
   }
 
+  private isFormValid() {
+    return $('.ui.form').form('is valid');
+  }
+
+
+  private initSemanticValidationForm() {
+    this.errorInfo = [{"input": "day", errors: ['not[day]'], prompt : ["ERRORS.REGISTER.DAY"]},
+                      {"input": "month", errors: ['not[month]'], prompt : ["ERRORS.REGISTER.MONTH"]},
+                      {"input": "year", errors: ['not[year]'], prompt : ["ERRORS.REGISTER.YEAR"]},
+                      {"input": "name", errors: ['empty'], prompt : ["ERRORS.REGISTER.NAME"]},
+                      {"input": "email", errors: ['empty'], prompt : ["ERRORS.REGISTER.EMAIL"]}];
+
+  }
+
+
   ngOnInit() {
+    this.initSemanticValidationForm();
+
     this.route.params.subscribe(params => {
         let username = params['username'];
 

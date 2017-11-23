@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserService } from './services/user.service';
 import { Router } from '@angular/router';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component'
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  @ViewChild(DeleteModalComponent)
+  private deleteModal: DeleteModalComponent;
 
   constructor(private hipsterTranslate: HipsterTranslate,
               private userService: UserService,
@@ -42,6 +45,10 @@ export class AppComponent {
 
   public changeLanguage(language) {
     this.hipsterTranslate.setLanguage(language);
+  }
+
+  public change(event) {
+    this.router.navigate(['/user/' + this.getUsername()]);
   }
 
 }

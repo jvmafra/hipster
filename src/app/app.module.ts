@@ -12,11 +12,13 @@ import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserPostComponent } from './user-post/user-post.component';
 import { UserService } from './services/user.service';
 import { GlobalService} from './services/global.service'
+import { FormValidationService } from './services/form-validation.service'
 import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderTokenInterceptor } from './services/interceptor/handle-header-token.interceptor';
 import { RequestTokenInterceptor } from './services/interceptor/handle-request-token.interceptor';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -27,7 +29,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     ProfilePageComponent,
     RegisterComponent,
-    UserPostComponent
+    UserPostComponent,
+    DeleteModalComponent
   ],
   providers: [
     {
@@ -44,6 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HipsterTranslate,
     UserService,
     GlobalService,
+    FormValidationService,
     AuthService,
     StorageService
   ],

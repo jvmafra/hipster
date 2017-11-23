@@ -65,6 +65,14 @@ export class UserService {
     return this.storageService.getStoreName();
   }
 
+  public deleteUser() {
+    let username = this.getStoreUsername();
+
+    return this.http.delete(this.serverHost + 'v1/usuario/' + username, {
+      headers: this.headers
+    });
+  }
+
   public getStoreUsername() {
     return this.storageService.getStoreUsername();
   }

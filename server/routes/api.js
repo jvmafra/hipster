@@ -64,7 +64,7 @@ router.post('/login', auth.login);
  */
 router.put('/v1/usuario/:username', async (req, res) => {
   const usuario = req.body;
-  
+
   let result;
   let validacao;
   validacao = UserValidator.isValid(usuario);
@@ -85,7 +85,7 @@ router.put('/v1/usuario/:username', async (req, res) => {
 /**
  * DELETE remove usuário
  */
-router.delete('/usuario/:username', async (req, res) => {
+router.delete('/v1/usuario/:username', async (req, res) => {
   const username = req.params.username;
 
   try {
@@ -94,8 +94,6 @@ router.delete('/usuario/:username', async (req, res) => {
   } catch(err) {
     res.status(400).json(err.message);
   }
-
 });
-
 
 module.exports = router;
