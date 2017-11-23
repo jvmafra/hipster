@@ -35,23 +35,30 @@ router.get('/v1/usuario', async (req, res) => {
  */
 router.get('/v1/usuario/:username', async (req, res) => {
   const username = req.params.username;
-  try {
+  let queryUser = async function () {
     const retorno = await UsuarioService.consultaUsuario(username);
     res.status(200).json(retorno);
+  };
+
+  try {
+    await queryUser();
   } catch (err){
     res.status(400).json(err.message);
   }
 });
-
 
 /**
  * POST cadastra usuário
  */
 router.post('/usuario', async (req, res) => {
   const usuario = req.body;
-  try {
+  let registerUser = async function () {
     const data = await UsuarioService.registerUser(usuario);
     res.status(200).json(data);
+  };
+
+  try {
+    await registerUser();
   } catch(err) {
     res.status(400).json(err.message);
   }
@@ -64,18 +71,24 @@ router.post('/login', auth.login);
  */
 router.put('/v1/usuario/:username', async (req, res) => {
   const usuario = req.body;
-  
+
   let result;
   let validacao;
   validacao = UserValidator.isValid(usuario);
   result = validacao.retorno;
 
-  if (!result) res.status(400).json(validacao.mensagem);
-  else{
+  let editUser = async function () {
+    const retorno = await UsuarioService.editaUsuario(username, usuario);
+    res.status(200).json(retorno);
+  };
+
+  if (!result) {
+    res.status(400).json(validacao.mensagem);
+
+  } else{
     const username = req.params.username;
     try {
-      const retorno = await UsuarioService.editaUsuario(username, usuario);
-      res.status(200).json(retorno);
+      await editUser();
     }catch(err) {
       res.status(400).json(err.message);
     }
@@ -88,9 +101,13 @@ router.put('/v1/usuario/:username', async (req, res) => {
 router.delete('/usuario/:username', async (req, res) => {
   const username = req.params.username;
 
-  try {
+  let removeUser = async function () {
     const retorno = await UsuarioService.removeUsuario(username);
     res.status(200).json(retorno);
+  };
+
+  try {
+    await removeUser();
   } catch(err) {
     res.status(400).json(err.message);
   }
