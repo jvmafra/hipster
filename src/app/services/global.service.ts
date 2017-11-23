@@ -5,7 +5,7 @@ export class GlobalService {
   private serverHost: String;
 
   constructor() {
-    this.serverHost = 'https://mysterious-waters-22741.herokuapp.com/';
+    this.serverHost = 'https://mysterious-waters-22741.herokuapp.com/api/';
   }
 
   public getServerHost() {
