@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {Router} from '@angular/router';
 import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserService } from './services/user.service';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component'
@@ -15,8 +14,7 @@ export class AppComponent {
   private deleteModal: DeleteModalComponent;
 
   constructor(private hipsterTranslate: HipsterTranslate,
-              private userService: UserService,
-              private router: Router){
+              private userService: UserService){
   }
 
   public loginUser(username, password) {
