@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
@@ -31,7 +32,8 @@ export class ProfilePageComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
               private userService: UserService,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              private router: Router) {
 
     translateService.get('REGISTER.DAY').subscribe((res: string) => {
       this.day = res;
@@ -81,7 +83,8 @@ export class ProfilePageComponent implements OnInit {
       this.userService.updateUser(usuario, this.profile.username).subscribe(
         data => {
           this.userService.storeName(usuario.name);
-          window.location.href = "/user/" + this.profile.username;
+
+          this.router.navigate(['/user/' + this.profile.username]);
         }, err => {
           if (err.statusText === "Unauthorized") {
             this.userService.logoutUser();

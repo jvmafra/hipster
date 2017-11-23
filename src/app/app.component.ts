@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserService } from './services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ export class AppComponent {
   title = 'app';
 
   constructor(private hipsterTranslate: HipsterTranslate,
-              private userService: UserService){
+              private userService: UserService,
+              private router: Router){
   }
 
   public loginUser(username, password) {
@@ -19,7 +21,7 @@ export class AppComponent {
       data => {
         let authUser: any = data;
         this.userService.storeUser(authUser);
-        window.location.href = "/user/" + authUser.user.username;
+        this.router.navigate(['/user/' + authUser.user.username]);
       }, err => {
         //TODO: show toast
       }

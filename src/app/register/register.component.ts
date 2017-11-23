@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@an
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,9 @@ export class RegisterComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private userService: UserService,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              private router: Router) {
+
     translateService.get('REGISTER.DAY').subscribe((res: string) => {
       this.day = res;
     });
@@ -49,7 +52,7 @@ export class RegisterComponent implements OnInit {
           data => {
             let authUser: any = data;
             this.userService.storeUser(authUser);
-            window.location.href = "/user/" + authUser.user.username;
+            this.router.navigate(['/user/' + authUser.user.username]);
           }, err => {
             //TODO: show toast
           }

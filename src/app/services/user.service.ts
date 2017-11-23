@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GlobalService } from './global.service'
 import { StorageService } from './storage.service'
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
@@ -10,7 +11,8 @@ export class UserService {
 
   constructor(private http: HttpClient,
               private globalService: GlobalService,
-              private storageService: StorageService) {
+              private storageService: StorageService,
+              private router: Router) {
 
     this.headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.serverHost = globalService.getServerHost();
@@ -69,7 +71,7 @@ export class UserService {
 
   public logoutUser() {
     this.storageService.removeUser();
-    window.location.href = "";
+    this.router.navigate(['/']);
   }
 
   public isAuthenticated() {
