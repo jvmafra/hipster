@@ -10,13 +10,13 @@ import { UserService } from '../services/user.service';
   encapsulation: ViewEncapsulation.None
 })
 export class RegisterComponent implements OnInit {
-  private user : Object;
-  private day : String;
-  private month : String;
-  private year : String;
-  private days : Array<number>;
-  private months : Array<number>;
-  private years : Array<number>;
+  private user: Object;
+  private day: String;
+  private month: String;
+  private year: String;
+  private days: Array<number>;
+  private months: Array<number>;
+  private years: Array<number>;
 
   constructor(private http: HttpClient,
               private userService: UserService,
