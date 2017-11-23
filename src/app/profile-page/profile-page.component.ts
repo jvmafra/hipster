@@ -50,7 +50,7 @@ export class ProfilePageComponent implements OnInit {
     this.years = this.userService.getBirthdayYearsArray('1905');
   }
 
-  updateProfile() {
+  public updateProfile() {
     var isValidDate: boolean = true;
     this.translateService.get('REGISTER.DAY').subscribe((res: string) => {
       if (this.day === res) {

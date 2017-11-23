@@ -14,7 +14,7 @@ export class AppComponent {
               private userService: UserService){
   }
 
-  loginUser(username, password) {
+  public loginUser(username, password) {
     this.userService.loginUser(username, password).subscribe(
       data => {
         let authUser: any = data;
@@ -26,15 +26,15 @@ export class AppComponent {
     );
   }
 
-  getName() {
+  public getName() {
     return this.userService.getStoreName();
   }
 
-  getUsername() {
+  public getUsername() {
     return this.userService.getStoreUsername();
   }
 
-  logoutUser(username, password) {
+  public logoutUser(username, password) {
     this.userService.logoutUser();
   }
 
