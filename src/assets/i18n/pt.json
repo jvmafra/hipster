@@ -1,15 +1,18 @@
 {
   "HIPSTER": {
+    "LOGIN": "Entrar",
+    "LOGOUT": "Sair",
     "HOME": "Início",
     "SEARCH": "Buscar no Hipster",
     "PROFILE": "Perfil",
     "LANGUAGE": "Idioma",
     "LANGUAGES": {
       "PT": "Português",
-      "EN": "Inglês"
+      "EN": "English"
     }
   },
   "PROFILEPAGE": {
+    "PROFILE_NOT_FOUND": "Usuário não encontrado",
     "ABOUT": "Sobre",
     "TIMELINE": "Linha do Tempo",
     "GENREFAVORITES": "Gêneros Favoritos",
@@ -25,6 +28,9 @@
     "LIKES": "Curtidas"
   },
   "REGISTER": {
+    "DAY": "Dia",
+    "MONTH": "Mês",
+    "YEAR": "Ano",
     "UPDATE": "Atualizar",
     "SUBMIT": "Registrar",
     "INVITE": "Junte-se a nós!",

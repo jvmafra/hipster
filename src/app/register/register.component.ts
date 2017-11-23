@@ -49,6 +49,30 @@ export class RegisterComponent implements OnInit {
     $('.ui.form').form(data);
 
     user.birthDate = this.userService.getBirthDate(this.day, this.month, this.year);
+    this.userService.registerUser(user).subscribe(
+      data => {
+        this.userService.loginUser(user.username, user.password).subscribe(
+          data => {
+            let authUser: any = data;
+            this.userService.storeUser(authUser);
+            window.location.href = "/user/" + authUser.user.username;
+          }, err => {
+            //TODO: show toast
+          }
+        );
+      }, err => {
+        console.log(err);
+      }
+    );
+  }
+
+  private registeraUser(user) {
+    let data = this.formValidation.getFormValidationVariables(this.errorInfo);
+
+    $('.ui.form').form(data);
+
+    user.birthDate = this.userService.getBirthDate(this.day, this.month, this.year);
+
     if (this.isFormValid()) {
       this.userService.registerUser(user).subscribe(
         data => { window.location.href = "/user/" + user.username;},
@@ -70,7 +94,6 @@ export class RegisterComponent implements OnInit {
                       {"input": "email", errors: ['empty'], prompt : ["ERRORS.REGISTER.EMAIL"]},
                       {"input": "username", errors: ['empty'], prompt : ["ERRORS.REGISTER.USERNAME"]},
                       {"input": "password", errors: ['empty'], prompt : ["ERRORS.REGISTER.PASSWORD"]}]
-
   }
 
 }

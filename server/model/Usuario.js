@@ -3,7 +3,6 @@ import * as erro from '../util/ErroHandler';
 import crypt from 'crypto';
 import bcrypt from 'bcrypt-nodejs'
 
-
 const Schema = mongoose.Schema;
 
 /**
@@ -37,7 +36,9 @@ const usuarioSchema = new Schema({
     username : {
       type: String,
       required:[true, erro.CADASTRO.VALIDACAO_USERNAME],
-      index: true,                                              // "chave-primária" pra facilitar na busca
+
+      index: true,                                              // primary-key
+
       unique: [true, getExistentEntityErroMenssage("username")]
     },
 
@@ -70,7 +71,7 @@ usuarioSchema.post('save', (err, doc, next) => {
 });
 
 usuarioSchema.options.toJSON = {
-  transform: (doc, ret) => {delete ret.password;}
+  transform: (doc, ret) => {delete ret.senha;}
 };
 
 module.exports = mongoose.model('Usuario', usuarioSchema);
