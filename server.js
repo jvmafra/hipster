@@ -36,6 +36,10 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'src/index.html'));
 });
 
+// Create link to Angular build directory
+var distDir = __dirname + "/dist/";
+app.use(express.static(distDir));
+
 /**
  * Get port from environment and store in Express.
  */
