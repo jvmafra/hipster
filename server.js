@@ -3,14 +3,15 @@ import express from 'express';
 import path from 'path';
 import http from 'http';
 import bodyParser from 'body-parser';
+import logger from 'morgan';
 const api = require('./server/routes/api');
 const cors = require('cors');
-
 
 // Get our API routes
 
 const app = express();
 
+app.use(logger('dev'));
 app.use(cors());
 
 // Parsers for POST data
@@ -20,6 +21,12 @@ app.use(bodyParser.json({
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'src')));
+
+// Auth Middleware - This will check if the token is valid
+// Only the requests that start with /api/* will be checked for the token.
+// Any URL's that do not follow the below pattern should be avoided unless you 
+// are sure that authentication is not needed
+app.all('/api/v1/*', [require('./server/middleware/validateRequest')]);
 
 // Set our api routes
 app.use('/api', api);
