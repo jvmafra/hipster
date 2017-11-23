@@ -26,13 +26,12 @@ export class RegisterComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private userService: UserService,
-              private formValidation: FormValidationService,
-              private translate: TranslateService ) {
+              private formValidation: FormValidationService ) {
 
     this.user = {};
     this.day = 'day';
     this.month = 'month';
-    this.year = 'year'
+    this.year = 'year';
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
     this.years = this.userService.getBirthdayYearsArray('1905');
@@ -43,13 +42,12 @@ export class RegisterComponent implements OnInit {
     this.initSemanticValidationForm();
   }
 
-  private registerUser(user) {
+  private registerUser(user, event) {
     let data = this.formValidation.getFormValidationVariables(this.errorInfo);
-
-    $('.ui.form').form(data);
+    $('.ui.form:nth-child(2)').form(data);
 
     user.birthDate = this.userService.getBirthDate(this.day, this.month, this.year);
-    console.log(this.isFormValid())
+
     if (this.isFormValid()) {
       this.userService.registerUser(user).subscribe(
         data => {
@@ -71,7 +69,7 @@ export class RegisterComponent implements OnInit {
   }
 
   private isFormValid() {
-    return false
+    return $('.ui.form:nth-child(2)').form('is valid');
   }
 
   private initSemanticValidationForm() {
@@ -82,7 +80,6 @@ export class RegisterComponent implements OnInit {
                       {"input": "email", errors: ['empty'], prompt : ["ERRORS.REGISTER.EMAIL"]},
                       {"input": "username", errors: ['empty'], prompt : ["ERRORS.REGISTER.USERNAME"]},
                       {"input": "password", errors: ['empty'], prompt : ["ERRORS.REGISTER.PASSWORD"]}]
-    $('.ui.form').form(errorInfo);
 
   }
 

@@ -21,9 +21,6 @@ export class UserValidator {
     } else if (user.email === "") {
       message = erro.CADASTRO.VALIDACAO_EMAIL;
 
-    } else if (!emailHasValidFormat(user.email)) {
-      message = erro.CADASTRO.VALIDACAO_EMAIL_FORMATO;
-
     } else if (user.dataNascimento === "") {
       message = erro.CADASTRO.VALIDACAO_DATA_NASCIMENTO;
 
@@ -37,8 +34,8 @@ export class UserValidator {
 
 }
 
+//@TODO: Check this in the future
 function emailHasValidFormat(emailToCheck) {
   let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return reg.test(emailToCheck);
 }
-
