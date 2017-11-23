@@ -24,17 +24,8 @@ export class UserValidator {
     } else if (!emailHasValidFormat(user.email)) {
       message = erro.CADASTRO.VALIDACAO_EMAIL_FORMATO;
 
-    } else if (user.senha === "") {
-      message = erro.CADASTRO.VALIDACAO_SENHA;
-
-    } else if (user.senha.length < 8) {
-      message = erro.CADASTRO.VALIDACAO_SENHA_TAMANHO;
-
     } else if (user.dataNascimento === "") {
       message = erro.CADASTRO.VALIDACAO_DATA_NASCIMENTO;
-
-    } else if (!dateHasValidFormat(user.dataNascimento)) {
-      message = erro.CADASTRO.VALIDACAO_DATA_NASCIMENTO_FORMATO;
 
     } else {
       isValid = true;
@@ -49,10 +40,5 @@ export class UserValidator {
 function emailHasValidFormat(emailToCheck) {
   let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return reg.test(emailToCheck);
-}
-
-function dateHasValidFormat(dateToCheck) {
-  let reg = /^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g;
-  return reg.test(dateToCheck);
 }
 
