@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
           data => {
             let authUser: any = data;
             this.userService.storeUser(authUser);
-            this.router.navigate(['/user/' + authUser.user.username]);
+            window.location.href = '/user/' + authUser.user.username;
           }, err => {
             //TODO: show toast
           }

@@ -21,7 +21,7 @@ export class AuthService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     if (this.userService.isAuthenticated()) {
       if (state.url === "/"){
-        this.router.navigate(['/user/' + this.userService.getStoreUsername()]);
+        window.location.href = '/user/' + this.userService.getStoreUsername();
         return false;
       }
     } else {

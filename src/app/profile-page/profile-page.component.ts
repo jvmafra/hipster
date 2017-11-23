@@ -64,7 +64,7 @@ export class ProfilePageComponent implements OnInit {
         data => {
           this.userService.storeName(usuario.name);
 
-          this.router.navigate(['/user/' + this.profile.username]);
+          window.location.href = '/user/' + this.profile.username;
         }, err => {
           console.log(err)
           if (err.statusText === "Unauthorized") {
