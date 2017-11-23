@@ -47,23 +47,15 @@ export class RegisterComponent implements OnInit {
     let data = this.formValidation.getFormValidationVariables(this.errorInfo);
 
     $('.ui.form').form(data);
-
     user.birthDate = this.userService.getBirthDate(this.day, this.month, this.year);
-    this.userService.registerUser(user).subscribe(
-      data => {
-        this.userService.loginUser(user.username, user.password).subscribe(
-          data => {
-            let authUser: any = data;
-            this.userService.storeUser(authUser);
-            window.location.href = "/user/" + authUser.user.username;
-          }, err => {
-            //TODO: show toast
-          }
-        );
-      }, err => {
-        console.log(err);
-      }
-    );
+
+    if (this.isFormValid()) {
+      this.userService.registerUser(user).subscribe(
+        data => { window.location.href = "/user/" + user.username;},
+        err => {console.log(err);}
+      );
+    }
+
   }
 
   private registeraUser(user) {
@@ -75,8 +67,19 @@ export class RegisterComponent implements OnInit {
 
     if (this.isFormValid()) {
       this.userService.registerUser(user).subscribe(
-        data => { window.location.href = "/user/" + user.username;},
-        err => {console.log(err);}
+        data => {
+          this.userService.loginUser(user.username, user.password).subscribe(
+            data => {
+              let authUser: any = data;
+              this.userService.storeUser(authUser);
+              window.location.href = "/user/" + authUser.user.username;
+            }, err => {
+              //TODO: show toast
+            }
+          );
+        }, err => {
+          console.log(err);
+        }
       );
     }
 
