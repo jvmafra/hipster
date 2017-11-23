@@ -77,7 +77,7 @@
                   <div class="ui left icon input">
                     <i class="calendar icon"></i>
                     <select class="hipster-select" [(ngModel)]="day" name="day">
-                      <option selected> {{ 'REGISTER.DAY' | translate }} </option>
+                      <option value="day"> {{ 'REGISTER.DAY' | translate }} </option>
                       <option *ngFor="let day of days" value="{{day + 1}}">{{ day + 1 }}</option>
                     </select>
                   </div>
@@ -87,7 +87,7 @@
                   <div class="ui left icon input">
                     <i class="calendar icon"></i>
                     <select class="hipster-select" [(ngModel)]="month" name="month">
-                      <option selected> {{ 'REGISTER.MONTH' | translate }} </option>
+                      <option value="month"> {{ 'REGISTER.MONTH' | translate }} </option>
                       <option *ngFor="let month of months" value="{{month + 1}}">{{ month + 1 }}</option>
                     </select>
                   </div>
@@ -97,7 +97,7 @@
                   <div class="ui left icon input">
                     <i class="calendar icon"></i>
                     <select class="hipster-select" [(ngModel)]="year" name="year">
-                      <option selected> {{ 'REGISTER.YEAR' | translate }} </option>
+                      <option value="year"> {{ 'REGISTER.YEAR' | translate }} </option>
                       <option *ngFor="let year of years" value="{{year + 1}}">{{ year + 1 }}</option>
                     </select>
                   </div>
