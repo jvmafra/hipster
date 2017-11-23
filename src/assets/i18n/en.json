@@ -41,10 +41,12 @@
     "USERNAME": "Username",
     "BIRTHDATE": "Birth date",
     "PASSWORD": "Password",
-    "NAME": "Name",
-    "DAY": "Day",
-    "MONTH": "Month",
-    "YEAR": "Year"
+    "NAME": "Name"
+  },
+  "DELETEMODAL": {
+    "DELETE_ACCOUNT": "Delete account",
+    "DELETE_MESSAGE": "Do you have sure that you want to delete your account? All your posts and information gonna be deleted permanently.",
+    "CANCEL": "Cancel"
   },
   "ERRORS": {
     "REGISTER": {
