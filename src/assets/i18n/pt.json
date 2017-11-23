@@ -42,5 +42,10 @@
     "BIRTHDATE": "Data de nasc.",
     "PASSWORD": "Senha",
     "NAME": "Nome"
+  },
+  "DELETEMODAL": {
+    "DELETE_ACCOUNT": "Deletar conta",
+    "DELETE_MESSAGE": "Você tem certeza que você quer deletar sua conta? Todas suas postagens e informações serão deletadas permanentemente.",
+    "CANCEL": "Cancelar"
   }
 }

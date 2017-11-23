@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
 import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserService } from './services/user.service';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component'
+import { ViewChild } from '@angular/core';
+
+declare var jquery:any;
+declare var $ :any;
+
 
 @Component({
   selector: 'app-root',
@@ -8,10 +15,12 @@ import { UserService } from './services/user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  @ViewChild(DeleteModalComponent)
+  private deleteModal: DeleteModalComponent;
 
   constructor(private hipsterTranslate: HipsterTranslate,
-              private userService: UserService){
+              private userService: UserService,
+              private router: Router){
   }
 
   public loginUser(username, password) {
@@ -40,6 +49,10 @@ export class AppComponent {
 
   public changeLanguage(language) {
     this.hipsterTranslate.setLanguage(language);
+  }
+
+  public change(event) {
+    window.location.href = '/user/' + this.getUsername()
   }
 
 }
