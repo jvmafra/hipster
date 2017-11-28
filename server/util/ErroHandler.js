@@ -13,10 +13,13 @@ _.CADASTRO = {
     VALIDACAO_SENHA_TAMANHO: 'A senha deve ter no mínimo 8 caracteres',
     VALIDACAO_USERNAME: 'Usuário deve ter um username',
     VALIDACAO_DATA_NASCIMENTO_FORMATO: 'A data não é valida',
-    VALIDACAO_DATA_NASCIMENTO: 'Usuário deve ter uma data de nascimento'
+    VALIDACAO_DATA_NASCIMENTO: 'Usuário deve ter uma data de nascimento',
+
+    VALIDACAO_OWNER: "Publicação deve ter um criador",
+    VALIDACAO_URL: "Publicação deve ter uma url vinculada a ela"
 };
 
-const REQUISICAO = {
+_.REQUISICAO = {
     ERRO_VALIDACAO: 'Erro de validação: ',
     ERRO_CRIACAO: 'Erro de criação: '
 };
@@ -34,7 +37,7 @@ const INFO_DUPLICADA = {
  * @param   {Function} next Função callback para redirecionar para a próxima função.
  */
 _.handleValidationError = (err, next) => {
-    let message = REQUISICAO.ERRO_VALIDACAO;
+    let message = _.REQUISICAO.ERRO_VALIDACAO;
     _.each(err.errors, (value, field) => {
         if (message.indexOf(': ') !== message.length - ': '.length) {
             message += ', ';
@@ -46,13 +49,12 @@ _.handleValidationError = (err, next) => {
 };
 
 _.handleMongoError = (err, next) => {
-    let message = REQUISICAO.ERRO_CRIACAO;
+    let message = _.REQUISICAO.ERRO_CRIACAO;
     if (err.code === 11000) { // duplicate key error
         message += INFO_DUPLICADA.USERNAME;
     }
     message += ".";
     return next(new Error(message));
 };
-
 
 module.exports = _;

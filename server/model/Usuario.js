@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import * as erro from '../util/ErroHandler';
-import crypt from 'crypto';
 import bcrypt from 'bcrypt-nodejs'
 
 const Schema = mongoose.Schema;
@@ -45,7 +44,33 @@ const usuarioSchema = new Schema({
     birthDate : {
       type: Date,
       required: [true, erro.CADASTRO.VALIDACAO_DATA_NASCIMENTO]
-    }
+    },
+
+    publicacoes: [{
+      _id: {
+        type: String,
+        required: [true, erro.CADASTRO.VALIDACAO_OWNER]
+      },
+
+      ownerUsername : {
+        type: String,
+        required: [true, erro.CADASTRO.VALIDACAO_OWNER]
+      },
+
+      url : {
+        type: String,
+        required: [true, erro.CADASTRO.VALIDACAO_URL]
+      },
+
+      description : String,
+
+      creationDate : Date,
+
+      genres : [String],
+
+      aproves : [String]
+      
+    }]
 });
 
 usuarioSchema.pre("save", function(next) {
