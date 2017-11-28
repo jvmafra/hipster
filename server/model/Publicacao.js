@@ -25,10 +25,16 @@ const publicacaoSchema = new Schema({
   },
 
   description : String,
+  
+  creationDate : { 
+    type: Date, 
+    default: Date.now },
 
-  genres: [String],
+  genres : [String],
 
-  aproves: [String]
+  aproves : [String],
+
+  
 });
 
 publicacaoSchema.pre("save", async function(next) {

@@ -64,9 +64,12 @@ const usuarioSchema = new Schema({
 
       description : String,
 
-      genres: [String],
+      creationDate : Date,
 
-      aproves: [String]
+      genres : [String],
+
+      aproves : [String]
+      
     }]
 });
 
