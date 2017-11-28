@@ -5,6 +5,7 @@ import http from 'http';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 const api = require('./server/routes/api');
+const publicacaoRouter = require('./server/routes/publicacaoRouter');
 const cors = require('cors');
 
 // Get our API routes
@@ -24,12 +25,13 @@ app.use(express.static(path.join(__dirname, 'src')));
 
 // Auth Middleware - This will check if the token is valid
 // Only the requests that start with /api/* will be checked for the token.
-// Any URL's that do not follow the below pattern should be avoided unless you 
+// Any URL's that do not follow the below pattern should be avoided unless you
 // are sure that authentication is not needed
 app.all('/api/v1/*', [require('./server/middleware/validateRequest')]);
 
 // Set our api routes
 app.use('/api', api);
+app.use('/api/publicacao', publicacaoRouter);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
