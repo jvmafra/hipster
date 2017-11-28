@@ -1,5 +1,5 @@
 import express from 'express';
-import { PublicacaoService }  from '../service/PublicacaoService';
+import { PublicationService }  from '../service/PublicationService';
 import auth from './auth';
 
 const router = express.Router();
@@ -11,7 +11,7 @@ const router = express.Router();
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   try {
-    const data = await PublicacaoService.consultaPublicacoes(id);
+    const data = await PublicationService.retrievePublication(id);
     res.status(200).json(data);
   } catch(err) {
     res.status(400).json(err.message);
@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
  */
 router.get('/', async (req, res) => {
   try {
-    const data = await PublicacaoService.consultaPublicacao();
+    const data = await PublicationService.retrievePublications();
     res.status(200).json(data);
   } catch(err) {
     res.status(400).json(err.message);
@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
  */
 router.delete('/', async (req, res) => {
   try {
-    const data = await PublicacaoService.removePublicacao();
+    const data = await PublicationService.removePublications();
     res.status(200).json(data);
   } catch(err) {
     res.status(400).json(err.message);
@@ -46,9 +46,9 @@ router.delete('/', async (req, res) => {
  * POST cadastra publicacao
  */
 router.post('/', async (req, res) => {
-  const publicacao = req.body;
+  const publication = req.body;
   try {
-    const data = await PublicacaoService.registraPublicacao(publicacao);
+    const data = await PublicationService.registerPublication(publication);
     res.status(200).json(data);
   } catch(err) {
     res.status(400).json(err.message);

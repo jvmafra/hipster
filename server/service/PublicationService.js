@@ -1,5 +1,5 @@
 import db_config from '../config/db_config';
-import Publicacao from '../model/Publicacao'
+import Publication from '../model/Publication'
 
 db_config();
 
@@ -8,7 +8,7 @@ db_config();
  *
  * @author Gustavo Oliveira
  */
-export class PublicacaoService{
+export class PublicationService{
 
   /**
    * Consulta uma Publicação dado um id.
@@ -17,9 +17,9 @@ export class PublicacaoService{
    * @returns {Promise}  Promise resolvida com o objeto Publicação
    * da forma que o mongo retorna.
    */
-  static consultaPublicacoes(id) {
+  static retrievePublication(id) {
     return new Promise((resolve, reject) =>
-      Publicacao.findOne({_id: id}, (err, result) => {
+      Publication.findOne({_id: id}, (err, result) => {
         if (err || !result) return reject(err);
         return resolve(result);
       })
@@ -32,9 +32,9 @@ export class PublicacaoService{
    * @returns {Promise}  Promise resolvida com uma lista de objetos Usuario
    * da forma que o mongo retorna.
    */
-  static consultaPublicacao() {
+  static retrievePublications() {
     return new Promise((resolve, reject) => {
-      Publicacao.find({}, (err, results) => {
+      Publication.find({}, (err, results) => {
         if (err) return reject(err);
         return resolve(results);
       });
@@ -48,9 +48,9 @@ export class PublicacaoService{
    * @param   {String}  id referente a publicação a ser removido
    * @return  {Promise} Promise resolvida
    */
-  static removePublicacao(id) {
+  static removePublication(id) {
     return new Promise((resolve, reject) =>
-      Publicacao.findOneAndRemove({_id: id}, (err, result) => {
+      Publication.findOneAndRemove({_id: id}, (err, result) => {
         if (err || !result) return reject(err);
         return resolve(result);
       })
@@ -58,16 +58,16 @@ export class PublicacaoService{
   }
 
   /**
-   * Cadastra um Usuario
-   *
+   * Cadastra uma Publicação
+   * 
    * @param   {Object}  publicacao contendo os campos preenchidos
    * @return  {Promise} Promise resolvida com o objeto Usuario
    * da forma que o mongo retorna
    */
-  static registraPublicacao(publicacao) {
-      const publicacaoMongoose = new Publicacao(publicacao);
+  static registerPublication(publication) {
+      const publicationMongoose = new Publication(publication);
       return  new Promise((resolve, reject) => {
-        publicacaoMongoose.save((err, result) => (err) ? reject(err) : resolve(result))
+        publicationMongoose.save((err, result) => (err) ? reject(err) : resolve(result))
       });
   }
 
@@ -77,9 +77,9 @@ export class PublicacaoService{
    * @return  {Promise} Promise resolvida com o resultado da
    * remoção de todas as Publicações.
    */
-  static removePublicacao() {
+  static removePublications() {
     return new Promise((resolve, reject) =>
-      Publicacao.remove({}, (err, result) => {
+      Publication.remove({}, (err, result) => {
         if (err || !result) return reject(err);
         return resolve(result);
       })

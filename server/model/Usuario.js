@@ -44,33 +44,7 @@ const usuarioSchema = new Schema({
     birthDate : {
       type: Date,
       required: [true, erro.CADASTRO.VALIDACAO_DATA_NASCIMENTO]
-    },
-
-    publicacoes: [{
-      _id: {
-        type: String,
-        required: [true, erro.CADASTRO.VALIDACAO_OWNER]
-      },
-
-      ownerUsername : {
-        type: String,
-        required: [true, erro.CADASTRO.VALIDACAO_OWNER]
-      },
-
-      url : {
-        type: String,
-        required: [true, erro.CADASTRO.VALIDACAO_URL]
-      },
-
-      description : String,
-
-      creationDate : Date,
-
-      genres : [String],
-
-      aproves : [String]
-      
-    }]
+    }  
 });
 
 usuarioSchema.pre("save", function(next) {
