@@ -37,7 +37,7 @@ const INFO_DUPLICADA = {
  * @param   {Function} next Função callback para redirecionar para a próxima função.
  */
 _.handleValidationError = (err, next) => {
-    let message = REQUISICAO.ERRO_VALIDACAO;
+    let message = _.REQUISICAO.ERRO_VALIDACAO;
     _.each(err.errors, (value, field) => {
         if (message.indexOf(': ') !== message.length - ': '.length) {
             message += ', ';

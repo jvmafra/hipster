@@ -32,7 +32,7 @@ const publicacaoSchema = new Schema({
 });
 
 publicacaoSchema.pre("save", async function(next) {
-  this.dataCriacao = this._id.getTimestamp().getTime();
+  this.dataCriacao = this._id.getTimestamp().getTime();  
 
   let usuario = {}
   try {

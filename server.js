@@ -31,7 +31,7 @@ app.all('/api/v1/*', [require('./server/middleware/validateRequest')]);
 
 // Set our api routes
 app.use('/api', api);
-app.use('/api/publicacao', publicacaoRouter);
+app.use('/api/v1/publicacao', publicacaoRouter);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
