@@ -40,7 +40,13 @@ const publicationSchema = new Schema({
 });
 
 publicationSchema.pre("save", async function(next) {  
-  next();
+  let usuario = {}
+  try {
+      usuario = await UsuarioService.consultaUsuario(this.ownerUsername);
+      next();
+  } catch (err) {
+      next(err);
+  }
   
 });
 

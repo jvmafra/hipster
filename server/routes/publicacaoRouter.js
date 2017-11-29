@@ -35,8 +35,7 @@ router.get('/', async (req, res) => {
  */
 router.get('/user/:username', async (req, res) => {
   const ownerUsername = req.params.username;
-  try {
-    console.log(ownerUsername);
+  try {    
     const data = await PublicationService.retrieveUserPublications(ownerUsername);
     res.status(200).json(data);
   } catch(err) {
