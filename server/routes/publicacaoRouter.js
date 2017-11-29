@@ -31,6 +31,20 @@ router.get('/', async (req, res) => {
 });
 
 /**
+ * GET consulta todas publicaçoes de um usuário
+ */
+router.get('/user/:username', async (req, res) => {
+  const ownerUsername = req.params.username;
+  try {
+    console.log(ownerUsername);
+    const data = await PublicationService.retrieveUserPublications(ownerUsername);
+    res.status(200).json(data);
+  } catch(err) {
+    res.status(400).json(err.message);
+  }
+});
+
+/**
  * DELETE todas publicaçoes
  */
 router.delete('/', async (req, res) => {

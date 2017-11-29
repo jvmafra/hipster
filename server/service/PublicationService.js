@@ -41,6 +41,21 @@ export class PublicationService{
     });
   }
 
+   /**
+   * Consulta todos as Publicações de um usuário
+   *
+   * @returns {Promise}  Promise resolvida com uma lista de objetos Usuario
+   * da forma que o mongo retorna.
+   */
+  static retrieveUserPublications(ownerUsername) {
+    return new Promise((resolve, reject) => {
+      Publication.find({ownerUsername: ownerUsername}, (err, results) => {
+        if (err) return reject(err);
+        return resolve(results);
+      });
+    });
+  }
+
 
   /**
    * Remove uma Publicação
