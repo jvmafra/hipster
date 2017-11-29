@@ -21,7 +21,8 @@ export class UsuarioService {
   static consultaUsuario(username) {
     return new Promise((resolve, reject) =>
       Usuario.findOne({username: username}, (err, result) => {
-        if (err || !result) return reject(err);
+        if (err) return reject(err);
+        if (!result) return reject(new Error("Username não cadastrado."));
         return resolve(result);
       })
     );
@@ -109,7 +110,6 @@ export class UsuarioService {
    * @return  {Promise} Promise resolvida com o objeto Usuario
    * da forma que o mongo retorna
    */
-
   static removeUsuario(username) {
     return new Promise((resolve, reject) =>
       Usuario.findOneAndRemove({username: username}, (err, result) => {
@@ -117,7 +117,5 @@ export class UsuarioService {
         return resolve(result);
       })
     );
-
   }
-
 }

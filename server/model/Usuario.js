@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import * as erro from '../util/ErroHandler';
-import crypt from 'crypto';
 import bcrypt from 'bcrypt-nodejs'
 
 const Schema = mongoose.Schema;
@@ -45,7 +44,7 @@ const usuarioSchema = new Schema({
     birthDate : {
       type: Date,
       required: [true, erro.CADASTRO.VALIDACAO_DATA_NASCIMENTO]
-    }
+    }  
 });
 
 usuarioSchema.pre("save", function(next) {
