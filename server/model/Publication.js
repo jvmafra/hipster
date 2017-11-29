@@ -24,6 +24,8 @@ const publicationSchema = new Schema({
     required: [true, erro.CADASTRO.VALIDACAO_URL]
   },
 
+  title : String, 
+
   description : String,
   
   creationDate : { 

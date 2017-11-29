@@ -23,6 +23,8 @@ module.exports = function(req, res, next) {
         return;
       }
 
+      console.log(decoded.username);
+
       // Authorize the user to see if s/he can access our resources
 
       var dbUser = validateUser(key); // The key would be the logged in user's username
