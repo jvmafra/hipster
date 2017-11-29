@@ -16,7 +16,8 @@ _.CADASTRO = {
     VALIDACAO_DATA_NASCIMENTO: 'Usuário deve ter uma data de nascimento',
 
     VALIDACAO_OWNER: "Publicação deve ter um criador",
-    VALIDACAO_URL: "Publicação deve ter uma url vinculada a ela"
+    VALIDACAO_URL: "Publicação deve ter uma url vinculada a ela",
+    VALIDACAO_TITLE: "Publicação deve ter um título"
 };
 
 _.REQUISICAO = {
