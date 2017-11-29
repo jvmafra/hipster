@@ -1,0 +1,22 @@
+<div class="ui divided items">
+  <div class="item">
+    <div class="ui small image">
+      <img src="../assets/elliot.jpg">
+    </div>
+    <div class="content">
+      <a class="header">{{ event.title }}</a>
+      <div class="meta">
+        <span class="date">{{ event.creationDate }}</span>
+      </div>
+      <div class="description">
+        <p>{{ event.description }}</p>
+      </div>
+      <div class="extra">
+        <a class="ui circular label likes">
+          <i class="heart icon"></i> {{ event.aproves.length }}  {{ 'POST.LIKES' | translate }}
+        </a>
+        <div class="ui tag label" [ngClass]="getClass(genre)" *ngFor="let genre of event.genres">{{ genre }}</div>
+      </div>
+    </div>
+  </div>
+</div>

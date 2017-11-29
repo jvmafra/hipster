@@ -19,6 +19,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderTokenInterceptor } from './services/interceptor/handle-header-token.interceptor';
 import { RequestTokenInterceptor } from './services/interceptor/handle-request-token.interceptor';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+import { TimelineComponent } from './timeline/timeline.component';
+import { TimelinePostComponent } from './timeline/timeline-post/timeline-post.component';
+import { PostPageComponent } from './post-page/post-page.component';
+import { SuccessMsgComponent } from './success-msg/success-msg.component';
+import { ErrorMsgComponent } from './error-msg/error-msg.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -30,7 +35,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProfilePageComponent,
     RegisterComponent,
     UserPostComponent,
-    DeleteModalComponent
+    DeleteModalComponent,
+    TimelineComponent,
+    TimelinePostComponent,
+    PostPageComponent,
+    SuccessMsgComponent,
+    ErrorMsgComponent
   ],
   providers: [
     {

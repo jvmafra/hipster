@@ -32,6 +32,7 @@ export class ProfilePageComponent implements OnInit {
   private months : Array<number>;
   private years : Array<number>;
   private errorInfo: Array<Object>;
+  private alreadyInit: number;
 
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
@@ -39,6 +40,7 @@ export class ProfilePageComponent implements OnInit {
               private translateService: TranslateService,
               private formValidation: FormValidationService ) {
 
+    this.alreadyInit = 0;
     this.day = 'day';
     this.month = 'month';
     this.year = 'year';
@@ -47,15 +49,26 @@ export class ProfilePageComponent implements OnInit {
     this.years = this.userService.getBirthdayYearsArray('1905');
   }
 
+  private checkTab() {
+
+    // < 2 because ngIf runs at least twice until load the hidden dropdown view
+    if (this.alreadyInit < 2 && this.selected_tab == 1) {
+      $('.ui.dropdown')
+        .dropdown()
+      ;
+    }
+
+    if (this.selected_tab == 1) { this.alreadyInit += 1 }
+    else { this.alreadyInit = 0 }
+
+    return this.selected_tab === 1
+  }
+
   public updateProfile() {
     let data = this.formValidation.getFormValidationVariables(this.errorInfo);
     $('.ui.form').form(data);
 
     if (this.isFormValid()) {
-      console.log(this.day)
-      console.log(this.month)
-      console.log(this.year)
-
       const usuario = {
         birthDate: this.userService.getBirthDate(this.day, this.month, this.year),
         email: this.email,
@@ -67,8 +80,12 @@ export class ProfilePageComponent implements OnInit {
         data => {
           this.userService.storeName(usuario.name);
           window.location.href = "/user/" + this.profile.username;
+          $('.ui.success.message')
+            .show();
         }, err => {
           console.log(err)
+          $('.ui.error.message')
+            .show();
           if (err.statusText === "Unauthorized") {
             this.userService.logoutUser();
           }
@@ -89,7 +106,6 @@ export class ProfilePageComponent implements OnInit {
                       {"input": "year", errors: ['not[year]'], prompt : ["ERRORS.REGISTER.YEAR"]},
                       {"input": "name", errors: ['empty'], prompt : ["ERRORS.REGISTER.NAME"]},
                       {"input": "email", errors: ['empty'], prompt : ["ERRORS.REGISTER.EMAIL"]}];
-
   }
 
 

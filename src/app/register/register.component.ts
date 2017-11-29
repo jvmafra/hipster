@@ -39,6 +39,10 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('.ui.dropdown')
+      .dropdown()
+    ;
+    
     this.initSemanticValidationForm();
   }
 
