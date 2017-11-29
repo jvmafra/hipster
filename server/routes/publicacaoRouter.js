@@ -56,6 +56,19 @@ router.delete('/', async (req, res) => {
 });
 
 /**
+ * DELETE publicação pelo id
+ */
+router.delete('/:id', async (req, res) => {
+  const publicationID = req.params.id;
+  try {
+    const data = await PublicationService.removePublication(publicationID);
+    res.status(200).json(data);
+  } catch(err) {
+    res.status(400).json(err.message);
+  }
+});
+
+/**
  * POST cadastra publicacao
  */
 router.post('/', async (req, res) => {
