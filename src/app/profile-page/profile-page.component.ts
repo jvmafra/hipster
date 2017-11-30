@@ -55,6 +55,7 @@ export class ProfilePageComponent implements OnInit {
     this.year = values[4];
 
     if (this.isFormValid()) {
+
       const usuario = {
         birthDate: this.userService.getBirthDate(this.day, this.month, this.year),
         email: this.email,
@@ -94,10 +95,13 @@ export class ProfilePageComponent implements OnInit {
 
 
   private initDate(userBirthDay) {
-    let userBirthDayFormatted = new Date(userBirthDay);
-    this.day = userBirthDayFormatted.getDay();
-    this.month = userBirthDayFormatted.getMonth();
-    this.year = userBirthDayFormatted.getFullYear();
+    let userBirthDayFormatted = userBirthDay.split("T");
+    userBirthDayFormatted = userBirthDayFormatted[0].split("-")
+
+    this.day = userBirthDayFormatted[2];
+    this.month = userBirthDayFormatted[1];
+    this.year = userBirthDayFormatted[0];
+
   }
 
   ngAfterViewChecked() {
@@ -105,9 +109,17 @@ export class ProfilePageComponent implements OnInit {
        $('.ui.dropdown')
          .dropdown()
        ;
+       if (this.day < 10) {
+         let dayFormatted = "" + this.day;
+         $("#day").dropdown("set selected", dayFormatted[1]);
 
-       $("#day").dropdown("set selected", this.day);
-       $("#month").dropdown("set selected", this.month);
+       }
+
+       if (this.month < 10) {
+         let monthFormatted = "" + this.month;
+         $("#month").dropdown("set selected", monthFormatted[1]);
+       }
+
        $("#year").dropdown("set selected", this.year);
 
      }
@@ -134,6 +146,7 @@ export class ProfilePageComponent implements OnInit {
             this.profile.spotify = this.profile.username;
             this.name = this.profile.name;
             this.username = this.profile.username;
+
             this.initDate(this.profile.birthDate);
 
             this.email = this.profile.email;
