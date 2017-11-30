@@ -1,12 +1,12 @@
 <div class="ui divided items">
   <div class="item">
     <div class="ui small image">
-      <img src="../assets/elliot.jpg">
+      <img [src]="event.thumbnail">
     </div>
     <div class="content">
-      <a class="header">{{ event.title }}</a>
+      <a class="header" (click)="openPost()">{{ event.title }}</a>
       <div class="meta">
-        <span class="date">{{ event.creationDate }}</span>
+        <span class="date">{{ event.owner_username }}: {{ event.creationDate }}</span>
       </div>
       <div class="description">
         <p>{{ event.description }}</p>

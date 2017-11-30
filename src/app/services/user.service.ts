@@ -7,6 +7,21 @@ import { StorageService } from './storage.service'
 export class UserService {
   private headers : HttpHeaders;
   private serverHost : String;
+  private colors: any = {
+    'Pop': 'red',
+    'Rock': 'orange',
+    'Funk': 'yellow',
+    'Rap': 'olive',
+    'Reggae': 'green',
+    'Classic': 'teal',
+    'b': 'blue',
+    'c': 'violet',
+    'd': 'purple',
+    'e': 'pink',
+    'f': 'brown',
+    'g': 'grey',
+    'h': 'black'
+  };
 
   constructor(private http: HttpClient,
               private globalService: GlobalService,
@@ -14,6 +29,10 @@ export class UserService {
 
     this.headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.serverHost = globalService.getServerHost();
+  }
+
+  public getColor(genre){
+    return this.colors[genre];
   }
 
   public registerUser(user) {

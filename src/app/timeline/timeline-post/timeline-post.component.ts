@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 declare var jquery:any;
 declare var $ :any;
@@ -13,29 +14,21 @@ export class TimelinePostComponent implements OnInit {
 
   @Input() event;
 
-  constructor() {
-  }
+  constructor(private userService: UserService) {}
 
-  private colors: any = {
-    'Pop': 'red',
-    'Rock': 'orange',
-    'Funk': 'yellow',
-    'Rap': 'olive',
-    'Reggae': 'green',
-    'Classic': 'teal',
-    'b': 'blue',
-    'c': 'violet',
-    'd': 'purple',
-    'e': 'pink',
-    'f': 'brown',
-    'g': 'grey',
-    'h': 'black'
-  };
+  openPost() {
+    window.location.href = "/post/" + this.event.id
+  }
 
   getClass(genre) {
-    return this.colors[genre];
+    return this.userService.getColor(genre);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    var url = this.event.url;
+    var videoid = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+    this.event.thumbnail = "https://img.youtube.com/vi/" + videoid[1] + "/hqdefault.jpg"
+    this.event.videoId = videoid[1]
+  }
 
 }
