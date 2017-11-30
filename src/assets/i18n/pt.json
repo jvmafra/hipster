@@ -47,7 +47,7 @@
   },
   "PUBLICATION": {
     "SHARE_MESSAGE":"Compartilha uma nova música",
-    "TITLE": "Titulo Opcional",
+    "TITLE": "Titulo (Opcional)",
     "URL": "URL",
     "DESCRIPTION": "Descrição",
     "GENRES": "Genêros"
@@ -79,5 +79,8 @@
         "VALIDACAO_URL_YOUTUBE": "Publicação deve ter uma url do youtube válida"
       }
     }
+  },
+  "GENERAL": {
+    "CANCEL": "Cancelar"
   }
 }

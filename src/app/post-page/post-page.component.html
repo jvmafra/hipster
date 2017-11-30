@@ -6,6 +6,9 @@
         <div class="item">
           <div class="content">
             <a class="header">{{ post.title }}</a>
+            <div class="meta" *ngIf="post.user_title !== 'undefined'">
+              <span class="date">{{ post.music_name }}</span>
+            </div>
             <div class="meta">
               <span class="date">{{ post.creationDate }}</span>
             </div>
