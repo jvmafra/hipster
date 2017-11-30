@@ -6,6 +6,10 @@
   padding: 5%;
 }
 
+.dropdown {
+  margin: 8px;
+}
+
 .hipster-select {
   padding-left: 34px !important;
   font-size: 12px;

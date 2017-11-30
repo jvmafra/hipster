@@ -1,3 +1,25 @@
 .hipster-login-form {
   margin-top: 2.5%;
 }
+
+.labeled {
+  color: white !important;
+}
+
+.item {
+  color: #DED3D2 !important;
+}
+
+.field {
+  width: 100% !important;
+  padding-bottom: 4px !important;
+}
+
+.fields {
+  margin: 0px !important;
+}
+
+.menu {
+  background-color: #3D3F4C;
+  border-radius: 0px;
+}

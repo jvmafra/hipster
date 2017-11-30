@@ -1,0 +1,28 @@
+<div class="ui container post-container">
+  <div class="ui piled segment">
+    <div class="ui divided items">
+      <div class="ui divided items">
+        <div class="item">
+          <div class="ui small image">
+            <img src="../assets/elliot.jpg">
+          </div>
+          <div class="content">
+            <a class="header">{{ post.title }}</a>
+            <div class="meta">
+              <span class="date">{{ post.creationDate }}</span>
+            </div>
+            <div class="description">
+              <p>{{ post.description }}</p>
+            </div>
+            <div class="extra">
+              <a class="ui circular label likes">
+                <i class="heart icon"></i> {{ post.aproves.length }}  {{ 'post.LIKES' | translate }}
+              </a>
+              <div class="ui tag label" [ngClass]="getClass(genre)" *ngFor="let genre of post.genres">{{ genre }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
