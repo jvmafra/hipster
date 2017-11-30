@@ -34,4 +34,12 @@ export class HipsterTranslate {
     location.reload();
   }
 
+  public translateErrorsPublication(errors) {
+    let prefix = "ERRORS.RESPONSE.PUBLICATION.";
+
+    for (var idx in errors) {
+      errors[idx] = this.translate.instant(prefix + errors[idx]);
+    }
+  }
+
 }

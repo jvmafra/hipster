@@ -1,0 +1,60 @@
+<div id="create-post" class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">
+    {{ 'PUBLICATION.SHARE_MESSAGE' | translate }}
+  </div>
+  <div *ngIf="requestErrors.length != 0"class="ui container">
+    <div class="ui icon compact error message">
+      <i class="inbox icon"></i>
+      <ul class="list">
+        <li *ngFor="let error of requestErrors"> {{ error }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content">
+    <form id="post-form" class="ui form">
+      <div class="two fields">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="child icon"></i>
+            <input type="text" name="title" [(ngModel)]="publication.title" attr.placeholder="{{ 'PUBLICATION.TITLE' | translate }}">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="child icon"></i>
+            <input type="text" name="url" [(ngModel)]="publication.url" attr.placeholder="{{ 'PUBLICATION.URL' | translate }}">
+          </div>
+        </div>
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <div class="ui action input">
+            <select class="hipster-select" [(ngModel)]="selectedGenre" name="selectedGenre">
+              <option value="genre"> {{ 'PUBLICATION.GENRES' | translate }}</option>
+              <option *ngFor="let genre of listGenres" value="{{genre.value}}">{{genre.name}}</option>
+            </select>
+           <div class="ui blue button" (click)="addGenre(selectedGenre)">ADD </div>
+         </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div (click)="removeGenre(genre)" class="ui tag label" [ngClass]="getClass(genre)" *ngFor="let genre of publication.genres">{{ genre }}</div>
+      </div>
+
+      <label>{{ 'PUBLICATION.DESCRIPTION' | translate }}</label>
+      <div class="field">
+        <div class="ui left icon input">
+          <textarea name="description" [(ngModel)]="publication.description" rows="5" cols="30"></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="actions">
+    <div class="ui button red deny">{{ 'GENERAL.CANCEL' | translate }}</div>
+    <div class="ui button green" (click)="createPost()">{{'POST.SHARE' | translate }}</div>
+  </div>
+</div>

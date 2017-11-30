@@ -26,7 +26,7 @@
     "SEND": "Send",
     "LIKE": "Like",
     "LIKES": "Likes",
-    "CREATE": "Create your post now!",
+    "SHARE": "Share",
     "MESSAGE": "TO BE DEFINED: Some message talking about the limits, likes, popularity, etc"
   },
   "REGISTER": {
@@ -50,6 +50,13 @@
     "DELETE_MESSAGE": "Do you have sure that you want to delete your account? All your posts and information gonna be deleted permanently.",
     "CANCEL": "Cancel"
   },
+  "PUBLICATION": {
+    "SHARE_MESSAGE":"Share a new music",
+    "TITLE": "Optional Title",
+    "URL": "URL",
+    "DESCRIPTION": "Description",
+    "GENRES": "Genres"
+  },
   "ERRORS": {
     "REGISTER": {
       "NAME": "A name need to be informed",
@@ -59,6 +66,21 @@
       "DAY": "A day need to be informed",
       "MONTH": "A day need to be informed",
       "YEAR": "A day need to be informed"
+    },
+    "PUBLICATION": {
+      "URL": "An url need to be informed"
+    },
+    "RESPONSE": {
+      "PUBLICATION": {
+        "VALIDACAO_OWNER": "Publication has to have a creator",
+        "VALIDACAO_URL": "Publication has to have an url",
+        "VALIDACAO_GENRES": "Publication has to have at least one genre",
+        "VALIDACAO_CATEGORY": "Publication has to be a music",
+        "VALIDACAO_URL_YOUTUBE": "Publication has to have a valid url from youtube"
+      }
     }
+  },
+  "GENERAL": {
+    "CANCEL": "Cancel"
   }
 }

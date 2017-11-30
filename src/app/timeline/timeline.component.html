@@ -2,11 +2,8 @@
 
   <div class="ui brown segment clearing">
     <p>{{ 'POST.MESSAGE' | translate }}</p>
-    <div class="ui animated button right floated" tabindex="0">
-      <div class="visible content">{{ 'POST.CREATE' | translate}}</div>
-      <div class="hidden content">
-        <i class="right arrow icon"></i>
-      </div>
+    <div (click)="createPost.createPostModal($event)" class="big ui button right floated" tabindex="0">
+      <div class="visible content"><i class="plus icon"></i>{{ 'POST.SHARE' | translate}}</div>
     </div>
   </div>
 
@@ -18,3 +15,5 @@
     </div>
   </div>
 </div>
+
+<app-create-post-modal> </app-create-post-modal>

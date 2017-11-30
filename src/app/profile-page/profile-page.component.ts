@@ -55,6 +55,7 @@ export class ProfilePageComponent implements OnInit {
     this.year = values[4];
 
     if (this.isFormValid()) {
+
       const usuario = {
         birthDate: this.userService.getBirthDate(this.day, this.month, this.year),
         email: this.email,
@@ -134,6 +135,7 @@ export class ProfilePageComponent implements OnInit {
             this.profile.spotify = this.profile.username;
             this.name = this.profile.name;
             this.username = this.profile.username;
+
             this.initDate(this.profile.birthDate);
 
             this.email = this.profile.email;

@@ -1,6 +1,7 @@
 import express from 'express';
 import { PublicationService }  from '../service/PublicationService';
 import auth from './auth';
+import {PublicationValidator} from '../util/PublicationValidator'
 
 const router = express.Router();
 
@@ -72,12 +73,19 @@ router.delete('/:id', async (req, res) => {
  */
 router.post('/', async (req, res) => {
   const publication = req.body;
-  try {
-    const data = await PublicationService.registerPublication(publication);
-    res.status(200).json(data);
-  } catch(err) {
-    res.status(400).json(err.message);
+  const validacao = await PublicationValidator.isValid(publication);
+  console.log(validacao);
+
+  if (!validacao.return) {res.status(400).json(validacao.message);}
+  else{
+    try {
+      const data = await PublicationService.registerPublication(publication);
+      res.status(200).json(data);
+    } catch(err) {
+      res.status(400).json(err.message);
+    }
   }
+
 });
 
 module.exports = router;
