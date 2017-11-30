@@ -15,7 +15,6 @@ export class PublicationService {
   }
 
   public savePublication(publication) {
-    console.log(this.serverHost)
     return this.http.post(this.serverHost + 'v1/publicacao', JSON.stringify(publication), {
       headers: this.headers
     });
