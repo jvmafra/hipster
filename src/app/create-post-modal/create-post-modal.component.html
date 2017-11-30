@@ -1,18 +1,51 @@
-<div class="ui modal">
+<div id="create-post" class="ui modal">
   <i class="close icon"></i>
   <div class="header">
-    {{ 'DELETEMODAL.DELETE_ACCOUNT' | translate }}
+    {{ 'PUBLICATION.SHARE_MESSAGE' | translate }}
   </div>
-  <div class="image content">
-    <div class="image">
-      <img class="ui avatar image" src="./assets/images/negative.png">
-    </div>
-    <div class="description">
-      {{ 'DELETEMODAL.DELETE_MESSAGE' | translate }}
-    </div>
+  <div class="content">
+    <form class="ui form">
+      <div class="two fields">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="child icon"></i>
+            <input type="text" name="title" [(ngModel)]="publication.title" attr.placeholder="{{ 'PUBLICATION.TITLE' | translate }}">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="child icon"></i>
+            <input type="text" name="url" [(ngModel)]="publication.url" attr.placeholder="{{ 'PUBLICATION.URL' | translate }}">
+          </div>
+        </div>
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <div class="ui action input">
+            <select class="hipster-select" [(ngModel)]="selectedGenre" name="selectedGenre">
+              <option value="genre"> {{ 'PUBLICATION.GENRES' | translate }}</option>
+              <option *ngFor="let genre of listGenres" value="{{genre.value}}">{{genre.name}}</option>
+            </select>
+           <div class="ui blue button" (click)="addGenre(selectedGenre)">ADD </div>
+         </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div (click)="removeGenre(genre)" class="ui tag label" [ngClass]="getClass(genre)" *ngFor="let genre of genres">{{ genre }}</div>
+      </div>
+
+      <label>{{ 'PUBLICATION.DESCRIPTION' | translate }}</label>
+      <div class="field">
+        <div class="ui left icon input">
+          <textarea name="description" [(ngModel)]="publication.description"></textarea>
+        </div>
+      </div>
+    </form>
   </div>
   <div class="actions">
-    <div class="ui button red deny">{{ 'DELETEMODAL.CANCEL' | translate }}</div>
-    <div class="ui button green approve">OK</div>
+    <div class="ui button red deny">{{ 'GENERAL.CANCEL' | translate }}</div>
+    <div class="ui button green approve">{{'POST.SHARE' | translate }}</div>
   </div>
 </div>

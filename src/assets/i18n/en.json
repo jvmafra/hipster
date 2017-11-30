@@ -50,6 +50,13 @@
     "DELETE_MESSAGE": "Do you have sure that you want to delete your account? All your posts and information gonna be deleted permanently.",
     "CANCEL": "Cancel"
   },
+  "PUBLICATION": {
+    "SHARE_MESSAGE":"Share a new music",
+    "TITLE": "Title",
+    "URL": "URL",
+    "DESCRIPTION": "Description",
+    "GENRES": "Genres"
+  },
   "ERRORS": {
     "REGISTER": {
       "NAME": "A name need to be informed",
@@ -60,5 +67,8 @@
       "MONTH": "A day need to be informed",
       "YEAR": "A day need to be informed"
     }
+  },
+  "GENERAL": {
+    "CANCEL": "Cancel"
   }
 }
