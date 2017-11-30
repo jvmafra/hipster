@@ -24,6 +24,7 @@ import { TimelinePostComponent } from './timeline/timeline-post/timeline-post.co
 import { PostPageComponent } from './post-page/post-page.component';
 import { SuccessMsgComponent } from './success-msg/success-msg.component';
 import { ErrorMsgComponent } from './error-msg/error-msg.component';
+import { CreatePostModalComponent } from './create-post-modal/create-post-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -40,7 +41,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TimelinePostComponent,
     PostPageComponent,
     SuccessMsgComponent,
-    ErrorMsgComponent
+    ErrorMsgComponent,
+    CreatePostModalComponent
   ],
   providers: [
     {
