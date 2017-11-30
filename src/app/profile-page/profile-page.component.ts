@@ -25,9 +25,9 @@ export class ProfilePageComponent implements OnInit {
   private email: string;
   private username: string;
   private foundUser: boolean;
-  private day : String;
-  private month : String;
-  private year : String;
+  private day : number;
+  private month : number;
+  private year : number;
   private days : Array<number>;
   private months : Array<number>;
   private years : Array<number>;
@@ -41,32 +41,9 @@ export class ProfilePageComponent implements OnInit {
               private formValidation: FormValidationService ) {
 
     this.alreadyInit = 0;
-    this.day = 'day';
-    this.month = 'month';
-    this.year = 'year';
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
     this.years = this.userService.getBirthdayYearsArray('1905');
-  }
-
-  private checkTab() {
-
-    // < 2 because ngIf runs at least twice until load the hidden dropdown view
-    if (this.alreadyInit < 2 && this.selected_tab == 1) {
-      $('.ui.dropdown')
-        .dropdown()
-      ;
-
-      $("#day").dropdown("set selected", this.day);
-      $("#month").dropdown("set selected", this.month);
-      $("#year").dropdown("set selected", this.year);
-
-    }
-
-    if (this.selected_tab == 1) { this.alreadyInit += 1 }
-    else { this.alreadyInit = 0 }
-
-    return this.selected_tab === 1
   }
 
   public updateProfile() {
@@ -89,12 +66,10 @@ export class ProfilePageComponent implements OnInit {
         data => {
           this.userService.storeName(usuario.name);
           window.location.href = "/user/" + this.profile.username;
-          $('.ui.success.message')
-            .show();
+          $('.ui.success.message').show();
         }, err => {
           console.log(err)
-          $('.ui.error.message')
-            .show();
+          $('.ui.error.message').show();
           if (err.statusText === "Unauthorized") {
             this.userService.logoutUser();
           }
@@ -118,6 +93,31 @@ export class ProfilePageComponent implements OnInit {
   }
 
 
+  private initDate(userBirthDay) {
+    let userBirthDayFormatted = new Date(userBirthDay);
+    this.day = userBirthDayFormatted.getDay();
+    this.month = userBirthDayFormatted.getMonth();
+    this.year = userBirthDayFormatted.getFullYear();
+  }
+
+  ngAfterViewChecked() {
+    if (this.alreadyInit < 2 && this.selected_tab == 1) {
+       $('.ui.dropdown')
+         .dropdown()
+       ;
+
+       $("#day").dropdown("set selected", this.day);
+       $("#month").dropdown("set selected", this.month);
+       $("#year").dropdown("set selected", this.year);
+
+     }
+
+     if (this.selected_tab == 1) { this.alreadyInit += 1 }
+     else { this.alreadyInit = 0 }
+
+     return this.selected_tab === 1
+  }
+
   ngOnInit() {
     this.initSemanticValidationForm();
 
@@ -134,12 +134,7 @@ export class ProfilePageComponent implements OnInit {
             this.profile.spotify = this.profile.username;
             this.name = this.profile.name;
             this.username = this.profile.username;
-
-            let birthDateArray = this.userService.getBirthDateString(this.profile.birthDate);
-
-            this.day = birthDateArray[0];
-            this.month = birthDateArray[1];
-            this.year = birthDateArray[2];
+            this.initDate(this.profile.birthDate);
 
             this.email = this.profile.email;
           }, err => {

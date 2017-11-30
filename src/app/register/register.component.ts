@@ -29,9 +29,6 @@ export class RegisterComponent implements OnInit {
               private formValidation: FormValidationService ) {
 
     this.user = {};
-    this.day = 'day';
-    this.month = 'month';
-    this.year = 'year';
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
     this.years = this.userService.getBirthdayYearsArray('1905');
@@ -39,21 +36,13 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    $('.ui.dropdown')
-      .dropdown()
-    ;
-
-    this.initSemanticValidationForm();
+    this.initDateDropdown();
+    this.initSemanticValidationFormInfo();
   }
 
   private registerUser(user, event) {
-    let data = this.formValidation.getFormValidationVariables(this.errorInfo);
-    $('.ui.form:nth-child(2)').form(data);
-    let values = $('.ui.dropdown').dropdown('get value');
-    this.day = values[1];
-    this.month = values[2];
-    this.year = values[3];
-
+    this.initSemanticValidationForm();
+    this.setDateValuesFromDropdown();
     user.birthDate = this.userService.getBirthDate(this.day, this.month, this.year);
 
     if (this.isFormValid()) {
@@ -80,7 +69,11 @@ export class RegisterComponent implements OnInit {
     return $('.ui.form:nth-child(2)').form('is valid');
   }
 
-  private initSemanticValidationForm() {
+  private initDateDropdown() {
+    $('.ui.dropdown').dropdown();
+  }
+
+  private initSemanticValidationFormInfo() {
     this.errorInfo = [{"input": "day", errors: ['not[day]'], prompt : ["ERRORS.REGISTER.DAY"]},
                       {"input": "month", errors: ['not[month]'], prompt : ["ERRORS.REGISTER.MONTH"]},
                       {"input": "year", errors: ['not[year]'], prompt : ["ERRORS.REGISTER.YEAR"]},
@@ -89,6 +82,18 @@ export class RegisterComponent implements OnInit {
                       {"input": "username", errors: ['empty'], prompt : ["ERRORS.REGISTER.USERNAME"]},
                       {"input": "password", errors: ['empty'], prompt : ["ERRORS.REGISTER.PASSWORD"]}]
 
+  }
+
+  private initSemanticValidationForm() {
+    let data = this.formValidation.getFormValidationVariables(this.errorInfo);
+    $('.ui.form:nth-child(2)').form(data);
+  }
+
+  private setDateValuesFromDropdown() {
+    let values = $('.ui.dropdown').dropdown('get value');
+    this.day = values[1];
+    this.month = values[2];
+    this.year = values[3];
   }
 
 }
