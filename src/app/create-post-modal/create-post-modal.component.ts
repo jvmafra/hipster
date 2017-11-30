@@ -1,4 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { PublicationService } from '../services/publication.service';
+import { ActivatedRoute } from '@angular/router';
+import { FormValidationService } from "../services/form-validation.service";
+import { HipsterTranslate } from "../services/hipster-translate.service";
 
 declare var jquery:any;
 declare var $ :any;
@@ -10,58 +14,67 @@ declare var $ :any;
   encapsulation: ViewEncapsulation.None
 })
 export class CreatePostModalComponent implements OnInit {
-  private genres : Array<String>
   private publication: Object;
   private colors: any;
   //@TODO Study and improve this types
   private originalListGenres : any;
   private listGenres : any;
   private selectedGenre: String;
+  private ownerUsername: String;
+  private errorInfo: Array<Object>;
+  private requestErrors: Array<String>;
 
-  constructor() {
-    this.genres = []
+  constructor(private publicationService: PublicationService,
+              private route: ActivatedRoute,
+              private formValidation: FormValidationService,
+              private hipsterTranslate: HipsterTranslate) {
     this.publication = {};
-    this.colors = {
-      'Pop': 'red',
-      'Rock': 'orange',
-      'Funk': 'yellow',
-      'Rap': 'olive',
-      'Reggae': 'green',
-      'Classic': 'teal',
-      'b': 'blue',
-      'c': 'violet',
-      'd': 'purple',
-      'e': 'pink',
-      'f': 'brown',
-      'g': 'grey',
-      'h': 'black'
-    };
-    this.listGenres = [ {name: "Pop", value:"Pop"},
-                        {name: "Rock", value:"Rock"},
-                        {name: "Funk", value:"Funk"},
-                        {name: "Rap", value:"Rap"},
-                        {name: "Reggae", value:"Reggae"},
-                        {name: "Classic", value:"Classic"}]
+    this.colors = this.publicationService.getGenreColorObjects();
+    this.listGenres = this.publicationService.getListGenres();
     this.originalListGenres =  this.listGenres.slice();
     this.selectedGenre = "genre";
+    this.initSemanticValidationFormInfo()
+
   }
 
   ngOnInit() {
+    this.requestErrors = [];
   }
 
   public createPostModal(event) {
+    this.publication = {genres : [], ownerUsername: ''};
+    this.ownerUsername = '';
+    this.publication["ownerUsername"] = window.localStorage.username;
+    this.requestErrors = [];
+    this.listGenres =  this.originalListGenres.slice();
+
     $('#create-post').modal({
-      onDeny    : function() { return true;},
-      onApprove : () => { this.createPost() }
+      onDeny    : function() { return true;}
     })
     .modal('setting', 'closable', false)
     .modal('show');
+
 
     event.stopPropagation();
   }
 
   private createPost() {
+    this.initSemanticValidationForm();
 
+    if ( this.isFormValid() ) {
+      this.publicationService.savePublication(this.publication).subscribe(
+        data => {
+          $('#create-post').modal('hide')
+        }, err => {
+          let errors = err.error.split(';');
+          errors.splice(errors.length - 1, 1);
+          this.hipsterTranslate.translateErrorsPublication(errors);
+          this.requestErrors = errors;
+        }
+      );
+    }
+
+    return false;
   }
 
   private getClass(genre) {
@@ -73,7 +86,7 @@ export class CreatePostModalComponent implements OnInit {
 
     for (index in this.listGenres) {
       if (this.listGenres[index].value === selectedGenre) {
-        this.genres.push(selectedGenre);
+        this.publication["genres"].push(selectedGenre);
         this.listGenres.splice(index, 1);
         this.selectedGenre = "genre";
         return;
@@ -83,18 +96,29 @@ export class CreatePostModalComponent implements OnInit {
 
   private removeGenre(selectedGenre : String) {
     let index : any;
+    let find = false;
 
     for (index in this.originalListGenres) {
       if (this.originalListGenres[index].value === selectedGenre) {
         this.listGenres.push(this.originalListGenres[index]);
-        this.genres.splice(index, 1);
-        return;
+        let genreIndex = this.publication["genres"].indexOf(this.originalListGenres[index].value);
+        this.publication["genres"].splice(genreIndex, 1);
       }
     }
   }
 
-  private savePublication() {
-      
+  private isFormValid() {
+    return $('#post-form').form('is valid');
+  }
+
+  private initSemanticValidationFormInfo() {
+    this.errorInfo = [{"input": "url", errors: ['empty'], prompt : ["ERRORS.PUBLICATION.URL"]}]
+
+  }
+
+  private initSemanticValidationForm() {
+    let data = this.formValidation.getFormValidationVariables(this.errorInfo);
+    $('#post-form').form(data);
   }
 
 }

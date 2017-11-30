@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('#language-dropdown').dropdown();
     this.selectedLanguage = this.hipsterTranslate.getFormattedLanguage();
   }
 

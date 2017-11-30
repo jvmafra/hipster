@@ -45,6 +45,13 @@
     "PASSWORD": "Senha",
     "NAME": "Nome"
   },
+  "PUBLICATION": {
+    "SHARE_MESSAGE":"Compartilha uma nova música",
+    "TITLE": "Titulo Opcional",
+    "URL": "URL",
+    "DESCRIPTION": "Descrição",
+    "GENRES": "Genêros"
+  },
   "DELETEMODAL": {
     "DELETE_ACCOUNT": "Deletar conta",
     "DELETE_MESSAGE": "Você tem certeza que você quer deletar sua conta? Todas suas postagens e informações serão deletadas permanentemente.",
@@ -59,6 +66,18 @@
       "DAY": "Um dia precisa ser informado",
       "MONTH": "Um mês precisa ser informado",
       "YEAR": "Um ano precisa ser informado"
+    },
+    "PUBLICATION": {
+      "URL": "Uma url precisa ser informada"
+    },
+    "RESPONSE": {
+      "PUBLICATION": {
+        "VALIDACAO_OWNER": "Publicação deve ter um criador",
+        "VALIDACAO_URL": "Publicação deve ter uma url vinculada a ela",
+        "VALIDACAO_GENRES": "Publicacao deve ter ao menos um genero",
+        "VALIDACAO_CATEGORY": "Publicação deve ser da categoria musica",
+        "VALIDACAO_URL_YOUTUBE": "Publicação deve ter uma url do youtube válida"
+      }
     }
   }
 }

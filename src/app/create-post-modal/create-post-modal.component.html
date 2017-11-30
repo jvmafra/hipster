@@ -3,8 +3,17 @@
   <div class="header">
     {{ 'PUBLICATION.SHARE_MESSAGE' | translate }}
   </div>
+  <div *ngIf="requestErrors.length != 0"class="ui container">
+    <div class="ui icon compact error message">
+      <i class="inbox icon"></i>
+      <ul class="list">
+        <li *ngFor="let error of requestErrors"> {{ error }}</li>
+      </ul>
+    </div>
+  </div>
+
   <div class="content">
-    <form class="ui form">
+    <form id="post-form" class="ui form">
       <div class="two fields">
         <div class="field">
           <div class="ui left icon input">
@@ -33,19 +42,19 @@
       </div>
 
       <div class="field">
-        <div (click)="removeGenre(genre)" class="ui tag label" [ngClass]="getClass(genre)" *ngFor="let genre of genres">{{ genre }}</div>
+        <div (click)="removeGenre(genre)" class="ui tag label" [ngClass]="getClass(genre)" *ngFor="let genre of publication.genres">{{ genre }}</div>
       </div>
 
       <label>{{ 'PUBLICATION.DESCRIPTION' | translate }}</label>
       <div class="field">
         <div class="ui left icon input">
-          <textarea name="description" [(ngModel)]="publication.description"></textarea>
+          <textarea name="description" [(ngModel)]="publication.description" rows="5" cols="30"></textarea>
         </div>
       </div>
     </form>
   </div>
   <div class="actions">
     <div class="ui button red deny">{{ 'GENERAL.CANCEL' | translate }}</div>
-    <div class="ui button green approve">{{'POST.SHARE' | translate }}</div>
+    <div class="ui button green" (click)="createPost()">{{'POST.SHARE' | translate }}</div>
   </div>
 </div>

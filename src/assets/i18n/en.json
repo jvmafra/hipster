@@ -52,7 +52,7 @@
   },
   "PUBLICATION": {
     "SHARE_MESSAGE":"Share a new music",
-    "TITLE": "Title",
+    "TITLE": "Optional Title",
     "URL": "URL",
     "DESCRIPTION": "Description",
     "GENRES": "Genres"
@@ -66,6 +66,18 @@
       "DAY": "A day need to be informed",
       "MONTH": "A day need to be informed",
       "YEAR": "A day need to be informed"
+    },
+    "PUBLICATION": {
+      "URL": "An url need to be informed"
+    },
+    "RESPONSE": {
+      "PUBLICATION": {
+        "VALIDACAO_OWNER": "Publication has to have a creator",
+        "VALIDACAO_URL": "Publication has to have an url",
+        "VALIDACAO_GENRES": "Publication has to have at least one genre",
+        "VALIDACAO_CATEGORY": "Publication has to be a music",
+        "VALIDACAO_URL_YOUTUBE": "Publication has to have a valid url from youtube"
+      }
     }
   },
   "GENERAL": {
