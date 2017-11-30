@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+.button {
+  background-color: #917260 !important;
+}
+
+.button:hover {
+  background-color: #7C5A50 !important;
+}
+
+body {
+  background-color: #DED3D2;
+}
+
+
+input:focus {
+  border-color: #7C5A50 !important;
+  background: #FFF;
+  color: rgba(0,0,0,.8);
+  box-shadow: none;
+}

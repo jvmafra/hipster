@@ -2,7 +2,7 @@
   "HIPSTER": {
     "LOGIN": "Log In",
     "LOGOUT": "Log Out",
-    "HOME": "Home",
+    "HOME": "See all posts",
     "SEARCH": "Search in Hipster",
     "PROFILE": "Profile",
     "LANGUAGE": "Language",
@@ -25,14 +25,16 @@
     "REPLY": "Reply",
     "SEND": "Send",
     "LIKE": "Like",
-    "LIKES": "Likes"
+    "LIKES": "Likes",
+    "CREATE": "Create your post now!",
+    "MESSAGE": "TO BE DEFINED: Some message talking about the limits, likes, popularity, etc"
   },
   "REGISTER": {
     "DAY": "Day",
     "MONTH": "Month",
     "YEAR": "Year",
     "UPDATE": "Update",
-    "SUBMIT": "Sign In",
+    "SUBMIT": "Sign Up",
     "INVITE": "Join us!",
     "CANCEL": "Cancel",
     "PERSONAL": "Personal info",

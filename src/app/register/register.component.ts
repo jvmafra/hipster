@@ -42,13 +42,17 @@ export class RegisterComponent implements OnInit {
     $('.ui.dropdown')
       .dropdown()
     ;
-    
+
     this.initSemanticValidationForm();
   }
 
   private registerUser(user, event) {
     let data = this.formValidation.getFormValidationVariables(this.errorInfo);
     $('.ui.form:nth-child(2)').form(data);
+    let values = $('.ui.dropdown').dropdown('get value');
+    this.day = values[1];
+    this.month = values[2];
+    this.year = values[3];
 
     user.birthDate = this.userService.getBirthDate(this.day, this.month, this.year);
 

@@ -56,6 +56,11 @@ export class ProfilePageComponent implements OnInit {
       $('.ui.dropdown')
         .dropdown()
       ;
+
+      $("#day").dropdown("set selected", this.day);
+      $("#month").dropdown("set selected", this.month);
+      $("#year").dropdown("set selected", this.year);
+
     }
 
     if (this.selected_tab == 1) { this.alreadyInit += 1 }
@@ -67,6 +72,10 @@ export class ProfilePageComponent implements OnInit {
   public updateProfile() {
     let data = this.formValidation.getFormValidationVariables(this.errorInfo);
     $('.ui.form').form(data);
+    let values = $('.ui.dropdown').dropdown('get value');
+    this.day = values[2];
+    this.month = values[3];
+    this.year = values[4];
 
     if (this.isFormValid()) {
       const usuario = {

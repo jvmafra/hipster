@@ -72,7 +72,7 @@
             </div>
             <div class="field" [ngClass]="{'disabled': !isMyProfile}">
               <div class="three fields">
-                <div class="ui fluid compact search selection dropdown">
+                <div id="day" class="ui fluid compact search selection dropdown">
                   <input type="hidden" name="day">
                   <i class="dropdown icon"></i>
                   <div class="default text">{{ 'REGISTER.DAY' | translate }}</div>
@@ -80,7 +80,7 @@
                     <div *ngFor="let day of days" class="item" attr.data-value="day + 1">{{ day + 1}}</div>
                   </div>
                 </div>
-                <div class="ui fluid compact search selection dropdown">
+                <div id="month" class="ui fluid compact search selection dropdown">
                   <input type="hidden" name="month">
                   <i class="dropdown icon"></i>
                   <div class="default text">{{ 'REGISTER.MONTH' | translate }}</div>
@@ -88,7 +88,7 @@
                     <div *ngFor="let month of months" class="item" attr.data-value="month + 1">{{ month + 1}}</div>
                   </div>
                 </div>
-                <div class="ui fluid compact search selection dropdown">
+                <div id="year" class="ui fluid compact search selection dropdown">
                   <input type="hidden" name="year">
                   <i class="dropdown icon"></i>
                   <div class="default text">{{ 'REGISTER.YEAR' | translate }}</div>
