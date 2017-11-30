@@ -101,10 +101,21 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    $('.ui.dropdown').dropdown();
-    $("#day").dropdown("set selected", this.day);
-    $("#month").dropdown("set selected", this.month);
-    $("#year").dropdown("set selected", this.year);
+    if (this.alreadyInit < 2 && this.selected_tab == 1) {
+       $('.ui.dropdown')
+         .dropdown()
+       ;
+
+       $("#day").dropdown("set selected", this.day);
+       $("#month").dropdown("set selected", this.month);
+       $("#year").dropdown("set selected", this.year);
+
+     }
+
+     if (this.selected_tab == 1) { this.alreadyInit += 1 }
+     else { this.alreadyInit = 0 }
+
+     return this.selected_tab === 1
   }
 
   ngOnInit() {
