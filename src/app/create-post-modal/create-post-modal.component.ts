@@ -38,6 +38,7 @@ export class CreatePostModalComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('#load_indication').hide();
     this.requestErrors = [];
     $('.ui.dropdown')
       .dropdown()
@@ -70,6 +71,7 @@ export class CreatePostModalComponent implements OnInit {
     let genres = $('#genres_select')
       .dropdown('get value').split(",");
 
+    $('#load_indication').show();
     this.publication["genres"] = genres;
 
     if (this.isFormValid() ) {
@@ -77,7 +79,9 @@ export class CreatePostModalComponent implements OnInit {
         data => {
           $('#create-post').modal('hide')
           window.location.href = "/"
+          $('#load_indication').hide();
         }, err => {
+          $('#load_indication').hide();
           let errors = err.error.split(';');
           errors.splice(errors.length - 1, 1);
           this.hipsterTranslate.translateErrorsPublication(errors);

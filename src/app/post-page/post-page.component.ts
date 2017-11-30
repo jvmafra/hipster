@@ -15,6 +15,7 @@ declare var $ :any;
 export class PostPageComponent implements OnInit {
 
   private post: any;
+  private user_title: string = undefined;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
@@ -28,15 +29,20 @@ export class PostPageComponent implements OnInit {
           data => {
             this.post = data;
 
-            let titles = this.post.title.split(" HIPSTER_FLAG ")
+            let titles: [any] = this.post.title.split(" HIPSTER_FLAG ")
             this.post["music_name"] = titles[0]
-            this.post["user_title"] = titles[1]
+            if (titles.length > 1) {
+              this.user_title = titles[1]
 
-            if (titles[1] === "undefined") {
-              this.post.title = this.post.music_name
-            } else {
-              this.post.title = this.post.user_title
+              if (titles[1] === "undefined") {
+                this.post.title = this.post.music_name
+              } else {
+                this.post.title = this.user_title
+              }
             }
+
+            let date = new Date(this.post.creationDate);
+            this.post.creationDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
 
             var url = this.post.url;
             var videoid = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);

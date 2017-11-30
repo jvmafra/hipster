@@ -1,24 +1,26 @@
 <div class="ui divided items">
   <div class="item">
-    <div class="ui small image">
+    <a class="ui small image" (click)="openPost()">
       <img [src]="event.thumbnail">
-    </div>
+    </a>
     <div class="content">
-      <a class="header" (click)="openPost()">{{ event.title }}</a>
-      <div class="meta" *ngIf="event.user_title !== 'undefined'">
-        <span class="date">{{ event.music_name }}</span>
+      <a class="header" (click)="openPost()">{{ title }}</a>
+      <div class="meta" *ngIf="title !== 'undefined'">
+        <span class="date">{{ subtitle }}</span>
       </div>
       <div class="meta">
-        <span class="date">{{ event.ownerUsername }}: {{ event.creationDate }}</span>
+        <span class="date">{{ event.ownerUsername }}: {{ creationDate }}</span>
       </div>
       <div class="description">
         <p>{{ event.description }}</p>
       </div>
       <div class="extra">
-        <a class="ui circular label likes">
-          <i class="heart icon"></i> {{ event.aproves.length }}  {{ 'POST.LIKES' | translate }}
-        </a>
-        <div class="ui tag label" [ngClass]="getClass(genre)" *ngFor="let genre of event.genres">{{ genre }}</div>
+        <div class="ui labels">
+          <a class="ui circular label likes">
+            <i class="heart icon"></i> {{ event.aproves.length }}  {{ 'POST.LIKES' | translate }}
+          </a>
+          <div class="ui tag label" [ngClass]="getClass(genre)" *ngFor="let genre of event.genres">{{ genre }}</div>
+        </div>
       </div>
     </div>
   </div>

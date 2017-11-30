@@ -14,7 +14,12 @@ export class TimelinePostComponent implements OnInit {
 
   @Input() event;
 
-  constructor(private userService: UserService) {}
+  private title: string;
+  private subtitle: string;
+  private creationDate: string;
+
+  constructor(private userService: UserService) {
+  }
 
   openPost() {
     window.location.href = "/post/" + this.event._id
@@ -25,20 +30,20 @@ export class TimelinePostComponent implements OnInit {
   }
 
   ngOnInit() {
-
     var url = this.event.url;
     var videoid = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
     this.event.thumbnail = "https://img.youtube.com/vi/" + videoid[1] + "/hqdefault.jpg"
     this.event.videoId = videoid[1]
 
+    let date = new Date(this.event.creationDate);
+    this.creationDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+
     let titles = this.event.title.split(" HIPSTER_FLAG ")
-    this.event.music_name = titles[0]
-    this.event.user_title = titles[1]
+    this.subtitle = titles[0]
+    this.title = titles[1]
 
     if (titles[1] === "undefined") {
-      this.event.title = this.event.music_name
-    } else {
-      this.event.title = this.event.user_title
+      this.title = this.subtitle
     }
   }
 

@@ -14,6 +14,12 @@ export class PublicationService {
     this.serverHost = globalService.getServerHost();
   }
 
+  public getPublicationFromUser(username) {
+    return this.http.get(this.serverHost + 'v1/publicacao/user/' + username, {
+      headers: this.headers
+    });
+  }
+
   public getPublication(id) {
     return this.http.get(this.serverHost + 'v1/publicacao/' + id, {
       headers: this.headers

@@ -1,12 +1,12 @@
 <div class="ui container post-container">
-  <div class="ui piled segment">
+  <div class="ui stacked segment">
     <div class="ui embed"></div>
     <div class="ui divided items">
       <div class="ui divided items">
         <div class="item">
           <div class="content">
             <a class="header">{{ post.title }}</a>
-            <div class="meta" *ngIf="post.user_title !== 'undefined'">
+            <div class="meta" *ngIf="user_title !== undefined">
               <span class="date">{{ post.music_name }}</span>
             </div>
             <div class="meta">
@@ -16,10 +16,12 @@
               <p>{{ post.description }}</p>
             </div>
             <div class="extra">
-              <a class="ui circular label likes">
-                <i class="heart icon"></i> {{ post.aproves.length }}  {{ 'POST.LIKES' | translate }}
-              </a>
-              <div class="ui tag label" [ngClass]="getClass(genre)" *ngFor="let genre of post.genres">{{ genre }}</div>
+              <div class="ui labels">
+                <a class="ui circular label likes">
+                  <i class="heart icon"></i> {{ post.aproves.length }}  {{ 'POST.LIKES' | translate }}
+                </a>
+                <div class="ui tag label" [ngClass]="getClass(genre)" *ngFor="let genre of post.genres">{{ genre }}</div>
+              </div>
             </div>
           </div>
         </div>
