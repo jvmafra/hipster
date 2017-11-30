@@ -95,31 +95,21 @@ export class ProfilePageComponent implements OnInit {
 
 
   private initDate(userBirthDay) {
-    let userBirthDayFormatted = userBirthDay.split("T");
-    userBirthDayFormatted = userBirthDayFormatted[0].split("-")
+      let userBirthDayFormatted = new Date(userBirthDay);
 
-    this.day = userBirthDayFormatted[2];
-    this.month = userBirthDayFormatted[1];
-    this.year = userBirthDayFormatted[0];
-
-  }
+      this.day = userBirthDayFormatted.getDate();
+      this.month = userBirthDayFormatted.getMonth() + 1;
+      this.year = userBirthDayFormatted.getFullYear();
+    }
 
   ngAfterViewChecked() {
     if (this.alreadyInit < 2 && this.selected_tab == 1) {
        $('.ui.dropdown')
          .dropdown()
        ;
-       if (this.day < 10) {
-         let dayFormatted = "" + this.day;
-         $("#day").dropdown("set selected", dayFormatted[1]);
 
-       }
-
-       if (this.month < 10) {
-         let monthFormatted = "" + this.month;
-         $("#month").dropdown("set selected", monthFormatted[1]);
-       }
-
+       $("#day").dropdown("set selected", this.day);
+       $("#month").dropdown("set selected", this.month);
        $("#year").dropdown("set selected", this.year);
 
      }
