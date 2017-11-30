@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserService } from './services/user.service';
+import { Router } from '@angular/router';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component'
 import { ViewChild } from '@angular/core';
 
@@ -18,7 +19,8 @@ export class AppComponent implements OnInit {
   private selectedLanguage: string;
 
   constructor(private hipsterTranslate: HipsterTranslate,
-              private userService: UserService){
+              private userService: UserService,
+              private router: Router){
   }
 
   ngOnInit() {
@@ -31,7 +33,7 @@ export class AppComponent implements OnInit {
       data => {
         let authUser: any = data;
         this.userService.storeUser(authUser);
-        window.location.href = "/user/" + authUser.user.username;
+        window.location.href = '/user/' + authUser.user.username;
       }, err => {
         //TODO: show toast
       }
@@ -55,7 +57,7 @@ export class AppComponent implements OnInit {
   }
 
   public change(event) {
-    window.location.href = '/user/' + this.getUsername()
+    window.location.href = '/user/' + this.getUsername();
   }
 
 }

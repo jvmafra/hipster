@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 import { FormValidationService } from '../services/form-validation.service';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -26,8 +27,9 @@ export class RegisterComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private userService: UserService,
-              private formValidation: FormValidationService ) {
-
+              private formValidation: FormValidationService,
+              private translateService: TranslateService,
+              private router: Router) {
     this.user = {};
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
@@ -45,23 +47,21 @@ export class RegisterComponent implements OnInit {
     this.setDateValuesFromDropdown();
     user.birthDate = this.userService.getBirthDate(this.day, this.month, this.year);
 
-    if (this.isFormValid()) {
-      this.userService.registerUser(user).subscribe(
-        data => {
-          this.userService.loginUser(user.username, user.password).subscribe(
-            data => {
-              let authUser: any = data;
-              this.userService.storeUser(authUser);
-              window.location.href = "/user/" + authUser.user.username;
-            }, err => {
-              //TODO: show toast
-            }
-          );
-        }, err => {
-          console.log(err);
-        }
-      );
-    }
+    this.userService.registerUser(user).subscribe(
+      data => {
+        this.userService.loginUser(user.username, user.password).subscribe(
+          data => {
+            let authUser: any = data;
+            this.userService.storeUser(authUser);
+            window.location.href = '/user/' + authUser.user.username;
+          }, err => {
+            //TODO: show toast
+          }
+        );
+      }, err => {
+        console.log(err);
+      }
+    );
 
   }
 
@@ -81,7 +81,6 @@ export class RegisterComponent implements OnInit {
                       {"input": "email", errors: ['empty'], prompt : ["ERRORS.REGISTER.EMAIL"]},
                       {"input": "username", errors: ['empty'], prompt : ["ERRORS.REGISTER.USERNAME"]},
                       {"input": "password", errors: ['empty'], prompt : ["ERRORS.REGISTER.PASSWORD"]}]
-
   }
 
   private initSemanticValidationForm() {

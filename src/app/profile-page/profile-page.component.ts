@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../services/user.service';
 import { PublicationService } from '../services/publication.service';
+import { Router } from '@angular/router';
 import { FormValidationService } from '../services/form-validation.service';
 
 declare var jquery:any;
@@ -57,7 +58,6 @@ export class ProfilePageComponent implements OnInit {
     this.year = values[4];
 
     if (this.isFormValid()) {
-
       const usuario = {
         birthDate: this.userService.getBirthDate(this.day, this.month, this.year),
         email: this.email,
@@ -69,7 +69,6 @@ export class ProfilePageComponent implements OnInit {
         data => {
           this.userService.storeName(usuario.name);
           window.location.href = "/user/" + this.profile.username;
-          $('.ui.success.message').show();
         }, err => {
           console.log(err)
           $('.ui.error.message').show();

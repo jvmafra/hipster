@@ -5,7 +5,7 @@ export class GlobalService {
   private serverHost: String;
 
   constructor() {
-    this.serverHost = 'http://127.0.0.1:3000/api/';
+    this.serverHost = 'https://hipstermusic.herokuapp.com/api/';
   }
 
   public getServerHost() {

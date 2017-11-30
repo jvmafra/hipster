@@ -16,7 +16,7 @@ module.exports = () => {
    * Caso não haja uma variável de ambiente informando o endereço do banco de dados,
    * utilizar endereço local.
    */
-  const db_string = process.env.MONGODB_ADDRESS || 'mongodb://127.0.0.1:27017/' + perfil; //'mongodb://piton:piton@ds131109.mlab.com:31109/piton';
+  const db_string = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/' + perfil; //'mongodb://piton:piton@ds131109.mlab.com:31109/piton';
   if (!db.readyState) {
     const conn = mongoose.connect(db_string);
   }
