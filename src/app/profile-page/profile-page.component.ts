@@ -95,12 +95,11 @@ export class ProfilePageComponent implements OnInit {
 
 
   private initDate(userBirthDay) {
-      let userBirthDayFormatted = new Date(userBirthDay);
-
-      this.day = userBirthDayFormatted.getDate();
-      this.month = userBirthDayFormatted.getMonth() + 1;
-      this.year = userBirthDayFormatted.getFullYear();
-    }
+    let userBirthDayFormatted = new Date(userBirthDay);
+    this.day = userBirthDayFormatted.getDate();
+    this.month = userBirthDayFormatted.getMonth() + 1;
+    this.year = userBirthDayFormatted.getFullYear();
+  }
 
   ngAfterViewChecked() {
     if (this.alreadyInit < 2 && this.selected_tab == 1) {
