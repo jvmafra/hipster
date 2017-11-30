@@ -29,24 +29,23 @@
         </div>
       </div>
 
-      <div class="two fields">
-        <div class="field">
-          <div class="ui action input">
-            <select class="hipster-select" [(ngModel)]="selectedGenre" name="selectedGenre">
-              <option value="genre"> {{ 'PUBLICATION.GENRES' | translate }}</option>
-              <option *ngFor="let genre of listGenres" value="{{genre.value}}">{{genre.name}}</option>
-            </select>
-           <div class="ui blue button" (click)="addGenre(selectedGenre)">ADD </div>
-         </div>
-        </div>
+      <div class="field">
+        <div class="ui sub header">{{ 'PUBLICATION.GENRES' | translate }}</div>
+        <div id="genres_select" class="ui multiple selection dropdown">
+          <input name="gender" type="hidden">
+          <i class="dropdown icon"></i>
+          <div class="default text"></div>
+          <div class="menu">
+            <div class="item" *ngFor="let genre of listGenres" attr.data-value="{{genre.value}}">
+              <div class="ui empty circular label" [ngClass]="getClass(genre)"></div>
+              {{ genre.name }}
+            </div>
+          </div>
+       </div>
       </div>
 
       <div class="field">
-        <div (click)="removeGenre(genre)" class="ui tag label" [ngClass]="getClass(genre)" *ngFor="let genre of publication.genres">{{ genre }}</div>
-      </div>
-
-      <label>{{ 'PUBLICATION.DESCRIPTION' | translate }}</label>
-      <div class="field">
+        <div class="ui sub header">{{ 'PUBLICATION.DESCRIPTION' | translate }}</div>
         <div class="ui left icon input">
           <textarea name="description" [(ngModel)]="publication.description" rows="5" cols="30"></textarea>
         </div>

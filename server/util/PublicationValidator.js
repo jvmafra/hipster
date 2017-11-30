@@ -28,7 +28,7 @@ export class PublicationValidator {
       let videoID = getVideoIDFromUrl(publication.url);
       try {
         const response = await getVideoInfo(videoID);
-        publication.title = response.title + " | "  + publication.title;
+        publication.title = response.title + " HIPSTER_FLAG "  + publication.title;
         if (response.genre != "Music") {
           message += erro.PUBLICATION.VALIDACAO_CATEGORY + ';';
         }

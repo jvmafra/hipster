@@ -39,6 +39,9 @@ export class CreatePostModalComponent implements OnInit {
 
   ngOnInit() {
     this.requestErrors = [];
+    $('.ui.dropdown')
+      .dropdown()
+    ;
   }
 
   public createPostModal(event) {
@@ -47,6 +50,9 @@ export class CreatePostModalComponent implements OnInit {
     this.publication["ownerUsername"] = window.localStorage.username;
     this.requestErrors = [];
     this.listGenres =  this.originalListGenres.slice();
+
+    $('#genres_select')
+      .dropdown('clear');
 
     $('#create-post').modal({
       onDeny    : function() { return true;}
@@ -61,10 +67,16 @@ export class CreatePostModalComponent implements OnInit {
   private createPost() {
     this.initSemanticValidationForm();
 
-    if ( this.isFormValid() ) {
+    let genres = $('#genres_select')
+      .dropdown('get value').split(",");
+
+    this.publication["genres"] = genres;
+
+    if (this.isFormValid() ) {
       this.publicationService.savePublication(this.publication).subscribe(
         data => {
           $('#create-post').modal('hide')
+          window.location.href = "/"
         }, err => {
           let errors = err.error.split(';');
           errors.splice(errors.length - 1, 1);
@@ -78,33 +90,7 @@ export class CreatePostModalComponent implements OnInit {
   }
 
   private getClass(genre) {
-    return this.colors[genre];
-  }
-
-  private addGenre(selectedGenre : String) {
-    let index : any;
-
-    for (index in this.listGenres) {
-      if (this.listGenres[index].value === selectedGenre) {
-        this.publication["genres"].push(selectedGenre);
-        this.listGenres.splice(index, 1);
-        this.selectedGenre = "genre";
-        return;
-      }
-    }
-  }
-
-  private removeGenre(selectedGenre : String) {
-    let index : any;
-    let find = false;
-
-    for (index in this.originalListGenres) {
-      if (this.originalListGenres[index].value === selectedGenre) {
-        this.listGenres.push(this.originalListGenres[index]);
-        let genreIndex = this.publication["genres"].indexOf(this.originalListGenres[index].value);
-        this.publication["genres"].splice(genreIndex, 1);
-      }
-    }
+    return this.colors[genre.name];
   }
 
   private isFormValid() {

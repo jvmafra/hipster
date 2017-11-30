@@ -5,8 +5,11 @@
     </div>
     <div class="content">
       <a class="header" (click)="openPost()">{{ event.title }}</a>
+      <div class="meta" *ngIf="event.user_title !== 'undefined'">
+        <span class="date">{{ event.music_name }}</span>
+      </div>
       <div class="meta">
-        <span class="date">{{ event.owner_username }}: {{ event.creationDate }}</span>
+        <span class="date">{{ event.ownerUsername }}: {{ event.creationDate }}</span>
       </div>
       <div class="description">
         <p>{{ event.description }}</p>
