@@ -1,0 +1,22 @@
+<div class="ui container ">
+
+  <div class="ui brown segment clearing">
+    <p>{{ 'POST.MESSAGE' | translate }}</p>
+    <div (click)="createPost.createPostModal($event)" class="ui animated button right floated" tabindex="0">
+      <div class="visible content">{{ 'POST.SHARE' | translate}}</div>
+      <div class="hidden content">
+        <i class="right arrow icon"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui stacked segment post-container">
+    <div class="ui divided items">
+      <div class="item" *ngFor="let event of events">
+        <app-timeline-post [event]="event"></app-timeline-post>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-create-post-modal> </app-create-post-modal>

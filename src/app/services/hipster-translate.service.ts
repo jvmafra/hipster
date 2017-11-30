@@ -22,9 +22,24 @@ export class HipsterTranslate {
     return localStorage.getItem('language');
   }
 
+  public getFormattedLanguage() {
+    let lang = this.getCurrentLanguage();
+
+    if (lang === "en") return "English"
+    if (lang === "pt") return "Português"
+  }
+
   public setLanguage(language) {
     localStorage.setItem('language', language);
     location.reload();
+  }
+
+  public translateErrorsPublication(errors) {
+    let prefix = "ERRORS.RESPONSE.PUBLICATION.";
+
+    for (var idx in errors) {
+      errors[idx] = this.translate.instant(prefix + errors[idx]);
+    }
   }
 
 }

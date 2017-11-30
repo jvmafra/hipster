@@ -5,6 +5,7 @@ import http from 'http';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 const api = require('./server/routes/api');
+const publicacaoRouter = require('./server/routes/publicacaoRouter');
 const cors = require('cors');
 
 // Get our API routes
@@ -35,6 +36,7 @@ app.all('/api/v1/*', [require('./server/middleware/validateRequest')]);
 
 // Set our api routes
 app.use('/api', api);
+app.use('/api/v1/publicacao', publicacaoRouter);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

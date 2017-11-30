@@ -45,7 +45,8 @@
     "jwt-simple": "^0.5.1",
     "morgan": "^1.9.0",
     "rxjs": "^5.5.2",
-    "zone.js": "^0.8.14"
+    "zone.js": "^0.8.14",
+    "youtube-info": "~1.1.2"
   },
   "devDependencies": {
     "@angular/cli": "1.5.0",
@@ -76,6 +77,7 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~2.4.2"
+    "typescript": "~2.4.2",
+    "youtube-info": "~1.1.2"
   }
 }

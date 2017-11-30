@@ -16,10 +16,10 @@ export class DeleteModalComponent {
   constructor(private userService: UserService) { }
 
 
-  public deleteUser(event) {
+  public deleteUserModal(event) {
     $('.ui.modal').modal({
       onDeny    : function() { return true;},
-      onApprove : () => { this.checkThis() }
+      onApprove : () => { this.deleteUser() }
     })
     .modal('show');
 
@@ -27,7 +27,7 @@ export class DeleteModalComponent {
   }
 
 
-  public checkThis(){
+  public deleteUser(){
     this.userService.deleteUser().subscribe(data => {this.userService.logoutUser()}, err => {console.log("Somethin bad happened")})
 
     return true;

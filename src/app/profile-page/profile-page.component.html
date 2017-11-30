@@ -2,9 +2,9 @@
   <div class="ui floating negative message" *ngIf="!foundUser">
     <p>{{ 'PROFILEPAGE.PROFILE_NOT_FOUND' | translate }}</p>
   </div>
-  <div class="ui grid" *ngIf="foundUser">
+  <div class="ui stackable grid" *ngIf="foundUser">
     <div class="five wide column">
-      <div class="ui card">
+      <div class="ui card centered">
         <a class="image" href="#">
           <img src="../assets/elliot.jpg">
         </a>
@@ -48,11 +48,13 @@
       </div>
       <div class="ui segment">
         <div *ngIf="selected_tab === 0" >
-          <div *ngFor="let event of events" >
-            <app-user-post [event]="event"></app-user-post>
+          <div class="ui divided items">
+            <div class="item" *ngFor="let event of events">
+              <app-timeline-post [event]="event"></app-timeline-post>
+            </div>
           </div>
         </div>
-        <div *ngIf="selected_tab === 1">
+        <div *ngIf="this.selected_tab === 1">
           <form class="ui form hipster-profile-form">
             <h4 class="ui horizontal divider header">
               <i class="child icon"></i>
@@ -71,35 +73,29 @@
               </div>
             </div>
             <div class="field" [ngClass]="{'disabled': !isMyProfile}">
-              <div class="four fields">
-                <div class="three wide field">
-                  <label>{{ 'REGISTER.DAY' | translate }}</label>
-                  <div class="ui left icon input">
-                    <i class="calendar icon"></i>
-                    <select class="hipster-select" [(ngModel)]="day" name="day">
-                      <option value="day"> {{ 'REGISTER.DAY' | translate }} </option>
-                      <option *ngFor="let day of days" value="{{day + 1}}">{{ day + 1 }}</option>
-                    </select>
+              <div class="three fields">
+                <div id="day" class="ui fluid compact search selection dropdown">
+                  <input type="hidden" name="day">
+                  <i class="dropdown icon"></i>
+                  <div class="default text">{{ 'REGISTER.DAY' | translate }}</div>
+                  <div class="menu">
+                    <div *ngFor="let day of days" class="item" attr.data-value="day + 1">{{ day +1}}</div>
                   </div>
                 </div>
-                <div class="three wide field">
-                  <label>{{ 'REGISTER.MONTH' | translate }}</label>
-                  <div class="ui left icon input">
-                    <i class="calendar icon"></i>
-                    <select class="hipster-select" [(ngModel)]="month" name="month">
-                      <option value="month"> {{ 'REGISTER.MONTH' | translate }} </option>
-                      <option *ngFor="let month of months" value="{{month + 1}}">{{ month + 1 }}</option>
-                    </select>
+                <div id="month" class="ui fluid compact search selection dropdown">
+                  <input type="hidden" name="month">
+                  <i class="dropdown icon"></i>
+                  <div class="default text">{{ 'REGISTER.MONTH' | translate }}</div>
+                  <div class="menu">
+                    <div *ngFor="let month of months" class="item" attr.data-value="month + 1">{{ month +1}}</div>
                   </div>
                 </div>
-                <div class="three wide field">
-                  <label>{{ 'REGISTER.YEAR' | translate }}</label>
-                  <div class="ui left icon input">
-                    <i class="calendar icon"></i>
-                    <select class="hipster-select" [(ngModel)]="year" name="year">
-                      <option value="year"> {{ 'REGISTER.YEAR' | translate }} </option>
-                      <option *ngFor="let year of years" value="{{year + 1}}">{{ year + 1 }}</option>
-                    </select>
+                <div id="year" class="ui fluid compact search selection dropdown">
+                  <input type="hidden" name="year">
+                  <i class="dropdown icon"></i>
+                  <div class="default text">{{ 'REGISTER.YEAR' | translate }}</div>
+                  <div class="menu">
+                    <div *ngFor="let year of years" class="item" attr.data-value="year +1">{{ year }}</div>
                   </div>
                 </div>
               </div>

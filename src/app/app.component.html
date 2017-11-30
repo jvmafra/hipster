@@ -1,13 +1,24 @@
-<div class="ui top attached menu">
+<div class="ui stackable menu">
   <div class="ui container">
     <a href="/" class="header item">
-      <img class="logo" src="assets/hipster-logo.png">
+      <img class="logo" src="assets/hipster-logo2.png">
       Hipster
     </a>
     <div class="item">
-      {{ 'HIPSTER.LANGUAGE' | translate }}:
-      <div (click)="changeLanguage('pt')" class="item"><i class="br flag"></i>{{ 'HIPSTER.LANGUAGES.PT' | translate }}</div>
-      <div (click)="changeLanguage('en')" class="item"><i class="us flag"></i>{{ 'HIPSTER.LANGUAGES.EN' | translate }}</div>
+      <div id="language-dropdown" class="ui fluid floating dropdown labeled icon button">
+        <i class="world icon"></i>
+        <span class="text">
+          <div>
+            <i *ngIf="selectedLanguage == 'Português'" class="br flag"></i>
+            <i *ngIf="selectedLanguage == 'English'" class="us flag"></i>
+            {{ selectedLanguage }}
+          </div>
+        </span>
+        <div class="menu">
+          <div class="item" (click)="changeLanguage('pt')"><i class="br flag"></i>{{ 'HIPSTER.LANGUAGES.PT' | translate }}</div>
+          <div class="item" (click)="changeLanguage('en')"><i class="us flag"></i>{{ 'HIPSTER.LANGUAGES.EN' | translate }}</div>
+        </div>
+      </div>
     </div>
     <div class="right menu" *ngIf="!userService.isAuthenticated()">
       <div class="ui form hipster-login-form">
@@ -24,32 +35,38 @@
               <input type="password" name="password" [(ngModel)]="password" attr.placeholder="{{ 'REGISTER.PASSWORD' | translate }}">
             </div>
           </div>
-          <div class="ui fluid blue submit button" (click)="loginUser(username, password)">{{ 'HIPSTER.LOGIN' | translate }}</div>
+          <div class="field">
+            <div class="ui fluid blue submit button" (click)="loginUser(username, password)">{{ 'HIPSTER.LOGIN' | translate }}</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="right menu " *ngIf="userService.isAuthenticated()">
-      <a (click)="change()" class="item">
-        <img class="ui avatar image" src="./assets/elliot.jpg">
-        <span>{{ getName() }}</span>
-        <div class="ui simple dropdown item">
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            <div class="item" (click)="deleteModal.deleteUser($event)">{{ 'DELETEMODAL.DELETE_ACCOUNT' | translate }}</div>
-          </div>
+    <div class="right menu" *ngIf="userService.isAuthenticated()"></div>
+    <a class="item" href="/" *ngIf="userService.isAuthenticated()">
+      <div>
+        {{ 'HIPSTER.HOME' | translate }}
+      </div>
+    </a>
+    <a class="item" (click)="logoutUser()" *ngIf="userService.isAuthenticated()">
+      <div>
+        {{ 'HIPSTER.LOGOUT' | translate }}
+      </div>
+    </a>
+    <a class="item" *ngIf="userService.isAuthenticated()">
+      <img (click)="change()" class="ui avatar image" src="./assets/elliot.jpg">
+      <span (click)="change()" >{{ getName() }}</span>
+      <div class="ui simple dropdown">
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item" (click)="deleteModal.deleteUserModal($event)">{{ 'DELETEMODAL.DELETE_ACCOUNT' | translate }}</div>
         </div>
-      </a>
-      <a href="/" class="item">{{ 'HIPSTER.HOME' | translate }}</a>
-      <a class="item">
-        <div (click)="logoutUser()">
-          {{ 'HIPSTER.LOGOUT' | translate }}
-        </div>
-      </a>
-    </div>
-
+      </div>
+    </a>
   </div>
 </div>
 
 <app-delete-modal view-model.ref="deleteModal"> </app-delete-modal>
+<app-success-msg></app-success-msg>
+<app-error-msg></app-error-msg>
 <router-outlet></router-outlet>

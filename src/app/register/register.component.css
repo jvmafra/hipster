@@ -1,16 +1,9 @@
-body {
-  background-image: url("/assets/images/front-page.png");;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-size: 100% 110%;
-
-}
-
 .hipster-register-container {
   margin-top: 1%;
+}
+
+.dropdown {
+  margin: 8px;
 }
 
 .hipster-register-form {
@@ -23,4 +16,8 @@ body {
 
 .form-width {
   width: 55% !important;
+}
+
+.card {
+  width: 100% !important;
 }

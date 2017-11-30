@@ -1,22 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserService } from './services/user.service';
 import { Router } from '@angular/router';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component'
 import { ViewChild } from '@angular/core';
 
+declare var jquery:any;
+declare var $ :any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
   private deleteModal: DeleteModalComponent;
+  private selectedLanguage: string;
 
   constructor(private hipsterTranslate: HipsterTranslate,
               private userService: UserService,
               private router: Router){
+  }
+
+  ngOnInit() {
+    $('#language-dropdown').dropdown();
+    this.selectedLanguage = this.hipsterTranslate.getFormattedLanguage();
   }
 
   public loginUser(username, password) {
