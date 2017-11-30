@@ -95,8 +95,8 @@ export class ProfilePageComponent implements OnInit {
 
   private initDate(userBirthDay) {
     let userBirthDayFormatted = new Date(userBirthDay);
-    this.day = userBirthDayFormatted.getDay();
-    this.month = userBirthDayFormatted.getMonth();
+    this.day = userBirthDayFormatted.getDate();
+    this.month = userBirthDayFormatted.getMonth() + 1;
     this.year = userBirthDayFormatted.getFullYear();
   }
 
