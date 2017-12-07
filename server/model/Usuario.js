@@ -44,7 +44,17 @@ const usuarioSchema = new Schema({
     birthDate : {
       type: Date,
       required: [true, erro.CADASTRO.VALIDACAO_DATA_NASCIMENTO]
-    }  
+    },
+
+    youtubeURL : {
+      type: String,
+      required: [false]
+    },
+
+    spotifyURL : {
+      type: String,
+      required: [false]
+    }
 });
 
 usuarioSchema.pre("save", function(next) {

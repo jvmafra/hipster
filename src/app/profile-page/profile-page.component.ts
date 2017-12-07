@@ -25,6 +25,8 @@ export class ProfilePageComponent implements OnInit {
 
   private name: string;
   private email: string;
+  private spotifyURL: string;
+  private youtubeURL: string;
   private username: string;
   private foundUser: boolean;
   private day : number;
@@ -62,7 +64,9 @@ export class ProfilePageComponent implements OnInit {
         birthDate: this.userService.getBirthDate(this.day, this.month, this.year),
         email: this.email,
         name: this.name,
-        username: this.username
+        username: this.username,
+        youtubeURL: this.youtubeURL,
+        spotifyURL: this.spotifyURL
       };
 
       this.userService.updateUser(usuario, this.profile.username).subscribe(
@@ -143,8 +147,9 @@ export class ProfilePageComponent implements OnInit {
             this.profile.youtube = this.profile.username;
             this.profile.spotify = this.profile.username;
             this.name = this.profile.name;
+            this.youtubeURL = this.profile.youtubeURL || "";
+            this.spotifyURL = this.profile.spotifyURL || "";
             this.username = this.profile.username;
-
             this.initDate(this.profile.birthDate);
 
             this.email = this.profile.email;

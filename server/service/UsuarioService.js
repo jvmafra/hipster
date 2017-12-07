@@ -96,7 +96,8 @@ export class UsuarioService {
   static editaUsuario(username, novoUsuario) {
     return new Promise((resolve, reject) =>
       Usuario.findOneAndUpdate({username: username}, novoUsuario, (err, result) => {
-        if (err || !result) return reject(err);
+        if (err) return reject(err);
+        if (!result) return reject(new Error("Operação não permitida"));
         return resolve(result);
       })
     );

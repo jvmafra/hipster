@@ -2,6 +2,7 @@ import express from 'express';
 import {UserValidator} from '../util/UserValidator'
 import { UsuarioService }  from '../service/UsuarioService';
 import auth from './auth';
+import token from '../service/tokenService';
 /*
  |--------------------------------------
  | API Routes
@@ -34,7 +35,7 @@ router.get('/v1/usuario', async (req, res) => {
  * GET consulta usuário por username
  */
 router.get('/v1/usuario/:username', async (req, res) => {
-  const username = req.params.username;
+  const username = req.params.username;        
   try {
     const retorno = await UsuarioService.consultaUsuario(username);
     res.status(200).json(retorno);
@@ -62,8 +63,8 @@ router.post('/login', auth.login);
 /**
  * PUT edita usuário
  */
-router.put('/v1/usuario/:username', async (req, res) => {
-  const usuario = req.body;
+router.put('/v1/usuario', async (req, res) => {
+  const usuario = req.body;  
 
   let result;
   let validacao;
@@ -71,8 +72,9 @@ router.put('/v1/usuario/:username', async (req, res) => {
   result = validacao.retorno;
 
   if (!result) res.status(400).json(validacao.mensagem);
-  else{
-    const username = req.params.username;
+  else{    
+    const username = token.getUsername(req);
+    console.log("Usuário logado: " + username);
     try {
       const retorno = await UsuarioService.editaUsuario(username, usuario);
       res.status(200).json(retorno);
@@ -85,8 +87,8 @@ router.put('/v1/usuario/:username', async (req, res) => {
 /**
  * DELETE remove usuário
  */
-router.delete('/v1/usuario/:username', async (req, res) => {
-  const username = req.params.username;
+router.delete('/v1/usuario', async (req, res) => {
+  const username = token.getUsername(req);
 
   try {
     const retorno = await UsuarioService.removeUsuario(username);

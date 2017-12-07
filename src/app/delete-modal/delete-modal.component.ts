@@ -17,7 +17,7 @@ export class DeleteModalComponent {
 
 
   public deleteUserModal(event) {
-    $('.ui.modal').modal({
+    $('#delete-modal').modal({
       onDeny    : function() { return true;},
       onApprove : () => { this.deleteUser() }
     })
