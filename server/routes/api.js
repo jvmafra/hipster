@@ -34,7 +34,7 @@ router.get('/v1/usuario', async (req, res) => {
  * GET consulta usuário por username
  */
 router.get('/v1/usuario/:username', async (req, res) => {
-  const username = req.params.username;
+  const username = req.params.username;  
   try {
     const retorno = await UsuarioService.consultaUsuario(username);
     res.status(200).json(retorno);
