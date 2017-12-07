@@ -21,11 +21,11 @@ app.use(bodyParser.json({
 }));
 
 // Point static path to dist
-//app.use(express.static(path.join(__dirname, 'src')));
+app.use(express.static(path.join(__dirname, 'src')));
 
 // Create link to Angular build directory
-var distDir = __dirname + "/dist";
-app.use(express.static(distDir));
+//var distDir = __dirname + "/dist";
+//app.use(express.static(distDir));
 
 
 // Auth Middleware - This will check if the token is valid
@@ -40,14 +40,14 @@ app.use('/api/v1/publicacao', publicacaoRouter);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/dist/index.html'));
+  res.sendFile(path.join(__dirname + 'src/index.html'));
 });
 
 
 /**
  * Get port from environment and store in Express.
  */
-const port = process.env.PORT || '8080';
+const port = process.env.PORT || '3000';
 app.set('port', port);
 
 /**

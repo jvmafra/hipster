@@ -13,16 +13,16 @@
           <div class="meta">{{ events.length }} {{ 'PROFILEPAGE.POSTS' | translate }}</div>
           <div class="description">
             <div class="ui list">
-              <div class="item" *ngIf="profile.youtube" >
+              <div class="item" *ngIf="ytURL" >
                 <i class="red large youtube play icon"></i>
                 <div class="content">
-                  /{{ profile.youtube }}
+                  /{{ ytURL }}
                 </div>
               </div>
-              <div class="item" *ngIf="profile.spotify">
+              <div class="item" *ngIf="spotifyURL">
                 <i class="green large spotify icon"></i>
                 <div class="content">
-                  /{{ profile.spotify }}
+                  /{{ spotifyURL }}
                 </div>
               </div>
               <!-- THIS SECTION WILL BE AVAILABLE SOON, WAITING FOR THE NEXT US -->
@@ -98,6 +98,18 @@
                     <div *ngFor="let year of years" class="item" attr.data-value="year +1">{{ year }}</div>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div class="field" [ngClass]="{'disabled': !isMyProfile}">
+              <div class="ui left icon input">
+                <i class="linkify icon"></i>
+                <input type="text" name="spotify" [(ngModel)]="spotifyURL" attr.placeholder="{{ 'Spotify Link' }}">
+              </div>
+            </div>
+            <div class="field" [ngClass]="{'disabled': !isMyProfile}">
+              <div class="ui left icon input">
+                <i class="linkify icon"></i>
+                <input type="text" name="youtube" [(ngModel)]="ytURL" attr.placeholder="{{ 'Youtube Link' }}">
               </div>
             </div>
             <div *ngIf="isMyProfile" class="ui fluid large blue submit button" (click)="updateProfile()">{{ 'REGISTER.UPDATE' | translate }}</div>

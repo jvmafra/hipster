@@ -6,8 +6,8 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
-  private headers : HttpHeaders;
-  private serverHost : String;
+  private headers: HttpHeaders;
+  private serverHost: String;
   private colors: any = {
     'Pop': 'red',
     'Rock': 'orange',
@@ -33,7 +33,7 @@ export class UserService {
     this.serverHost = globalService.getServerHost();
   }
 
-  public getColor(genre){
+  public getColor(genre) {
     return this.colors[genre];
   }
 

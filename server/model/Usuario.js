@@ -35,16 +35,24 @@ const usuarioSchema = new Schema({
     username : {
       type: String,
       required:[true, erro.CADASTRO.VALIDACAO_USERNAME],
-
       index: true,                                              // primary-key
-
       unique: [true, getExistentEntityErroMenssage("username")]
     },
 
     birthDate : {
       type: Date,
       required: [true, erro.CADASTRO.VALIDACAO_DATA_NASCIMENTO]
-    }  
+    },
+
+    ytURL: {
+      type: String,
+      required: [false, ""]
+    },
+
+    spotifyURL: {
+      type: String,
+      required: [false, ""]
+    }
 });
 
 usuarioSchema.pre("save", function(next) {

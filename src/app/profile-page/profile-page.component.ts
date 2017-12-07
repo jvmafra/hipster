@@ -7,8 +7,8 @@ import { PublicationService } from '../services/publication.service';
 import { Router } from '@angular/router';
 import { FormValidationService } from '../services/form-validation.service';
 
-declare var jquery:any;
-declare var $ :any;
+declare let jquery: any;
+declare let $: any;
 
 @Component({
   selector: 'app-profile-page',
@@ -17,7 +17,7 @@ declare var $ :any;
   encapsulation: ViewEncapsulation.None
 })
 export class ProfilePageComponent implements OnInit {
-  private $ : any;
+  private $: any;
   private profile: any;
   private events: any;
   private selected_tab: number = 0;
@@ -27,14 +27,16 @@ export class ProfilePageComponent implements OnInit {
   private email: string;
   private username: string;
   private foundUser: boolean;
-  private day : number;
-  private month : number;
-  private year : number;
-  private days : Array<number>;
-  private months : Array<number>;
-  private years : Array<number>;
+  private day: number;
+  private month: number;
+  private year: number;
+  private days: Array<number>;
+  private months: Array<number>;
+  private years: Array<number>;
   private errorInfo: Array<Object>;
   private alreadyInit: number;
+  private ytURL: string;
+  private spotifyURL: string;
 
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
@@ -50,9 +52,9 @@ export class ProfilePageComponent implements OnInit {
   }
 
   public updateProfile() {
-    let data = this.formValidation.getFormValidationVariables(this.errorInfo);
+    const data = this.formValidation.getFormValidationVariables(this.errorInfo);
     $('.ui.form').form(data);
-    let values = $('.ui.dropdown').dropdown('get value');
+    const values = $('.ui.dropdown').dropdown('get value');
     this.day = values[2];
     this.month = values[3];
     this.year = values[4];
@@ -62,9 +64,10 @@ export class ProfilePageComponent implements OnInit {
         birthDate: this.userService.getBirthDate(this.day, this.month, this.year),
         email: this.email,
         name: this.name,
-        username: this.username
+        username: this.username,
+        spotifyURL: this.spotifyURL,
+        ytURL: this.ytURL
       };
-
       this.userService.updateUser(usuario, this.profile.username).subscribe(
         data => {
           this.userService.storeName(usuario.name);
@@ -78,13 +81,11 @@ export class ProfilePageComponent implements OnInit {
         }
       );
     }
-
   }
 
   private isFormValid() {
     return $('.ui.form').form('is valid');
   }
-
 
   private initSemanticValidationForm() {
     this.errorInfo = [{"input": "day", errors: ['not[day]'], prompt : ["ERRORS.REGISTER.DAY"]},
@@ -94,7 +95,6 @@ export class ProfilePageComponent implements OnInit {
                       {"input": "email", errors: ['empty'], prompt : ["ERRORS.REGISTER.EMAIL"]}];
   }
 
-
   private initDate(userBirthDay) {
     let userBirthDayFormatted = new Date(userBirthDay);
     this.day = userBirthDayFormatted.getDate();
@@ -103,34 +103,36 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    if (this.alreadyInit < 2 && this.selected_tab == 1) {
+    if (this.alreadyInit < 2 && this.selected_tab === 1) {
        $('.ui.dropdown')
          .dropdown()
        ;
 
-       $("#day").dropdown("set selected", this.day);
-       $("#month").dropdown("set selected", this.month);
-       $("#year").dropdown("set selected", this.year);
+       $('#day').dropdown('set selected', this.day);
+       $('#month').dropdown('set selected', this.month);
+       $('#year').dropdown('set selected', this.year);
 
-     }
+    }
 
-     if (this.selected_tab == 1) { this.alreadyInit += 1 }
-     else { this.alreadyInit = 0 }
-
-     return this.selected_tab === 1
+    if (this.selected_tab === 1) {
+      this.alreadyInit += 1;
+    } else {
+      this.alreadyInit = 0;
+    }
+    return this.selected_tab === 1;
   }
 
   ngOnInit() {
     this.initSemanticValidationForm();
 
     this.route.params.subscribe(params => {
-        let username = params['username'];
+        const username = params['username'];
 
         this.isMyProfile = this.userService.compareUsername(username);
 
         this.publicationService.getPublicationFromUser(username).subscribe(
           data => {
-            this.events = data
+            this.events = data;
           }, err => {
             this.foundUser = false;
           }
@@ -140,8 +142,8 @@ export class ProfilePageComponent implements OnInit {
           data => {
             this.foundUser = true;
             this.profile = data;
-            this.profile.youtube = this.profile.username;
-            this.profile.spotify = this.profile.username;
+            this.ytURL = this.profile.ytURL || '';
+            this.spotifyURL = this.profile.spotifyURL || '';
             this.name = this.profile.name;
             this.username = this.profile.username;
 

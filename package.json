@@ -4,13 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "babel-node": "babel-node --presets=env",
+    "babel-node": "nodemon --exec npm run babel-node --presets=env",
     "start": "babel-node -- ./server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ng build"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -35,7 +34,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "bcrypt-nodejs": "0.0.3",    
+    "bcrypt-nodejs": "0.0.3",
     "cors": "^2.8.4",
     "mongoose": "^4.13.1",
     "express": "^4.16.2",
