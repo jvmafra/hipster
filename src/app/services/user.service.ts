@@ -46,7 +46,7 @@ export class UserService {
   }
 
   public updateUser(user, username) {
-    return this.http.put(this.serverHost + 'v1/usuario/' + username, JSON.stringify(user), {
+    return this.http.put(this.serverHost + 'v1/usuario', JSON.stringify(user), {
       headers: this.headers
     });
   }
@@ -87,7 +87,7 @@ export class UserService {
   public deleteUser() {
     let username = this.getStoreUsername();
 
-    return this.http.delete(this.serverHost + 'v1/usuario/' + username, {
+    return this.http.delete(this.serverHost + 'v1/usuario', {
       headers: this.headers
     });
   }
