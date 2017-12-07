@@ -72,16 +72,18 @@
                 <input type="text" name="email" [(ngModel)]="email" attr.placeholder="{{ 'REGISTER.EMAIL' | translate }}">
               </div>
             </div>
-            <div class="field" [ngClass]="{'disabled': !isMyProfile}">
-              <div class="ui left icon input">
-                <i class="red youtube play icon"></i>
-                <input type="text" name="youtube" [(ngModel)]="youtubeURL" placeholder="YouTube">
+            <div class="two fields">
+              <div class="field" [ngClass]="{'disabled': !isMyProfile}">
+                <div class="ui left icon input">
+                  <i class="red youtube play icon"></i>
+                  <input type="text" name="youtube" [(ngModel)]="youtubeURL" placeholder="YouTube">
+                </div>
               </div>
-            </div>
-            <div class="field" [ngClass]="{'disabled': !isMyProfile}">
-              <div class="ui left icon input">
-                <i class="green spotify icon"></i>
-                <input type="text" name="spotify" [(ngModel)]="spotifyURL" placeholder="Spotify">
+              <div class="field" [ngClass]="{'disabled': !isMyProfile}">
+                <div class="ui left icon input">
+                  <i class="green spotify icon"></i>
+                  <input type="text" name="spotify" [(ngModel)]="spotifyURL" placeholder="Spotify">
+                </div>
               </div>
             </div>
             <div class="field" [ngClass]="{'disabled': !isMyProfile}">
