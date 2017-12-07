@@ -46,12 +46,12 @@ const usuarioSchema = new Schema({
 
     ytURL: {
       type: String,
-      required: false
+      required: [false, ""]
     },
 
     spotifyURL: {
       type: String,
-      required: false
+      required: [false, ""]
     }
 });
 

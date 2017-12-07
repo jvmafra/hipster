@@ -35,8 +35,8 @@ export class ProfilePageComponent implements OnInit {
   private years: Array<number>;
   private errorInfo: Array<Object>;
   private alreadyInit: number;
-  private youtube: string;
-  private spotify: string;
+  private ytURL: string;
+  private spotifyURL: string;
 
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
@@ -65,10 +65,9 @@ export class ProfilePageComponent implements OnInit {
         email: this.email,
         name: this.name,
         username: this.username,
-        spotifyURL: this.spotify,
-        ytURL: this.youtube
+        spotifyURL: this.spotifyURL,
+        ytURL: this.ytURL
       };
-
       this.userService.updateUser(usuario, this.profile.username).subscribe(
         data => {
           this.userService.storeName(usuario.name);
@@ -104,16 +103,16 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    if (this.alreadyInit < 2 && this.selected_tab == 1) {
+    if (this.alreadyInit < 2 && this.selected_tab === 1) {
        $('.ui.dropdown')
          .dropdown()
        ;
 
-       $("#day").dropdown("set selected", this.day);
-       $("#month").dropdown("set selected", this.month);
-       $("#year").dropdown("set selected", this.year);
+       $('#day').dropdown('set selected', this.day);
+       $('#month').dropdown('set selected', this.month);
+       $('#year').dropdown('set selected', this.year);
 
-     }
+    }
 
     if (this.selected_tab === 1) {
       this.alreadyInit += 1;
@@ -143,8 +142,8 @@ export class ProfilePageComponent implements OnInit {
           data => {
             this.foundUser = true;
             this.profile = data;
-            this.youtube = this.profile.ytURL || '';
-            this.spotify = this.profile.spotifyURL || '';
+            this.ytURL = this.profile.ytURL || '';
+            this.spotifyURL = this.profile.spotifyURL || '';
             this.name = this.profile.name;
             this.username = this.profile.username;
 
