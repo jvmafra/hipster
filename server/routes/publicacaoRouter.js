@@ -74,7 +74,6 @@ router.delete('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   const publication = req.body;
   const validacao = await PublicationValidator.isValid(publication);
-  console.log(validacao);
 
   if (!validacao.return) {res.status(400).json(validacao.message);}
   else{
@@ -94,15 +93,15 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
 
   const id = req.params.id;
-  const novaPublicacao = req.body;  
+  const novaPublicacao = req.body;
 
     try {
       const retorno = await PublicationService.editPublication(id, novaPublicacao);
       res.status(200).json(retorno);
-    }catch(err) {
+    } catch(err) {
       res.status(400).json(err.message);
     }
-  
+
 });
 
 module.exports = router;

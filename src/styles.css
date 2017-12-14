@@ -18,3 +18,21 @@ input:focus {
   color: rgba(0,0,0,.8);
   box-shadow: none;
 }
+
+.liked-btn {
+  background-color: #DB2828 !important;
+  color: white !important;
+}
+
+.liked-btn:hover {
+  background-color: #a70e0e !important;
+}
+
+.unliked-btn {
+  background-color: #E8E8E8 !important;
+  color: rgba(0,0,0,.6) !important;
+}
+
+.unliked-btn:hover {
+  background-color: #b7b7b7 !important;
+}

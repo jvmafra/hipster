@@ -27,6 +27,7 @@
     "LIKE": "Curtir",
     "LIKES": "Curtidas",
     "SHARE": "Compartilhe",
+    "ARTIST": "Artista",
     "MESSAGE": "A SER DEFINIDO: Alguma mensagem falando sobre os limites, curtidas, popularidade, etc"
   },
   "REGISTER": {
@@ -50,7 +51,9 @@
     "TITLE": "Titulo (Opcional)",
     "URL": "URL",
     "DESCRIPTION": "Descrição",
-    "GENRES": "Genêros"
+    "GENRES": "Genêros",
+    "YEAR": "Ano de Publicação (Opcional)",
+    "ARTIST": "Artista (Opctional)"
   },
   "DELETEMODAL": {
     "DELETE_ACCOUNT": "Deletar conta",

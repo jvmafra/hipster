@@ -21,6 +21,14 @@ export class TimelineComponent implements OnInit {
     this.publicationService.getAllPublications().subscribe(
       data => {
         this.events = data;
+
+        this.events.sort((a: any, b: any) => {
+          let dateA = new Date(a.creationDate);
+          let dateB = new Date(b.creationDate);
+
+          return dateB.getTime() - dateA.getTime();
+        });
+
       }, err => {
         console.log(err)
       }
