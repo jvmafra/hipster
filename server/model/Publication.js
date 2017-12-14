@@ -37,13 +37,11 @@ const publicationSchema = new Schema({
 
   genres : [String],
 
-  aproves : [String],
+  likes : [String],
   
   artist : String,
 
   year : Number,
-
-  songwriter : String
   
 });
 
