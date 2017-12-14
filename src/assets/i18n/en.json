@@ -27,6 +27,7 @@
     "LIKE": "Like",
     "LIKES": "Likes",
     "SHARE": "Share",
+    "ARTIST": "Artist",
     "MESSAGE": "TO BE DEFINED: Some message talking about the limits, likes, popularity, etc"
   },
   "REGISTER": {
@@ -55,7 +56,9 @@
     "TITLE": "Title (Optional)",
     "URL": "URL",
     "DESCRIPTION": "Description",
-    "GENRES": "Genres"
+    "GENRES": "Genres",
+    "YEAR": "Publish Year (Optional)",
+    "ARTIST": "Artist (Opctional)"
   },
   "ERRORS": {
     "REGISTER": {

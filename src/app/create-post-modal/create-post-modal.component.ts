@@ -3,6 +3,7 @@ import { PublicationService } from '../services/publication.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormValidationService } from "../services/form-validation.service";
 import { HipsterTranslate } from "../services/hipster-translate.service";
+import { UserService } from "../services/user.service";
 
 declare var jquery:any;
 declare var $ :any;
@@ -19,6 +20,7 @@ export class CreatePostModalComponent implements OnInit {
   //@TODO Study and improve this types
   private originalListGenres : any;
   private listGenres : any;
+  private years : Array<number>;
   private selectedGenre: String;
   private ownerUsername: String;
   private errorInfo: Array<Object>;
@@ -27,20 +29,26 @@ export class CreatePostModalComponent implements OnInit {
   constructor(private publicationService: PublicationService,
               private route: ActivatedRoute,
               private formValidation: FormValidationService,
-              private hipsterTranslate: HipsterTranslate) {
+              private hipsterTranslate: HipsterTranslate,
+              private userService: UserService) {
     this.publication = {};
     this.colors = this.publicationService.getGenreColorObjects();
     this.listGenres = this.publicationService.getListGenres();
     this.originalListGenres =  this.listGenres.slice();
     this.selectedGenre = "genre";
     this.initSemanticValidationFormInfo()
+    this.years = this.userService.getBirthdayYearsArray('1905');
 
   }
 
   ngOnInit() {
     $('#load_indication').hide();
     this.requestErrors = [];
-    $('.ui.dropdown')
+    $('#genres_select')
+      .dropdown()
+    ;
+
+    $('#year_select')
       .dropdown()
     ;
   }
@@ -53,6 +61,8 @@ export class CreatePostModalComponent implements OnInit {
     this.listGenres =  this.originalListGenres.slice();
 
     $('#genres_select')
+      .dropdown('clear');
+    $('#year_select')
       .dropdown('clear');
 
     $('#create-post').modal({
@@ -71,10 +81,13 @@ export class CreatePostModalComponent implements OnInit {
     let genres = $('#genres_select')
       .dropdown('get value').split(",");
 
-    $('#load_indication').show();
     this.publication["genres"] = genres;
 
-    if (this.isFormValid() ) {
+    let year = $('#year_select').dropdown('get value');
+    this.publication["year"] = +year;
+
+    if (this.isFormValid()) {
+      $('#load_indication').show();
       this.publicationService.savePublication(this.publication).subscribe(
         data => {
           $('#create-post').modal('hide')

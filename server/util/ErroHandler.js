@@ -17,7 +17,7 @@ _.CADASTRO = {
 
     VALIDACAO_OWNER: "Publicação deve ter um criador",
     VALIDACAO_URL: "Publicação deve ter uma url vinculada a ela",
-    VALIDACAO_TITLE: "Publicação deve ter um título"
+    VALIDACAO_TITLE: "Publicação deve ter um título"    
 };
 
 _.REQUISICAO = {
@@ -31,7 +31,8 @@ _.PUBLICATION = {
   VALIDACAO_TITLE: "VALIDACAO_TITLE",
   VALIDACAO_GENRES: "VALIDACAO_GENRES",
   VALIDACAO_CATEGORY: "VALIDACAO_CATEGORY",
-  VALIDACAO_URL_YOUTUBE: "VALIDACAO_URL_YOUTUBE"
+  VALIDACAO_URL_YOUTUBE: "VALIDACAO_URL_YOUTUBE",
+  VALIDACAO_YEAR: "O ano precisa ser um inteiro válido"
 }
 
 const INFO_DUPLICADA = {

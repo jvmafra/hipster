@@ -26,6 +26,13 @@ export class PublicationService {
     });
   }
 
+  public updatePublication(publication) {
+    let id = publication._id;
+    return this.http.put(this.serverHost + 'v1/publicacao/' + id, JSON.stringify(publication), {
+      headers: this.headers
+    });
+  }
+
   public getAllPublications() {
     return this.http.get(this.serverHost + 'v1/publicacao', {
       headers: this.headers
@@ -54,6 +61,22 @@ export class PublicationService {
       'g': 'grey',
       'h': 'black'
     };
+  }
+
+  public getLikeBorderClass(username, likes) {
+    if (likes.includes(username)) {
+      return 'red'
+    } else {
+      return ''
+    }
+  }
+
+  public getLikeClass(username, likes) {
+    if (likes.includes(username)) {
+      return 'liked-btn'
+    } else {
+      return 'unliked-btn'
+    }
   }
 
   public getListGenres() {

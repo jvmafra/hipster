@@ -32,6 +32,26 @@
         </div>
       </div>
 
+      <div class="two fields">
+        <div class="field">
+          <div class="ui sub header"> {{ 'PUBLICATION.ARTIST' | translate }} </div>
+          <div class="ui left icon input">
+            <input type="text" name="title" [(ngModel)]="publication.artist">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui sub header">{{ 'PUBLICATION.YEAR' | translate }}</div>
+          <div id="year_select" class="ui search selection dropdown">
+            <input type="hidden" name="year">
+            <i class="dropdown icon"></i>
+            <div class="default text">{{ 'REGISTER.YEAR' | translate }}</div>
+            <div class="menu">
+              <div *ngFor="let year of years" class="item" attr.data-value="year + 1">{{ year }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="field">
         <div class="ui sub header">{{ 'PUBLICATION.GENRES' | translate }}</div>
         <div id="genres_select" class="ui multiple selection dropdown">

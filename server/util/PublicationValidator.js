@@ -38,6 +38,12 @@ export class PublicationValidator {
 
     }
 
+    if (publication.year){
+      let isNumber = Number.isInteger(publication.year);
+      if(!isNumber){
+        message += erro.PUBLICATION.VALIDACAO_YEAR + ';'
+      }
+    }
 
     //@TODO Need refactoring when hipster genres be defined
     if (publication.genres === undefined || publication.genres.length === 0) {

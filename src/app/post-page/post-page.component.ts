@@ -16,6 +16,7 @@ export class PostPageComponent implements OnInit {
 
   private post: any;
   private user_title: string = undefined;
+  private creationDate: string;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
@@ -42,7 +43,7 @@ export class PostPageComponent implements OnInit {
             }
 
             let date = new Date(this.post.creationDate);
-            this.post.creationDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+            this.creationDate = date.toLocaleString();
 
             var url = this.post.url;
             var videoid = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
@@ -56,9 +57,40 @@ export class PostPageComponent implements OnInit {
             console.log(err)
           }
         );
-
-
     });
+  }
+
+  likePost() {
+    let username = window.localStorage.username
+
+    if (this.post.likes.includes(username)) {
+      var index = this.post.likes.indexOf(username, 0);
+      if (index > -1) {
+         this.post.likes.splice(index, 1);
+      }
+    } else {
+      this.post.likes.push(username);
+    }
+
+    let updatedPost = {
+      likes : this.post.likes,
+      _id: this.post._id
+    }
+
+    this.publicationService.updatePublication(updatedPost).subscribe(
+      data => {}, err => {}
+    );
+
+  }
+
+  getLikeBorderClass() {
+    let username = window.localStorage.username
+    return this.publicationService.getLikeBorderClass(username, this.post.likes);
+  }
+
+  getLikeClass() {
+    let username = window.localStorage.username
+    return this.publicationService.getLikeClass(username, this.post.likes);
   }
 
   getClass(genre) {
