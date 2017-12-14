@@ -88,4 +88,21 @@ router.post('/', async (req, res) => {
 
 });
 
+/**
+ * PUT edita publicacao pelo id
+ */
+router.put('/:id', async (req, res) => {
+
+  const id = req.params.id;
+  const novaPublicacao = req.body;  
+
+    try {
+      const retorno = await PublicationService.editPublication(id, novaPublicacao);
+      res.status(200).json(retorno);
+    }catch(err) {
+      res.status(400).json(err.message);
+    }
+  
+});
+
 module.exports = router;
