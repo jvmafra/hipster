@@ -6,6 +6,7 @@ import { UserService } from '../services/user.service';
 import { PublicationService } from '../services/publication.service';
 import { Router } from '@angular/router';
 import { FormValidationService } from '../services/form-validation.service';
+import { AlertService } from '../services/alert.service';
 
 declare var jquery:any;
 declare var $ :any;
@@ -43,7 +44,8 @@ export class ProfilePageComponent implements OnInit {
               private userService: UserService,
               private translateService: TranslateService,
               private publicationService: PublicationService,
-              private formValidation: FormValidationService ) {
+              private formValidation: FormValidationService,
+              private alertService: AlertService) {
 
     this.alreadyInit = 0;
     this.days = Array.from(Array(31).keys());
@@ -71,11 +73,11 @@ export class ProfilePageComponent implements OnInit {
 
       this.userService.updateUser(usuario, this.profile.username).subscribe(
         data => {
+          this.alertService.showSuccessAlert("Atualização de Perfil", "Perfil atualizado com sucesso!");
           this.userService.storeName(usuario.name);
           window.location.href = "/user/" + this.profile.username;
         }, err => {
-          console.log(err)
-          $('.ui.error.message').show();
+          this.alertService.showErrorAlert("Atualização de Perfil", "Erro ao atualizar Perfil, tente novamente mais tarde.");
           if (err.statusText === "Unauthorized") {
             this.userService.logoutUser();
           }
@@ -135,6 +137,13 @@ export class ProfilePageComponent implements OnInit {
         this.publicationService.getPublicationFromUser(username).subscribe(
           data => {
             this.events = data
+            this.events.sort((a: any, b: any) => {
+              let dateA = new Date(a.creationDate);
+              let dateB = new Date(b.creationDate);
+
+              return dateB.getTime() - dateA.getTime();
+            });
+
           }, err => {
             this.foundUser = false;
           }

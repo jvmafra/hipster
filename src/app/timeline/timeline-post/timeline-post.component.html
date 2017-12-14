@@ -8,18 +8,34 @@
       <div class="meta" *ngIf="title !== 'undefined'">
         <span class="date">{{ subtitle }}</span>
       </div>
+      <div class="meta" *ngIf="event.artist">
+        <span class="date">{{ 'POST.ARTIST' | translate }}: {{ event.artist }}</span>
+      </div>
       <div class="meta">
         <span class="date">{{ event.ownerUsername }}: {{ creationDate }}</span>
       </div>
       <div class="description">
         <p>{{ event.description }}</p>
       </div>
+      <div class="description">
+        <a class="ui label" *ngIf="event.year">
+          {{ event.year }}
+        </a>
+        <div class="ui labeled button" tabindex="0">
+          <div class="ui red tiny button" (click)="likePost()" [ngClass]="getLikeClass()">
+            <i class="heart icon"></i> {{ 'POST.LIKES' | translate }}
+          </div>
+          <a class="ui basic left pointing tiny label" [ngClass]="getLikeBorderClass()">
+            {{ event.likes.length }}
+          </a>
+        </div>
+      </div>
       <div class="extra">
         <div class="ui labels">
-          <a class="ui circular label likes">
-            <i class="heart icon"></i> {{ event.aproves.length }}  {{ 'POST.LIKES' | translate }}
-          </a>
-          <div class="ui tag label" [ngClass]="getClass(genre)" *ngFor="let genre of event.genres">{{ genre }}</div>
+          <div class="ui basic label" *ngFor="let genre of event.genres">
+            <a class="ui empty circular label" [ngClass]="getClass(genre)"></a>
+            {{ genre }}
+          </div>
         </div>
       </div>
     </div>

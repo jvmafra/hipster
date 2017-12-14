@@ -4,6 +4,7 @@ import { UserService } from './services/user.service';
 import { Router } from '@angular/router';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component'
 import { ViewChild } from '@angular/core';
+import { AlertService } from './services/alert.service';
 
 declare var jquery:any;
 declare var $ :any;
@@ -20,7 +21,8 @@ export class AppComponent implements OnInit {
 
   constructor(private hipsterTranslate: HipsterTranslate,
               private userService: UserService,
-              private router: Router){
+              private router: Router,
+              private alertService: AlertService){
   }
 
   ngOnInit() {
@@ -35,7 +37,7 @@ export class AppComponent implements OnInit {
         this.userService.storeUser(authUser);
         window.location.href = '/user/' + authUser.user.username;
       }, err => {
-        //TODO: show toast
+        this.alertService.showErrorAlert("Autenticar Usuário", "Usuário ou Senha não encontrados")
       }
     );
   }

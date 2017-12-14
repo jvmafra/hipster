@@ -4,6 +4,7 @@ import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { FormValidationService } from '../services/form-validation.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AlertService } from '../services/alert.service';
 
 declare var jquery:any;
 declare var $ :any;
@@ -29,7 +30,8 @@ export class RegisterComponent implements OnInit {
               private userService: UserService,
               private formValidation: FormValidationService,
               private translateService: TranslateService,
-              private router: Router) {
+              private router: Router,
+              private alertService: AlertService) {
     this.user = {};
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
@@ -51,15 +53,16 @@ export class RegisterComponent implements OnInit {
       data => {
         this.userService.loginUser(user.username, user.password).subscribe(
           data => {
+            this.alertService.showSuccessAlert("Registrar Usuário", "Usuário registrado com sucesso!")
             let authUser: any = data;
             this.userService.storeUser(authUser);
             window.location.href = '/user/' + authUser.user.username;
           }, err => {
-            //TODO: show toast
+            this.alertService.showErrorAlert("Registrar Usuário", "Verifique as informações inseridas e tente novamente.")
           }
         );
       }, err => {
-        console.log(err);
+        this.alertService.showErrorAlert("Registrar Usuário", "Verifique as informações inseridas e tente novamente.")
       }
     );
 

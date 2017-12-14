@@ -9,18 +9,34 @@
             <div class="meta" *ngIf="user_title !== undefined">
               <span class="date">{{ post.music_name }}</span>
             </div>
+            <div class="meta" *ngIf="post.artist">
+              <span class="date">{{ 'POST.ARTIST' | translate }}: {{ post.artist }}</span>
+            </div>
             <div class="meta">
-              <span class="date">{{ post.creationDate }}</span>
+              <span class="date">{{ post.ownerUsername }}: {{ creationDate }}</span>
             </div>
             <div class="description">
               <p>{{ post.description }}</p>
             </div>
+            <div class="description">
+              <a class="ui label" *ngIf="post.year">
+                {{ post.year }}
+              </a>
+              <div class="ui labeled button" tabindex="0">
+                <div class="ui red button" (click)="likePost()" [ngClass]="getLikeClass()">
+                  <i class="heart icon"></i> {{ 'POST.LIKES' | translate }}
+                </div>
+                <a class="ui basic left pointing label" [ngClass]="getLikeBorderClass()">
+                  {{ post.likes.length }}
+                </a>
+              </div>
+            </div>
             <div class="extra">
               <div class="ui labels">
-                <a class="ui circular label likes">
-                  <i class="heart icon"></i> {{ post.aproves.length }}  {{ 'POST.LIKES' | translate }}
-                </a>
-                <div class="ui tag label" [ngClass]="getClass(genre)" *ngFor="let genre of post.genres">{{ genre }}</div>
+                <div class="ui basic label" *ngFor="let genre of post.genres">
+                  <a class="ui empty circular label" [ngClass]="getClass(genre)"></a>
+                  {{ genre }}
+                </div>
               </div>
             </div>
           </div>

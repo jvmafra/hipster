@@ -22,10 +22,9 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { TimelinePostComponent } from './timeline/timeline-post/timeline-post.component';
 import { PostPageComponent } from './post-page/post-page.component';
-import { SuccessMsgComponent } from './success-msg/success-msg.component';
-import { ErrorMsgComponent } from './error-msg/error-msg.component';
 import { CreatePostModalComponent } from './create-post-modal/create-post-modal.component';
 import { PublicationService } from './services/publication.service';
+import { AlertService } from './services/alert.service';
 
 PublicationService
 export function HttpLoaderFactory(http: HttpClient) {
@@ -42,8 +41,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     TimelineComponent,
     TimelinePostComponent,
     PostPageComponent,
-    SuccessMsgComponent,
-    ErrorMsgComponent,
     CreatePostModalComponent
   ],
   providers: [
@@ -64,7 +61,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormValidationService,
     AuthService,
     StorageService,
-    PublicationService
+    PublicationService,
+    AlertService
   ],
   imports: [
     BrowserModule,
