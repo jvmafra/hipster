@@ -61,9 +61,7 @@ export class TimelineComponent implements OnInit {
   filterEvents = (index, genre) => {
     if (genre) {
       this.filteredEvents = this.events.filter((event) => {
-        const result = event.genres.filter((eventGenre) => {
-          return eventGenre === genre.value;
-        });
+        const result = event.genres.filter(eventGenre => eventGenre === genre.value );
         return result.length > 0;
       });
     }
