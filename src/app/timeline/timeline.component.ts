@@ -35,11 +35,10 @@ export class TimelineComponent implements OnInit {
     $('#genres_select')
       .dropdown({
         onChange: function (genreFilter) {
-          pubService.getAllPublications().subscribe(
+          this.publicationService.getAllPublications().subscribe(
             data => {
               this.events = data;
               this.events = this.events.filter(d => d.genres.indexOf(genreFilter) !== -1);
-              console.log(this.events);
               this.events.sort((a: any, b: any) => {
                 let dateA = new Date(a.creationDate);
                 let dateB = new Date(b.creationDate);
@@ -50,6 +49,7 @@ export class TimelineComponent implements OnInit {
             }, err => {
               console.log(err);
             }
+          );
         }
       });
   }
@@ -57,7 +57,7 @@ export class TimelineComponent implements OnInit {
   ngOnInit() {
     $('#genres_select')
       .dropdown('get value').split(',');
-    console.log(this.genreFilter);
+
     this.publicationService.getAllPublications().subscribe(
       data => {
         this.events = data;
