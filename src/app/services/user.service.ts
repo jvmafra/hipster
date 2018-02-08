@@ -20,8 +20,7 @@ export class UserService {
     'd': 'purple',
     'e': 'pink',
     'f': 'brown',
-    'g': 'grey',
-    'h': 'black'
+    'g': 'black'
   };
 
   constructor(private http: HttpClient,

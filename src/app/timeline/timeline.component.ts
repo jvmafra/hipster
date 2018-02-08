@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CreatePostModalComponent } from '../create-post-modal/create-post-modal.component'
 import { ViewChild } from '@angular/core';
 import { PublicationService } from '../services/publication.service';
+import {UserService} from "../services/user.service"
 
 @Component({
   selector: 'app-timeline',
@@ -11,28 +12,72 @@ import { PublicationService } from '../services/publication.service';
 })
 export class TimelineComponent implements OnInit {
   @ViewChild(CreatePostModalComponent)
-  private createPost: CreatePostModalComponent;
+  public createPost: CreatePostModalComponent;
 
-  private events: any;
+  public listGenres : any;
 
-  constructor(private publicationService: PublicationService) { }
+  public events: any;
+
+  public shownEvents: any;
+
+  public filteredEvents: any;
+
+  public selectedLabel: any;
+
+  constructor(private publicationService: PublicationService,
+              private userService: UserService) {
+    this.listGenres = this.publicationService.getListGenres();
+  }
 
   ngOnInit() {
     this.publicationService.getAllPublications().subscribe(
       data => {
         this.events = data;
-
+        this.selectedLabel = "todos";
         this.events.sort((a: any, b: any) => {
           let dateA = new Date(a.creationDate);
           let dateB = new Date(b.creationDate);
 
           return dateB.getTime() - dateA.getTime();
         });
-
+        this.shownEvents = this.events;
       }, err => {
         console.log(err)
       }
     );
   }
 
+  getClass(genre) {
+    return this.userService.getColor(genre);
+  }
+
+  /**
+   * Filter events according with selected genres.
+   * Save selected genre index to future operations.
+   *
+   * @param index     Index of selected label on view
+   * @param genre     {Object} of selected label on view
+   */
+  filterEvents = (index, genre) => {
+    if (genre) {
+      this.filteredEvents = this.events.filter((event) => {
+        const result = event.genres.filter(eventGenre => eventGenre === genre.value );
+        return result.length > 0;
+      });
+    }
+
+    this.selectedLabel = index ;
+    this.shownEvents = genre ? this.filteredEvents : this.events;
+  };
+
+  /**
+   * Verifies whether label is selected or not.
+   *
+   * @param index         Label's indentifier
+   * @return {string | string} which will be used as class of the label to
+   *         mark as selected
+   */
+  isSelected = (index) => {
+    return this.selectedLabel === index ? "blue" : "";
+  };
 }

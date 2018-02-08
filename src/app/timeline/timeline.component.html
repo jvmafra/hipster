@@ -11,9 +11,22 @@
   </div>
 
   <div class="ui stacked segment post-container">
-    <div class="ui divided items">
-      <div class="item" *ngFor="let event of events">
-        <app-timeline-post [event]="event"></app-timeline-post>
+    <div id="labelTodos" class="ui basic large label" [ngClass]="isSelected('todos')">
+      <a class="ui empty circular label grey" (click)="filterEvents('todos')"></a>
+      Todos
+    </div>
+    <div id="label{{i}}" class="ui basic large label" *ngFor="let genre of listGenres; index as i" [ngClass]="isSelected(i, genre)">
+      <a class="ui empty circular large label" [ngClass]="getClass(genre.value)" (click)="filterEvents(i, genre)"></a>
+      {{ genre.value }}
+    </div>
+  </div>
+
+  <div class="ui stacked segment post-container extra">
+    <div class="ui labels">
+      <div class="ui divided items">
+        <div class="item" *ngFor="let event of shownEvents">
+          <app-timeline-post [event]="event"></app-timeline-post>
+        </div>
       </div>
     </div>
   </div>
