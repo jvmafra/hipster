@@ -1,19 +1,36 @@
 <div class="ui container ">
 
   <div class="ui brown segment clearing">
-    <p>{{ 'POST.MESSAGE' | translate }}</p>
+    <!--p>{{ 'POST.MESSAGE' | translate }}</p-->
     <div (click)="createPost.createPostModal($event)" class="ui animated button right floated" tabindex="0">
       <div class="visible content">{{ 'POST.SHARE' | translate}}</div>
       <div class="hidden content">
         <i class="right arrow icon"></i>
       </div>
     </div>
+
+    <div class="field">
+      <div class="ui sub header">{{ 'Filter posts' | translate }}</div>
+      <div id="genres_select" class="ui selection dropdown">
+        <input name="gender" type="hidden">
+        <i class="dropdown icon"></i>
+        <div class="default text">Genres</div>
+        <div class="menu">
+          <div class="item" *ngFor="let genre of genres" attr.data-value="{{genre.value}}"
+               (click)="getFilters()">
+            <div class="ui empty circular label" [ngClass]="getGenreColor(genre)"></div>
+            {{ genre.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <div class="ui stacked segment post-container">
     <div class="ui divided items">
-      <div class="item" *ngFor="let event of events">
-        <app-timeline-post [event]="event"></app-timeline-post>
+      <div id="#pubPost" class="item" *ngFor="let event of events">
+        <app-timeline-post  [event]="event"></app-timeline-post>
       </div>
     </div>
   </div>

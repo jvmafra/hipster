@@ -25,6 +25,7 @@ import { PostPageComponent } from './post-page/post-page.component';
 import { CreatePostModalComponent } from './create-post-modal/create-post-modal.component';
 import { PublicationService } from './services/publication.service';
 import { AlertService } from './services/alert.service';
+import { FilterMusicComponent } from './filter-music/filter-music.component';
 
 PublicationService
 export function HttpLoaderFactory(http: HttpClient) {
@@ -41,7 +42,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TimelineComponent,
     TimelinePostComponent,
     PostPageComponent,
-    CreatePostModalComponent
+    CreatePostModalComponent,
+    FilterMusicComponent
   ],
   providers: [
     {
