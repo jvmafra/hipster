@@ -72,8 +72,14 @@ export class TimelineComponent implements OnInit {
     this.shownEvents = genre ? this.filteredEvents : this.events;
   };
 
-
-  isSelected = (index, genre) => {
+  /**
+   * Verifies whether label is selected or not.
+   *
+   * @param index         Label's indentifier
+   * @return {string | string} which will be used as class of the label to
+   *         mark as selected
+   */
+  isSelected = (index) => {
     return this.selectedLabel === index ? "blue" : "";
   };
 }
