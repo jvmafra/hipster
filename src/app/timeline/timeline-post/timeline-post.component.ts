@@ -77,7 +77,7 @@ export class TimelinePostComponent implements OnInit {
     this.subtitle = titles[0]
     this.title = titles[1]
 
-    if (titles[1] === "undefined") {
+    if (titles[1] === "") {
       this.title = this.subtitle
     }
   }

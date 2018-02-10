@@ -15,11 +15,15 @@ export class PublicationValidator {
     var message = '';
 
     //@TODO Need Refactoring when token and username problem be fixed
-    if (publication.ownerUsername === undefined || publication.ownerUsername === ""){
+    if (publication.ownerUsername === undefined || publication.ownerUsername.trim() === ""){
       message += erro.PUBLICATION.VALIDACAO_OWNER + ';';
     }
 
-    if (publication.url === undefined || publication.url === "") {
+    if (publication.title === undefined || publication.title.trim() === "") {
+      publication.title = "";
+    }
+
+    if (publication.url === undefined || publication.url.trim() === "") {
       message += erro.PUBLICATION.VALIDACAO_URL + ';';
     } else if (getVideoIDFromUrl(publication.url) === 'error') {
       message += erro.PUBLICATION.VALIDACAO_URL_YOUTUBE + ';';
@@ -28,6 +32,7 @@ export class PublicationValidator {
       let videoID = getVideoIDFromUrl(publication.url);
       try {
         const response = await getVideoInfo(videoID);
+
         publication.title = response.title + " HIPSTER_FLAG "  + publication.title;
         if (response.genre != "Music") {
           message += erro.PUBLICATION.VALIDACAO_CATEGORY + ';';
