@@ -24,7 +24,11 @@ export class TimelineComponent implements OnInit {
     this.listGenres = this.publicationService.getListGenres();
   }
 
-  public ngOnInit() {
+  ngOnInit() {
+    this.getAllPublications();
+  }
+
+  public getAllPublications() {
     this.publicationService.getAllPublications().subscribe(
       data => {
         this.events = data;
@@ -47,7 +51,7 @@ export class TimelineComponent implements OnInit {
    * @param index     Index of selected label on view
    * @param genre     {Object} of selected label on view
    */
-  filterEvents = (index, genre) => {
+  public filterEvents = (index, genre) => {
     if (genre) {
       this.filteredEvents = this.events.filter((event) => {
         const result = event.genres.filter(eventGenre => eventGenre === genre.value );
@@ -66,7 +70,7 @@ export class TimelineComponent implements OnInit {
    * @return {string | string} which will be used as class of the label to
    *         mark as selected
    */
-  isSelected = (index) => {
+  public isSelected = (index) => {
     return this.selectedLabel === index ? "blue" : "";
   };
 }
