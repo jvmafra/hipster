@@ -13,15 +13,10 @@ import {UserService} from "../services/user.service"
 export class TimelineComponent implements OnInit {
   @ViewChild(CreatePostModalComponent)
   public createPost: CreatePostModalComponent;
-
   public listGenres : any;
-
   public events: any;
-
   public shownEvents: any;
-
   public filteredEvents: any;
-
   public selectedLabel: any;
 
   constructor(private publicationService: PublicationService,
@@ -29,17 +24,11 @@ export class TimelineComponent implements OnInit {
     this.listGenres = this.publicationService.getListGenres();
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.publicationService.getAllPublications().subscribe(
       data => {
         this.events = data;
         this.selectedLabel = "todos";
-        this.events.sort((a: any, b: any) => {
-          let dateA = new Date(a.creationDate);
-          let dateB = new Date(b.creationDate);
-
-          return dateB.getTime() - dateA.getTime();
-        });
         this.shownEvents = this.events;
       }, err => {
         console.log(err)
@@ -47,7 +36,7 @@ export class TimelineComponent implements OnInit {
     );
   }
 
-  getClass(genre) {
+  public getClass(genre) {
     return this.userService.getColor(genre);
   }
 
