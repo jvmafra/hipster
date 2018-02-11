@@ -14,13 +14,18 @@ declare var $ :any;
 })
 export class PostPageComponent implements OnInit {
 
-  private post: any;
-  private user_title: string = undefined;
-  private creationDate: string;
+  public post;
+  public user_title: string = undefined;
+  public creationDate: string;
+  private OPTIONAL_TITLE = 1;
+  private MUSIC_NAME = 0;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
-              private publicationService: PublicationService) { }
+              private publicationService: PublicationService) {
+    this.post = {};
+    this.post["likes"] = [];
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -29,30 +34,15 @@ export class PostPageComponent implements OnInit {
         this.publicationService.getPublication(postId).subscribe(
           data => {
             this.post = data;
-
-            let titles: [any] = this.post.title.split(" HIPSTER_FLAG ")
-            this.post["music_name"] = titles[0]
-            if (titles.length > 1) {
-              this.user_title = titles[1]
-
-              if (titles[1] === "undefined") {
-                this.post.title = this.post.music_name
-              } else {
-                this.post.title = this.user_title
-              }
-            }
-
+            let titles = this.post.title.split(" HIPSTER_FLAG ")
+            this.post.music_name = titles[this.MUSIC_NAME];
+            this.user_title = titles[this.OPTIONAL_TITLE];
+            this.post.title = titles[this.OPTIONAL_TITLE] === "" ? this.post.music_name : this.user_title;
             let date = new Date(this.post.creationDate);
             this.creationDate = date.toLocaleString();
-
             var url = this.post.url;
-            var videoid = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
-            this.post.videoId = videoid[1]
-            $('.ui.embed').embed({
-              source      : 'youtube',
-              id          : this.post.videoId,
-              icon        : 'video'
-            });
+            this.initEmbedYotubue();
+
           }, err => {
             console.log(err)
           }
@@ -60,7 +50,15 @@ export class PostPageComponent implements OnInit {
     });
   }
 
-  likePost() {
+  private initEmbedYotubue() {
+    $('.ui.embed').embed({
+      source      : 'youtube',
+      id          : "CHFUjjZJfkQ",
+      icon        : 'video'
+    });
+  }
+
+  public likePost() {
     let username = window.localStorage.username
 
     if (this.post.likes.includes(username)) {
@@ -83,17 +81,17 @@ export class PostPageComponent implements OnInit {
 
   }
 
-  getLikeBorderClass() {
+  public getLikeBorderClass() {
     let username = window.localStorage.username
     return this.publicationService.getLikeBorderClass(username, this.post.likes);
   }
 
-  getLikeClass() {
+  public getLikeClass() {
     let username = window.localStorage.username
     return this.publicationService.getLikeClass(username, this.post.likes);
   }
 
-  getClass(genre) {
+  private getClass(genre) {
     return this.userService.getColor(genre);
   }
 

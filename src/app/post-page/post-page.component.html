@@ -6,10 +6,10 @@
         <div class="item">
           <div class="content">
             <a class="header">{{ post.title }}</a>
-            <div class="meta" *ngIf="user_title !== undefined">
+            <div class="meta" *ngIf='user_title !== ""'>
               <span class="date">{{ post.music_name }}</span>
             </div>
-            <div class="meta" *ngIf="post.artist">
+            <div class="meta" *ngIf="post?.artist">
               <span class="date">{{ 'POST.ARTIST' | translate }}: {{ post.artist }}</span>
             </div>
             <div class="meta">
@@ -19,7 +19,7 @@
               <p>{{ post.description }}</p>
             </div>
             <div class="description">
-              <a class="ui label" *ngIf="post.year">
+              <a class="ui label" *ngIf="post?.year">
                 {{ post.year }}
               </a>
               <div class="ui labeled button" tabindex="0">
