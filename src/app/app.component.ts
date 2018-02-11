@@ -16,11 +16,11 @@ declare var $ :any;
 })
 export class AppComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
-  private deleteModal: DeleteModalComponent;
-  private selectedLanguage: string;
+  public deleteModal: DeleteModalComponent;
+  public selectedLanguage: string;
 
   constructor(private hipsterTranslate: HipsterTranslate,
-              private userService: UserService,
+              public userService: UserService,
               private router: Router,
               private alertService: AlertService){
   }
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
     this.selectedLanguage = this.hipsterTranslate.getFormattedLanguage();
   }
 
-  public loginUser(username, password) {
+  private loginUser(username, password) {
     this.userService.loginUser(username, password).subscribe(
       data => {
         let authUser: any = data;
@@ -42,15 +42,15 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public getName() {
+  private getName() {
     return this.userService.getStoreName();
   }
 
-  public getUsername() {
+  private getUsername() {
     return this.userService.getStoreUsername();
   }
 
-  public logoutUser(username, password) {
+  private logoutUser(username, password) {
     this.userService.logoutUser();
   }
 
@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
     this.hipsterTranslate.setLanguage(language);
   }
 
-  public change(event) {
+  private change(event) {
     window.location.href = '/user/' + this.getUsername();
   }
 

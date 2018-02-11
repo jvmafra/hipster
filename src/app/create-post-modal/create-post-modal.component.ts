@@ -21,10 +21,10 @@ export class CreatePostModalComponent implements OnInit {
   public originalListGenres : Array<Object>;
   public listGenres : Array<Object>;
   public years : Array<number>;
-  public selectedGenre: String;
-  public ownerUsername: String;
+  public selectedGenre: string;
+  public ownerUsername: string;
   public errorInfo: Array<Object>;
-  public requestErrors: Array<String>;
+  public requestErrors: Array<string>;
 
   constructor(private publicationService: PublicationService,
               private route: ActivatedRoute,

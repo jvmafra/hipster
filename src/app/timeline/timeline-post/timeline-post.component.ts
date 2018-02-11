@@ -14,24 +14,23 @@ declare var $ :any;
 export class TimelinePostComponent implements OnInit {
 
   @Input() event;
-
-  private title: string;
-  private subtitle: string;
-  private creationDate: string;
+  public title: string;
+  public subtitle: string;
+  public creationDate: string;
 
   constructor(private userService: UserService,
               private publicationService: PublicationService) {
   }
 
-  openPost() {
+  public openPost() {
     window.location.href = "/post/" + this.event._id
   }
 
-  getClass(genre) {
+  private getClass(genre) {
     return this.userService.getColor(genre);
   }
 
-  likePost() {
+  public likePost() {
     let username = window.localStorage.username
 
     if (this.event.likes.includes(username)) {
@@ -54,12 +53,12 @@ export class TimelinePostComponent implements OnInit {
 
   }
 
-  getLikeBorderClass() {
+  public getLikeBorderClass() {
     let username = window.localStorage.username
     return this.publicationService.getLikeBorderClass(username, this.event.likes);
   }
 
-  getLikeClass() {
+  public getLikeClass() {
     let username = window.localStorage.username
     return this.publicationService.getLikeClass(username, this.event.likes);
   }
