@@ -24,6 +24,16 @@ const publicationSchema = new Schema({
     required: [true, erro.CADASTRO.VALIDACAO_URL]
   },
 
+  url : {
+    type: String,
+    required: [true, erro.CADASTRO.VALIDACAO_VIDEOID]
+  },
+
+  videoID : {
+    type: String,
+    required: [true, erro.CADASTRO.VALIDACAO_VIDEOID]
+  },
+
   title : {
     type: String,
     required: [true, erro.CADASTRO.VALIDACAO_TITLE]
@@ -31,21 +41,21 @@ const publicationSchema = new Schema({
 
   description : String,
   
-  creationDate : { 
-    type: Date, 
+  creationDate : {
+    type: Date,
     default: Date.now },
 
   genres : [String],
 
   likes : [String],
-  
+
   artist : String,
 
   year : Number,
-  
+
 });
 
-publicationSchema.pre("save", async function(next) {  
+publicationSchema.pre("save", async function(next) {
   let usuario = {}
   try {
       usuario = await UsuarioService.consultaUsuario(this.ownerUsername);
@@ -53,7 +63,7 @@ publicationSchema.pre("save", async function(next) {
   } catch (err) {
       next(err);
   }
-  
+
 });
 
 publicationSchema.post('save', (err, doc, next) => {

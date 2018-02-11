@@ -69,9 +69,7 @@ export class TimelinePostComponent implements OnInit {
 
   ngOnInit() {
     var url = this.event.url;
-    var videoid = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
-    this.event.thumbnail = "https://img.youtube.com/vi/" + videoid[1] + "/hqdefault.jpg"
-    this.event.videoId = videoid[1]
+    this.event.thumbnail = "https://img.youtube.com/vi/" + this.event.videoID + "/hqdefault.jpg"
 
     let date = new Date(this.event.creationDate);
     this.creationDate = date.toLocaleString();

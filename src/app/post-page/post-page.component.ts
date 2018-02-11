@@ -41,7 +41,7 @@ export class PostPageComponent implements OnInit {
             let date = new Date(this.post.creationDate);
             this.creationDate = date.toLocaleString();
             var url = this.post.url;
-            this.initEmbedYotubue();
+            this.initEmbedYotubue(this.post.videoID);
 
           }, err => {
             console.log(err)
@@ -50,10 +50,10 @@ export class PostPageComponent implements OnInit {
     });
   }
 
-  private initEmbedYotubue() {
+  private initEmbedYotubue(videoID) {
     $('.ui.embed').embed({
       source      : 'youtube',
-      id          : "CHFUjjZJfkQ",
+      id          : videoID,
       icon        : 'video'
     });
   }
