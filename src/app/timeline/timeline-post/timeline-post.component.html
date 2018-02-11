@@ -5,7 +5,7 @@
     </a>
     <div class="content">
       <a class="header" (click)="openPost()">{{ title }}</a>
-      <div class="meta" *ngIf="title !== 'undefined'">
+      <div class="meta" *ngIf='user_title !== ""'>
         <span class="date">{{ subtitle }}</span>
       </div>
       <div class="meta" *ngIf="event.artist">

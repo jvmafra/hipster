@@ -15,8 +15,12 @@ export class TimelinePostComponent implements OnInit {
 
   @Input() event;
   public title: string;
+  public user_title: string;
+
   public subtitle: string;
   public creationDate: string;
+  private OPTIONAL_TITLE = 1;
+  private MUSIC_NAME = 0;
 
   constructor(private userService: UserService,
               private publicationService: PublicationService) {
@@ -71,14 +75,11 @@ export class TimelinePostComponent implements OnInit {
 
     let date = new Date(this.event.creationDate);
     this.creationDate = date.toLocaleString();
+    let titles =  this.event.title.split(" HIPSTER_FLAG ")
+    this.subtitle = titles[this.MUSIC_NAME];
+    this.user_title = titles[this.OPTIONAL_TITLE];
+    this.title = titles[this.OPTIONAL_TITLE] === "" ? this.subtitle : this.user_title;
 
-    let titles = this.event.title.split(" HIPSTER_FLAG ")
-    this.subtitle = titles[0]
-    this.title = titles[1]
-
-    if (titles[1] === "") {
-      this.title = this.subtitle
-    }
   }
 
 }
