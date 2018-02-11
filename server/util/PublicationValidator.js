@@ -1,6 +1,8 @@
 import * as erro from '../util/ErroHandler';
 import fetchVideoInfo from 'youtube-info';
 
+let MAX_VIEWS = 1000000;
+
 export class PublicationValidator {
 
   /**@FIXME: este comentário está redundante.
@@ -30,18 +32,7 @@ export class PublicationValidator {
     } else {
       //@TODO: In future, this could be in PublicationService
       let videoID = getVideoIDFromUrl(publication.url);
-      try {
-        const response = await getVideoInfo(videoID);
-
-        publication.title = response.title + " HIPSTER_FLAG "  + publication.title;
-        publication.videoID = videoID;
-        if (response.genre != "Music") {
-          message += erro.PUBLICATION.VALIDACAO_CATEGORY + ';';
-        }
-      } catch(err) {
-        message += erro.PUBLICATION.VALIDACAO_URL + ';';
-      }
-
+      message += await checkYoutubeAPIInfo(videoID, publication);
     }
 
     if (publication.year){
@@ -68,6 +59,29 @@ export class PublicationValidator {
 
 }
 
+async function checkYoutubeAPIInfo(videoID, publication) {
+  let message = "";
+
+  try {
+    const response = await getVideoInfo(videoID);
+    publication.title = response.title + " HIPSTER_FLAG "  + publication.title;
+    publication.videoID = videoID;
+
+    if (response.genre != "Music") {
+      message += erro.PUBLICATION.VALIDACAO_CATEGORY + ';';
+    }
+
+    if (response.views > MAX_VIEWS) {
+      message += erro.PUBLICATION.VALIDACAO_VIEW_COUNT + ';';
+    }
+
+  } catch(err) {
+    message += erro.PUBLICATION.VALIDACAO_URL_YOUTUBE + ';';
+  }
+
+  return message;
+}
+
 function getVideoIDFromUrl(url) {
   var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
   var match = url.match(regExp);
@@ -85,8 +99,9 @@ function getVideoInfo(videoID) {
   return new Promise((resolve, reject) =>
     fetchVideoInfo(videoID).then(function (videoInfo, err) {
       if (err) return reject(err);
+      if (!videoInfo.url) return reject("Video doesn't exist");
 
       return resolve(videoInfo);
     })
-  )
+  );
 }

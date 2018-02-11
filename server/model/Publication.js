@@ -26,12 +26,12 @@ const publicationSchema = new Schema({
 
   url : {
     type: String,
-    required: [true, erro.CADASTRO.VALIDACAO_VIDEOID]
+    required: [true, erro.CADASTRO.VALIDACAO_URL_YOUTUBE]
   },
 
   videoID : {
     type: String,
-    required: [true, erro.CADASTRO.VALIDACAO_VIDEOID]
+    required: [true, erro.CADASTRO.VALIDACAO_VIDEOID_YOUTUBE]
   },
 
   title : {
@@ -40,7 +40,7 @@ const publicationSchema = new Schema({
   },
 
   description : String,
-  
+
   creationDate : {
     type: Date,
     default: Date.now },

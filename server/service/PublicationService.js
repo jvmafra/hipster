@@ -18,12 +18,7 @@ export class PublicationService{
    * da forma que o mongo retorna.
    */
   static retrievePublication(id) {
-    return new Promise((resolve, reject) =>
-      Publication.findOne({_id: id}, (err, result) => {
-        if (err || !result) return reject(err);
-        return resolve(result);
-      })
-    );
+    return Publication.findOne({_id: id}).exec();
   }
 
    /**
