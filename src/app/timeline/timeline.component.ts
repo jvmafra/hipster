@@ -16,16 +16,25 @@ export class TimelineComponent implements OnInit {
   public listGenres : any;
   public events: any;
   public shownEvents: any;
-  public filteredEvents: any;
   public selectedLabel: any;
+  public filteredGenres : Array<String>;
+  private NO_FILTERED_GENRES = 0;
 
   constructor(private publicationService: PublicationService,
               private userService: UserService) {
     this.listGenres = this.publicationService.getListGenres();
+    this.initGenreSelectedProperty();
+    this.filteredGenres = []
   }
 
   ngOnInit() {
     this.getAllPublications();
+  }
+
+  private initGenreSelectedProperty() {
+    for (let index in this.listGenres) {
+      this.listGenres[index].genreSelected = false;
+    }
   }
 
   public getAllPublications() {
@@ -44,33 +53,66 @@ export class TimelineComponent implements OnInit {
     return this.userService.getColor(genre);
   }
 
+  // @TODO: In future this should be done in backend
+
   /**
    * Filter events according with selected genres.
-   * Save selected genre index to future operations.
+   * Save the genres filtered index to future operations.
    *
-   * @param index     Index of selected label on view
    * @param genre     {Object} of selected label on view
    */
-  public filterEvents = (index, genre) => {
-    if (genre) {
-      this.filteredEvents = this.events.filter((event) => {
-        const result = event.genres.filter(eventGenre => eventGenre === genre.value );
-        return result.length > 0;
-      });
+  public filterEvents (genre) {
+
+    if (genre.genreSelected === false) {
+      this.filteredGenres.push(genre.value);
+    } else {
+      var index = this.filteredGenres.indexOf(genre.value);
+      if (index > -1) { this.filteredGenres.splice(index, 1);}
     }
 
-    this.selectedLabel = index ;
-    this.shownEvents = genre ? this.filteredEvents : this.events;
+    let filteredEvents = this.auxFilterEvents();
+    genre.genreSelected = genre.genreSelected == false ? true : false;
+    //When user unselect all labels
+    this.shownEvents = this.filteredGenres.length === this.NO_FILTERED_GENRES ? this.events : filteredEvents;
   };
 
+
+  private auxFilterEvents() {
+    let filteredEvents = [];
+
+    filteredEvents = this.events.filter((event) => {
+      const result = event.genres.filter(eventGenre => this.filteredGenres.includes(eventGenre));
+      return result.length > 0;
+    });
+
+    return filteredEvents;
+  }
+
+  /**
+   * Clear the genre filter in TimeLine
+   *
+   */
+  public clearFilter() {
+    this.shownEvents = this.events;
+    this.listGenres.map(genre => genre.genreSelected = false);
+    this.filteredGenres = [];
+  }
+
+  // @TODO: In future this should be done using Angular's OnPush
   /**
    * Verifies whether label is selected or not.
    *
-   * @param index         Label's indentifier
+   * @param genre   {Object} of selected label on view
    * @return {string | string} which will be used as class of the label to
    *         mark as selected
    */
-  public isSelected = (index) => {
-    return this.selectedLabel === index ? "blue" : "";
+  public isSelected (genre) {
+    if (!genre && this.filteredGenres.length === this.NO_FILTERED_GENRES) {
+      return "blue";
+    } else if (!genre) {
+      return "";
+    }
+
+    return genre.genreSelected === true ? "blue" : "";
   };
 }

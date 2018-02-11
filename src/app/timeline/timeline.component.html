@@ -11,12 +11,14 @@
   </div>
 
   <div class="ui stacked segment post-container">
-    <div id="labelTodos" class="ui basic large label" [ngClass]="isSelected('todos')">
-      <a class="ui empty circular label grey" (click)="filterEvents('todos')"></a>
+    <div id="labelTodos" (click)="clearFilter()" class="ui basic large label"
+         [ngClass]="isSelected()">
+      <a class="ui empty circular label grey"></a>
       Todos
     </div>
-    <div id="label{{i}}" class="ui basic large label" *ngFor="let genre of listGenres; index as i" [ngClass]="isSelected(i, genre)">
-      <a class="ui empty circular large label" [ngClass]="getClass(genre.value)" (click)="filterEvents(i, genre)"></a>
+    <div id="label{{i}}" (click)="filterEvents(genre)" class="ui basic large label"
+          *ngFor="let genre of listGenres;" [ngClass]="isSelected(genre)">
+      <a class="ui empty circular large label" [ngClass]="getClass(genre.value)"></a>
       {{ genre.value }}
     </div>
   </div>
