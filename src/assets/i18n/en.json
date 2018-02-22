@@ -28,7 +28,7 @@
   },
   "POST": {
     "REPLY": "Reply",
-    "SEND": "Write an comment...",
+    "SEND": "Write a comment...",
     "LIKE": "Like",
     "LIKES": "Likes",
     "DELETE": "Delete",
