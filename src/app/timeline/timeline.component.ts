@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CreatePostModalComponent } from '../create-post-modal/create-post-modal.component'
 import { ViewChild } from '@angular/core';
 import { PublicationService } from '../services/publication.service';
-import {UserService} from "../services/user.service"
+import { UserService } from "../services/user.service"
 
 @Component({
   selector: 'app-timeline',
