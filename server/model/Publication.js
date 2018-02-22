@@ -43,7 +43,8 @@ const publicationSchema = new Schema({
 
   creationDate : {
     type: Date,
-    default: Date.now },
+    default: Date.now
+  },
 
   genres : [String],
 
@@ -52,6 +53,27 @@ const publicationSchema = new Schema({
   artist : String,
 
   year : Number,
+
+  comments : [
+    {
+      ownerUsername : {
+        type: String,
+        required: [true, erro.COMMENT.VALIDACAO_OWNER]
+      },
+
+      description : {
+        type: String,
+        required: [true, erro.COMMENT.VALIDACAO_COMMENT]
+      },
+
+      creationDate : {
+        type: Date,
+        default: Date.now
+      },
+
+      likes : [String],
+    }
+  ],
 
 });
 

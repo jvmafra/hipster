@@ -24,6 +24,14 @@ input:focus {
   color: white !important;
 }
 
+.liked-comment {
+  color: #DB2828 !important;
+}
+
+.unliked-comment {
+  color: rgba(0,0,0,.4) !important;
+}
+
 .liked-btn:hover {
   background-color: #a70e0e !important;
 }

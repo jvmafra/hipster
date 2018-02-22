@@ -23,11 +23,14 @@
   },
   "POST": {
     "REPLY": "Responder",
-    "SEND": "Enviar",
+    "SEND": "Escreva um comentário...",
     "LIKE": "Curtir",
     "LIKES": "Curtidas",
+    "DELETE": "Excluir",
     "SHARE": "Compartilhe",
     "ARTIST": "Artista",
+    "SEE_MORE": "Mostrar mais...",
+    "HIDE": "Mostrar menos...",
     "MESSAGE": "A SER DEFINIDO: Alguma mensagem falando sobre os limites, curtidas, popularidade, etc"
   },
   "REGISTER": {
@@ -53,7 +56,8 @@
     "DESCRIPTION": "Descrição",
     "GENRES": "Genêros",
     "YEAR": "Ano de Publicação (Opcional)",
-    "ARTIST": "Artista (Opctional)"
+    "ARTIST": "Artista (Opctional)",
+    "COMMENTS": "Comentários"
   },
   "DELETEMODAL": {
     "DELETE_ACCOUNT": "Deletar conta",

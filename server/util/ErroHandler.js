@@ -37,6 +37,11 @@ _.PUBLICATION = {
   VALIDACAO_VIEW_COUNT: "VALIDACAO_VIEW_COUNT"
 }
 
+_.COMMENT = {
+  VALIDACAO_OWNER: "VALIDACAO_OWNER",
+  VALIDACAO_COMMENT: "VALIDACAO_COMMENT",
+}
+
 const INFO_DUPLICADA = {
     USERNAME: 'Esse username já existe',
     EMAIL: 'Esse e-mail já foi cadastrado'

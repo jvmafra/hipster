@@ -2,3 +2,7 @@
   margin-top: 3% !important;
   margin-bottom: 3% !important;
 }
+
+.hip-full-width {
+  min-width: 100% !important;
+}
