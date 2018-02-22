@@ -38,6 +38,32 @@
           </div>
         </div>
       </div>
+
+      <div>
+        <div class="ui sub header hip-margin"> {{ 'PUBLICATION.COMMENTS' | translate }} </div>
+        <div class="actions" *ngIf="event.comments.length > 2">
+          <a *ngIf="!seeMore" (click)="seeMoreComments()" class="reply">{{ 'POST.SEE_MORE' | translate }}</a>
+          <a *ngIf="seeMore" (click)="seeMoreComments()" class="reply">{{ 'POST.HIDE' | translate }}</a>
+        </div>
+        <div *ngIf="!seeMore">
+          <app-post-comment *ngIf="event.comments.length > 0" [post]="event" [comment]="event.comments[0]"></app-post-comment>
+          <app-post-comment *ngIf="event.comments.length > 1" [post]="event" [comment]="event.comments[1]"></app-post-comment>
+        </div>
+        <div *ngIf="seeMore">
+          <div *ngFor="let comment of event.comments">
+            <app-post-comment [post]="event" [comment]="comment"></app-post-comment>
+          </div>
+        </div>
+        <form class="ui reply form hip-margin" >
+          <div class="field">
+            <div class="ui icon input">
+              <input type="text" (keypress)="onSubmit($event)" name="description" [(ngModel)]="comment.description" attr.placeholder="{{ 'POST.SEND' | translate }}">
+              <i class="send link icon" (click)="postComment()"></i>
+            </div>
+          </div>
+        </form>
+      </div>
+
     </div>
   </div>
 </div>

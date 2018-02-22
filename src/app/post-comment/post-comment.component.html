@@ -1,0 +1,20 @@
+<div class="ui comments">
+  <div class="comment">
+    <a class="avatar">
+      <img src="../assets/elliot.jpg">
+    </a>
+    <div class="content">
+      <a class="author" (click)="seeProfile()">{{ comment.ownerUsername }}</a>
+      <div class="metadata">
+        <div class="date">{{ creationDate }}</div>
+      </div>
+      <div class="text">
+        {{ comment.description }}
+      </div>
+      <div class="actions">
+        <a class="reply" (click)="likeComment()" [ngClass]="getLikeCommentClass()">{{ comment.likes.length }} {{ 'POST.LIKES' | translate }}</a>
+        <a *ngIf="isMyProfile" (click)="removeComment()" class="reply">{{ 'POST.DELETE' | translate }}</a>
+      </div>
+    </div>
+  </div>
+</div>

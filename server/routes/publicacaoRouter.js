@@ -94,7 +94,7 @@ router.put('/:id', async (req, res) => {
 
   const id = req.params.id;
   const novaPublicacao = req.body;
-
+  
     try {
       const retorno = await PublicationService.editPublication(id, novaPublicacao);
       res.status(200).json(retorno);

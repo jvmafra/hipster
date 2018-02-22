@@ -21,13 +21,65 @@ export class TimelinePostComponent implements OnInit {
   public creationDate: string;
   private OPTIONAL_TITLE = 1;
   private MUSIC_NAME = 0;
+  private seeMore = false;
+  private comment;
 
   constructor(private userService: UserService,
               private publicationService: PublicationService) {
+      this.comment = {};
   }
 
   public openPost() {
     window.location.href = "/post/" + this.event._id
+  }
+
+  private seeMoreComments() {
+    this.seeMore = !this.seeMore;
+    console.log(this.event);
+
+    if (!this.seeMore) {
+
+    } else {
+
+    }
+
+  }
+
+  private onSubmit(e) {
+      if (e.keyCode == 13) {
+          this.postComment();
+      }
+  }
+
+  public postComment() {
+    let username = window.localStorage.username
+
+    if (this.comment.description.trim()) {
+      this.comment.ownerUsername = username;
+
+      let newComment = {
+        ownerUsername: username,
+        description: this.comment.description,
+        likes: [],
+        creationDate: new Date()
+      };
+
+      this.event.comments.push(newComment);
+
+      let updatedPost = {
+        _id: this.event._id,
+        comments: this.event.comments
+      }
+
+      this.publicationService.updatePublication(updatedPost).subscribe(
+        data => {
+          this.comment = {
+            description:  ""
+          };
+        }, err => {}
+      );
+    }
+
   }
 
   private getClass(genre) {

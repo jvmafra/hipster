@@ -84,7 +84,6 @@ export class PublicationService{
     );
   }
 
-
   static editPublication(id, updatedPublication){
     return new Promise((resolve, reject) =>
     Publication.findOneAndUpdate({_id: id}, updatedPublication, (err, result) => {
