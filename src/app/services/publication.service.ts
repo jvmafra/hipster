@@ -71,6 +71,14 @@ export class PublicationService {
     }
   }
 
+    public getLikeCommentClass(username, likes) {
+      if (likes.includes(username)) {
+        return 'liked-comment'
+      } else {
+        return 'unliked-comment'
+      }
+    }
+
   public getLikeClass(username, likes) {
     if (likes.includes(username)) {
       return 'liked-btn'

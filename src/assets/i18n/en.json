@@ -23,11 +23,14 @@
   },
   "POST": {
     "REPLY": "Reply",
-    "SEND": "Send",
+    "SEND": "Write an comment...",
     "LIKE": "Like",
     "LIKES": "Likes",
+    "DELETE": "Delete",
     "SHARE": "Share",
     "ARTIST": "Artist",
+    "SEE_MORE": "Show more...",
+    "HIDE": "Show less...",
     "MESSAGE": "TO BE DEFINED: Some message talking about the limits, likes, popularity, etc"
   },
   "REGISTER": {
@@ -58,7 +61,8 @@
     "DESCRIPTION": "Description",
     "GENRES": "Genres",
     "YEAR": "Publish Year (Optional)",
-    "ARTIST": "Artist (Opctional)"
+    "ARTIST": "Artist (Opctional)",
+    "COMMENTS": "Comments"
   },
   "ERRORS": {
     "REGISTER": {

@@ -6,6 +6,10 @@
   padding: 5%;
 }
 
+.hip-full-width {
+  min-width: 100% !important;
+}
+
 .dropdown {
   margin: 8px;
 }
