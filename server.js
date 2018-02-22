@@ -46,8 +46,10 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + 'src/index.html'));
 });
 
+ScheduleService.checkScheduler();
+
 //Cron Schedule
-cron.schedule('58 23 * * *', function(){
+cron.schedule('50 23 * * *', function(){
   ScheduleService.removeVideos();
 });
 /**
