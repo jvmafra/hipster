@@ -11,6 +11,11 @@
       "EN": "English"
     }
   },
+  "TERMS_CONDITIONS": {
+    "TITLE": "Terms and Conditions",
+    "ACCEPT": "I agree to the Terms and Conditions",
+    "TERMS": "asdasdasd",
+  },
   "PROFILEPAGE": {
     "PROFILE_NOT_FOUND": "User not found",
     "ABOUT": "About",

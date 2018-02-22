@@ -11,6 +11,11 @@
       "EN": "English"
     }
   },
+  "TERMS_CONDITIONS": {
+    "TITLE": "Termos e Condições",
+    "ACCEPT": "Eu concordo com os Termos e Condições",
+    "TERMS": "asdasdasd",
+  },
   "PROFILEPAGE": {
     "PROFILE_NOT_FOUND": "Usuário não encontrado",
     "ABOUT": "Sobre",
