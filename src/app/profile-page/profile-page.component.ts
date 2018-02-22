@@ -29,7 +29,7 @@ export class ProfilePageComponent implements OnInit {
   private spotifyURL: string;
   private youtubeURL: string;
   private username: string;
-  private foundUser: boolean;
+  public foundUser: boolean;
   private day : number;
   private month : number;
   private year : number;
@@ -53,7 +53,7 @@ export class ProfilePageComponent implements OnInit {
     this.years = this.userService.getBirthdayYearsArray('1905');
   }
 
-  public updateProfile() {
+  private updateProfile() {
     let data = this.formValidation.getFormValidationVariables(this.errorInfo);
     $('.ui.form').form(data);
     let values = $('.ui.dropdown').dropdown('get value');

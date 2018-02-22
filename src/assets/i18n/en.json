@@ -79,7 +79,8 @@
         "VALIDACAO_URL": "Publication has to have an url",
         "VALIDACAO_GENRES": "Publication has to have at least one genre",
         "VALIDACAO_CATEGORY": "Publication has to be a music",
-        "VALIDACAO_URL_YOUTUBE": "Publication has to have a valid url from youtube"
+        "VALIDACAO_URL_YOUTUBE": "Publication has to have a valid url from youtube",
+        "VALIDACAO_VIEW_COUNT": "Publication has more than 1 million of views"
       }
     }
   },

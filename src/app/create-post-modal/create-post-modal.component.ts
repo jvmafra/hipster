@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Output, ViewEncapsulation, EventEmitter} from '@angular/core';
 import { PublicationService } from '../services/publication.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormValidationService } from "../services/form-validation.service";
@@ -15,16 +15,16 @@ declare var $ :any;
   encapsulation: ViewEncapsulation.None
 })
 export class CreatePostModalComponent implements OnInit {
-  private publication: Object;
-  private colors: any;
-  //@TODO Study and improve this types
-  private originalListGenres : any;
-  private listGenres : any;
-  private years : Array<number>;
-  private selectedGenre: String;
-  private ownerUsername: String;
-  private errorInfo: Array<Object>;
-  private requestErrors: Array<String>;
+  @Output() getAllPublications = new EventEmitter<string>();
+  public publication;
+  public colors: Object;
+  public originalListGenres : Array<Object>;
+  public listGenres : Array<Object>;
+  public years : Array<number>;
+  public selectedGenre: string;
+  public ownerUsername: string;
+  public errorInfo: Array<Object>;
+  public requestErrors: Array<string>;
 
   constructor(private publicationService: PublicationService,
               private route: ActivatedRoute,
@@ -44,13 +44,8 @@ export class CreatePostModalComponent implements OnInit {
   ngOnInit() {
     $('#load_indication').hide();
     this.requestErrors = [];
-    $('#genres_select')
-      .dropdown()
-    ;
-
-    $('#year_select')
-      .dropdown()
-    ;
+    $('#genres_select').dropdown();
+    $('#year_select').dropdown();
   }
 
   public createPostModal(event) {
@@ -60,10 +55,8 @@ export class CreatePostModalComponent implements OnInit {
     this.requestErrors = [];
     this.listGenres =  this.originalListGenres.slice();
 
-    $('#genres_select')
-      .dropdown('clear');
-    $('#year_select')
-      .dropdown('clear');
+    $('#genres_select').dropdown('clear');
+    $('#year_select').dropdown('clear');
 
     $('#create-post').modal({
       onDeny    : function() { return true;}
@@ -71,15 +64,13 @@ export class CreatePostModalComponent implements OnInit {
     .modal('setting', 'closable', false)
     .modal('show');
 
-
     event.stopPropagation();
   }
 
-  private createPost() {
+  public createPost() {
     this.initSemanticValidationForm();
 
-    let genres = $('#genres_select')
-      .dropdown('get value').split(",");
+    let genres = $('#genres_select').dropdown('get value').split(",");
 
     this.publication["genres"] = genres;
 
@@ -91,8 +82,8 @@ export class CreatePostModalComponent implements OnInit {
       this.publicationService.savePublication(this.publication).subscribe(
         data => {
           $('#create-post').modal('hide')
-          window.location.href = "/"
           $('#load_indication').hide();
+          this.getAllPublications.emit();
         }, err => {
           $('#load_indication').hide();
           let errors = err.error.split(';');

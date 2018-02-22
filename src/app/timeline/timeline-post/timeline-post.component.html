@@ -5,7 +5,7 @@
     </a>
     <div class="content">
       <a class="header" (click)="openPost()">{{ title }}</a>
-      <div class="meta" *ngIf="title !== 'undefined'">
+      <div class="meta" *ngIf='user_title !== ""'>
         <span class="date">{{ subtitle }}</span>
       </div>
       <div class="meta" *ngIf="event.artist">
@@ -30,7 +30,7 @@
           </a>
         </div>
       </div>
-      <div class="extra">
+      <div *ngIf='event.genres[0] != ""' class="extra">
         <div class="ui labels">
           <div class="ui basic label" *ngFor="let genre of event.genres">
             <a class="ui empty circular label" [ngClass]="getClass(genre)"></a>

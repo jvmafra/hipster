@@ -14,24 +14,27 @@ declare var $ :any;
 export class TimelinePostComponent implements OnInit {
 
   @Input() event;
+  public title: string;
+  public user_title: string;
 
-  private title: string;
-  private subtitle: string;
-  private creationDate: string;
+  public subtitle: string;
+  public creationDate: string;
+  private OPTIONAL_TITLE = 1;
+  private MUSIC_NAME = 0;
 
   constructor(private userService: UserService,
               private publicationService: PublicationService) {
   }
 
-  openPost() {
+  public openPost() {
     window.location.href = "/post/" + this.event._id
   }
 
-  getClass(genre) {
+  private getClass(genre) {
     return this.userService.getColor(genre);
   }
 
-  likePost() {
+  public likePost() {
     let username = window.localStorage.username
 
     if (this.event.likes.includes(username)) {
@@ -54,32 +57,27 @@ export class TimelinePostComponent implements OnInit {
 
   }
 
-  getLikeBorderClass() {
+  public getLikeBorderClass() {
     let username = window.localStorage.username
     return this.publicationService.getLikeBorderClass(username, this.event.likes);
   }
 
-  getLikeClass() {
+  public getLikeClass() {
     let username = window.localStorage.username
     return this.publicationService.getLikeClass(username, this.event.likes);
   }
 
   ngOnInit() {
     var url = this.event.url;
-    var videoid = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
-    this.event.thumbnail = "https://img.youtube.com/vi/" + videoid[1] + "/hqdefault.jpg"
-    this.event.videoId = videoid[1]
+    this.event.thumbnail = "https://img.youtube.com/vi/" + this.event.videoID + "/hqdefault.jpg"
 
     let date = new Date(this.event.creationDate);
     this.creationDate = date.toLocaleString();
+    let titles =  this.event.title.split(" HIPSTER_FLAG ")
+    this.subtitle = titles[this.MUSIC_NAME];
+    this.user_title = titles[this.OPTIONAL_TITLE];
+    this.title = titles[this.OPTIONAL_TITLE] === "" ? this.subtitle : this.user_title;
 
-    let titles = this.event.title.split(" HIPSTER_FLAG ")
-    this.subtitle = titles[0]
-    this.title = titles[1]
-
-    if (titles[1] === "undefined") {
-      this.title = this.subtitle
-    }
   }
 
 }

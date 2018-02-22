@@ -125,7 +125,7 @@ export class UserService {
     startYear = startYear || 1980;
 
     while ( startYear <= currentYear ) {
-      years.push(startYear++);
+      years.unshift(startYear++);
     }
 
     return years;

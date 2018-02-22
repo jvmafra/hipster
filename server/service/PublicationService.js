@@ -6,7 +6,7 @@ db_config();
 /**
  * Service responsavel pela lógica de usuário
  *
- * @author Gustavo Oliveira
+ * @author Team Hipster
  */
 export class PublicationService{
 
@@ -18,12 +18,7 @@ export class PublicationService{
    * da forma que o mongo retorna.
    */
   static retrievePublication(id) {
-    return new Promise((resolve, reject) =>
-      Publication.findOne({_id: id}, (err, result) => {
-        if (err || !result) return reject(err);
-        return resolve(result);
-      })
-    );
+    return Publication.findOne({_id: id}).exec();
   }
 
    /**
@@ -33,12 +28,7 @@ export class PublicationService{
    * da forma que o mongo retorna.
    */
   static retrievePublications() {
-    return new Promise((resolve, reject) => {
-      Publication.find({}, (err, results) => {
-        if (err) return reject(err);
-        return resolve(results);
-      });
-    });
+    return Publication.find({}).sort({creationDate: -1}).exec();
   }
 
    /**
@@ -48,12 +38,7 @@ export class PublicationService{
    * da forma que o mongo retorna.
    */
   static retrieveUserPublications(ownerUsername) {
-    return new Promise((resolve, reject) => {
-      Publication.find({ownerUsername: ownerUsername}, (err, results) => {
-        if (err) return reject(err);
-        return resolve(results);
-      });
-    });
+    return Publication.find({ownerUsername: ownerUsername}).sort({creationDate: 1}).exec();
   }
 
 
@@ -74,16 +59,14 @@ export class PublicationService{
 
   /**
    * Cadastra uma Publicação
-   * 
+   *
    * @param   {Object}  publicacao contendo os campos preenchidos
    * @return  {Promise} Promise resolvida com o objeto Usuario
    * da forma que o mongo retorna
    */
   static registerPublication(publication) {
-      const publicationMongoose = new Publication(publication);
-      return  new Promise((resolve, reject) => {
-        publicationMongoose.save((err, result) => (err) ? reject(err) : resolve(result))
-      });
+    const publicationMongoose = new Publication(publication);
+    return publicationMongoose.save();
   }
 
   /**

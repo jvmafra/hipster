@@ -17,13 +17,13 @@ declare var $ :any;
 })
 export class RegisterComponent implements OnInit {
   private $ : any;
-  private user : Object;
-  private day : String;
-  private month : String;
-  private year : String;
-  private days : Array<number>;
-  private months : Array<number>;
-  private years : Array<number>;
+  public user;
+  public day : string;
+  public month : string;
+  public year : string;
+  public days : Array<number>;
+  public months : Array<number>;
+  public years : Array<number>;
   private errorInfo: Array<Object>;
 
   constructor(private http: HttpClient,
@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
     this.initSemanticValidationFormInfo();
   }
 
-  private registerUser(user, event) {
+  public registerUser(user, event) {
     this.initSemanticValidationForm();
     this.setDateValuesFromDropdown();
     user.birthDate = this.userService.getBirthDate(this.day, this.month, this.year);

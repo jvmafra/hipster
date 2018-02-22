@@ -79,7 +79,8 @@
         "VALIDACAO_URL": "Publicação deve ter uma url vinculada a ela",
         "VALIDACAO_GENRES": "Publicacao deve ter ao menos um genero",
         "VALIDACAO_CATEGORY": "Publicação deve ser da categoria musica",
-        "VALIDACAO_URL_YOUTUBE": "Publicação deve ter uma url do youtube válida"
+        "VALIDACAO_URL_YOUTUBE": "Publicação deve ter uma url do youtube válida",
+        "VALIDACAO_VIEW_COUNT": "Publicação tem mais que 1 milhão de visualizações"
       }
     }
   },
