@@ -60,6 +60,7 @@
         <i class="dropdown icon"></i>
         <div class="menu">
           <div class="item" (click)="deleteModal.deleteUserModal($event)">{{ 'DELETEMODAL.DELETE_ACCOUNT' | translate }}</div>
+          <div class="item" (click)="feedbackModal.sendFeedbackModal($event)">{{ 'HIPSTER.SEND_REPORT' | translate }}</div>
         </div>
       </div>
     </a>
@@ -67,4 +68,6 @@
 </div>
 
 <app-delete-modal view-model.ref="deleteModal"> </app-delete-modal>
+<app-feedback-modal view-model.ref="feedbackModal"> </app-feedback-modal>
+
 <router-outlet></router-outlet>

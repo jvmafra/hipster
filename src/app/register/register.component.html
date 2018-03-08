@@ -32,7 +32,7 @@
           </div>
           <p> <b> {{ 'REGISTER.BIRTHDATE' | translate }} : </b> </p>
           <div class="three fields">
-            <div class="ui fluid compact search selection dropdown">
+            <div id="day_r" class="ui fluid compact search selection dropdown">
               <input type="hidden" name="day">
               <i class="dropdown icon"></i>
               <div class="default text">{{ 'REGISTER.DAY' | translate }}</div>
@@ -40,7 +40,7 @@
                 <div *ngFor="let day of days" class="item" attr.data-value="day + 1">{{ day + 1}}</div>
               </div>
             </div>
-            <div class="ui fluid compact search selection dropdown">
+            <div id="month_r" class="ui fluid compact search selection dropdown">
               <input type="hidden" name="month">
               <i class="dropdown icon"></i>
               <div class="default text">{{ 'REGISTER.MONTH' | translate }}</div>
@@ -48,7 +48,7 @@
                 <div *ngFor="let month of months" class="item" attr.data-value="month + 1">{{ month + 1}}</div>
               </div>
             </div>
-            <div class="ui fluid compact search selection dropdown">
+            <div id="year_r" class="ui fluid compact search selection dropdown">
               <input type="hidden" name="year">
               <i class="dropdown icon"></i>
               <div class="default text">{{ 'REGISTER.YEAR' | translate }}</div>
@@ -64,7 +64,7 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input type="text" name="username" [(ngModel)]="user.username" attr.placeholder="{{ 'REGISTER.USERNAME' | translate }}">
+              <input id="username_r" type="text" name="username" [(ngModel)]="user.username" attr.placeholder="{{ 'REGISTER.USERNAME' | translate }}">
             </div>
           </div>
           <div class="field">
@@ -75,6 +75,20 @@
           </div>
           <div class="ui fluid large blue submit button" (click)="registerUser(user, $event)">{{ 'REGISTER.SUBMIT' | translate }}</div>
         </form>
+
+        <div class="ui vertical large animated button fb-btn" (click)="loginFB()">
+          <div class="hidden content">{{ 'REGISTER.LOGIN_FB' | translate }}</div>
+          <div class="visible content">
+            <i class="facebook icon"></i>
+          </div>
+        </div>
+
+        <div class="ui vertical large animated button google-btn" (click)="loginGoogle()">
+          <div class="hidden content">{{ 'REGISTER.LOGIN_GOOGLE' | translate }}</div>
+          <div class="visible content">
+            <i class="google icon"></i>
+          </div>
+        </div>
       </div>
     </div>
   </div>
