@@ -6,10 +6,20 @@
     "SEARCH": "Buscar no Hipster",
     "PROFILE": "Perfil",
     "LANGUAGE": "Idioma",
+    "CLASS": "Classificar Postagens",
+    "CLASS_RECENT": "Mais recentes",
+    "CLASS_L_POPULAR": "Menos populares",
+    "CLASS_M_POPULAR": "Mais populares",
+    "SEND_REPORT": "Enviar Denúncia",
     "LANGUAGES": {
       "PT": "Português",
       "EN": "English"
     }
+  },
+  "FEEDBACK": {
+    "MESSAGE": "mensagem",
+    "SEND": "Enviar",
+    "CANCEL": "Cancelar"
   },
   "TERMS_CONDITIONS": {
     "TITLE": "Termos e Condições",
@@ -52,14 +62,16 @@
     "USERNAME": "Nome de usuário",
     "BIRTHDATE": "Data de nasc.",
     "PASSWORD": "Senha",
-    "NAME": "Nome"
+    "NAME": "Nome",
+    "LOGIN_FB": "Entrar com o Facebook",
+    "LOGIN_GOOGLE": "Entrar com o Google"
   },
   "PUBLICATION": {
     "SHARE_MESSAGE":"Compartilha uma nova música",
     "TITLE": "Titulo (Opcional)",
     "URL": "URL",
     "DESCRIPTION": "Descrição",
-    "GENRES": "Genêros",
+    "GENRES": "Gêneros",
     "YEAR": "Ano de Publicação (Opcional)",
     "ARTIST": "Artista (Opctional)",
     "COMMENTS": "Comentários"

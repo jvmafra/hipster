@@ -4,6 +4,9 @@ import { ViewChild } from '@angular/core';
 import { PublicationService } from '../services/publication.service';
 import { UserService } from "../services/user.service"
 
+declare var jquery:any;
+declare var $ :any;
+
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
@@ -34,6 +37,29 @@ export class TimelineComponent implements OnInit {
   private initGenreSelectedProperty() {
     for (let index in this.listGenres) {
       this.listGenres[index].genreSelected = false;
+    }
+  }
+
+  private classifyBy(index) {
+    if (index === 1) {
+      this.shownEvents.sort(function(post1, post2) {
+        console.log(post1);
+          var date1 = new Date(post1.creationDate).getTime();
+          var date2 = new Date(post2.creationDate).getTime();
+          return date2 - date1;
+      });
+    } else if (index == 2) {
+      this.shownEvents.sort(function(post1, post2) {
+          var count1 = post1.likes.length;
+          var count2 = post2.likes.length;
+          return count2 - count1;
+      });
+    } else {
+      this.shownEvents.sort(function(post1, post2) {
+          var count1 = post1.likes.length;
+          var count2 = post2.likes.length;
+          return count1 - count2;
+      });
     }
   }
 

@@ -13,11 +13,54 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.js"></script>
   <script type="text/javascript" src="./assets/alert/Semantic-UI-Alert.js"></script>
 
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="./assets/hipster-logo2.png">
 
 </head>
 <body>
   <app-root></app-root>
+
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDOi0F5NpVtHPfdA2H-z5bI4yCXKQiHfDE",
+      authDomain: "hipster-6d14e.firebaseapp.com",
+      databaseURL: "https://hipster-6d14e.firebaseio.com",
+      projectId: "hipster-6d14e",
+      storageBucket: "hipster-6d14e.appspot.com",
+      messagingSenderId: "97386213982"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1697318116981626',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v2.10'
+    });
+
+    FB.AppEvents.logPageView();
+
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
 </body>
 </html>

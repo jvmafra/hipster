@@ -6,10 +6,20 @@
     "SEARCH": "Search in Hipster",
     "PROFILE": "Profile",
     "LANGUAGE": "Language",
+    "CLASS": "Classify Posts",
+    "CLASS_RECENT": "Most Recent",
+    "CLASS_L_POPULAR": "Less Popular",
+    "CLASS_M_POPULAR": "Most Popular",
+    "SEND_REPORT": "Send Report",
     "LANGUAGES": {
       "PT": "Português",
       "EN": "English"
     }
+  },
+  "FEEDBACK": {
+    "MESSAGE": "Message",
+    "SEND": "Send",
+    "CANCEL": "Cancel",
   },
   "TERMS_CONDITIONS": {
     "TITLE": "Terms and Conditions",
@@ -52,7 +62,9 @@
     "USERNAME": "Username",
     "BIRTHDATE": "Birth date",
     "PASSWORD": "Password",
-    "NAME": "Name"
+    "NAME": "Name",
+    "LOGIN_FB": "Login with Facebook",
+    "LOGIN_GOOGLE": "Login with Google"
   },
   "DELETEMODAL": {
     "DELETE_ACCOUNT": "Delete account",

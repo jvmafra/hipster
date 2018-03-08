@@ -10,16 +10,43 @@
     </div>
   </div>
 
-  <div class="ui stacked segment post-container">
-    <div id="labelTodos" (click)="clearFilter()" class="ui basic large label"
-         [ngClass]="isSelected(undefined)">
-      <a class="ui empty circular label grey"></a>
-      Todos
+  <div class="ui segment post-container">
+    <div class="ui divided items">
+      <div class="ui form">
+        <div class="inline fields">
+          <label>{{ 'HIPSTER.CLASS' | translate }}</label>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input  (click)="classifyBy(1)" type="radio" name="frequency" checked="checked">
+              <label>{{ 'HIPSTER.CLASS_RECENT' | translate }}</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input (click)="classifyBy(2)" type="radio" name="frequency">
+              <label>{{ 'HIPSTER.CLASS_M_POPULAR' | translate }}</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input (click)="classifyBy(3)" type="radio" name="frequency">
+              <label>{{ 'HIPSTER.CLASS_L_POPULAR' | translate }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="label{{i}}" (click)="filterEvents(genre)" class="ui basic large label"
-          *ngFor="let genre of listGenres;" [ngClass]="isSelected(genre)">
-      <a class="ui empty circular large label" [ngClass]="getClass(genre.value)"></a>
-      {{ genre.value }}
+    <div class="ui divided items">
+      <div id="labelTodos" (click)="clearFilter()" class="ui basic large label"
+           [ngClass]="isSelected(undefined)">
+        <a class="ui empty circular label grey"></a>
+        Todos
+      </div>
+      <div id="label{{i}}" (click)="filterEvents(genre)" class="ui basic large label"
+            *ngFor="let genre of listGenres;" [ngClass]="isSelected(genre)">
+        <a class="ui empty circular large label" [ngClass]="getClass(genre.value)"></a>
+        {{ genre.value }}
+      </div>
     </div>
   </div>
 

@@ -25,6 +25,7 @@ import { PostPageComponent } from './post-page/post-page.component';
 import { CreatePostModalComponent } from './create-post-modal/create-post-modal.component';
 import { PublicationService } from './services/publication.service';
 import { AlertService } from './services/alert.service';
+import { FeedbackModalComponent } from './feedback-modal/feedback-modal.component';
 import { PostCommentComponent } from './post-comment/post-comment.component';
 import { TermsConditionsModalComponent } from './terms-conditions-modal/terms-conditions-modal.component';
 
@@ -44,6 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TimelinePostComponent,
     PostPageComponent,
     CreatePostModalComponent,
+    FeedbackModalComponent,
     PostCommentComponent,
     TermsConditionsModalComponent
   ],
