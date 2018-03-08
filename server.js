@@ -4,6 +4,9 @@ import path from 'path';
 import http from 'http';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
+import {ScheduleService} from './server/service/ScheduleService';
+
+const cron = require('node-cron');
 const api = require('./server/routes/api');
 const publicacaoRouter = require('./server/routes/publicacaoRouter');
 const cors = require('cors');
@@ -43,7 +46,12 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + 'src/index.html'));
 });
 
+ScheduleService.checkScheduler();
 
+//Cron Schedule
+cron.schedule('50 23 * * *', function(){
+  ScheduleService.removeVideos();
+});
 /**
  * Get port from environment and store in Express.
  */

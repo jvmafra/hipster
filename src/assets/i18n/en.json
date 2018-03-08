@@ -19,7 +19,12 @@
   "FEEDBACK": {
     "MESSAGE": "Message",
     "SEND": "Send",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+  },
+  "TERMS_CONDITIONS": {
+    "TITLE": "Terms and Conditions",
+    "ACCEPT": "I agree to the Terms and Conditions",
+    "TERMS": "asdasdasd"
   },
   "PROFILEPAGE": {
     "PROFILE_NOT_FOUND": "User not found",
@@ -33,11 +38,14 @@
   },
   "POST": {
     "REPLY": "Reply",
-    "SEND": "Send",
+    "SEND": "Write an comment...",
     "LIKE": "Like",
     "LIKES": "Likes",
+    "DELETE": "Delete",
     "SHARE": "Share",
     "ARTIST": "Artist",
+    "SEE_MORE": "Show more...",
+    "HIDE": "Show less...",
     "MESSAGE": "TO BE DEFINED: Some message talking about the limits, likes, popularity, etc"
   },
   "REGISTER": {
@@ -70,7 +78,8 @@
     "DESCRIPTION": "Description",
     "GENRES": "Genres",
     "YEAR": "Publish Year (Optional)",
-    "ARTIST": "Artist (Opctional)"
+    "ARTIST": "Artist (Opctional)",
+    "COMMENTS": "Comments"
   },
   "ERRORS": {
     "REGISTER": {

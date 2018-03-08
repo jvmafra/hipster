@@ -1,10 +1,12 @@
-import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewEncapsulation } from '@angular/core';
+import { ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { FormValidationService } from '../services/form-validation.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService } from '../services/alert.service';
+import { TermsConditionsModalComponent } from '../terms-conditions-modal/terms-conditions-modal.component'
 
 declare var jquery:any;
 declare var $ :any;
@@ -17,6 +19,8 @@ declare var firebase: any;
   encapsulation: ViewEncapsulation.None
 })
 export class RegisterComponent implements OnInit {
+  @ViewChild(TermsConditionsModalComponent)
+  public termsConditions: TermsConditionsModalComponent;
   private $ : any;
   public user;
   public day : string;
@@ -44,6 +48,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.initDateDropdown();
+    this.initCheckbox();
     this.initSemanticValidationFormInfo();
   }
 
@@ -158,6 +163,14 @@ export class RegisterComponent implements OnInit {
       }
     );
 
+  }
+
+  private enableRegister() {
+    return $('#toggle-terms').checkbox('is checked');
+  }
+
+  private initCheckbox() {
+    $('#toggle-terms').checkbox();
   }
 
   private isFormValid() {

@@ -1,7 +1,7 @@
 import * as erro from '../util/ErroHandler';
 import fetchVideoInfo from 'youtube-info';
 
-let MAX_VIEWS = 1000000;
+const MAX_VIEWS = 1000000;
 
 export class PublicationValidator {
 

@@ -73,7 +73,15 @@
               <input type="password" name="password" [(ngModel)]="user.password" attr.placeholder="{{ 'REGISTER.PASSWORD' | translate }}">
             </div>
           </div>
-          <div class="ui fluid large blue submit button" (click)="registerUser(user, $event)">{{ 'REGISTER.SUBMIT' | translate }}</div>
+          <div class="ui segment">
+            <div class="fields hit-segment">
+              <div id="toggle-terms" class="ui toggle checkbox">
+                <input type="checkbox" name="gift" tabindex="0" class="hidden">
+              </div>
+              <label (click)="termsConditions.termsConditionsModal($event)"><a>{{ 'TERMS_CONDITIONS.ACCEPT' | translate }}</a></label>
+            </div>
+          </div>
+          <div class="ui fluid large blue submit button" [ngClass]="{'disabled': !enableRegister()}" (click)="registerUser(user, $event)">{{ 'REGISTER.SUBMIT' | translate }}</div>
         </form>
 
         <div class="ui vertical large animated button fb-btn" (click)="loginFB()">
@@ -93,3 +101,5 @@
     </div>
   </div>
 </div>
+
+<app-terms-conditions-modal></app-terms-conditions-modal>
