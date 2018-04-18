@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
-import {HttpClientModule, HttpClient} from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { routes } from './app.router';
@@ -28,6 +28,8 @@ import { AlertService } from './services/alert.service';
 import { FeedbackModalComponent } from './feedback-modal/feedback-modal.component';
 import { PostCommentComponent } from './post-comment/post-comment.component';
 import { TermsConditionsModalComponent } from './terms-conditions-modal/terms-conditions-modal.component';
+import { CreatePostHomeComponent } from './create-post-home/create-post-home.component';
+import { LoadIndicationComponent } from './load-indication/load-indication.component';
 
 PublicationService
 export function HttpLoaderFactory(http: HttpClient) {
@@ -47,7 +49,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreatePostModalComponent,
     FeedbackModalComponent,
     PostCommentComponent,
-    TermsConditionsModalComponent
+    TermsConditionsModalComponent,
+    CreatePostHomeComponent,
+    LoadIndicationComponent
   ],
   providers: [
     {

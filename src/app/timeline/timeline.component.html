@@ -1,13 +1,7 @@
 <div class="ui container ">
 
   <div class="ui brown segment clearing">
-    <p>{{ 'POST.MESSAGE' | translate }}</p>
-    <div (click)="createPost.createPostModal($event)" class="ui animated button right floated" tabindex="0">
-      <div class="visible content">{{ 'POST.SHARE' | translate}}</div>
-      <div class="hidden content">
-        <i class="right arrow icon"></i>
-      </div>
-    </div>
+    <app-create-post-home></app-create-post-home>
   </div>
 
   <div class="ui segment post-container">
