@@ -67,4 +67,9 @@ export class AppComponent implements OnInit {
     window.location.href = '/user/' + this.getUsername();
   }
 
+  private enterPressed(event, username, password) {
+    if(event.keyCode == 13) {
+      this.loginUser(username, password);
+    }
+  }
 }
