@@ -102,21 +102,21 @@ export class PostPageComponent implements OnInit {
   private seeMoreComments() {
     this.seeMore = !this.seeMore;
     console.log(this.post);
-
-    if (!this.seeMore) {
-
-    } else {
-
-    }
-
   }
 
+  /**
+   * Habilita a publicação do comentario utilizando a tecla ENTER
+   */
   private onSubmit(e) {
       if (e.keyCode == 13) {
           this.postComment();
       }
   }
 
+  /**
+   * Regista o novo comentario feito pelo usuario com todas as sua informacoes associadas e atualiza
+   * a publicacao.
+   */
   public postComment() {
     let username = window.localStorage.username
 
