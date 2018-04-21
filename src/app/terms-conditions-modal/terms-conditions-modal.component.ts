@@ -14,7 +14,7 @@ export class TermsConditionsModalComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
+  }  
 
   public termsConditionsModal(event) {
 

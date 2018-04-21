@@ -21,11 +21,6 @@
     "SEND": "Enviar",
     "CANCEL": "Cancelar"
   },
-  "TERMS_CONDITIONS": {
-    "TITLE": "Termos e Condições",
-    "ACCEPT": "Eu concordo com os Termos e Condições",
-    "TERMS": "asdasdasd"
-  },
   "PROFILEPAGE": {
     "PROFILE_NOT_FOUND": "Usuário não encontrado",
     "ABOUT": "Sobre",
@@ -107,5 +102,42 @@
   },
   "GENERAL": {
     "CANCEL": "Cancelar"
+  },
+  "TERMS_CONDITIONS": {
+    "TITLE": "Termos e Condições",
+    "ACCEPT": "Eu concordo com os Termos e Condições",
+    "INTRODUCTION_TITLE": "INTRODUÇÃO",
+    "INTRODUCTION_TEXT": "A equipe Hipster tem o prazer de lhe oferecer acesso a este site (o Hipster), tanto o site como outros serviços da equipe Hipster estão sujeitos a estes Termos e Condições de Uso. Estes Termos se aplicam a todos os usuários do Hipster, incluindo usuários que também são contribuintes de Conteúdo Gerado pelo Usuário (conforme definido a seguir). Ao prosseguir além da página inicial do site ou visualizar ou enviar conteúdo, você expressa o seu consentimento, acordo e compreensão destes termos. A equipe hipster pode, a seu critério, modificar, restringir, mudar ou de alguma maneira alterar estes termos, o site, no todo ou em parte, impor limites em certas funções no site ou restringir o seu acesso à parte ou a todo o site. Ao continuar acessando e usando o site, você está evidenciando o seu consentimento, acordo e compreensão de tal modificações, mudanças ou alterações. Revise estes termos regularmente, pois eles poderão ser modificados de tempos em tempos, sem aviso prévio.",
+    "USER_CONTENT_TITLE": "CONTEÚDO GERADO PELO USUÁRIO",
+    "USER_CONTENT_TEXT": "Você pode enviar conteúdo, incluindo texto e links para vídeos ao Hipster (coletivamente, 'Conteúdo Gerado pelo Usuário'), desde que você respeite estas regras de bom senso:",
+    "USER_CONTENT_PART1_TITLE": "1. Você publicou, você é o dono", 
+    "USER_CONTENT_PART1_TEXT": "Lembre-se de que, mesmo que o conteúdo original possa ser excluído, o conteúdo compartilhado e distribuído por uma série de canais pode ser republicado, pesquisado e encontrado na internet.",
+    "USER_CONTENT_PART2_TITLE": "2. Respeite a lei, inclusive no que se refere à propriedade intelectual", 
+    "USER_CONTENT_PART2_TEXT": "É fundamental que você mostre o devido respeito pela lei em geral e, especificamente, pelas leis que regem os direitos autorais e o uso justo de material protegido por direitos autorais. Não publique vídeos, músicas ou outros conteúdos protegidos por direitos autorais, a menos que você os possua ou tenha permissão do proprietário para exibir tal conteúdo nesse contexto. Tenha em mente que as leis podem variar dependendo de onde você mora.",
+    "USER_CONTENT_PART3_TITLE": "3. Trate os outros como você gostaria de ser tratado", 
+    "USER_CONTENT_PART3_TEXT": "Respeite as opiniões e crenças dos outros. Use a cortesia comum ao publicar conteúdo: abstenha-se de linguagem, imagens ou links abusivos, obscenos ou ofensivos. Não publique conteúdo ou links de sites da internet que apresentam conteúdo sexual, jogos de azar ou que defendem a intolerância de outros; e não crie tal conteúdo no Hipster.",
+    "USER_CONTENT_PART4_TITLE": "4. Não publique informações confidenciais ou exclusivas", 
+    "USER_CONTENT_PART4_TEXT": "Ao publicar conteúdo no Hipster, você concorda em permitir que qualquer pessoa com acesso Hipster possa acessá-lo e usá-lo sem restrições, exceto no que diz respeito a quaisquer direitos de propriedade intelectual aplicáveis que você ou outros possam ter sobre esse conteúdo. Você concorda que não publicará ou não transmitirá material confidencial ou exclusivo para si mesmo ou para terceiros.",
+    "RESPONSABILITY_TITLE": "DIREITOS E INSENÇÕES DE RESPONSABILIDADE DO HIPSTER",
+    "RESPONSABILITY_PART1": "Você concede ao Hipster o direito mundial, não exclusivo, perpétuo, irrevogável, isento de royalties e totalmente pago, transferível (incluindo o direito de sublicenciar) de exercer todos os direitos autorais, publicidade e direitos morais em relação a qualquer Conteúdo Gerado pelo Usuário que você publica no Hipster em qualquer formato de mídia e através de qualquer canal de mídia.",
+    "RESPONSABILITY_PART2": "O Hipster renuncia expressamente a qualquer responsabilidade ou responsabilidade pelo Conteúdo Gerado pelo Usuário publicado no site, e tal conteúdo não representa necessariamente as opiniões ou posições da equipe Hipster",
+    "RESPONSABILITY_PART3": "O Hipster não promete nem garante que qualquer Conteúdo Gerado pelo Usuário publicado nas Redes Sociais da CommScope esteja correto ou exato, e o Hipster não concorda ou endossa tais conteúdos.",
+    "RESPONSABILITY_PART4": "O Hipster mantém o direito de recusar a publicar qualquer Conteúdo Gerado pelo Usuário ou remover qualquer conteúdo postado anteriormente no Hipster, a nosso exclusivo critério.",
+    "RESPONSABILITY_PART5": "Você entende que ao usar o Site, será exposto ao Conteúdo Gerado pelo Usuário de uma variedade de fontes e que o Hipster não é responsável pela utilidade, segurança ou direitos de propriedade intelectual relacionados a tal Conteúdo Gerado pelo Usuário. Você também compreende e reconhece que pode estar exposto a Conteúdo Gerado pelo Usuário que é impreciso, ofensivo, indecente ou questionável, e concorda renunciar e, por meio deste, renuncia a quaisquer direitos ou recursos legais ou equitativos que você tenha ou possa ter contra o Hipster com respeito a isso.",
+    "PRIVACY_TITLE": "PRIVACIDADE",
+    "PRIVACY_PART1": "O Hispter respeita sua PRIVACY pessoal e a confidencialidade de suas informações corporativas. Ao acessar o Site, podemos coletar informações pessoalmente identificáveis que você decida divulgar voluntariamente. Também podemos coletar automaticamente determinadas informações de uso do site enquanto você navega no Site. Podemos compartilhar suas informações pessoais com outras empresas e indivíduos que executam funções de suporte em relação a pedidos de produtos Hipster (por exemplo, processamento de cartão de crédito) e com a manutenção do Site. Exceto nos casos previstos neste documento, não compartilharemos suas informações pessoais ou qualquer informação de uso do site com terceiros, a menos que seja exigido por lei.",
+    "PRIVACY_PART2": "Seja atencioso com a PRIVACY dos outros e não faça referência a outros sem a devida permissão.",
+    "SAFETY_TITLE": "SEGURANÇA",
+    "SAFETY_PART1": "Você não publicará comunicações comerciais não autorizadas (como spam) no Hipster.",
+    "SAFETY_PART2": "Você não carregará vírus ou outros códigos mal-intencionados.",
+    "SAFETY_PART3": "Você não solicitará informações de login, nem acessará uma conta que pertença a outra pessoa.",
+    "SAFETY_PART4": "Você não coletará conteúdo ou informações de usuários, ou acessará o Hipster usando meios automatizados (como bots de coleta, robôs, spiders ou scrapers) sem nossa permissão prévia.",
+    "SAFETY_PART5": "Você não fará parte de marketing multinível ilegal, como um esquema de pirâmide, no Hipster.",    
+    "SAFETY_PART6": "Você não irá intimidar, assediar ou praticar bullying contra qualquer usuário.",
+    "SAFETY_PART7": "Você não publicará conteúdo que contenha discurso de ódio, seja ameaçador ou pornográfico; incite violência; ou contenha nudez ou violência gratuita ou gráfica.",    
+    "SAFETY_PART8": "Você não irá desenvolver nem operar um aplicativo de terceiros com conteúdo relacionado a álcool, encontros ou outro conteúdo adulto (incluindo anúncios) sem as restrições apropriadas com base em idade.",
+    "SAFETY_PART9": "Você não usará o Hipster para praticar qualquer ato ilegal, equivocado, malicioso ou discriminatório.",
+    "SAFETY_PART10": "Você não fará nada que possa desativar, sobrecarregar ou impedir a aparência ou o funcionamento adequado do Hipster, como um ataque de negação de serviço ou interferência no processamento da página ou de outra funcionalidade do Facebook.",
+    "SAFETY_PART11": "Você não facilitará nem incentivará a violação desta Declaração ou de nossas políticas."    
   }
 }
