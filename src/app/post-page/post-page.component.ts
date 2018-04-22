@@ -19,11 +19,14 @@ export class PostPageComponent implements OnInit {
   public creationDate: string;
   private OPTIONAL_TITLE = 1;
   private MUSIC_NAME = 0;
+  private seeMore = false;
+  private comment;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
               private publicationService: PublicationService) {
     this.post = {};
+    this.comment = {};
     this.post["likes"] = [];
   }
 
@@ -93,6 +96,56 @@ export class PostPageComponent implements OnInit {
 
   private getClass(genre) {
     return this.userService.getColor(genre);
+  }
+
+
+  private seeMoreComments() {
+    this.seeMore = !this.seeMore;
+    console.log(this.post);
+  }
+
+  /**
+   * Habilita a publicação do comentario utilizando a tecla ENTER
+   */
+  private onSubmit(e) {
+      if (e.keyCode == 13) {
+          this.postComment();
+      }
+  }
+
+  /**
+   * Regista o novo comentario feito pelo usuario com todas as sua informacoes associadas e atualiza
+   * a publicacao.
+   */
+  public postComment() {
+    let username = window.localStorage.username
+
+    if (this.comment.description.trim()) {
+      this.comment.ownerUsername = username;
+
+      let newComment = {
+        ownerUsername: username,
+        description: this.comment.description,
+        likes: [],
+        creationDate: new Date()
+      };
+
+      this.post.comments.push(newComment);
+
+      let updatedPost = {
+        _id: this.post._id,
+        comments: this.post.comments
+      }
+
+      this.publicationService.updatePublication(updatedPost).subscribe(
+        data => {
+          this.comment = {
+            description:  ""
+          };
+        }, err => {}
+      );
+    }
+
   }
 
 }
