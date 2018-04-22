@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { PublicationService } from '../services/publication.service';
+import { AlertService } from '../services/alert.service';
 
 declare var jquery:any;
 declare var $ :any;
@@ -24,13 +25,16 @@ export class PostPageComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
-              private publicationService: PublicationService) {
+              private publicationService: PublicationService,
+              private alertService: AlertService) {
     this.post = {};
     this.comment = {};
     this.post["likes"] = [];
   }
 
   ngOnInit() {
+    this.alertService.showLoadIndication();
+    
     this.route.params.subscribe(params => {
         let postId = params['id'];
 
@@ -46,7 +50,9 @@ export class PostPageComponent implements OnInit {
             var url = this.post.url;
             this.initEmbedYotubue(this.post.videoID);
 
+            this.alertService.hideLoadIndication();
           }, err => {
+            this.alertService.hideLoadIndication();
             console.log(err)
           }
         );

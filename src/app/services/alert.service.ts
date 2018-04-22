@@ -9,6 +9,14 @@ export class AlertService {
 
   constructor() {}
 
+  public showLoadIndication() {
+    $('#load_indication').show();
+  }
+
+  public hideLoadIndication() {
+    $('#load_indication').hide();
+  }
+  
   public showErrorAlert(textHead: string, text: string) {
     $.uiAlert({
       textHead: textHead, // header

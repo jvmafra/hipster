@@ -28,6 +28,7 @@ import { AlertService } from './services/alert.service';
 import { FeedbackModalComponent } from './feedback-modal/feedback-modal.component';
 import { PostCommentComponent } from './post-comment/post-comment.component';
 import { TermsConditionsModalComponent } from './terms-conditions-modal/terms-conditions-modal.component';
+import { LoadIndicationComponent } from './load-indication/load-indication.component';
 
 PublicationService
 export function HttpLoaderFactory(http: HttpClient) {
@@ -47,7 +48,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreatePostModalComponent,
     FeedbackModalComponent,
     PostCommentComponent,
-    TermsConditionsModalComponent
+    TermsConditionsModalComponent,
+    LoadIndicationComponent
   ],
   providers: [
     {
