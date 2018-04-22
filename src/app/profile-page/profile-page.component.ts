@@ -54,6 +54,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   private updateProfile() {
+    this.alertService.showLoadIndication();
     let data = this.formValidation.getFormValidationVariables(this.errorInfo);
     $('.ui.form').form(data);
     let values = $('.ui.dropdown').dropdown('get value');
@@ -84,6 +85,7 @@ export class ProfilePageComponent implements OnInit {
         }
       );
     }
+    this.alertService.showLoadIndication();
 
   }
 

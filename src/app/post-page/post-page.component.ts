@@ -31,7 +31,7 @@ export class PostPageComponent implements OnInit {
 
   ngOnInit() {
     this.alertService.showLoadIndication();
-
+    
     this.route.params.subscribe(params => {
         let postId = params['id'];
 
