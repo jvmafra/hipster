@@ -126,7 +126,9 @@ export class ProfilePageComponent implements OnInit {
      return this.selected_tab === 1
   }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.alertService.showLoadIndication();
+
     this.initSemanticValidationForm();
 
     this.route.params.subscribe(params => {
@@ -167,7 +169,7 @@ export class ProfilePageComponent implements OnInit {
             this.foundUser = false;
           }
         );
-     });
-
+     });    
+    this.alertService.hideLoadIndication();
   }
 }
