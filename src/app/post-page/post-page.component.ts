@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { PublicationService } from '../services/publication.service';
+import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component'
 
 declare var jquery:any;
 declare var $ :any;
@@ -13,6 +14,9 @@ declare var $ :any;
   encapsulation: ViewEncapsulation.None
 })
 export class PostPageComponent implements OnInit {
+
+  @ViewChild(FeedbackModalComponent)
+  public feedbackModal: FeedbackModalComponent;
 
   public post;
   public user_title: string = undefined;

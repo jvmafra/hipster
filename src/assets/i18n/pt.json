@@ -11,13 +11,14 @@
     "CLASS_L_POPULAR": "Menos populares",
     "CLASS_M_POPULAR": "Mais populares",
     "SEND_REPORT": "Enviar Denúncia",
+    "REPORT": "Denunciar",
     "LANGUAGES": {
       "PT": "Português",
       "EN": "English"
     }
   },
   "FEEDBACK": {
-    "MESSAGE": "mensagem",
+    "MESSAGE": "Mensagem",
     "SEND": "Enviar",
     "CANCEL": "Cancelar"
   },
