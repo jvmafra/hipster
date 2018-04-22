@@ -2,6 +2,7 @@ import express from 'express';
 import { ReportService }  from '../service/ReportService';
 import auth from './auth';
 import {ReportValidator} from '../util/ReportValidator'
+var sendEmail = require('../service/MailService').sendEmail;
 
 const router = express.Router();
 
@@ -16,6 +17,7 @@ router.post('/', async (req, res) => {
     else{
       try {
         const data = await ReportService.registerReport(report);
+        sendEmail(JSON.stringify(report));
         res.status(200).json(data);
       } catch(err) {
         res.status(400).json(err.message);

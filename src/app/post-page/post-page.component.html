@@ -30,7 +30,7 @@
                   {{ post.likes.length }}
                 </a>
               </div>
-              <div class="ui negative basic button" (click)="feedbackModal.sendFeedbackModal($event)">
+              <div class="ui negative basic button" (click)="feedbackModal.sendFeedbackModal($event, post)">
                   {{ 'HIPSTER.REPORT' | translate }}
               </div>
             </div>

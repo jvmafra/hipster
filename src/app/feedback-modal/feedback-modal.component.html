@@ -6,12 +6,12 @@
   <div class="content">
     <form id="ui-form" class="ui form">
       <div class="field">
-          <textarea rows="2" type="text" name="message" attr.placeholder="{{ 'FEEDBACK.MESSAGE' | translate }}"></textarea>
+          <textarea rows="2" type="text" name="message" [(ngModel)]="report.description" attr.placeholder="{{ 'FEEDBACK.MESSAGE' | translate }}"></textarea>
       </div>
     </form>
   </div>
   <div class="actions">
     <div class="ui button red deny">{{ 'DELETEMODAL.CANCEL' | translate }}</div>
-    <div class="ui button green approve">{{ 'FEEDBACK.SEND' | translate }}</div>
+    <div class="ui button green approve"  (click)="sendReport()">{{ 'FEEDBACK.SEND' | translate }}</div>
   </div>
 </div>

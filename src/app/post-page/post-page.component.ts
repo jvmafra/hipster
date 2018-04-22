@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { PublicationService } from '../services/publication.service';
-import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component'
+import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
 
 declare var jquery:any;
 declare var $ :any;
@@ -25,6 +25,8 @@ export class PostPageComponent implements OnInit {
   private MUSIC_NAME = 0;
   private seeMore = false;
   private comment;
+  private videoId;
+  private ownerUser;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
@@ -50,11 +52,19 @@ export class PostPageComponent implements OnInit {
             var url = this.post.url;
             this.initEmbedYotubue(this.post.videoID);
 
+            this.ownerUser = this.post.ownerUsername;
+            this.videoId = this.post.videoIDreported;
+            console.log(this.ownerUser);
+            console.log(this.videoId);
+
           }, err => {
-            console.log(err)
+            console.log(err);
           }
         );
     });
+
+    console.log(this.ownerUser);
+    console.log(this.videoId);
   }
 
   private initEmbedYotubue(videoID) {
