@@ -47,12 +47,13 @@ export class PostPageComponent implements OnInit {
             var url = this.post.url;
             this.initEmbedYotubue(this.post.videoID);
 
+            this.alertService.hideLoadIndication();
           }, err => {
+            this.alertService.hideLoadIndication();
             console.log(err)
           }
         );
     });
-    this.alertService.hideLoadIndication();
   }
 
   private initEmbedYotubue(videoID) {
