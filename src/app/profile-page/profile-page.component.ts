@@ -78,6 +78,7 @@ export class ProfilePageComponent implements OnInit {
           this.alertService.showSuccessAlert("Atualização de Perfil", "Perfil atualizado com sucesso!");
           this.userService.storeName(usuario.name);
           this.alertService.hideLoadIndication();
+          this.profile = usuario;
           this.router.navigateByUrl('/user/' + this.profile.username);
         }, err => {
           this.alertService.showErrorAlert("Atualização de Perfil", "Erro ao atualizar Perfil, tente novamente mais tarde.");
