@@ -1,21 +1,17 @@
 <app-load-indication></app-load-indication>
-<div class="ui container ">  
-  <div class="ui brown segment clearing">    
-    <p>{{ 'POST.MESSAGE' | translate }}</p>
-    <div (click)="createPost.createPostModal($event)" class="ui animated button right floated" tabindex="0">
-      <div class="visible content">{{ 'POST.SHARE' | translate}}</div>
-      <div class="hidden content">
-        <i class="right arrow icon"></i>
-      </div>
-    </div>
-  </div>  
-  <div class="ui segment post-container">      
+
+<div class="ui container ">
+  <div class="ui brown segment clearing">
+    <app-create-post-home (getAllPublications)="getAllPublications()"></app-create-post-home>    
+  </div>
+
+  <div class="ui segment post-container">
     <div class="ui divided items">
       <div class="ui form">
-        <div class="inline fields">                    
+        <div class="inline fields">
           <label>{{ 'HIPSTER.CLASS' | translate }}</label>
           <div class="field">
-            <div class="ui radio checkbox">              
+            <div class="ui radio checkbox">
               <input  (click)="classifyBy(1)" type="radio" name="frequency" checked="checked">
               <label>{{ 'HIPSTER.CLASS_RECENT' | translate }}</label>
             </div>
@@ -35,14 +31,14 @@
         </div>
       </div>
     </div>
-    <div class="ui divided items">      
+    <div class="ui divided items">
       <div id="labelTodos" (click)="clearFilter()" class="ui basic large label"
-           [ngClass]="isSelected(undefined)">           
+           [ngClass]="isSelected(undefined)">
         <a class="ui empty circular label grey"></a>
         Todos
       </div>
       <div id="label{{i}}" (click)="filterEvents(genre)" class="ui basic large label"
-            *ngFor="let genre of listGenres;" [ngClass]="isSelected(genre)">                    
+            *ngFor="let genre of listGenres;" [ngClass]="isSelected(genre)">
         <a class="ui empty circular large label" [ngClass]="getClass(genre.value)"></a>
         {{ genre.value }}
       </div>
@@ -52,7 +48,7 @@
   <div class="ui stacked segment post-container extra">
     <div class="ui labels">
       <div class="ui divided items">
-        <div class="item" *ngFor="let event of shownEvents">          
+        <div class="item" *ngFor="let event of shownEvents">
           <app-timeline-post class="hip-full-width" [event]="event"></app-timeline-post>
         </div>
       </div>

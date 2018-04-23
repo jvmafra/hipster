@@ -33,8 +33,8 @@ export class TimelineComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.alertService.showLoadIndication();    
-    this.getAllPublications();    
+    this.alertService.showLoadIndication();
+    this.getAllPublications();
     this.alertService.hideLoadIndication();
   }
 
@@ -47,7 +47,6 @@ export class TimelineComponent implements OnInit {
   private classifyBy(index) {
     if (index === 1) {
       this.shownEvents.sort(function(post1, post2) {
-        console.log(post1);
           var date1 = new Date(post1.creationDate).getTime();
           var date2 = new Date(post2.creationDate).getTime();
           return date2 - date1;
@@ -67,7 +66,7 @@ export class TimelineComponent implements OnInit {
     }
   }
 
-  public getAllPublications() {        
+  public getAllPublications() {
     this.publicationService.getAllPublications().subscribe(
       data => {
         this.events = data;
