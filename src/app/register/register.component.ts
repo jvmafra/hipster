@@ -153,7 +153,7 @@ export class RegisterComponent implements OnInit {
             this.alertService.showSuccessAlert("Registrar Usuário", "Usuário registrado com sucesso!")
             let authUser: any = data;
             this.userService.storeUser(authUser);
-            window.location.href = '/user/' + authUser.user.username;
+            this.router.navigateByUrl('/user/' + authUser.user.username);
           }, err => {
             this.alertService.showErrorAlert("Registrar Usuário", "Verifique as informações inseridas e tente novamente.")
           }

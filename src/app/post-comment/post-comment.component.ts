@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { PublicationService } from '../services/publication.service';
 import { UserService } from "../services/user.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-comment',
@@ -16,7 +17,8 @@ export class PostCommentComponent implements OnInit {
   private creationDate: string;
 
   constructor(private publicationService: PublicationService,
-              private userService: UserService) {
+              private userService: UserService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -46,7 +48,7 @@ export class PostCommentComponent implements OnInit {
 
   private seeProfile() {
     let username = window.localStorage.username
-    window.location.href = '/user/' + username;
+    this.router.navigateByUrl('/user/' + username);
   }
 
   public likeComment() {

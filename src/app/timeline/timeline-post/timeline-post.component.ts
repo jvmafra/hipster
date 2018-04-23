@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { PublicationService } from '../../services/publication.service';
+import { Router } from '@angular/router';
 
 declare var jquery:any;
 declare var $ :any;
@@ -25,17 +26,17 @@ export class TimelinePostComponent implements OnInit {
   private comment;
 
   constructor(private userService: UserService,
-              private publicationService: PublicationService) {
+              private publicationService: PublicationService,
+              private router: Router) {
       this.comment = {};
   }
 
   public openPost() {
-    window.location.href = "/post/" + this.event._id
+    this.router.navigateByUrl('/post' + this.event._id);
   }
 
   private seeMoreComments() {
     this.seeMore = !this.seeMore;
-    console.log(this.event);
 
     if (!this.seeMore) {
 
