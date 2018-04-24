@@ -20,7 +20,7 @@
   "FEEDBACK": {
     "MESSAGE": "Message",
     "SEND": "Send",
-    "CANCEL": "Cancel",
+    "CANCEL": "Cancel"
   },
   "TERMS_CONDITIONS": {
     "TITLE": "Terms and Conditions",
@@ -103,6 +103,11 @@
         "VALIDACAO_CATEGORY": "Publication has to be a music",
         "VALIDACAO_URL_YOUTUBE": "Publication has to have a valid url from youtube",
         "VALIDACAO_VIEW_COUNT": "Publication has more than 1 million of views"
+      },
+      "REPORT": {
+        "VALIDACAO_OWNER": "Report owner invalid",
+        "VALIDACAO_REPORTED_USER": "Reported user invalid",
+        "VALIDACAO_DESCRIPTION": "Report description invalid"
       }
     }
   },

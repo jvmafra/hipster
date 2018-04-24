@@ -103,6 +103,11 @@
         "VALIDACAO_CATEGORY": "Publicação deve ser da categoria musica",
         "VALIDACAO_URL_YOUTUBE": "Publicação deve ter uma url do youtube válida",
         "VALIDACAO_VIEW_COUNT": "Publicação tem mais que 1 milhão de visualizações"
+      },
+      "REPORT": {
+        "VALIDACAO_OWNER": "Criador da denúncia inválido",
+        "VALIDACAO_REPORTED_USER": "Usuário reportado inválido",
+        "VALIDACAO_DESCRIPTION": "Descrição da denúncia inválida"
       }
     }
   },

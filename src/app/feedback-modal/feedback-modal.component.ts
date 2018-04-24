@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { ReportService } from '../services/report.service';
 import { UserService } from '../services/user.service';
+import { HipsterTranslate } from "../services/hipster-translate.service";
+
 
 declare var jquery:any;
 declare var $ :any;
@@ -16,9 +18,11 @@ export class FeedbackModalComponent implements OnInit {
   private reportedUser: string;
   private videoIDreported: string;
   private report;
+  public requestErrors: Array<string>;
 
   constructor(private reportService: ReportService,
-    private userService: UserService) {
+    private userService: UserService,
+    private hipsterTranslate: HipsterTranslate) {
     this.report = {};
     this.reportedUser = '';
     this.videoIDreported = '';
@@ -26,7 +30,7 @@ export class FeedbackModalComponent implements OnInit {
    }
 
   ngOnInit() {
-
+    this.requestErrors = [];
   }
 
   public sendFeedbackModal(event, post) {
@@ -57,7 +61,17 @@ export class FeedbackModalComponent implements OnInit {
 
     console.log(reportToBeSent);
 
-    this.reportService.saveReport(reportToBeSent);
+    this.reportService.saveReport(reportToBeSent).subscribe(
+      data => {
+        console.log("Success");
+      }, err => {                
+        let errors = err.error.split(';');
+        errors.splice(errors.length - 1, 1);
+        this.hipsterTranslate.translateErrorsReport(errors);        
+        this.requestErrors = errors;
+        console.log(this.requestErrors);
+      }
+    );    
   }
 
 }

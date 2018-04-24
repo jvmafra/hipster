@@ -42,4 +42,12 @@ export class HipsterTranslate {
     }
   }
 
+  public translateErrorsReport(errors) {
+    let prefix = "ERRORS.RESPONSE.REPORT.";
+
+    for (var idx in errors) {
+      errors[idx] = this.translate.instant(prefix + errors[idx]);
+    }
+  }
+
 }
