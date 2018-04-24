@@ -57,9 +57,7 @@
     "USERNAME": "Nome de usuário",
     "BIRTHDATE": "Data de nasc.",
     "PASSWORD": "Senha",
-    "NAME": "Nome",
-    "LOGIN_FB": "Entrar com o Facebook",
-    "LOGIN_GOOGLE": "Entrar com o Google"
+    "NAME": "Nome"
   },
   "PUBLICATION": {
     "SHARE_MESSAGE":"Compartilha uma nova música",

@@ -57,9 +57,7 @@
     "USERNAME": "Username",
     "BIRTHDATE": "Birth date",
     "PASSWORD": "Password",
-    "NAME": "Name",
-    "LOGIN_FB": "Login with Facebook",
-    "LOGIN_GOOGLE": "Login with Google"
+    "NAME": "Name"
   },
   "DELETEMODAL": {
     "DELETE_ACCOUNT": "Delete account",
