@@ -6,11 +6,35 @@
     <!-- <div class="sixteen wide mobile sixteen wide tablet ten wide computer column">
       <img class="ui centered small image" src="../assets/hipster-logo2.png">
     </div> -->
-    <div class="centered sixteen wide mobile sixteen wide tablet six wide computer column">
+
+    <div class="centered sixteen wide mobile sixteen wide tablet six wide computer column"
+         *ngIf='registering'>
       <div class="ui centered card form-width">
         <div class="content">
           <div class="right floated meta">Hispter</div>
-          <img class="ui avatar image" src="../assets/hipster-logo2.png">
+          <img class="ui image logo_info" src="../assets/hipster-logo2.png">
+        </div>
+        <div class="hipster-register-form">
+          <h4 class="ui horizontal divider header">
+            <i class="exclamation circle icon"></i>
+            {{ 'REGISTER.CONCLUSION' | translate }}
+          </h4>
+
+          <div class="ui info visible message">
+            <p>{{ 'REGISTER.CONCLUSION_MESSAGE' | translate }}</p>
+          </div>
+          <div class="ui field">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="centered sixteen wide mobile sixteen wide tablet six wide computer column"
+         *ngIf='!registering'>
+      <div class="ui centered card form-width">
+        <div class="content">
+          <div class="right floated meta">Hispter</div>
+          <img class="ui logo_info image" src="../assets/hipster-logo2.png">
         </div>
         <form class="ui form hipster-register-form">
           <h4 class="ui horizontal divider header">

@@ -59,7 +59,9 @@
     "PASSWORD": "Password",
     "NAME": "Name",
     "LOGIN_FB": "Login with Facebook",
-    "LOGIN_GOOGLE": "Login with Google"
+    "LOGIN_GOOGLE": "Login with Google",
+    "CONCLUSION": "Proceed with registration",
+    "CONCLUSION_MESSAGE": "Check your e-mail to proceed with registration."
   },
   "DELETEMODAL": {
     "DELETE_ACCOUNT": "Delete account",
@@ -110,13 +112,13 @@
     "INTRODUCTION_TEXT": "The hipster team is pleased to offer you access to this website (the 'Hispter'), both the site and the other services of the Hipster team are subject to these Terms and Conditions of Use. These Terms apply to all users of the Hipster, including users who are also contributors of User Generated Content (as hereinafter defined). By proceeding beyond the site home page or viewing or posting content, you express your consent to, agreement with, and understanding of these terms. The hipster team may, in its sole discretion, modify, restrict, change, or otherwise alter these terms, the site, in whole or in part, impose limits on certain features on the site, or restrict your access to part or all of the site. By continuing to access and use the site and/or the commscope social networks you will be evidencing your consent to, agreement with, and understanding of, such modifications, changes or alterations. Please review these terms regularly as they may be modified from time to time without notice to you.",
     "USER_CONTENT_TITLE": "USER GENERATED CONTENT",
     "USER_CONTENT_TEXT": "You may submit content, including text, video links to the Hipster (collectively, 'User Generated Content'), provided that you abide by these common sense rules:",
-    "USER_CONTENT_PART1_TITLE": "1. If you post it, you own it", 
+    "USER_CONTENT_PART1_TITLE": "1. If you post it, you own it",
     "USER_CONTENT_PART1_TEXT": "Keep in mind that even if original content can be deleted, the content that is shared and distributed through an array of channels can be reposted, searched, and found on the Internet.",
-    "USER_CONTENT_PART2_TITLE": "2. Respect the law, including with regard to intellectual property", 
+    "USER_CONTENT_PART2_TITLE": "2. Respect the law, including with regard to intellectual property",
     "USER_CONTENT_PART2_TEXT": "It is critical that you show proper respect for the law generally, and specifically for the laws governing copyright and fair use of copyrighted material. Do not post images, videos or other copyrighted content unless you own them or have permission from the owner to display such content in this context. Keep in mind that the laws may differ depending on where you live.",
-    "USER_CONTENT_PART3_TITLE": "3. Treat others like you want to be treated", 
+    "USER_CONTENT_PART3_TITLE": "3. Treat others like you want to be treated",
     "USER_CONTENT_PART3_TEXT": "Be respectful of others’ opinions and beliefs. Use common courtesy when posting content: refrain from abusive, obscene, or offensive language, images, or links. Do not post content from, or links to, Internet sites that feature sexual content, gambling, or that advocate intolerance of others; and do not create such content on Hipster.",
-    "USER_CONTENT_PART4_TITLE": "4. Do not post confidential or proprietary information", 
+    "USER_CONTENT_PART4_TITLE": "4. Do not post confidential or proprietary information",
     "USER_CONTENT_PART4_TEXT": "By posting content to Hipster, you are agreeing to allow anyone with access to Hipster to access it and use it without restriction, except with regard to any applicable intellectual property rights that you or others may have in such content. You agree that you will not post or transmit material that is confidential or proprietary to you or a third-party.",
     "RESPONSABILITY_TITLE": "HIPSTER’s RIGHTS AND DISCLAIMERS",
     "RESPONSABILITY_PART1": "You grant to Hipster a worldwide, non-exclusive, perpetual, irrevocable, royalty-free and fully-paid, transferable right (including the right to sublicense) to exercise all copyright, publicity, and moral rights with respect to any User Generated Content you post on the Hipster in any media formats and through any media channels.",
@@ -132,12 +134,12 @@
     "SAFETY_PART2": "You will not upload viruses or other malicious code.",
     "SAFETY_PART3": "You will not solicit login information or access an account belonging to someone else.",
     "SAFETY_PART4": "You will not collect users' content or information, or otherwise access Hipster, using automated means (such as harvesting bots, robots, spiders, or scrapers) without our prior permission.",
-    "SAFETY_PART5": "You will not engage in unlawful multi-level marketing, such as a pyramid scheme, on Hipster.",    
+    "SAFETY_PART5": "You will not engage in unlawful multi-level marketing, such as a pyramid scheme, on Hipster.",
     "SAFETY_PART6": "You will not bully, intimidate, or harass any user.",
-    "SAFETY_PART7": "You will not post content that: is hate speech, threatening, or pornographic; incites violence; or contains nudity or graphic or gratuitous violence.",    
+    "SAFETY_PART7": "You will not post content that: is hate speech, threatening, or pornographic; incites violence; or contains nudity or graphic or gratuitous violence.",
     "SAFETY_PART8": "You will not develop or operate a third-party application containing alcohol-related, dating or other mature content (including advertisements) without appropriate age-based restrictions.",
     "SAFETY_PART9": "You will not use Hipster to do anything unlawful, misleading, malicious, or discriminatory.",
     "SAFETY_PART10": "You will not do anything that could disable, overburden, or impair the proper working or appearance of Hipster, such as a denial of service attack or interference with page rendering or other Hipster functionality.",
-    "SAFETY_PART11": "You will not facilitate or encourage any violations of this Statement or our policies."      
+    "SAFETY_PART11": "You will not facilitate or encourage any violations of this Statement or our policies."
   }
 }
