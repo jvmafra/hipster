@@ -33,6 +33,10 @@ export class TimelinePostComponent implements OnInit {
     window.location.href = "/post/" + this.event._id
   }
 
+  ngAfterViewInit() {
+    this.initEmbedYoutube(this.event.videoID);
+  }
+
   private seeMoreComments() {
     this.seeMore = !this.seeMore;
     console.log(this.event);
@@ -87,6 +91,7 @@ export class TimelinePostComponent implements OnInit {
   }
 
   public likePost() {
+
     let username = window.localStorage.username
 
     if (this.event.likes.includes(username)) {
@@ -109,6 +114,10 @@ export class TimelinePostComponent implements OnInit {
 
   }
 
+  private initEmbedYoutube(videoID) {
+    $('#' + videoID).embed();
+  }
+
   public getLikeBorderClass() {
     let username = window.localStorage.username
     return this.publicationService.getLikeBorderClass(username, this.event.likes);
@@ -121,14 +130,13 @@ export class TimelinePostComponent implements OnInit {
 
   ngOnInit() {
     var url = this.event.url;
-    this.event.thumbnail = "https://img.youtube.com/vi/" + this.event.videoID + "/hqdefault.jpg"
-
     let date = new Date(this.event.creationDate);
     this.creationDate = date.toLocaleString();
     let titles =  this.event.title.split(" HIPSTER_FLAG ")
     this.subtitle = titles[this.MUSIC_NAME];
     this.user_title = titles[this.OPTIONAL_TITLE];
     this.title = titles[this.OPTIONAL_TITLE] === "" ? this.subtitle : this.user_title;
+    this.initEmbedYoutube(this.event.videoID);
 
   }
 

@@ -33,8 +33,8 @@ export class TimelineComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.alertService.showLoadIndication();    
-    this.getAllPublications();    
+    this.alertService.showLoadIndication();
+    this.getAllPublications();
     this.alertService.hideLoadIndication();
   }
 
@@ -67,7 +67,7 @@ export class TimelineComponent implements OnInit {
     }
   }
 
-  public getAllPublications() {        
+  public getAllPublications() {
     this.publicationService.getAllPublications().subscribe(
       data => {
         this.events = data;
