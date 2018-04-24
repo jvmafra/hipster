@@ -90,7 +90,7 @@ export class CreatePostHomeComponent implements OnInit {
     return false;
   }
 
-  hideForm() {
+  public hideForm() {
     this.publication = {}
     this.closeErros();
     $('#post_fade').transition('fade down');
@@ -99,7 +99,7 @@ export class CreatePostHomeComponent implements OnInit {
 
   }
 
-  animateForm() {
+  public animateForm() {
     let status = $('#post_fade')[0].className.split(" ")[1]
     if (this.publication.url && status === "hidden") {
       $('#post_fade').transition('fade down');
