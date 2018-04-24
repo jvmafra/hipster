@@ -1,6 +1,6 @@
 <div class="ui grid">
   <div class="sixteen wide mobile six wide tablet four wide computer column">
-    <div class="ui embed" data-source="youtube" [attr.id]="event.videoID" [attr.data-id]="event.videoID"></div>
+    <div class="ui embed" data-source="youtube" [attr.id]="event.ownerUsername + event.creationDate + event.videoID" [attr.data-id]="event.videoID"></div>
   </div>
   <div class="sixteen wide mobile eight wide tablet twelve wide computer column">
     <div class="ui divided items">

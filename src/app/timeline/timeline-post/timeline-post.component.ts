@@ -34,7 +34,7 @@ export class TimelinePostComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.initEmbedYoutube(this.event.videoID);
+    this.initEmbedYoutube(this.event.ownerUsername + this.event.creationDate + this.event.videoID);
   }
 
   private seeMoreComments() {
@@ -114,8 +114,8 @@ export class TimelinePostComponent implements OnInit {
 
   }
 
-  private initEmbedYoutube(videoID) {
-    $('#' + videoID).embed();
+  private initEmbedYoutube(hashID) {
+    $('#' + hashID).embed();
   }
 
   public getLikeBorderClass() {
@@ -136,7 +136,7 @@ export class TimelinePostComponent implements OnInit {
     this.subtitle = titles[this.MUSIC_NAME];
     this.user_title = titles[this.OPTIONAL_TITLE];
     this.title = titles[this.OPTIONAL_TITLE] === "" ? this.subtitle : this.user_title;
-    this.initEmbedYoutube(this.event.videoID);
+    this.initEmbedYoutube(this.event.ownerUsername + this.event.creationDate + this.event.videoID);
 
   }
 
