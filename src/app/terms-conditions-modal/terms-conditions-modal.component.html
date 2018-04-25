@@ -3,7 +3,40 @@
   <div class="header">
     {{ 'TERMS_CONDITIONS.TITLE' | translate }}
   </div>
-  <div class="content">
-    {{ 'TERMS_CONDITIONS.TERMS' | translate }}
+  <div id = "terms" class="content" >
+    
+    <h3 class = "title-terms">{{ 'TERMS_CONDITIONS.INTRODUCTION_TITLE' | translate }}</h3>    
+    <p class = "text-terms">{{ 'TERMS_CONDITIONS.INTRODUCTION_TEXT' | translate }}</p>
+
+    <h3 class = "title-terms">{{ 'TERMS_CONDITIONS.USER_CONTENT_TITLE' | translate }}</h3>    
+    <p class = "text-terms">{{ 'TERMS_CONDITIONS.USER_CONTENT_TEXT' | translate }}</p>        
+    
+    <h3 class = "text-section-terms">{{ 'TERMS_CONDITIONS.USER_CONTENT_PART1_TITLE' | translate }}</h3>
+    <p class = "text-terms">{{ 'TERMS_CONDITIONS.USER_CONTENT_PART1_TEXT' | translate }}</p>    
+
+    <h3 class = "text-section-terms">{{ 'TERMS_CONDITIONS.USER_CONTENT_PART2_TITLE' | translate }}</h3>
+    <p class = "text-terms">{{ 'TERMS_CONDITIONS.USER_CONTENT_PART2_TEXT' | translate }}</p>    
+    
+    <h3 class = "text-section-terms">{{ 'TERMS_CONDITIONS.USER_CONTENT_PART3_TITLE' | translate }}</h3>
+    <p class = "text-terms">{{ 'TERMS_CONDITIONS.USER_CONTENT_PART3_TEXT' | translate }}</p>    
+    
+    <h3 class = "text-section-terms">{{ 'TERMS_CONDITIONS.USER_CONTENT_PART4_TITLE' | translate }}</h3>
+    <p class = "text-terms">{{ 'TERMS_CONDITIONS.USER_CONTENT_PART4_TEXT' | translate }}</p>    
+    
+    <h3 class = "title-terms">{{ 'TERMS_CONDITIONS.RESPONSABILITY_TITLE' | translate }}</h3>    
+    <li class = "text-terms" *ngFor="let term of terms_responsability"> 
+        {{ term.text | translate}}
+    </li>       
+
+    <h3 class = "title-terms">{{ 'TERMS_CONDITIONS.PRIVACY_TITLE' | translate }}</h3>    
+    <li class = "text-terms" *ngFor="let term of terms_privacy"> 
+        {{ term.text | translate}}
+    </li>    
+
+    <h3 class = "title-terms">{{ 'TERMS_CONDITIONS.SAFETY_TITLE' | translate }}</h3>    
+    <li class = "text-terms" *ngFor="let term of terms_safety"> 
+        {{ term.text | translate}}
+    </li>
+    
   </div>
 </div>
