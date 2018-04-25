@@ -53,6 +53,7 @@ export class PostPageComponent implements OnInit {
             this.creationDate = date.toLocaleString();
             var url = this.post.url;
             this.initEmbedYotubue(this.post.videoID);
+            this.alertService.hideLoadIndication();
             
           }, err => {
             this.alertService.hideLoadIndication();
@@ -60,9 +61,6 @@ export class PostPageComponent implements OnInit {
           }
         );
     });
-
-    console.log(this.ownerUser);
-    console.log(this.videoId);
   }
 
   private initEmbedYotubue(videoID) {
