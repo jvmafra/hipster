@@ -64,14 +64,14 @@ export class FeedbackModalComponent implements OnInit {
     this.reportService.saveReport(reportToBeSent).subscribe(
       data => {
         console.log("Success");
-      }, err => {                
-        let errors = err.error.split(';');
+      }, err => {
+        const errors = err.error.split(';');
         errors.splice(errors.length - 1, 1);
-        this.hipsterTranslate.translateErrorsReport(errors);        
+        this.hipsterTranslate.translateErrorsReport(errors);
         this.requestErrors = errors;
         console.log(this.requestErrors);
       }
-    );    
+    );
   }
 
 }
