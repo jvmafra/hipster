@@ -97,7 +97,7 @@ export class UserService {
 
   public logoutUser() {
     this.storageService.removeUser();
-    window.location.href = '/';
+    this.router.navigateByUrl('/register');
   }
 
   public isAuthenticated() {

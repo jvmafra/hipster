@@ -45,7 +45,8 @@ export class ProfilePageComponent implements OnInit {
               private translateService: TranslateService,
               private publicationService: PublicationService,
               private formValidation: FormValidationService,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private router: Router) {
 
     this.alreadyInit = 0;
     this.days = Array.from(Array(31).keys());
@@ -77,7 +78,8 @@ export class ProfilePageComponent implements OnInit {
           this.alertService.showSuccessAlert("Atualização de Perfil", "Perfil atualizado com sucesso!");
           this.userService.storeName(usuario.name);
           this.alertService.hideLoadIndication();
-          window.location.href = "/user/" + this.profile.username;          
+          this.profile = usuario;
+          this.router.navigateByUrl('/user/' + this.profile.username);
         }, err => {
           this.alertService.showErrorAlert("Atualização de Perfil", "Erro ao atualizar Perfil, tente novamente mais tarde.");
           if (err.statusText === "Unauthorized") {
@@ -129,7 +131,7 @@ export class ProfilePageComponent implements OnInit {
      return this.selected_tab === 1
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.alertService.showLoadIndication();
 
     this.initSemanticValidationForm();
@@ -167,12 +169,12 @@ export class ProfilePageComponent implements OnInit {
             this.initDate(this.profile.birthDate);
 
             this.email = this.profile.email;
-            
+
           }, err => {
-            this.foundUser = false;            
+            this.foundUser = false;
           }
         );
         this.alertService.hideLoadIndication();
-     });    
+     });
   }
 }
