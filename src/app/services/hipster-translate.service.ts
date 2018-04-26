@@ -50,4 +50,10 @@ export class HipsterTranslate {
     }
   }
 
+  public translateItem(item){
+
+    let itemTranslated = this.translate.instant(item);
+    return itemTranslated;
+  }
+
 }

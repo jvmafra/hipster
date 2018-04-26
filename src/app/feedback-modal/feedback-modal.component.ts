@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { ReportService } from '../services/report.service';
 import { UserService } from '../services/user.service';
 import { HipsterTranslate } from "../services/hipster-translate.service";
+import { AlertService } from '../services/alert.service';
 
 
 declare var jquery:any;
@@ -22,7 +23,8 @@ export class FeedbackModalComponent implements OnInit {
 
   constructor(private reportService: ReportService,
     private userService: UserService,
-    private hipsterTranslate: HipsterTranslate) {
+    private hipsterTranslate: HipsterTranslate,
+    private alertService: AlertService) {
     this.report = {};
     this.reportedUser = '';
     this.videoIDreported = '';
@@ -55,13 +57,15 @@ export class FeedbackModalComponent implements OnInit {
 
     this.reportService.saveReport(reportToBeSent).subscribe(
       data => {
-        console.log("Success");
+        this.alertService.showSuccessAlert(this.hipsterTranslate.translateItem("FEEDBACK.SUCCESS_TITLE"), 
+                                           this.hipsterTranslate.translateItem("FEEDBACK.SUCCESS_TEXT"));
       }, err => {
         const errors = err.error.split(';');
         errors.splice(errors.length - 1, 1);
         this.hipsterTranslate.translateErrorsReport(errors);
         this.requestErrors = errors;
-        console.log(this.requestErrors);
+        console.log(this.requestErrors);        
+        this.alertService.showErrorAlert(this.hipsterTranslate.translateItem("FEEDBACK.FAIL_TITLE"), this.requestErrors.join('\r</br>'));
       }
     );
   }

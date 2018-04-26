@@ -20,7 +20,10 @@
   "FEEDBACK": {
     "MESSAGE": "Message",
     "SEND": "Send",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "SUCCESS_TITLE": "Report submited",
+    "SUCCESS_TEXT": "We'll avaliate your report soon",
+    "FAIL_TITLE": "Report not submited"
   },
   "PROFILEPAGE": {
     "PROFILE_NOT_FOUND": "User not found",

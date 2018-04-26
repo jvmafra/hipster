@@ -20,7 +20,10 @@
   "FEEDBACK": {
     "MESSAGE": "Mensagem",
     "SEND": "Enviar",
-    "CANCEL": "Cancelar"
+    "CANCEL": "Cancelar",
+    "SUCCESS_TITLE": "Denúncia enviada",
+    "SUCCESS_TEXT": "Nós iremos avaliar sua denúncia em breve",
+    "FAIL_TITLE": "Denúncia não enviada"
   },
   "PROFILEPAGE": {
     "PROFILE_NOT_FOUND": "Usuário não encontrado",
