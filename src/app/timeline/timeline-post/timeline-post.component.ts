@@ -32,7 +32,7 @@ export class TimelinePostComponent implements OnInit {
   }
 
   public openPost() {
-    this.router.navigateByUrl('/post' + this.event._id);
+    this.router.navigateByUrl('/post/' + this.event._id);
   }
 
   private seeMoreComments() {
