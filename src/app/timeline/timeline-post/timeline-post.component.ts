@@ -16,6 +16,7 @@ export class TimelinePostComponent implements OnInit {
   @Input() event;
   public title: string;
   public user_title: string;
+  public customPostID: string;
 
   public subtitle: string;
   public creationDate: string;
@@ -34,12 +35,12 @@ export class TimelinePostComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.initEmbedYoutube(this.event.ownerUsername + this.event.creationDate + this.event.videoID);
+    this.customPostID = this.event.ownerUsername + this.event.creationDate.replace(/[^a-z0-9]/gi,'') + this.event.videoID;
+    this.initEmbedYoutube(this.customPostID);
   }
 
   private seeMoreComments() {
     this.seeMore = !this.seeMore;
-    console.log(this.event);
 
     if (!this.seeMore) {
 
@@ -115,6 +116,7 @@ export class TimelinePostComponent implements OnInit {
   }
 
   private initEmbedYoutube(hashID) {
+    console.log(hashID);
     $('#' + hashID).embed();
   }
 
@@ -136,7 +138,9 @@ export class TimelinePostComponent implements OnInit {
     this.subtitle = titles[this.MUSIC_NAME];
     this.user_title = titles[this.OPTIONAL_TITLE];
     this.title = titles[this.OPTIONAL_TITLE] === "" ? this.subtitle : this.user_title;
-    this.initEmbedYoutube(this.event.ownerUsername + this.event.creationDate + this.event.videoID);
+
+    this.customPostID = this.event.ownerUsername + this.event.creationDate.replace(/[^a-z0-9]/gi,'') + this.event.videoID;
+    this.initEmbedYoutube(this.customPostID);
 
   }
 
