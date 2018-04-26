@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
       data => {
         let authUser: any = data;
         this.userService.storeUser(authUser);
-        window.location.href = '/user/' + authUser.user.username;
+        this.router.navigateByUrl('/user/' + authUser.user.username);
       }, err => {
         this.alertService.showErrorAlert("Autenticar Usuário", "Usuário ou Senha não encontrados")
       }
@@ -64,7 +64,7 @@ export class AppComponent implements OnInit {
   }
 
   private change(event) {
-    window.location.href = '/user/' + this.getUsername();
+    this.router.navigateByUrl('/user/' + this.getUsername());
   }
 
 }

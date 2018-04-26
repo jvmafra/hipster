@@ -26,13 +26,6 @@
                   /{{ profile.spotifyURL }}
                 </div>
               </div>
-              <!-- THIS SECTION WILL BE AVAILABLE SOON, WAITING FOR THE NEXT US -->
-              <!-- <div class="item">
-                <i class="orange large sound icon"></i>
-                <div class="content">
-                  {{ 'PROFILEPAGE.GENREFAVORITES' | translate }}: <a>Pop</a>, <a>Rock</a>, <a>Folk</a>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
@@ -48,7 +41,7 @@
         </a>
       </div>
       <div class="ui segment">
-        <div *ngIf="selected_tab === 0" >
+        <div *ngIf="this.selected_tab === 0" >
           <div class="ui divided items">
             <div class="item" *ngFor="let event of events">
               <app-timeline-post class="hip-full-width" [event]="event"></app-timeline-post>

@@ -1,6 +1,6 @@
 <div class="ui stackable menu">
   <div class="ui container">
-    <a href="/" class="header item">
+    <a routerLink="/" class="header item">
       <img class="logo" src="assets/hipster-logo2.png">
       Hipster
     </a>
@@ -43,7 +43,7 @@
     </div>
 
     <div class="right menu" *ngIf="userService.isAuthenticated()"></div>
-    <a class="item" href="/" *ngIf="userService.isAuthenticated()">
+    <a class="item" routerLink="/" *ngIf="userService.isAuthenticated()">
       <div>
         {{ 'HIPSTER.HOME' | translate }}
       </div>

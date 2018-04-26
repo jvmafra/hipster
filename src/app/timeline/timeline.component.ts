@@ -47,7 +47,6 @@ export class TimelineComponent implements OnInit {
   private classifyBy(index) {
     if (index === 1) {
       this.shownEvents.sort(function(post1, post2) {
-        console.log(post1);
           var date1 = new Date(post1.creationDate).getTime();
           var date2 = new Date(post2.creationDate).getTime();
           return date2 - date1;
