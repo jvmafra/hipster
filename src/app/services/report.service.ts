@@ -15,25 +15,13 @@ export class ReportService {
   }
 
   public getReport(id) {
-    return this.http.get(this.serverHost + 'v1/report/user/' + id, {
-      headers: this.headers
-    });
-  }
-
-  public deleteReport(id) {
-    return this.http.delete(this.serverHost + 'v1/report/user/' + id, {
+    return this.http.get(this.serverHost + 'v1/report/' + id, {
       headers: this.headers
     });
   }
 
   public getAllReports() {
     return this.http.get(this.serverHost + 'v1/report', {
-      headers: this.headers
-    });
-  }
-
-  public deleteAllReports() {
-    return this.http.delete(this.serverHost + 'v1/report', {
       headers: this.headers
     });
   }

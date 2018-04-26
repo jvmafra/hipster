@@ -11,11 +11,15 @@ export class ReportValidator {
     }
 
     if (report.reportedUser === undefined || report.reportedUser.trim() === ""){
-        message += erro.REPORT.VALIDACAO_REPORTED_USER + ';';
+      message += erro.REPORT.VALIDACAO_REPORTED_USER + ';';
     }
 
     if (report.description === undefined || report.description.trim() === ""){
-        message += erro.REPORT.VALIDACAO_DESCRIPTION + ';';
+      message += erro.REPORT.VALIDACAO_DESCRIPTION + ';';
+    }
+
+    if (report.ownerUsername === report.reportedUser){
+      message += erro.REPORT.VALIDACAO_REPORT_YOURSELF + ';';
     }
 
     if (message == ''){

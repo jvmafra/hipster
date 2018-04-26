@@ -36,19 +36,13 @@ export class FeedbackModalComponent implements OnInit {
   public sendFeedbackModal(event, post) {
     this.reportedUser = post.ownerUsername;
     this.videoIDreported = post.videoID;
-    console.log(post.ownerUsername);
-    console.log(post.videoID);
-    console.log(this.reportedUser);
-    console.log(this.videoIDreported);
+
     $('#feedback-modal').modal('show');
     event.stopPropagation();
   }
 
   public sendReport(){
     let username = window.localStorage.username;
-
-    console.log(this.reportedUser);
-    console.log(this.videoIDreported);
 
     let reportToBeSent = {
       ownerUsername: username,
@@ -57,9 +51,7 @@ export class FeedbackModalComponent implements OnInit {
       description: this.report.description,
       reportDate: new Date()
 
-    };
-
-    console.log(reportToBeSent);
+    };    
 
     this.reportService.saveReport(reportToBeSent).subscribe(
       data => {

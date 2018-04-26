@@ -22,11 +22,6 @@
     "SEND": "Send",
     "CANCEL": "Cancel"
   },
-  "TERMS_CONDITIONS": {
-    "TITLE": "Terms and Conditions",
-    "ACCEPT": "I agree to the Terms and Conditions",
-    "TERMS": "asdasdasd"
-  },
   "PROFILEPAGE": {
     "PROFILE_NOT_FOUND": "User not found",
     "ABOUT": "About",
@@ -105,7 +100,8 @@
       "REPORT": {
         "VALIDACAO_OWNER": "Report owner invalid",
         "VALIDACAO_REPORTED_USER": "Reported user invalid",
-        "VALIDACAO_DESCRIPTION": "Report description invalid"
+        "VALIDACAO_DESCRIPTION": "Report description invalid",
+        "VALIDACAO_REPORT_YOURSELF": "User can't report himself"        
       }
     }
   },

@@ -39,19 +39,7 @@ router.get('/', async (req, res) => {
 });
 
 /**
- * DELETE todos os reports
- */
-router.delete('/', async (req, res) => {
-    try {
-      const data = await ReportService.removeReports();
-      res.status(200).json(data);
-    } catch(err) {
-      res.status(400).json(err.message);
-    }
-});
-
-/**
- * GET consulta uma report especifico
+ * GET consulta um report especifico
  */
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
@@ -62,18 +50,5 @@ router.get('/:id', async (req, res) => {
       res.status(400).json(err.message);
     }
 });
-
-/**
- * DELETE reports pelo id
- */
-router.delete('/:id', async (req, res) => {
-    const id = req.params.id;
-    try {
-      const data = await ReportService.removeReport(id);
-      res.status(200).json(data);
-    } catch(err) {
-      res.status(400).json(err.message);
-    }
-  });
 
 module.exports = router;

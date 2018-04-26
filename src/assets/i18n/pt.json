@@ -100,7 +100,8 @@
       "REPORT": {
         "VALIDACAO_OWNER": "Criador da denúncia inválido",
         "VALIDACAO_REPORTED_USER": "Usuário reportado inválido",
-        "VALIDACAO_DESCRIPTION": "Descrição da denúncia inválida"
+        "VALIDACAO_DESCRIPTION": "Descrição da denúncia inválida",
+        "VALIDACAO_REPORT_YOURSELF": "Usuário não pode reportar ele mesmo"        
       }
     }
   },

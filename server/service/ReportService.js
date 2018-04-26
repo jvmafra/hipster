@@ -30,21 +30,6 @@ export class ReportService{
     static retrieveReports() {
       return Report.find({}).sort({reportDate: -1}).exec();
     }
-        
-    /**
-     * Remove um Report
-     *
-     * @param   {String}  id referente ao report a ser removido
-     * @return  {Promise} Promise resolvida
-     */
-    static removeReport(id) {
-      return new Promise((resolve, reject) =>
-        Report.findOneAndRemove({_id: id}, (err, result) => {
-          if (err || !result) return reject(err);
-          return resolve(result);
-        })
-      );
-    }
   
     /**
      * Cadastra um Report
@@ -56,21 +41,6 @@ export class ReportService{
     static registerReport(report) {
       const reportMongoose = new Report(report);
       return reportMongoose.save();
-    }
-  
-    /**
-     * Remove todas os Reports
-     *
-     * @return  {Promise} Promise resolvida com o resultado da
-     * remoção de todas as Reports.
-     */
-    static removeReports() {
-      return new Promise((resolve, reject) =>
-        Report.remove({}, (err, result) => {
-          if (err || !result) return reject(err);
-          return resolve(result);
-        })
-      );
     }
       
   }
