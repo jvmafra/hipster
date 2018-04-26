@@ -116,7 +116,6 @@ export class TimelinePostComponent implements OnInit {
   }
 
   private initEmbedYoutube(hashID) {
-    console.log(hashID);
     $('#' + hashID).embed();
   }
 
