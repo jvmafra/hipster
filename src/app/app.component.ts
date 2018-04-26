@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserService } from './services/user.service';
 import { Router } from '@angular/router';
-import { DeleteModalComponent } from './delete-modal/delete-modal.component'
-import { FeedbackModalComponent } from './feedback-modal/feedback-modal.component'
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { ViewChild } from '@angular/core';
 import { AlertService } from './services/alert.service';
 
@@ -18,9 +17,6 @@ declare var $ :any;
 export class AppComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
   public deleteModal: DeleteModalComponent;
-
-  @ViewChild(FeedbackModalComponent)
-  public feedbackModal: FeedbackModalComponent;
 
   public selectedLanguage: string;
 
@@ -40,7 +36,7 @@ export class AppComponent implements OnInit {
       data => {
         let authUser: any = data;
         this.userService.storeUser(authUser);
-        window.location.href = '/user/' + authUser.user.username;
+        this.router.navigateByUrl('/user/' + authUser.user.username);
       }, err => {
         this.alertService.showErrorAlert("Autenticar Usuário", "Usuário ou Senha não encontrados")
       }
@@ -64,7 +60,7 @@ export class AppComponent implements OnInit {
   }
 
   private change(event) {
-    window.location.href = '/user/' + this.getUsername();
+    this.router.navigateByUrl('/user/' + this.getUsername());
   }
 
 }

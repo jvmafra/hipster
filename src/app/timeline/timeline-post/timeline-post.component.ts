@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { PublicationService } from '../../services/publication.service';
+import { Router } from '@angular/router';
 
 declare var jquery:any;
 declare var $ :any;
@@ -16,6 +17,7 @@ export class TimelinePostComponent implements OnInit {
   @Input() event;
   public title: string;
   public user_title: string;
+  public customPostID: string;
 
   public subtitle: string;
   public creationDate: string;
@@ -25,17 +27,22 @@ export class TimelinePostComponent implements OnInit {
   private comment;
 
   constructor(private userService: UserService,
-              private publicationService: PublicationService) {
+              private publicationService: PublicationService,
+              private router: Router) {
       this.comment = {};
   }
 
   public openPost() {
-    window.location.href = "/post/" + this.event._id
+    this.router.navigateByUrl('/post/' + this.event._id);
+  }
+
+  ngAfterViewInit() {
+    this.customPostID = this.event.ownerUsername + this.event.creationDate.replace(/[^a-z0-9]/gi,'') + this.event.videoID;
+    this.initEmbedYoutube(this.customPostID);
   }
 
   private seeMoreComments() {
     this.seeMore = !this.seeMore;
-    console.log(this.event);
 
     if (!this.seeMore) {
 
@@ -87,6 +94,7 @@ export class TimelinePostComponent implements OnInit {
   }
 
   public likePost() {
+
     let username = window.localStorage.username
 
     if (this.event.likes.includes(username)) {
@@ -109,6 +117,10 @@ export class TimelinePostComponent implements OnInit {
 
   }
 
+  private initEmbedYoutube(hashID) {
+    $('#' + hashID).embed();
+  }
+
   public getLikeBorderClass() {
     let username = window.localStorage.username
     return this.publicationService.getLikeBorderClass(username, this.event.likes);
@@ -121,14 +133,15 @@ export class TimelinePostComponent implements OnInit {
 
   ngOnInit() {
     var url = this.event.url;
-    this.event.thumbnail = "https://img.youtube.com/vi/" + this.event.videoID + "/hqdefault.jpg"
-
     let date = new Date(this.event.creationDate);
     this.creationDate = date.toLocaleString();
     let titles =  this.event.title.split(" HIPSTER_FLAG ")
     this.subtitle = titles[this.MUSIC_NAME];
     this.user_title = titles[this.OPTIONAL_TITLE];
     this.title = titles[this.OPTIONAL_TITLE] === "" ? this.subtitle : this.user_title;
+
+    this.customPostID = this.event.ownerUsername + this.event.creationDate.replace(/[^a-z0-9]/gi,'') + this.event.videoID;
+    this.initEmbedYoutube(this.customPostID);
 
   }
 

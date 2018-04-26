@@ -9,6 +9,7 @@ import {ScheduleService} from './server/service/ScheduleService';
 const cron = require('node-cron');
 const api = require('./server/routes/api');
 const publicacaoRouter = require('./server/routes/publicacaoRouter');
+const reportRouter = require('./server/routes/reportRouter');
 const cors = require('cors');
 
 // Get our API routes
@@ -40,6 +41,7 @@ app.all('/api/v1/*', [require('./server/middleware/validateRequest')]);
 // Set our api routes
 app.use('/api', api);
 app.use('/api/v1/publicacao', publicacaoRouter);
+app.use('/api/v1/report', reportRouter);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

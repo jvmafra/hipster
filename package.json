@@ -47,7 +47,8 @@
     "node-cron": "^1.2.1",
     "rxjs": "^5.5.2",
     "youtube-info": "~1.1.2",
-    "zone.js": "^0.8.14"
+    "zone.js": "^0.8.14",
+    "nodemailer": "^4.6.0"
   },
   "devDependencies": {
     "@angular/cli": "1.5.0",
@@ -74,6 +75,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "lodash": "^4.17.4",
     "mongoose": "^4.13.1",
+    "nodemailer": "^4.6.0",
     "nodemon": "^1.12.1",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",

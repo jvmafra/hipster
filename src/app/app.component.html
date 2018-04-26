@@ -1,6 +1,6 @@
 <div class="ui stackable menu">
   <div class="ui container">
-    <a href="/" class="header item">
+    <a routerLink="/" class="header item">
       <img class="logo" src="assets/hipster-logo2.png">
       Hipster
     </a>
@@ -43,7 +43,7 @@
     </div>
 
     <div class="right menu" *ngIf="userService.isAuthenticated()"></div>
-    <a class="item" href="/" *ngIf="userService.isAuthenticated()">
+    <a class="item" routerLink="/" *ngIf="userService.isAuthenticated()">
       <div>
         {{ 'HIPSTER.HOME' | translate }}
       </div>
@@ -54,13 +54,12 @@
       </div>
     </a>
     <a class="item" *ngIf="userService.isAuthenticated()">
-      <img (click)="change()" class="ui avatar image" src="./assets/elliot.jpg">
+      <img (click)="change()" class="ui avatar image" src="./assets/neutro.png">
       <span (click)="change()" >{{ getName() }}</span>
       <div class="ui simple dropdown">
         <i class="dropdown icon"></i>
         <div class="menu">
           <div class="item" (click)="deleteModal.deleteUserModal($event)">{{ 'DELETEMODAL.DELETE_ACCOUNT' | translate }}</div>
-          <div class="item" (click)="feedbackModal.sendFeedbackModal($event)">{{ 'HIPSTER.SEND_REPORT' | translate }}</div>
         </div>
       </div>
     </a>
@@ -68,6 +67,4 @@
 </div>
 
 <app-delete-modal view-model.ref="deleteModal"> </app-delete-modal>
-<app-feedback-modal view-model.ref="feedbackModal"> </app-feedback-modal>
-
 <router-outlet></router-outlet>

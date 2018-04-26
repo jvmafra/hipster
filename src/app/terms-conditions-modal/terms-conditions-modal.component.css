@@ -1,0 +1,21 @@
+.title-terms {    
+    font-weight: bold;    
+    font-size: 18px;
+}
+
+.text-terms {
+    text-align: justify;
+    text-justify: inter-word;
+    font-size: 14px;
+}
+
+.text-section-terms {
+    font-weight: bold;   
+    font-size: 16px;
+}
+
+#terms.content{
+    height: 400px; 
+    overflow-y: scroll;
+}
+

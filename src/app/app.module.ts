@@ -11,8 +11,9 @@ import { FormsModule } from '@angular/forms';
 import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserPostComponent } from './user-post/user-post.component';
 import { UserService } from './services/user.service';
-import { GlobalService} from './services/global.service'
-import { FormValidationService } from './services/form-validation.service'
+import { ReportService } from './services/report.service';
+import { GlobalService} from './services/global.service';
+import { FormValidationService } from './services/form-validation.service';
 import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -28,6 +29,8 @@ import { AlertService } from './services/alert.service';
 import { FeedbackModalComponent } from './feedback-modal/feedback-modal.component';
 import { PostCommentComponent } from './post-comment/post-comment.component';
 import { TermsConditionsModalComponent } from './terms-conditions-modal/terms-conditions-modal.component';
+import { LoadIndicationComponent } from './load-indication/load-indication.component';
+import { CreatePostHomeComponent } from './create-post-home/create-post-home.component';
 
 PublicationService
 export function HttpLoaderFactory(http: HttpClient) {
@@ -47,7 +50,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreatePostModalComponent,
     FeedbackModalComponent,
     PostCommentComponent,
-    TermsConditionsModalComponent
+    TermsConditionsModalComponent,
+    LoadIndicationComponent,
+    CreatePostHomeComponent
   ],
   providers: [
     {
@@ -68,6 +73,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthService,
     StorageService,
     PublicationService,
+    ReportService,
     AlertService
   ],
   imports: [

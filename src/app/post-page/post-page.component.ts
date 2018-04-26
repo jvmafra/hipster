@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { PublicationService } from '../services/publication.service';
+import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
+import { AlertService } from '../services/alert.service';
 
 declare var jquery:any;
 declare var $ :any;
@@ -14,20 +16,29 @@ declare var $ :any;
 })
 export class PostPageComponent implements OnInit {
 
+  @ViewChild(FeedbackModalComponent)
+  public feedbackModal: FeedbackModalComponent;
+
   public post;
   public user_title: string = undefined;
   public creationDate: string;
   private OPTIONAL_TITLE = 1;
   private MUSIC_NAME = 0;
+  private seeMore = false;
+  private comment;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
-              private publicationService: PublicationService) {
+              private publicationService: PublicationService,
+              private alertService: AlertService) {
     this.post = {};
+    this.comment = {};
     this.post["likes"] = [];
   }
 
   ngOnInit() {
+    this.alertService.showLoadIndication();
+    
     this.route.params.subscribe(params => {
         let postId = params['id'];
 
@@ -42,8 +53,10 @@ export class PostPageComponent implements OnInit {
             this.creationDate = date.toLocaleString();
             var url = this.post.url;
             this.initEmbedYotubue(this.post.videoID);
-
+            this.alertService.hideLoadIndication();
+            
           }, err => {
+            this.alertService.hideLoadIndication();
             console.log(err)
           }
         );
@@ -93,6 +106,56 @@ export class PostPageComponent implements OnInit {
 
   private getClass(genre) {
     return this.userService.getColor(genre);
+  }
+
+
+  private seeMoreComments() {
+    this.seeMore = !this.seeMore;
+    console.log(this.post);
+  }
+
+  /**
+   * Habilita a publicação do comentario utilizando a tecla ENTER
+   */
+  private onSubmit(e) {
+      if (e.keyCode == 13) {
+          this.postComment();
+      }
+  }
+
+  /**
+   * Regista o novo comentario feito pelo usuario com todas as sua informacoes associadas e atualiza
+   * a publicacao.
+   */
+  public postComment() {
+    let username = window.localStorage.username
+
+    if (this.comment.description.trim()) {
+      this.comment.ownerUsername = username;
+
+      let newComment = {
+        ownerUsername: username,
+        description: this.comment.description,
+        likes: [],
+        creationDate: new Date()
+      };
+
+      this.post.comments.push(newComment);
+
+      let updatedPost = {
+        _id: this.post._id,
+        comments: this.post.comments
+      }
+
+      this.publicationService.updatePublication(updatedPost).subscribe(
+        data => {
+          this.comment = {
+            description:  ""
+          };
+        }, err => {}
+      );
+    }
+
   }
 
 }
