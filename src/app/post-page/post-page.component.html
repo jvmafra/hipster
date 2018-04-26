@@ -31,6 +31,9 @@
                   {{ post.likes.length }}
                 </a>
               </div>
+              <div class="ui negative basic button" (click)="feedbackModal.sendFeedbackModal($event, post)">
+                  {{ 'HIPSTER.REPORT' | translate }}
+              </div>
             </div>
             <div class="extra">
               <div class="ui labels">
@@ -70,3 +73,5 @@
     </div>
   </div>
 </div>
+
+<app-feedback-modal view-model.ref="feedbackModal"></app-feedback-modal>

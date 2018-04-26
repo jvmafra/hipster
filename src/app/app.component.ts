@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserService } from './services/user.service';
 import { Router } from '@angular/router';
-import { DeleteModalComponent } from './delete-modal/delete-modal.component'
-import { FeedbackModalComponent } from './feedback-modal/feedback-modal.component'
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { ViewChild } from '@angular/core';
 import { AlertService } from './services/alert.service';
 
@@ -18,9 +17,6 @@ declare var $ :any;
 export class AppComponent implements OnInit {
   @ViewChild(DeleteModalComponent)
   public deleteModal: DeleteModalComponent;
-
-  @ViewChild(FeedbackModalComponent)
-  public feedbackModal: FeedbackModalComponent;
 
   public selectedLanguage: string;
 

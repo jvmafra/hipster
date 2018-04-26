@@ -11,15 +11,19 @@
     "CLASS_L_POPULAR": "Menos populares",
     "CLASS_M_POPULAR": "Mais populares",
     "SEND_REPORT": "Enviar Denúncia",
+    "REPORT": "Denunciar",
     "LANGUAGES": {
       "PT": "Português",
       "EN": "English"
     }
   },
   "FEEDBACK": {
-    "MESSAGE": "mensagem",
+    "MESSAGE": "Mensagem",
     "SEND": "Enviar",
-    "CANCEL": "Cancelar"
+    "CANCEL": "Cancelar",
+    "SUCCESS_TITLE": "Denúncia enviada",
+    "SUCCESS_TEXT": "Nós iremos avaliar sua denúncia em breve",
+    "FAIL_TITLE": "Denúncia não enviada"
   },
   "PROFILEPAGE": {
     "PROFILE_NOT_FOUND": "Usuário não encontrado",
@@ -95,6 +99,12 @@
         "VALIDACAO_CATEGORY": "Publicação deve ser da categoria musica",
         "VALIDACAO_URL_YOUTUBE": "Publicação deve ter uma url do youtube válida",
         "VALIDACAO_VIEW_COUNT": "Publicação tem mais que 1 milhão de visualizações"
+      },
+      "REPORT": {
+        "VALIDACAO_OWNER": "Criador da denúncia inválido",
+        "VALIDACAO_REPORTED_USER": "Usuário reportado inválido",
+        "VALIDACAO_DESCRIPTION": "Descrição da denúncia inválida",
+        "VALIDACAO_REPORT_YOURSELF": "Usuário não pode reportar ele mesmo"        
       }
     }
   },
