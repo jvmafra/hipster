@@ -5,7 +5,7 @@
     <div class="ui divided items">
       <div class="ui divided items">
         <div class="item">
-          <div class="content">            
+          <div class="content">
             <a class="header">{{ post.title }}</a>
             <div class="meta" *ngIf='user_title !== ""'>
               <span class="date">{{ post.music_name }}</span>
@@ -14,7 +14,9 @@
               <span class="date">{{ 'POST.ARTIST' | translate }}: {{ post.artist }}</span>
             </div>
             <div class="meta">
-              <span class="date">{{ post.ownerUsername }}: {{ creationDate }}</span>
+              <span class="date">{{ 'POST.BY' | translate }}</span>
+              <a class="date hip-ownerusername" (click)="goToUserPage(post.ownerUsername)">{{ post.ownerUsername }}</a>
+              <span class="date"> {{ 'POST.AT' | translate }} {{ creationDate }}</span>
             </div>
             <div class="description">
               <p>{{ post.description }}</p>

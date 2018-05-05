@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { PublicationService } from '../../services/publication.service';
+import { HipsterTranslate } from '../../services/hipster-translate.service';
 import { Router } from '@angular/router';
 
 declare var jquery:any;
@@ -29,7 +30,12 @@ export class TimelinePostComponent implements OnInit {
   constructor(private userService: UserService,
               private publicationService: PublicationService,
               private router: Router) {
+
       this.comment = {};
+  }
+
+  public goToUserPage(username) {
+    this.router.navigateByUrl('/user/' + username);
   }
 
   public openPost() {
