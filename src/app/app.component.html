@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="right menu" *ngIf="!userService.isAuthenticated()">
-      <div class="ui form hipster-login-form">
+      <div class="ui form hipster-login-form" (keypress)="enterPressed($event, username, password)">
         <div class="fields">
           <div class="field">
             <div class="ui left icon input">
