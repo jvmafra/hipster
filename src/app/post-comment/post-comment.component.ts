@@ -46,8 +46,7 @@ export class PostCommentComponent implements OnInit {
     );
   }
 
-  private seeProfile() {
-    let username = window.localStorage.username
+  private seeProfile(username) {
     this.router.navigateByUrl('/user/' + username);
   }
 
