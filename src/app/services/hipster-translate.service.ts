@@ -25,6 +25,12 @@ export class HipsterTranslate {
   public getFormattedLanguage() {
     let lang = this.getCurrentLanguage();
 
+    let hipster_languages = ["en", "pt"];        
+
+    if (hipster_languages.indexOf(lang) === -1){
+      return "English";  
+    }
+
     if (lang === "en") return "English"
     if (lang === "pt") return "Português"
   }
