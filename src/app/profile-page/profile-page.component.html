@@ -40,6 +40,11 @@
           {{ 'PROFILEPAGE.ABOUT' | translate }}
         </a>
       </div>
+
+      <div class="ui brown segment clearing" *ngIf="this.selected_tab === 0">
+        <app-create-post-home (getAllPublications)="getAllPublications()"></app-create-post-home>
+      </div>
+
       <div class="ui segment">
         <div *ngIf="this.selected_tab === 0" >
           <div class="ui divided items">
