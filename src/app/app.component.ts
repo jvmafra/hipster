@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
       data => {
         let authUser: any = data;
         this.userService.storeUser(authUser);
-        this.router.navigateByUrl('/user/' + authUser.user.username);
+        this.router.navigateByUrl('/');
       }, err => {
         this.alertService.showErrorAlert("Autenticar Usuário", "Usuário ou Senha não encontrados")
       }
