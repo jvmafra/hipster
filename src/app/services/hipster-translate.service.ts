@@ -27,7 +27,7 @@ export class HipsterTranslate {
 
     let hipster_languages = ["en", "pt"];        
 
-    if (hipster_languages.indexOf(lang) === -1){
+    if (hipster_languages.indexOf(lang) === -1) {
       return "English";  
     }
 
