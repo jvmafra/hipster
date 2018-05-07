@@ -24,11 +24,6 @@ const publicationSchema = new Schema({
     required: [true, erro.CADASTRO.VALIDACAO_URL]
   },
 
-  url : {
-    type: String,
-    required: [true, erro.CADASTRO.VALIDACAO_URL_YOUTUBE]
-  },
-
   videoID : {
     type: String,
     required: [true, erro.CADASTRO.VALIDACAO_VIDEOID_YOUTUBE]

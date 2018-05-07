@@ -18,7 +18,7 @@ declare var $ :any;
 })
 export class CreatePostHomeComponent implements OnInit {
 
-  @Output() getAllPublications = new EventEmitter<string>();
+  @Output() search = new EventEmitter<string>();
   public publication;
   public colors: Object;
   public originalListGenres : Array<Object>;
@@ -75,7 +75,7 @@ export class CreatePostHomeComponent implements OnInit {
         data => {
           $('#create-post').modal('hide')
           this.alertService.hideLoadIndication();
-          this.getAllPublications.emit();
+          this.search.emit();
           this.hideForm();
         }, err => {
           this.alertService.hideLoadIndication();

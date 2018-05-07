@@ -17,7 +17,7 @@ const reportSchema = new Schema({
     },
 
     videoIDreported : {
-        type: String        
+        type: String
     },
 
     description : {
@@ -29,13 +29,13 @@ const reportSchema = new Schema({
     reportDate : {
       type: Date,
       default: Date.now },
-    
+
 });
 
 reportSchema.pre("save", async function(next) {
     let ownerUsernameCheck = {}
     try {
-        ownerUsernameCheck = await UsuarioService.consultaUsuario(this.ownerUsername);        
+        ownerUsernameCheck = await UsuarioService.consultaUsuario(this.ownerUsername);
     } catch (err) {
         next(err);
     }

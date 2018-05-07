@@ -87,6 +87,16 @@ export class PublicationService {
     }
   }
 
+  public search (params) {
+    return this.http.get(this.serverHost + 'v1/publicacao', {
+      headers: this.headers,
+      params: {
+        orderBy: params.orderBy,
+        filterByGenres: params.filterByGenres
+      }
+    });
+  }
+
   public getListGenres() {
     return [ {name: "Pop", value:"Pop"},
              {name: "Rock", value:"Rock"},
