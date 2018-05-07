@@ -82,28 +82,37 @@
             </div>
             <div class="field" [ngClass]="{'disabled': !isMyProfile}">
               <div class="three fields">
-                <div id="day" class="ui fluid compact search selection dropdown">
-                  <input type="hidden" name="day">
-                  <i class="dropdown icon"></i>
-                  <div class="default text">{{ 'REGISTER.DAY' | translate }}</div>
-                  <div class="menu">
-                    <div *ngFor="let day of days" class="item" attr.data-value="day + 1">{{ day +1}}</div>
+                <div class="field">
+                    <div class="ui sub header">{{ 'REGISTER.DAY' | translate }}</div>
+                  <div id="day" class="ui fluid compact search selection dropdown">
+                    <input type="hidden" name="day">
+                    <i class="dropdown icon"></i>
+                    <div class="default text">{{ 'REGISTER.DAY' | translate }}</div>
+                    <div class="menu">
+                      <div *ngFor="let day of days" class="item" attr.data-value="day + 1">{{ day +1}}</div>
+                    </div>
                   </div>
                 </div>
-                <div id="month" class="ui fluid compact search selection dropdown">
-                  <input type="hidden" name="month">
-                  <i class="dropdown icon"></i>
-                  <div class="default text">{{ 'REGISTER.MONTH' | translate }}</div>
-                  <div class="menu">
-                    <div *ngFor="let month of months" class="item" attr.data-value="month + 1">{{ month +1}}</div>
+                <div class="field">
+                  <div class="ui sub header">{{ 'REGISTER.MONTH' | translate }}</div>
+                  <div id="month" class="ui fluid compact search selection dropdown">
+                    <input type="hidden" name="month">
+                    <i class="dropdown icon"></i>
+                    <div class="default text">{{ 'REGISTER.MONTH' | translate }}</div>
+                    <div class="menu">
+                      <div *ngFor="let month of months" class="item" attr.data-value="month + 1">{{ month +1}}</div>
+                    </div>
                   </div>
                 </div>
-                <div id="year" class="ui fluid compact search selection dropdown">
-                  <input type="hidden" name="year">
-                  <i class="dropdown icon"></i>
-                  <div class="default text">{{ 'REGISTER.YEAR' | translate }}</div>
-                  <div class="menu">
-                    <div *ngFor="let year of years" class="item" attr.data-value="year +1">{{ year }}</div>
+                <div class="field">
+                  <div class="ui sub header">{{ 'REGISTER.YEAR' | translate }}</div>
+                  <div id="year" class="ui fluid compact search selection dropdown">
+                    <input type="hidden" name="year">
+                    <i class="dropdown icon"></i>
+                    <div class="default text">{{ 'REGISTER.YEAR' | translate }}</div>
+                    <div class="menu">
+                      <div *ngFor="let year of years" class="item" attr.data-value="year +1">{{ year }}</div>
+                    </div>
                   </div>
                 </div>
               </div>
