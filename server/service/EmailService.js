@@ -2,15 +2,6 @@ import nodemailer from 'nodemailer';
 import handlebars from 'express-handlebars';
 import hbs from 'nodemailer-express-handlebars';
 import path from 'path';
-import juice from 'juice';
-
-let REGISTRATION_MAIL = '<div>' +
-  // + '<img style="margin-left: 45%;" src="../../src/assets/hipster-logo2.png">' +
-  + '<p style="text-align: center">' +
-  + 'Olá, seu cadastro está quase completo. Para prosseguir com seu cadastro clique no link a baixo:' +
-  + '</p>'
-  + '</div>';
-
 
 /**
  * @FIXME Esconder senha do email
@@ -35,15 +26,22 @@ const data = {
   template: 'registrationemail',
   context: {
     nome: '',
-    link: "http://hipstermusic.herokuapp.com/confirmation/a4qas412Fwrea"
+    link: "http://hipstermusic.herokuapp.com/confirmation/"
   }
 };
 
 export class EmailService {
+  /**
+   * Responsavel por montar e enviar o email de confirmação de
+   * registro.
+   *
+   * @param {String} token referente a confirmação.
+   * @param {Object} to que cotém os dados para o envio do email.
+   */
   static sendRegistrationMail (token, to) {
-    const nome = "GileBoy";
-    data.to= nome + ', gileadekelvin@gmail.com';
-    data.context.nome = nome;
+    data.to= to.nome + ', ' + to.email;
+    data.context.nome = to.nome;
+    data.context.link += token;
     transporter.sendMail(data, function (err, info) {
       if(err)
         console.log(err);
@@ -52,6 +50,3 @@ export class EmailService {
     });
   }
 }
-
-EmailService.sendRegistrationMail();
-module.exports = EmailService;

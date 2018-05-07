@@ -54,6 +54,11 @@ const usuarioSchema = new Schema({
     spotifyURL : {
       type: String,
       required: [false]
+    },
+
+    active : {
+      type: Boolean,
+      default: false
     }
 });
 

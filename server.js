@@ -5,11 +5,14 @@ import http from 'http';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import {ScheduleService} from './server/service/ScheduleService';
+import uuid from 'uuid/v1';
 
 const cron = require('node-cron');
 const api = require('./server/routes/api');
 const publicacaoRouter = require('./server/routes/publicacaoRouter');
 const cors = require('cors');
+
+export const NAMESPACE = uuid();
 
 // Get our API routes
 

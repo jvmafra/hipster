@@ -1,6 +1,9 @@
 import db_config from '../config/db_config';
-import Usuario from '../model/Usuario'
-import bcrypt from 'bcrypt-nodejs'
+import Usuario from '../model/Usuario';
+import bcrypt from 'bcrypt-nodejs';
+import uuid3 from 'uuid/v3';
+import {NAMESPACE} from "../../server";
+import { EmailService } from './EmailService';
 
 db_config();
 
@@ -10,7 +13,6 @@ db_config();
  * @author Gustavo Oliveira
  */
 export class UsuarioService {
-
   /**
    * Consulta um Usuário dado um username.
    *
@@ -80,9 +82,19 @@ export class UsuarioService {
   static registerUser(usuario) {
     const usuarioMongoose = new Usuario(usuario);
     return  new Promise((resolve, reject) => {
-      usuarioMongoose.save((err, result) => (err) ? reject(err) : resolve(result));
+      usuarioMongoose.save((err, result) => {
+        if (err) {
+          return reject(err);
+        }
+        else {
+          console.log(JSON.stringify(result, null, 2));
+          const to = {nome: result.name, email:result.email};
+          const token = uuid3(result.username,NAMESPACE);
+          EmailService.sendRegistrationMail(result._id, to);
+          return resolve(result)
+        }
+      });
     })
-
   }
 
   /**

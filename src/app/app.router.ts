@@ -7,7 +7,6 @@ import { RegisterComponent } from './register/register.component';
 import { AuthService } from './services/auth.service';
 import { TimelineComponent } from './timeline/timeline.component';
 import { PostPageComponent } from './post-page/post-page.component';
-import { NewAccountComponent } from './new-account/new-account.component';
 
 export const router: Routes = [
   { path: '', component: TimelineComponent, canActivate: [AuthService] },
