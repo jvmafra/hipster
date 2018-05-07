@@ -11,6 +11,7 @@
     "CLASS_L_POPULAR": "Less Popular",
     "CLASS_M_POPULAR": "Most Popular",
     "SEND_REPORT": "Send Report",
+    "REPORT": "Report",
     "LANGUAGES": {
       "PT": "Português",
       "EN": "English"
@@ -19,7 +20,10 @@
   "FEEDBACK": {
     "MESSAGE": "Message",
     "SEND": "Send",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "SUCCESS_TITLE": "Report submited",
+    "SUCCESS_TEXT": "We'll avaliate your report soon",
+    "FAIL_TITLE": "Report not submited"
   },
   "PROFILEPAGE": {
     "PROFILE_NOT_FOUND": "User not found",
@@ -32,6 +36,8 @@
     "PROFILE": "Profile"
   },
   "POST": {
+    "BY": "By ",
+    "AT": "at ",
     "REPLY": "Reply",
     "SEND": "Write an comment...",
     "LIKE": "Like",
@@ -99,6 +105,12 @@
         "VALIDACAO_CATEGORY": "Publication has to be a music",
         "VALIDACAO_URL_YOUTUBE": "Publication has to have a valid url from youtube",
         "VALIDACAO_VIEW_COUNT": "Publication has more than 1 million of views"
+      },
+      "REPORT": {
+        "VALIDACAO_OWNER": "Report owner invalid",
+        "VALIDACAO_REPORTED_USER": "Reported user invalid",
+        "VALIDACAO_DESCRIPTION": "Report description invalid",
+        "VALIDACAO_REPORT_YOURSELF": "User can't report himself"
       }
     }
   },

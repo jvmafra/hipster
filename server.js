@@ -10,6 +10,7 @@ import uuid from 'uuid/v1';
 const cron = require('node-cron');
 const api = require('./server/routes/api');
 const publicacaoRouter = require('./server/routes/publicacaoRouter');
+const reportRouter = require('./server/routes/reportRouter');
 const cors = require('cors');
 
 export const NAMESPACE = uuid();
@@ -43,6 +44,7 @@ app.all('/api/v1/*', [require('./server/middleware/validateRequest')]);
 // Set our api routes
 app.use('/api', api);
 app.use('/api/v1/publicacao', publicacaoRouter);
+app.use('/api/v1/report', reportRouter);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

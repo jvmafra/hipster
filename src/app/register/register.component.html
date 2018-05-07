@@ -107,20 +107,6 @@
           </div>
           <div class="ui fluid large blue submit button" [ngClass]="{'disabled': !enableRegister()}" (click)="registerUser(user, $event)">{{ 'REGISTER.SUBMIT' | translate }}</div>
         </form>
-
-        <div class="ui vertical large animated button fb-btn" (click)="loginFB()">
-          <div class="hidden content">{{ 'REGISTER.LOGIN_FB' | translate }}</div>
-          <div class="visible content">
-            <i class="facebook icon"></i>
-          </div>
-        </div>
-
-        <div class="ui vertical large animated button google-btn" (click)="loginGoogle()">
-          <div class="hidden content">{{ 'REGISTER.LOGIN_GOOGLE' | translate }}</div>
-          <div class="visible content">
-            <i class="google icon"></i>
-          </div>
-        </div>
       </div>
     </div>
   </div>

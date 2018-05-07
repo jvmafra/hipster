@@ -2,7 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CreatePostModalComponent } from '../create-post-modal/create-post-modal.component'
 import { ViewChild } from '@angular/core';
 import { PublicationService } from '../services/publication.service';
-import { UserService } from "../services/user.service"
+import { UserService } from "../services/user.service";
+import { AlertService } from "../services/alert.service";
 
 declare var jquery:any;
 declare var $ :any;
@@ -24,14 +25,17 @@ export class TimelineComponent implements OnInit {
   private NO_FILTERED_GENRES = 0;
 
   constructor(private publicationService: PublicationService,
-              private userService: UserService) {
+              private userService: UserService,
+              private alertService: AlertService) {
     this.listGenres = this.publicationService.getListGenres();
     this.initGenreSelectedProperty();
     this.filteredGenres = []
   }
 
   ngOnInit() {
+    this.alertService.showLoadIndication();
     this.getAllPublications();
+    this.alertService.hideLoadIndication();
   }
 
   private initGenreSelectedProperty() {
@@ -43,7 +47,6 @@ export class TimelineComponent implements OnInit {
   private classifyBy(index) {
     if (index === 1) {
       this.shownEvents.sort(function(post1, post2) {
-        console.log(post1);
           var date1 = new Date(post1.creationDate).getTime();
           var date2 = new Date(post2.creationDate).getTime();
           return date2 - date1;

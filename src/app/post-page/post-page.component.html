@@ -1,3 +1,4 @@
+<app-load-indication></app-load-indication>
 <div class="ui container post-container">
   <div class="ui stacked segment">
     <div class="ui embed"></div>
@@ -13,7 +14,9 @@
               <span class="date">{{ 'POST.ARTIST' | translate }}: {{ post.artist }}</span>
             </div>
             <div class="meta">
-              <span class="date">{{ post.ownerUsername }}: {{ creationDate }}</span>
+              <span class="date">{{ 'POST.BY' | translate }}</span>
+              <a class="date hip-ownerusername" (click)="goToUserPage(post.ownerUsername)">{{ post.ownerUsername }}</a>
+              <span class="date"> {{ 'POST.AT' | translate }} {{ creationDate }}</span>
             </div>
             <div class="description">
               <p>{{ post.description }}</p>
@@ -29,6 +32,9 @@
                 <a class="ui basic left pointing label" [ngClass]="getLikeBorderClass()">
                   {{ post.likes.length }}
                 </a>
+              </div>
+              <div class="ui negative basic button" (click)="feedbackModal.sendFeedbackModal($event, post)">
+                  {{ 'HIPSTER.REPORT' | translate }}
               </div>
             </div>
             <div class="extra">
@@ -69,3 +75,5 @@
     </div>
   </div>
 </div>
+
+<app-feedback-modal view-model.ref="feedbackModal"></app-feedback-modal>

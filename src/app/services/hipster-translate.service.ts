@@ -25,6 +25,12 @@ export class HipsterTranslate {
   public getFormattedLanguage() {
     let lang = this.getCurrentLanguage();
 
+    let hipster_languages = ["en", "pt"];        
+
+    if (hipster_languages.indexOf(lang) === -1) {
+      return "English";  
+    }
+
     if (lang === "en") return "English"
     if (lang === "pt") return "Português"
   }
@@ -40,6 +46,20 @@ export class HipsterTranslate {
     for (var idx in errors) {
       errors[idx] = this.translate.instant(prefix + errors[idx]);
     }
+  }
+
+  public translateErrorsReport(errors) {
+    let prefix = "ERRORS.RESPONSE.REPORT.";
+
+    for (var idx in errors) {
+      errors[idx] = this.translate.instant(prefix + errors[idx]);
+    }
+  }
+
+  public translateItem(item){
+
+    let itemTranslated = this.translate.instant(item);
+    return itemTranslated;
   }
 
 }

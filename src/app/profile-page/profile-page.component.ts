@@ -45,9 +45,11 @@ export class ProfilePageComponent implements OnInit {
               private translateService: TranslateService,
               private publicationService: PublicationService,
               private formValidation: FormValidationService,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private router: Router) {
 
     this.alreadyInit = 0;
+    this.foundUser = true;
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
     this.years = this.userService.getBirthdayYearsArray('1905');
@@ -71,16 +73,20 @@ export class ProfilePageComponent implements OnInit {
         spotifyURL: this.spotifyURL
       };
 
+      this.alertService.showLoadIndication();
       this.userService.updateUser(usuario, this.profile.username).subscribe(
         data => {
           this.alertService.showSuccessAlert("Atualização de Perfil", "Perfil atualizado com sucesso!");
           this.userService.storeName(usuario.name);
-          window.location.href = "/user/" + this.profile.username;
+          this.alertService.hideLoadIndication();
+          this.profile = usuario;
+          this.router.navigateByUrl('/user/' + this.profile.username);
         }, err => {
           this.alertService.showErrorAlert("Atualização de Perfil", "Erro ao atualizar Perfil, tente novamente mais tarde.");
           if (err.statusText === "Unauthorized") {
             this.userService.logoutUser();
           }
+          this.alertService.hideLoadIndication();
         }
       );
     }
@@ -127,6 +133,8 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.alertService.showLoadIndication();
+
     this.initSemanticValidationForm();
 
     this.route.params.subscribe(params => {
@@ -167,7 +175,7 @@ export class ProfilePageComponent implements OnInit {
             this.foundUser = false;
           }
         );
+        this.alertService.hideLoadIndication();
      });
-
   }
 }
