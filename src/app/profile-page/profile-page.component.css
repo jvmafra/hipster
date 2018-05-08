@@ -11,10 +11,14 @@
 }
 
 .dropdown {
-  margin: 8px;
+  margin-top: 2%;
 }
 
 .hipster-select {
   padding-left: 34px !important;
   font-size: 12px;
+}
+
+.ui.sub.header {
+  padding-left: 4.5%;
 }
