@@ -44,9 +44,9 @@ app.use('/api/v1/publicacao', publicacaoRouter);
 app.use('/api/v1/report', reportRouter);
 
 // Catch all other routes and return the index file
-//app.get('*', (req, res) => {
-// res.sendFile(path.join(__dirname + '/dist/index.html'));
-//});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname + 'src/index.html'));
+// });
 
 ScheduleService.checkScheduler();
 
