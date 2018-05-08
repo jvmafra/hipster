@@ -35,6 +35,11 @@
   width: 100% !important;
 }
 
+.logo_info {
+  width: 40px;
+  height: auto;
+}
+
 .field {
   width: 100% !important;
   padding-bottom: 4px !important;

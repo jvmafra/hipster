@@ -1,6 +1,10 @@
 import db_config from '../config/db_config';
-import Usuario from '../model/Usuario'
-import bcrypt from 'bcrypt-nodejs'
+import Usuario from '../model/Usuario';
+import bcrypt from 'bcrypt-nodejs';
+import uuid3 from 'uuid/v3';
+import { NAMESPACE } from "../../server";
+import { EmailService } from './EmailService';
+import { ConfirmationService } from "./ConfirmationService";
 
 db_config();
 
@@ -10,7 +14,6 @@ db_config();
  * @author Gustavo Oliveira
  */
 export class UsuarioService {
-
   /**
    * Consulta um Usuário dado um username.
    *
@@ -37,7 +40,7 @@ export class UsuarioService {
    */
   static authUser(username, password) {
     return new Promise((resolve, reject) =>
-      Usuario.findOne({ username: username }, (err, result) => {
+      Usuario.findOne({ username: username, active: true }, (err, result) => {
         if (err || !result) {
           return resolve(err);
         } else {
@@ -80,9 +83,22 @@ export class UsuarioService {
   static registerUser(usuario) {
     const usuarioMongoose = new Usuario(usuario);
     return  new Promise((resolve, reject) => {
-      usuarioMongoose.save((err, result) => (err) ? reject(err) : resolve(result));
-    })
+      usuarioMongoose.save((err, result) => {
+        if (err) {
+          return reject(err);
+        }
+        else {
+          const to = {nome: result.name, email:result.email};
+          const token = uuid3(result.username,NAMESPACE);
+          const registrationToken = {uuid : token, ownerUsername : result.username, expirationTime : 1};
 
+          ConfirmationService.createRegisterToken(registrationToken);
+
+          EmailService.sendRegistrationMail(token, to);
+          return resolve(result)
+        }
+      });
+    })
   }
 
   /**

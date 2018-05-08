@@ -1,0 +1,34 @@
+.hipster-register-container {
+  margin-top: 1%;
+}
+
+.hipster-register-form {
+  padding: 5%;
+  padding-bottom: 1em;
+}
+
+.danger {
+  color: darkred;
+}
+
+.success {
+  color: green;
+}
+
+.hipster-font-select {
+  font-size: 12px;
+}
+
+.form-width {
+  width: 55% !important;
+}
+
+.card {
+  width: 100% !important;
+}
+
+.logo_info {
+  width: 40px;
+  height: auto;
+}
+

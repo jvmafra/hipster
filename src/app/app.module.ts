@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import { routes } from './app.router';
+import { router } from './app.router';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HipsterTranslate } from './services/hipster-translate.service';
@@ -31,6 +32,8 @@ import { PostCommentComponent } from './post-comment/post-comment.component';
 import { TermsConditionsModalComponent } from './terms-conditions-modal/terms-conditions-modal.component';
 import { LoadIndicationComponent } from './load-indication/load-indication.component';
 import { CreatePostHomeComponent } from './create-post-home/create-post-home.component';
+import { ConfirmationPageComponent } from './confirmation-page/confirmation-page.component';
+import {ConfirmationService} from "./services/confirmation.service";
 
 PublicationService
 export function HttpLoaderFactory(http: HttpClient) {
@@ -52,7 +55,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PostCommentComponent,
     TermsConditionsModalComponent,
     LoadIndicationComponent,
-    CreatePostHomeComponent
+    CreatePostHomeComponent,
+    ConfirmationPageComponent
   ],
   providers: [
     {
@@ -74,12 +78,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     StorageService,
     PublicationService,
     ReportService,
-    AlertService
+    AlertService,
+    ConfirmationService
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    routes,
+    RouterModule.forRoot(router),
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

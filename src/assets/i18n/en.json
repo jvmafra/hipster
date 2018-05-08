@@ -63,7 +63,16 @@
     "USERNAME": "Username",
     "BIRTHDATE": "Birth date",
     "PASSWORD": "Password",
-    "NAME": "Name"
+    "NAME": "Name",
+    "LOGIN_FB": "Login with Facebook",
+    "LOGIN_GOOGLE": "Login with Google",
+    "CONCLUSION": "Proceed with registration",
+    "CONCLUSION_MESSAGE": "Check your e-mail to proceed with registration."
+  },
+  "CONFIRMATION": {
+    "CONFIRMATION_TITLE": "Last Step",
+    "CONFIRMATION_SUCCESS": "Your register was confirmed with success. Now on you are a trully Hipster signin and enjoy our plataform!",
+    "CONFIRMATION_ERROR": "You have failed this city! Ops, wrong tv show! Something has failed, contact our support!"
   },
   "DELETEMODAL": {
     "DELETE_ACCOUNT": "Delete account",
