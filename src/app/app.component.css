@@ -1,7 +1,3 @@
-.hipster-login-form {
-  margin-top: 2.5%;
-}
-
 .labeled {
   color: white !important;
 }
@@ -22,4 +18,16 @@
 .menu {
   background-color: #3D3F4C;
   border-radius: 0px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0){
+  .hipster-login-form {
+    margin-top: 2.5%;
+  }  
+}
+
+@-moz-document url-prefix() {
+  .hipster-login-form {
+    margin-top: 20.5%;
+  }
 }
