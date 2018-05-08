@@ -11,15 +11,17 @@ const self = this;
  * validações adicionadas para manter a consistencia dos dados
  * que iremos guardar.
  */
-const RegisterToken = new Schema({
+const registerTokenSchema = new Schema({
   uuid : {
     type: String,
-    required: [true]
+    required: [true],
+    index: true,                                              // primary-key
+    unique: [true]
   },
 
   ownerUsername : {
     type: String,
-    required: [true, erro.CADASTRO.VALIDACAO_OWNER]
+    required: [true]
   },
 
   creationDate : {
@@ -29,14 +31,13 @@ const RegisterToken = new Schema({
 
   expirationTime : {
     type: Number,
-    required: [true, erro.CADASTRO.VALIDACAO_URL_YOUTUBE]
+    required: [true]
   }
 });
 
-publicationSchema.pre("save", async function(next) {
-  let usuario = {};
+registerTokenSchema.pre("save", async function(next) {
   try {
-      usuario = await UsuarioService.consultaUsuario(this.ownerUsername);
+      await UsuarioService.consultaUsuario(this.ownerUsername);
       next();
   } catch (err) {
       next(err);
@@ -44,7 +45,7 @@ publicationSchema.pre("save", async function(next) {
 
 });
 
-publicationSchema.post('save', (err, doc, next) => {
+registerTokenSchema.post('save', (err, doc, next) => {
   if (err.name === 'ValidationError') {
     erro.handleValidationError(err, next);
   } else if (err.name === 'MongoError'){
@@ -54,4 +55,4 @@ publicationSchema.post('save', (err, doc, next) => {
 });
 
 
-module.exports = mongoose.model('RegisterToken', publicationSchema);
+module.exports = mongoose.model('RegisterToken', registerTokenSchema);

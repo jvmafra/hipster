@@ -32,6 +32,8 @@ import { PostCommentComponent } from './post-comment/post-comment.component';
 import { TermsConditionsModalComponent } from './terms-conditions-modal/terms-conditions-modal.component';
 import { LoadIndicationComponent } from './load-indication/load-indication.component';
 import { CreatePostHomeComponent } from './create-post-home/create-post-home.component';
+import { ConfirmationPageComponent } from './confirmation-page/confirmation-page.component';
+import {ConfirmationService} from "./services/confirmation.service";
 
 PublicationService
 export function HttpLoaderFactory(http: HttpClient) {
@@ -53,7 +55,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PostCommentComponent,
     TermsConditionsModalComponent,
     LoadIndicationComponent,
-    CreatePostHomeComponent
+    CreatePostHomeComponent,
+    ConfirmationPageComponent
   ],
   providers: [
     {
@@ -75,7 +78,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     StorageService,
     PublicationService,
     ReportService,
-    AlertService
+    AlertService,
+    ConfirmationService
   ],
   imports: [
     BrowserModule,

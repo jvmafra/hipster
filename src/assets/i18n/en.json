@@ -69,6 +69,11 @@
     "CONCLUSION": "Proceed with registration",
     "CONCLUSION_MESSAGE": "Check your e-mail to proceed with registration."
   },
+  "CONFIRMATION": {
+    "CONFIRMATION_TITLE": "Last Step",
+    "CONFIRMATION_SUCCESS": "Your register was confirmed with success. Now on you are a trully Hipster signin and enjoy our plataform!",
+    "CONFIRMATION_ERROR": "You have failed this city! Ops, wrong tv show! Something has failed, contact our support!"
+  },
   "DELETEMODAL": {
     "DELETE_ACCOUNT": "Delete account",
     "DELETE_MESSAGE": "Do you have sure that you want to delete your account? All your posts and information gonna be deleted permanently.",

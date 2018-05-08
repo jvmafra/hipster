@@ -69,6 +69,11 @@
     "CONCLUSION": "Concluir cadastro",
     "CONCLUSION_MESSAGE": "Verifique seu email para dar proceguimento ao cadastro de sua conta."
   },
+  "CONFIRMATION": {
+    "CONFIRMATION_TITLE": "Ultimo Passo",
+    "CONFIRMATION_SUCCESS": "Seu cadastro foi confirmado com sucesso. Agora voce é um verdadeiro Hispter faça login e se divirta em nossa plataforma!",
+    "CONFIRMATION_ERROR": "You have failed this city! Ops, seriado errado! Alguma coisa não deu certo, entre em contato com nosso suporte!"
+  },
   "PUBLICATION": {
     "SHARE_MESSAGE":"Compartilha uma nova música",
     "TITLE": "Titulo (Opcional)",
