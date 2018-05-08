@@ -40,7 +40,7 @@ export class UsuarioService {
    */
   static authUser(username, password) {
     return new Promise((resolve, reject) =>
-      Usuario.findOne({ username: username }, (err, result) => {
+      Usuario.findOne({ username: username, active: true }, (err, result) => {
         if (err || !result) {
           return resolve(err);
         } else {
