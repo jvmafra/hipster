@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {ConfirmationService} from "../services/confirmation.service";
 import {ActivatedRoute} from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
@@ -8,15 +8,17 @@ import {AlertService} from "../services/alert.service";
   selector: 'app-confirmation-page',
   templateUrl: './confirmation-page.component.html',
   styleUrls: ['./confirmation-page.component.css'],
-  encapsulation: ViewEncapsulation.None
 })
 export class ConfirmationPageComponent implements OnInit {
   private  classIcon : any;
 
-  constructor(private confirmatioService: ConfirmationService,
+  constructor(private confirmationService: ConfirmationService,
               private route: ActivatedRoute,
               private translateService: TranslateService,
-              private alertService: AlertService) { }
+              private alertService: AlertService) {
+
+        this.classIcon = true;
+  }
 
   ngOnInit() {
     this.alertService.showLoadIndication();
@@ -24,11 +26,10 @@ export class ConfirmationPageComponent implements OnInit {
     this.route.params.subscribe(params => {
       let token = params['token'];
 
-      this.confirmatioService.getConfirmation(token).subscribe(data => {
+      this.confirmationService.getConfirmation(token).subscribe(data => {
           this.classIcon = true;
-        },
-          err => {
-            this.classIcon = false;
+        }, err => {
+          this.classIcon = false;
       });
     });
   }
