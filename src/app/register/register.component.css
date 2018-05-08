@@ -7,7 +7,8 @@
 }
 
 .hipster-register-form {
-  padding: 5%;
+  padding: 10%;
+  padding-bottom: 30px !important;
 }
 
 .ui.toggle.checkbox input:checked~.box:before, .ui.toggle.checkbox input:checked~label:before {
@@ -32,4 +33,9 @@
 
 .card {
   width: 100% !important;
+}
+
+.field {
+  width: 100% !important;
+  padding-bottom: 4px !important;
 }
