@@ -1,0 +1,35 @@
+<div class="hipster-bg-image">
+</div>
+
+<div class="ui container hipster-register-container">
+  <div class="ui grid">
+    <!-- <div class="sixteen wide mobile sixteen wide tablet ten wide computer column">
+      <img class="ui centered small image" src="../assets/hipster-logo2.png">
+    </div> -->
+
+    <div class="centered sixteen wide mobile sixteen wide tablet six wide computer column">
+      <div class="ui centered card form-width">
+        <div class="content">
+          <div class="right floated meta">Hispter</div>
+          <img class="ui image logo_info" src="../assets/hipster-logo2.png">
+        </div>
+        <div class="hipster-register-form">
+          <h4 class="ui horizontal divider header">
+            <i class="check circle icon" [ngClass]="{'danger plus':!getClass(), 'success':getClass()}"></i>
+            {{ 'CONFIRMATION.CONFIRMATION_TITLE' | translate }}
+          </h4>
+
+          <div class="ui success visible message" *ngIf="getClass()">
+            <p>{{ 'CONFIRMATION.CONFIRMATION_SUCCESS' | translate }}</p>
+          </div>
+
+          <div class="ui negative visible message" *ngIf="!getClass()">
+            <p>{{ 'CONFIRMATION.CONFIRMATION_ERROR' | translate }}</p>
+          </div>
+          <div class="ui field">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

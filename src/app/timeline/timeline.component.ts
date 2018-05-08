@@ -14,6 +14,7 @@ declare var $ :any;
   styleUrls: ['./timeline.component.css'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class TimelineComponent implements OnInit {
   @ViewChild(CreatePostModalComponent)
   public createPost: CreatePostModalComponent;
@@ -23,18 +24,23 @@ export class TimelineComponent implements OnInit {
   public selectedLabel: any;
   public filteredGenres : Array<String>;
   private NO_FILTERED_GENRES = 0;
+  public ORDER_BY_MOST_RECENT = 1;
+  public ORDER_BY_MOST_POPULAR = 2;
+  public ORDER_BY_LESS_POPULAR = 3;
+  private selectedOrder;
 
   constructor(private publicationService: PublicationService,
               private userService: UserService,
               private alertService: AlertService) {
     this.listGenres = this.publicationService.getListGenres();
     this.initGenreSelectedProperty();
-    this.filteredGenres = []
+    this.filteredGenres = [];
+    this.selectedOrder = this.ORDER_BY_MOST_RECENT;
   }
 
   ngOnInit() {
     this.alertService.showLoadIndication();
-    this.getAllPublications();
+    this.search();
     this.alertService.hideLoadIndication();
   }
 
@@ -44,30 +50,20 @@ export class TimelineComponent implements OnInit {
     }
   }
 
-  private classifyBy(index) {
-    if (index === 1) {
-      this.shownEvents.sort(function(post1, post2) {
-          var date1 = new Date(post1.creationDate).getTime();
-          var date2 = new Date(post2.creationDate).getTime();
-          return date2 - date1;
-      });
-    } else if (index == 2) {
-      this.shownEvents.sort(function(post1, post2) {
-          var count1 = post1.likes.length;
-          var count2 = post2.likes.length;
-          return count2 - count1;
-      });
-    } else {
-      this.shownEvents.sort(function(post1, post2) {
-          var count1 = post1.likes.length;
-          var count2 = post2.likes.length;
-          return count1 - count2;
-      });
+  public classifyBy(orderByParam) {
+
+    if ([1,2,3].indexOf(orderByParam) !== -1) {
+      this.selectedOrder = orderByParam;
+      this.search();
     }
   }
 
-  public getAllPublications() {
-    this.publicationService.getAllPublications().subscribe(
+  public search() {
+    let params = {};
+    params["orderBy"] = this.selectedOrder;
+    params["filterByGenres"] = this.filteredGenres;
+
+    this.publicationService.search(params).subscribe(
       data => {
         this.events = data;
         this.selectedLabel = "todos";
@@ -82,8 +78,6 @@ export class TimelineComponent implements OnInit {
     return this.userService.getColor(genre);
   }
 
-  // @TODO: In future this should be done in backend
-
   /**
    * Filter events according with selected genres.
    * Save the genres filtered index to future operations.
@@ -94,37 +88,24 @@ export class TimelineComponent implements OnInit {
 
     if (genre.genreSelected === false) {
       this.filteredGenres.push(genre.value);
+      genre.genreSelected = true;
     } else {
       var index = this.filteredGenres.indexOf(genre.value);
       if (index > -1) { this.filteredGenres.splice(index, 1);}
+      genre.genreSelected = false;
     }
 
-    let filteredEvents = this.auxFilterEvents();
-    genre.genreSelected = genre.genreSelected == false ? true : false;
-    //When user unselect all labels
-    this.shownEvents = this.filteredGenres.length === this.NO_FILTERED_GENRES ? this.events : filteredEvents;
+    this.search();
   };
-
-
-  private auxFilterEvents() {
-    let filteredEvents = [];
-
-    filteredEvents = this.events.filter((event) => {
-      const result = event.genres.filter(eventGenre => this.filteredGenres.includes(eventGenre));
-      return result.length > 0;
-    });
-
-    return filteredEvents;
-  }
 
   /**
    * Clear the genre filter in TimeLine
    *
    */
   public clearFilter() {
-    this.shownEvents = this.events;
-    this.listGenres.map(genre => genre.genreSelected = false);
     this.filteredGenres = [];
+    this.listGenres.map(genre => genre.genreSelected = false);
+    this.search();
   }
 
   // @TODO: In future this should be done using Angular's OnPush

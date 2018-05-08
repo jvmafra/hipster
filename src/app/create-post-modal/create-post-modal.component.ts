@@ -15,7 +15,7 @@ declare var $ :any;
   encapsulation: ViewEncapsulation.None
 })
 export class CreatePostModalComponent implements OnInit {
-  @Output() getAllPublications = new EventEmitter<string>();
+  @Output() search = new EventEmitter<string>();
   public publication;
   public colors: Object;
   public originalListGenres : Array<Object>;
@@ -83,7 +83,7 @@ export class CreatePostModalComponent implements OnInit {
         data => {
           $('#create-post').modal('hide')
           $('#load_indication').hide();
-          this.getAllPublications.emit();
+          this.search.emit();
         }, err => {
           $('#load_indication').hide();
           let errors = err.error.split(';');

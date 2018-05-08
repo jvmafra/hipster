@@ -5,12 +5,17 @@ import http from 'http';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import {ScheduleService} from './server/service/ScheduleService';
+import uuid from 'uuid/v1';
 
 const cron = require('node-cron');
 const api = require('./server/routes/api');
 const publicacaoRouter = require('./server/routes/publicacaoRouter');
 const reportRouter = require('./server/routes/reportRouter');
+const confirmationRouter = require('./server/routes/confirmationRouter');
 const cors = require('cors');
+
+export const NAMESPACE = uuid();
+export const domain = Boolean(process.env.PORT) ? 'http://hipstermusic.herokuapp.com' : 'http://localhost:4200';
 
 // Get our API routes
 
@@ -40,6 +45,7 @@ app.all('/api/v1/*', [require('./server/middleware/validateRequest')]);
 
 // Set our api routes
 app.use('/api', api);
+app.use('/api/confirmation', confirmationRouter);
 app.use('/api/v1/publicacao', publicacaoRouter);
 app.use('/api/v1/report', reportRouter);
 

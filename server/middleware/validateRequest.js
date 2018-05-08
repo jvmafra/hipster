@@ -21,7 +21,7 @@ module.exports = function(req, res, next) {
           "message": "Token Expired"
         });
         return;
-      }      
+      }
 
       // Authorize the user to see if s/he can access our resources
 

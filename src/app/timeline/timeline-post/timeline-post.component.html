@@ -14,7 +14,9 @@
             <span class="date">{{ 'POST.ARTIST' | translate }}: {{ event.artist }}</span>
           </div>
           <div class="meta">
-            <span class="date">{{ event.ownerUsername }}: {{ creationDate }}</span>
+            <span class="date">{{ 'POST.BY' | translate }}</span>
+            <a class="date hip-ownerusername" (click)="goToUserPage(event.ownerUsername)">{{ event.ownerUsername }}</a>
+            <span class="date"> {{ 'POST.AT' | translate }} {{ creationDate }}</span>
           </div>
           <div class="description">
             <p>{{ event.description }}</p>

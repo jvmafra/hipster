@@ -4,6 +4,7 @@ import { UserService } from '../services/user.service';
 import { PublicationService } from '../services/publication.service';
 import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
 import { AlertService } from '../services/alert.service';
+import { Router } from '@angular/router';
 
 declare var jquery:any;
 declare var $ :any;
@@ -30,7 +31,8 @@ export class PostPageComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private userService: UserService,
               private publicationService: PublicationService,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private router: Router) {
     this.post = {};
     this.comment = {};
     this.post["likes"] = [];
@@ -38,7 +40,7 @@ export class PostPageComponent implements OnInit {
 
   ngOnInit() {
     this.alertService.showLoadIndication();
-    
+
     this.route.params.subscribe(params => {
         let postId = params['id'];
 
@@ -54,13 +56,17 @@ export class PostPageComponent implements OnInit {
             var url = this.post.url;
             this.initEmbedYotubue(this.post.videoID);
             this.alertService.hideLoadIndication();
-            
+
           }, err => {
             this.alertService.hideLoadIndication();
             console.log(err)
           }
         );
     });
+  }
+
+  public goToUserPage(username) {
+    this.router.navigateByUrl('/user/' + username);
   }
 
   private initEmbedYotubue(videoID) {

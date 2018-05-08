@@ -49,9 +49,20 @@ export class ProfilePageComponent implements OnInit {
               private router: Router) {
 
     this.alreadyInit = 0;
+    this.foundUser = true;
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
     this.years = this.userService.getBirthdayYearsArray('1905');
+  }
+
+  public getAllPublications() {
+    this.publicationService.getAllPublications().subscribe(
+      data => {
+        this.events = data;
+      }, err => {
+        console.log(err)
+      }
+    );
   }
 
   private updateProfile() {

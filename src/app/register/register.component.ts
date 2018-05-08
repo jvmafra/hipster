@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewEncapsulation } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from '../services/user.service';
@@ -8,9 +8,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { AlertService } from '../services/alert.service';
 import { TermsConditionsModalComponent } from '../terms-conditions-modal/terms-conditions-modal.component'
 
-declare var jquery: any;
-declare var $: any;
-declare var firebase: any;
+declare let jquery: any;
+declare let $: any;
+declare let firebase: any;
 
 @Component({
   selector: 'app-register',
@@ -18,7 +18,7 @@ declare var firebase: any;
   styleUrls: ['./register.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, AfterViewInit {
   @ViewChild(TermsConditionsModalComponent)
   public termsConditions: TermsConditionsModalComponent;
   private $: any;
@@ -32,6 +32,7 @@ export class RegisterComponent implements OnInit {
   private errorInfo: Array<Object>;
   private provider: any;
   private self: any;
+  public registering;
 
   constructor(private http: HttpClient,
               private userService: UserService,
@@ -43,13 +44,17 @@ export class RegisterComponent implements OnInit {
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
     this.years = this.userService.getBirthdayYearsArray('1905');
-
+    this.registering = false;
   }
 
   ngOnInit() {
-    this.initDateDropdown();
+
     this.initCheckbox();
     this.initSemanticValidationFormInfo();
+  }
+
+  ngAfterViewInit() {
+    this.initDateDropdown();
   }
 
   public setUpProfile(email, birthday, name) {
@@ -76,21 +81,11 @@ export class RegisterComponent implements OnInit {
 
     this.userService.registerUser(user).subscribe(
       data => {
-        this.userService.loginUser(user.username, user.password).subscribe(
-          data => {
-            this.alertService.showSuccessAlert("Registrar Usuário", "Usuário registrado com sucesso!")
-            let authUser: any = data;
-            this.userService.storeUser(authUser);
-            this.router.navigateByUrl('/user/' + authUser.user.username);
-          }, err => {
-            this.alertService.showErrorAlert("Registrar Usuário", "Verifique as informações inseridas e tente novamente.")
-          }
-        );
+        this.registering = true;
       }, err => {
         this.alertService.showErrorAlert("Registrar Usuário", "Verifique as informações inseridas e tente novamente.")
       }
     );
-
   }
 
   private enableRegister() {
@@ -128,7 +123,7 @@ export class RegisterComponent implements OnInit {
   }
 
   private setDateValuesFromDropdown() {
-    let values = $('.ui.dropdown').dropdown('get value');
+    const values = $('.ui.dropdown').dropdown('get value');
     this.day = values[1];
     this.month = values[2];
     this.year = values[3];

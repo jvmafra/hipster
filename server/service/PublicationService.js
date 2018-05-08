@@ -1,14 +1,19 @@
-import db_config from '../config/db_config';
 import Publication from '../model/Publication'
 
-db_config();
+
+const ORDER_BY_MOST_RECENT = 1;
+const ORDER_BY_MOST_POPULAR = 2;
+const ORDER_BY_LESS_POPULAR = 3;
+const ASCENDING_ORDER = 1;
+const DESCENDING_ORDER = -1;
 
 /**
  * Service responsavel pela lógica de usuário
  *
  * @author Team Hipster
  */
-export class PublicationService{
+export class PublicationService {
+
 
   /**
    * Consulta uma Publicação dado um id.
@@ -25,10 +30,14 @@ export class PublicationService{
    * Consulta todos as Publicações.
    *
    * @returns {Promise}  Promise resolvida com uma lista de objetos Usuario
-   * da forma que o mongo retorna.
+   * da forma que o mongo retorna. Recebe uma query com informações sobre
+   * ordenação e filtering.
    */
-  static retrievePublications() {
-    return Publication.find({}).sort({creationDate: -1}).exec();
+  static search(query) {
+    let sortParams = getSortParams(query.orderBy);
+    let findParams = getFindParams(query.filterByGenres);
+
+    return Publication.find(findParams).sort(sortParams).exec();
   }
 
    /**
@@ -84,6 +93,8 @@ export class PublicationService{
     );
   }
 
+
+
   static editPublication(id, updatedPublication){
     return new Promise((resolve, reject) =>
     Publication.findOneAndUpdate({_id: id}, updatedPublication, (err, result) => {
@@ -93,4 +104,32 @@ export class PublicationService{
     })
   );
   }
+}
+
+function getFindParams(filteredByGenreParam) {
+  let find = {};
+
+  if (filteredByGenreParam instanceof Array) {
+    find = {"genres": { $in : filteredByGenreParam}}
+  } else if (filteredByGenreParam != undefined) {
+    var auxArray = [];
+    auxArray.push(filteredByGenreParam)
+    find = {"genres": { $in : auxArray}}
+  }
+
+  return find;
+}
+
+function getSortParams(orderByParam) {
+  let sort = {};
+
+  if (orderByParam == ORDER_BY_MOST_RECENT) {
+    sort = { "creationDate": DESCENDING_ORDER };
+  } else if (orderByParam == ORDER_BY_MOST_POPULAR) {
+    sort = { "likes": DESCENDING_ORDER };
+  } else if (orderByParam == ORDER_BY_LESS_POPULAR) {
+    sort = { "likes": ASCENDING_ORDER };
+  }
+
+  return sort;
 }

@@ -6,8 +6,8 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { ViewChild } from '@angular/core';
 import { AlertService } from './services/alert.service';
 
-declare var jquery:any;
-declare var $ :any;
+declare var jquery: any;
+declare var $: any;
 
 @Component({
   selector: 'app-root',
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   constructor(private hipsterTranslate: HipsterTranslate,
               public userService: UserService,
               private router: Router,
-              private alertService: AlertService){
+              private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -34,11 +34,11 @@ export class AppComponent implements OnInit {
   private loginUser(username, password) {
     this.userService.loginUser(username, password).subscribe(
       data => {
-        let authUser: any = data;
+        const authUser: any = data;
         this.userService.storeUser(authUser);
-        this.router.navigateByUrl('/user/' + authUser.user.username);
+        this.router.navigateByUrl('/');
       }, err => {
-        this.alertService.showErrorAlert("Autenticar Usuário", "Usuário ou Senha não encontrados")
+        this.alertService.showErrorAlert('Autenticar Usuário', 'Usuário ou Senha não encontrados');
       }
     );
   }
@@ -63,4 +63,9 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('/user/' + this.getUsername());
   }
 
+  private enterPressed(event, username, password) {
+    if (event.keyCode === 13) {
+      this.loginUser(username, password);
+    }
+ }
 }

@@ -6,24 +6,26 @@ import {PublicationValidator} from '../util/PublicationValidator'
 const router = express.Router();
 
 /**
- * GET consulta uma publicacao especifica
+ * GET consulta todas publicaçoes. Essa consulta pode ter params de: ordenação e fitler
  */
-router.get('/:id', async (req, res) => {
-  const id = req.params.id;
+router.get('/', async (req, res) => {
+  const query = req.query;
+
   try {
-    const data = await PublicationService.retrievePublication(id);
+    const data = await PublicationService.search(query);
     res.status(200).json(data);
   } catch(err) {
     res.status(400).json(err.message);
   }
 });
-
 /**
- * GET consulta todas publicaçoes
+ * GET consulta uma publicacao especifica
  */
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
+  const id = req.params.id;
+
   try {
-    const data = await PublicationService.retrievePublications();
+    const data = await PublicationService.retrievePublication(id);
     res.status(200).json(data);
   } catch(err) {
     res.status(400).json(err.message);
@@ -94,7 +96,7 @@ router.put('/:id', async (req, res) => {
 
   const id = req.params.id;
   const novaPublicacao = req.body;
-  
+
     try {
       const retorno = await PublicationService.editPublication(id, novaPublicacao);
       res.status(200).json(retorno);
