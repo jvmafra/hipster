@@ -55,6 +55,16 @@ export class ProfilePageComponent implements OnInit {
     this.years = this.userService.getBirthdayYearsArray('1905');
   }
 
+  public getAllPublications() {
+    this.publicationService.getAllPublications().subscribe(
+      data => {
+        this.events = data;
+]      }, err => {
+        console.log(err)
+      }
+    );
+  }
+
   private updateProfile() {
     let data = this.formValidation.getFormValidationVariables(this.errorInfo);
     $('.ui.form').form(data);
