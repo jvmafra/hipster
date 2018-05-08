@@ -59,7 +59,7 @@ export class ProfilePageComponent implements OnInit {
     this.publicationService.getAllPublications().subscribe(
       data => {
         this.events = data;
-]      }, err => {
+      }, err => {
         console.log(err)
       }
     );

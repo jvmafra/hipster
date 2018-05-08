@@ -1,7 +1,7 @@
 <app-load-indication></app-load-indication>
 <div class="ui container ">
   <div class="ui brown segment clearing">
-    <app-create-post-home (getAllPublications)="getAllPublications()"></app-create-post-home>
+    <app-create-post-home (search)="search()"></app-create-post-home>
   </div>
 
   <div class="ui segment post-container">
@@ -11,19 +11,19 @@
           <label>{{ 'HIPSTER.CLASS' | translate }}</label>
           <div class="field">
             <div class="ui radio checkbox">
-              <input  (click)="classifyBy(1)" type="radio" name="frequency" checked="checked">
+              <input  (click)="classifyBy(ORDER_BY_MOST_RECENT)" type="radio" name="frequency" checked="checked">
               <label>{{ 'HIPSTER.CLASS_RECENT' | translate }}</label>
             </div>
           </div>
           <div class="field">
             <div class="ui radio checkbox">
-              <input (click)="classifyBy(2)" type="radio" name="frequency">
+              <input (click)="classifyBy(ORDER_BY_MOST_POPULAR)" type="radio" name="frequency">
               <label>{{ 'HIPSTER.CLASS_M_POPULAR' | translate }}</label>
             </div>
           </div>
           <div class="field">
             <div class="ui radio checkbox">
-              <input (click)="classifyBy(3)" type="radio" name="frequency">
+              <input (click)="classifyBy(ORDER_BY_LESS_POPULAR)" type="radio" name="frequency">
               <label>{{ 'HIPSTER.CLASS_L_POPULAR' | translate }}</label>
             </div>
           </div>
