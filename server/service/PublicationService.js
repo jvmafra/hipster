@@ -126,9 +126,9 @@ function getSortParams(orderByParam) {
   if (orderByParam == ORDER_BY_MOST_RECENT) {
     sort = { "creationDate": DESCENDING_ORDER };
   } else if (orderByParam == ORDER_BY_MOST_POPULAR) {
-    sort = { "genres": ASCENDING_ORDER };
+    sort = { "likes": DESCENDING_ORDER };
   } else if (orderByParam == ORDER_BY_LESS_POPULAR) {
-    sort = { "genres": DESCENDING_ORDER };
+    sort = { "likes": ASCENDING_ORDER };
   }
 
   return sort;
