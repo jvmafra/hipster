@@ -39,6 +39,10 @@ export class ProfilePageComponent implements OnInit {
   private errorInfo: Array<Object>;
   private alreadyInit: number;
 
+  public ORDER_BY_MOST_RECENT = 1;
+  private filteredGenres : Array<String>;
+  private selectedOrder;
+  
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
               private userService: UserService,
@@ -53,10 +57,16 @@ export class ProfilePageComponent implements OnInit {
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
     this.years = this.userService.getBirthdayYearsArray('1905');
+    this.filteredGenres = [];
+    this.selectedOrder = this.ORDER_BY_MOST_RECENT;
   }
 
-  public getAllPublications() {
-    this.publicationService.getAllPublications().subscribe(
+  public search() {
+    let params = {};
+    params["orderBy"] = this.selectedOrder;
+    params["filterByGenres"] = this.filteredGenres;
+    
+    this.publicationService.search(params).subscribe(
       data => {
         this.events = data;
       }, err => {
