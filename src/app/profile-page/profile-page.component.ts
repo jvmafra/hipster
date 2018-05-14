@@ -53,6 +53,8 @@ export class ProfilePageComponent implements OnInit {
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
     this.years = this.userService.getBirthdayYearsArray('1905');
+    this.profile = '';
+    this.events = '';
   }
 
   public getAllPublications() {
