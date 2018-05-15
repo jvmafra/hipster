@@ -39,6 +39,10 @@ export class ProfilePageComponent implements OnInit {
   private errorInfo: Array<Object>;
   private alreadyInit: number;
 
+  public ORDER_BY_MOST_RECENT = 1;
+  private filteredGenres : Array<String>;
+  private selectedOrder;
+
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
               private userService: UserService,
@@ -55,16 +59,27 @@ export class ProfilePageComponent implements OnInit {
     this.years = this.userService.getBirthdayYearsArray('1905');
     this.profile = '';
     this.events = '';
+    this.filteredGenres = [];
+    this.selectedOrder = this.ORDER_BY_MOST_RECENT;
   }
 
-  public getAllPublications() {
-    this.publicationService.getAllPublications().subscribe(
-      data => {
-        this.events = data;
-      }, err => {
-        console.log(err)
-      }
-    );
+  public search() {
+    this.route.params.subscribe(params => {
+        let username = params['username'];
+        this.publicationService.getPublicationFromUser(username).subscribe(
+          data => {
+            this.events = data
+            this.events.sort((a: any, b: any) => {
+              let dateA = new Date(a.creationDate);
+              let dateB = new Date(b.creationDate);
+
+              return dateB.getTime() - dateA.getTime();
+            });
+          }, err => {
+            this.foundUser = false;
+          }
+        );
+    });
   }
 
   private updateProfile() {
