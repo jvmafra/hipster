@@ -42,7 +42,7 @@ export class ProfilePageComponent implements OnInit {
   public ORDER_BY_MOST_RECENT = 1;
   private filteredGenres : Array<String>;
   private selectedOrder;
-  
+
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
               private userService: UserService,
@@ -62,17 +62,22 @@ export class ProfilePageComponent implements OnInit {
   }
 
   public search() {
-    let params = {};
-    params["orderBy"] = this.selectedOrder;
-    params["filterByGenres"] = this.filteredGenres;
-    
-    this.publicationService.search(params).subscribe(
-      data => {
-        this.events = data;
-      }, err => {
-        console.log(err)
-      }
-    );
+    this.route.params.subscribe(params => {
+        let username = params['username'];
+        this.publicationService.getPublicationFromUser(username).subscribe(
+          data => {
+            this.events = data
+            this.events.sort((a: any, b: any) => {
+              let dateA = new Date(a.creationDate);
+              let dateB = new Date(b.creationDate);
+
+              return dateB.getTime() - dateA.getTime();
+            });
+          }, err => {
+            this.foundUser = false;
+          }
+        );
+    });
   }
 
   private updateProfile() {
