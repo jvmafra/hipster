@@ -92,7 +92,9 @@ export class PublicationService {
       headers: this.headers,
       params: {
         orderBy: params.orderBy,
-        filterByGenres: params.filterByGenres
+        filterByGenres: params.filterByGenres,
+        skip: params.skip,
+        user: params.user
       }
     });
   }
