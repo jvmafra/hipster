@@ -117,7 +117,6 @@ export class PostPageComponent implements OnInit {
 
   private seeMoreComments() {
     this.seeMore = !this.seeMore;
-    console.log(this.post);
   }
 
   /**

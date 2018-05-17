@@ -64,7 +64,6 @@ export class FeedbackModalComponent implements OnInit {
         errors.splice(errors.length - 1, 1);
         this.hipsterTranslate.translateErrorsReport(errors);
         this.requestErrors = errors;
-        console.log(this.requestErrors);        
         this.alertService.showErrorAlert(this.hipsterTranslate.translateItem("FEEDBACK.FAIL_TITLE"), this.requestErrors.join('\r</br>'));
       }
     );
