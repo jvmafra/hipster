@@ -35,9 +35,10 @@ export class PublicationService {
    */
   static search(query) {
     let sortParams = getSortParams(query.orderBy);
-    let findParams = getFindParams(query.filterByGenres);
+    let findParams = getFindParams(query.filterByGenres, query.user);
 
-    return Publication.find(findParams).sort(sortParams).exec();
+    return Publication.find(findParams).sort(sortParams)
+            .limit(7).skip(parseInt(query.skip)).exec();
   }
 
    /**
@@ -106,15 +107,19 @@ export class PublicationService {
   }
 }
 
-function getFindParams(filteredByGenreParam) {
+function getFindParams(filteredByGenreParam, userParam) {
   let find = {};
 
+  if (userParam != "undefined") {
+    find["ownerUsername"] = userParam;
+  }
+
   if (filteredByGenreParam instanceof Array) {
-    find = {"genres": { $in : filteredByGenreParam}}
+    find["genres"] = { $in : filteredByGenreParam}
   } else if (filteredByGenreParam != undefined) {
     var auxArray = [];
     auxArray.push(filteredByGenreParam)
-    find = {"genres": { $in : auxArray}}
+    find["genres"] = { $in : auxArray}
   }
 
   return find;
