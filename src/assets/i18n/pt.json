@@ -7,7 +7,8 @@
     "PROFILE": "Perfil",
     "LANGUAGE": "Idioma",
     "CLASS": "Classificar Postagens",
-    "CLASS_RECENT": "Mais recentes",
+    "CLASS_M_RECENT": "Mais recentes",
+    "CLASS_L_RECENT": "Menos recentes",
     "CLASS_L_POPULAR": "Menos populares",
     "CLASS_M_POPULAR": "Mais populares",
     "SEND_REPORT": "Enviar Denúncia",
@@ -16,6 +17,12 @@
       "PT": "Português",
       "EN": "English"
     }
+  },
+  "FILTER_OPTIONS": {
+    "FILTER_OPTIONS": "Filtrar resultados",
+    "GENRES": "GÊNERO",
+    "CLASSIFY_POSTS": "CLASSIFICAR RESULTADOS",
+    "DATE": "DATA DE PUBLICAÇÃO"
   },
   "FEEDBACK": {
     "MESSAGE": "Mensagem",

@@ -25,8 +25,9 @@ export class TimelineComponent implements OnInit {
   public filteredGenres : Array<String>;
   private NO_FILTERED_GENRES = 0;
   public ORDER_BY_MOST_RECENT = 1;
-  public ORDER_BY_MOST_POPULAR = 2;
-  public ORDER_BY_LESS_POPULAR = 3;
+  public ORDER_BY_LESS_RECENT = 2;
+  public ORDER_BY_MOST_POPULAR = 3;
+  public ORDER_BY_LESS_POPULAR = 4;
   private selectedOrder;
 
   constructor(private publicationService: PublicationService,
@@ -52,7 +53,7 @@ export class TimelineComponent implements OnInit {
 
   public classifyBy(orderByParam) {
 
-    if ([1,2,3].indexOf(orderByParam) !== -1) {
+    if ([1,2,3,4].indexOf(orderByParam) !== -1) {
       this.selectedOrder = orderByParam;
       this.search();
     }
@@ -60,8 +61,10 @@ export class TimelineComponent implements OnInit {
 
   public search() {
     let params = {};
+
     params["orderBy"] = this.selectedOrder;
     params["filterByGenres"] = this.filteredGenres;
+    params["textSearch"] = [];
 
     this.publicationService.search(params).subscribe(
       data => {

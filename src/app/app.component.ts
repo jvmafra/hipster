@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   public deleteModal: DeleteModalComponent;
 
   public selectedLanguage: string;
+  public textToSearch: string;
 
   constructor(private hipsterTranslate: HipsterTranslate,
               public userService: UserService,
@@ -41,6 +42,16 @@ export class AppComponent implements OnInit {
         this.alertService.showErrorAlert('Autenticar Usuário', 'Usuário ou Senha não encontrados');
       }
     );
+  }
+
+  public onSubmit(e) {
+      if (e.keyCode == 13) {
+        this.router.navigate(['/search/'], { queryParams: { q: this.textToSearch } });
+      }
+  }
+
+  public textSearch(text) {
+    this.router.navigate(['/search/'], { queryParams: { q: text } });
   }
 
   private getName() {

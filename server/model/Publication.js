@@ -72,6 +72,8 @@ const publicationSchema = new Schema({
 
 });
 
+publicationSchema.index( { title: "text" } );
+
 publicationSchema.pre("save", async function(next) {
   let usuario = {}
   try {

@@ -2,8 +2,9 @@ import Publication from '../model/Publication'
 
 
 const ORDER_BY_MOST_RECENT = 1;
-const ORDER_BY_MOST_POPULAR = 2;
-const ORDER_BY_LESS_POPULAR = 3;
+const ORDER_BY_LESS_RECENT = 2;
+const ORDER_BY_MOST_POPULAR = 3;
+const ORDER_BY_LESS_POPULAR = 4;
 const ASCENDING_ORDER = 1;
 const DESCENDING_ORDER = -1;
 
@@ -29,13 +30,19 @@ export class PublicationService {
    /**
    * Consulta todos as Publicações.
    *
-   * @returns {Promise}  Promise resolvida com uma lista de objetos Usuario
+   * @returns {Promise}  Promise resolvida com uma lista de objetos Publication
    * da forma que o mongo retorna. Recebe uma query com informações sobre
    * ordenação e filtering.
    */
   static search(query) {
     let sortParams = getSortParams(query.orderBy);
-    let findParams = getFindParams(query.filterByGenres);
+    let genreParams = getFindParams(query.filterByGenres);
+    let textSearchParams = getTextSearchParams(query.textSearch);
+
+    console.log(query);
+    if (genreParams["genres"]) { textSearchParams["genres"] = genreParams["genres"] }
+
+    let findParams = textSearchParams;
 
     return Publication.find(findParams).sort(sortParams).exec();
   }
@@ -106,6 +113,17 @@ export class PublicationService {
   }
 }
 
+function getTextSearchParams(textSearch) {
+  let find = {};
+
+  if (textSearch) {
+    find = { $text: { $search: textSearch } }
+  }
+
+  return find;
+
+}
+
 function getFindParams(filteredByGenreParam) {
   let find = {};
 
@@ -125,6 +143,8 @@ function getSortParams(orderByParam) {
 
   if (orderByParam == ORDER_BY_MOST_RECENT) {
     sort = { "creationDate": DESCENDING_ORDER };
+  } if (orderByParam == ORDER_BY_LESS_RECENT) {
+    sort = { "creationDate": ASCENDING_ORDER };
   } else if (orderByParam == ORDER_BY_MOST_POPULAR) {
     sort = { "likes": DESCENDING_ORDER };
   } else if (orderByParam == ORDER_BY_LESS_POPULAR) {
