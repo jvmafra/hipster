@@ -40,6 +40,10 @@ export class ProfilePageComponent implements OnInit {
   private alreadyInit: number;
   private skip;
 
+  public ORDER_BY_MOST_RECENT = 1;
+  private filteredGenres : Array<String>;
+  private selectedOrder;
+
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
               private userService: UserService,
@@ -55,6 +59,10 @@ export class ProfilePageComponent implements OnInit {
     this.months = Array.from(Array(12).keys());
     this.skip = 0;
     this.years = this.userService.getBirthdayYearsArray('1905');
+    this.profile = '';
+    this.events = '';
+    this.filteredGenres = [];
+    this.selectedOrder = this.ORDER_BY_MOST_RECENT;
   }
 
   public onScroll() {
