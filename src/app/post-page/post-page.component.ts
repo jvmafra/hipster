@@ -23,10 +23,11 @@ export class PostPageComponent implements OnInit {
   public post;
   public user_title: string = undefined;
   public creationDate: string;
+  public seeMore = false;
+  public comment: any;
+
   private OPTIONAL_TITLE = 1;
   private MUSIC_NAME = 0;
-  private seeMore = false;
-  private comment;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
@@ -123,7 +124,7 @@ export class PostPageComponent implements OnInit {
   /**
    * Habilita a publicação do comentario utilizando a tecla ENTER
    */
-  private onSubmit(e) {
+  public onSubmit(e) {
       if (e.keyCode == 13) {
           this.postComment();
       }

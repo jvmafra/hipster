@@ -18,7 +18,7 @@ export class FeedbackModalComponent implements OnInit {
   private $ : any;
   private reportedUser: string;
   private videoIDreported: string;
-  private report;
+  public report: any;
   public requestErrors: Array<string>;
 
   constructor(private reportService: ReportService,
@@ -53,18 +53,18 @@ export class FeedbackModalComponent implements OnInit {
       description: this.report.description,
       reportDate: new Date()
 
-    };    
+    };
 
     this.reportService.saveReport(reportToBeSent).subscribe(
       data => {
-        this.alertService.showSuccessAlert(this.hipsterTranslate.translateItem("FEEDBACK.SUCCESS_TITLE"), 
+        this.alertService.showSuccessAlert(this.hipsterTranslate.translateItem("FEEDBACK.SUCCESS_TITLE"),
                                            this.hipsterTranslate.translateItem("FEEDBACK.SUCCESS_TEXT"));
       }, err => {
         const errors = err.error.split(';');
         errors.splice(errors.length - 1, 1);
         this.hipsterTranslate.translateErrorsReport(errors);
         this.requestErrors = errors;
-        console.log(this.requestErrors);        
+        console.log(this.requestErrors);
         this.alertService.showErrorAlert(this.hipsterTranslate.translateItem("FEEDBACK.FAIL_TITLE"), this.requestErrors.join('\r</br>'));
       }
     );
