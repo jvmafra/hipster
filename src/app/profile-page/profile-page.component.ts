@@ -38,6 +38,7 @@ export class ProfilePageComponent implements OnInit {
   private years : Array<number>;
   private errorInfo: Array<Object>;
   private alreadyInit: number;
+  private skip;
 
   public ORDER_BY_MOST_RECENT = 1;
   private filteredGenres : Array<String>;
@@ -56,6 +57,7 @@ export class ProfilePageComponent implements OnInit {
     this.foundUser = true;
     this.days = Array.from(Array(31).keys());
     this.months = Array.from(Array(12).keys());
+    this.skip = 0;
     this.years = this.userService.getBirthdayYearsArray('1905');
     this.profile = '';
     this.events = '';
@@ -63,23 +65,26 @@ export class ProfilePageComponent implements OnInit {
     this.selectedOrder = this.ORDER_BY_MOST_RECENT;
   }
 
-  public search() {
-    this.route.params.subscribe(params => {
-        let username = params['username'];
-        this.publicationService.getPublicationFromUser(username).subscribe(
-          data => {
-            this.events = data
-            this.events.sort((a: any, b: any) => {
-              let dateA = new Date(a.creationDate);
-              let dateB = new Date(b.creationDate);
+  public onScroll() {
+    this.search(this.profile.name);
+  }
 
-              return dateB.getTime() - dateA.getTime();
-            });
-          }, err => {
-            this.foundUser = false;
-          }
-        );
-    });
+  public search(username) {
+    let params = {};
+
+    params["orderBy"] = ""
+    params["filterByGenres"] = "";
+    params["skip"] = this.skip;
+    params["user"] = username;
+
+    this.publicationService.search(params).subscribe(
+      data => {
+        this.events = this.skip === 0 ? data : this.events.concat(data);
+        this.skip = this.events.length;
+      }, err => {
+        console.log(err)
+      }
+    );
   }
 
   private updateProfile() {
@@ -169,20 +174,7 @@ export class ProfilePageComponent implements OnInit {
 
         this.isMyProfile = this.userService.compareUsername(username);
 
-        this.publicationService.getPublicationFromUser(username).subscribe(
-          data => {
-            this.events = data
-            this.events.sort((a: any, b: any) => {
-              let dateA = new Date(a.creationDate);
-              let dateB = new Date(b.creationDate);
-
-              return dateB.getTime() - dateA.getTime();
-            });
-
-          }, err => {
-            this.foundUser = false;
-          }
-        );
+        this.search(username);
 
         this.userService.retrieveUser(username).subscribe(
           data => {

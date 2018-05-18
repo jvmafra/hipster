@@ -34,6 +34,7 @@ import { LoadIndicationComponent } from './load-indication/load-indication.compo
 import { CreatePostHomeComponent } from './create-post-home/create-post-home.component';
 import { ConfirmationPageComponent } from './confirmation-page/confirmation-page.component';
 import {ConfirmationService} from "./services/confirmation.service";
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 PublicationService
 export function HttpLoaderFactory(http: HttpClient) {
@@ -84,6 +85,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     FormsModule,
+    InfiniteScrollModule,
     RouterModule.forRoot(router),
     HttpClientModule,
     TranslateModule.forRoot({
