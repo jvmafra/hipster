@@ -33,7 +33,7 @@ export class PostPageComponent implements OnInit {
               private publicationService: PublicationService,
               private alertService: AlertService,
               private router: Router) {
-    this.post = {};
+    this.post = this.initPost();
     this.comment = {};
     this.post["likes"] = [];
   }
@@ -162,6 +162,12 @@ export class PostPageComponent implements OnInit {
       );
     }
 
+  }
+
+  private initPost(){
+    return {"_id":undefined, "url":undefined, "year":undefined, "ownerUsername":undefined, 
+    "title":undefined, "videoID":undefined, "__v":undefined, "comments":0, "likes":0, "genres":0, 
+    "creationDate":undefined};
   }
 
 }
