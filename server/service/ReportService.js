@@ -9,27 +9,6 @@ db_config();
  * @author Team Hipster
  */
 export class ReportService{
-
-    /**
-     * Consulta um Report dado um id.
-     *
-     * @param   {String}  id do report para recuperação.
-     * @returns {Promise}  Promise resolvida com o objeto Report
-     * da forma que o mongo retorna.
-     */
-    static retrieveReport(id) {
-      return Report.findOne({_id: id}).exec();
-    }
-  
-     /**
-     * Consulta todos os Reports.
-     *
-     * @returns {Promise}  Promise resolvida com uma lista de objetos Report
-     * da forma que o mongo retorna.
-     */
-    static retrieveReports() {
-      return Report.find({}).sort({reportDate: -1}).exec();
-    }
   
     /**
      * Cadastra um Report
@@ -43,4 +22,4 @@ export class ReportService{
       return reportMongoose.save();
     }
       
-  }
+}
