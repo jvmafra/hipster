@@ -13,8 +13,8 @@ export class PostCommentComponent implements OnInit {
 
   @Input() comment;
   @Input() post;
-  private isMyProfile: boolean;
-  private creationDate: string;
+  public isMyProfile: boolean;
+  public creationDate: string;
 
   constructor(private publicationService: PublicationService,
               private userService: UserService,
@@ -46,7 +46,7 @@ export class PostCommentComponent implements OnInit {
     );
   }
 
-  private seeProfile(username) {
+  public seeProfile(username) {
     this.router.navigateByUrl('/user/' + username);
   }
 
