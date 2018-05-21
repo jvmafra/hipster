@@ -74,7 +74,6 @@ router.put('/v1/usuario', async (req, res) => {
   if (!result) res.status(400).json(validacao.mensagem);
   else{    
     const username = token.getUsername(req);
-    console.log("Usuário logado: " + username);
     try {
       const retorno = await UsuarioService.editaUsuario(username, usuario);
       res.status(200).json(retorno);
