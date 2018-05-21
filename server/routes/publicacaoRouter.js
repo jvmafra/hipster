@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
     const data = await PublicationService.search(query);
     res.status(200).json(data);
   } catch(err) {
-    console.log(err.message);
     res.status(400).json(err.message);
   }
 });
