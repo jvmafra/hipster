@@ -1,5 +1,8 @@
 <app-load-indication></app-load-indication>
-<div class="ui container ">
+<div class="ui container "
+            infiniteScroll
+            [infiniteScrollDistance]="1"
+            (scrolled)="onScroll()">
   <div class="ui brown segment clearing">
     <app-create-post-home (search)="search()"></app-create-post-home>
   </div>

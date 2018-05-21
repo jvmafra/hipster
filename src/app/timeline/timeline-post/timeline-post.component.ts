@@ -22,10 +22,11 @@ export class TimelinePostComponent implements OnInit {
 
   public subtitle: string;
   public creationDate: string;
+  public seeMore = false;
+  public comment: any;
+
   private OPTIONAL_TITLE = 1;
   private MUSIC_NAME = 0;
-  private seeMore = false;
-  private comment;
 
   constructor(private userService: UserService,
               private publicationService: PublicationService,
@@ -58,7 +59,7 @@ export class TimelinePostComponent implements OnInit {
 
   }
 
-  private onSubmit(e) {
+  public onSubmit(e) {
       if (e.keyCode == 13) {
           this.postComment();
       }

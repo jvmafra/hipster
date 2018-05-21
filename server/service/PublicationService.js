@@ -36,15 +36,15 @@ export class PublicationService {
    */
   static search(query) {
     let sortParams = getSortParams(query.orderBy);
-    let genreParams = getFindParams(query.filterByGenres);
+    let genreParams = getFindParams(query.filterByGenres, query.user);
     let textSearchParams = getTextSearchParams(query.textSearch);
 
-    console.log(query);
     if (genreParams["genres"]) { textSearchParams["genres"] = genreParams["genres"] }
 
     let findParams = textSearchParams;
 
-    return Publication.find(findParams).sort(sortParams).exec();
+    return Publication.find(findParams).sort(sortParams)
+            .limit(7).skip(parseInt(query.skip)).exec();
   }
 
    /**
@@ -124,15 +124,19 @@ function getTextSearchParams(textSearch) {
 
 }
 
-function getFindParams(filteredByGenreParam) {
+function getFindParams(filteredByGenreParam, userParam) {
   let find = {};
 
+  if (userParam != "undefined") {
+    find["ownerUsername"] = userParam;
+  }
+
   if (filteredByGenreParam instanceof Array) {
-    find = {"genres": { $in : filteredByGenreParam}}
+    find["genres"] = { $in : filteredByGenreParam}
   } else if (filteredByGenreParam != undefined) {
     var auxArray = [];
     auxArray.push(filteredByGenreParam)
-    find = {"genres": { $in : auxArray}}
+    find["genres"] = { $in : auxArray}
   }
 
   return find;

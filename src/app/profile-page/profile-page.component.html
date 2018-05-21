@@ -47,7 +47,10 @@
 
       <div class="ui segment">
         <div *ngIf="this.selected_tab === 0" >
-          <div class="ui divided items">
+          <div class="ui divided items"
+               infiniteScroll
+               [infiniteScrollDistance]="1"
+               (scrolled)="onScroll()">
             <div class="item" *ngFor="let event of events">
               <app-timeline-post class="hip-full-width" [event]="event"></app-timeline-post>
             </div>

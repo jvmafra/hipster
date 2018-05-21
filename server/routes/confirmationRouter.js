@@ -14,7 +14,6 @@ router.get('/:uuid', async (req, res) => {
     await ConfirmationService.deleteToken(uuid);
     res.status(200).json(token);
   } catch(err) {
-    console.log(err.message);
     res.status(400).json(err.message);
   }
 });
