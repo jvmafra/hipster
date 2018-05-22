@@ -1,0 +1,64 @@
+<div class="ui container">
+  <div class="ui grid post-container">
+    <div class="sixteen wide mobile four wide tablet four wide computer column">
+      <div class="ui segment extra">
+        <div class="ui header"> {{ 'FILTER_OPTIONS.FILTER_OPTIONS' | translate }} </div>
+
+        <div class="inline fields">
+          <div class="ui sub header"> {{ 'FILTER_OPTIONS.GENRES' | translate }} </div>
+          <div>
+            <div id="labelTodos" (click)="clearFilter()" class="ui basic large label label-container"
+                 [ngClass]="isSelected(undefined)">
+              <a class="ui empty circular label grey"></a>
+              Todos
+            </div>
+            <div id="label{{i}}" (click)="filterEvents(genre)" class="ui basic large label label-container"
+                  *ngFor="let genre of listGenres;" [ngClass]="isSelected(genre)">
+              <a class="ui empty circular large label" [ngClass]="getClass(genre.value)"></a>
+              {{ genre.value }}
+            </div>
+          </div>
+        </div>
+
+        <div class="inline fields post-container">
+          <div class="ui sub header"> {{ 'FILTER_OPTIONS.CLASSIFY_POSTS' | translate }} </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input  (click)="classifyBy(ORDER_BY_MOST_RECENT)" type="radio" name="frequency" checked="checked">
+              <label>{{ 'HIPSTER.CLASS_M_RECENT' | translate }}</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input  (click)="classifyBy(ORDER_BY_LESS_RECENT)" type="radio" name="frequency">
+              <label>{{ 'HIPSTER.CLASS_L_RECENT' | translate }}</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input (click)="classifyBy(ORDER_BY_MOST_POPULAR)" type="radio" name="frequency">
+              <label>{{ 'HIPSTER.CLASS_M_POPULAR' | translate }}</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input (click)="classifyBy(ORDER_BY_LESS_POPULAR)" type="radio" name="frequency">
+              <label>{{ 'HIPSTER.CLASS_L_POPULAR' | translate }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sixteen wide mobile twelve wide tablet twelve wide computer column">
+      <div class="ui stacked segment extra">
+        <div class="ui labels">
+          <div class="ui divided items">
+            <div class="item" *ngFor="let event of shownEvents">
+              <app-timeline-post class="hip-full-width" [event]="event"></app-timeline-post>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
