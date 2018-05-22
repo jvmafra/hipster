@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <div class="item" *ngIf="!userService.isAuthenticated()">
+    <div class="item" *ngIf="userService.isAuthenticated()">
       <div class="ui action input">
         <input type="text" (keypress)="onSubmit($event)" [(ngModel)]="textToSearch" attr.placeholder="{{ 'HIPSTER.SEARCH' | translate }}">
         <button class="ui icon button" (click)="textSearch(textToSearch)" >
