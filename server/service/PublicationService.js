@@ -60,7 +60,7 @@ export class PublicationService {
 
     //When user is acessing his home page
     if(!query.orderBy) {
-      findParams = {"$match": {"ownerUsername": "henrique"}};
+      findParams = {"$match": {"ownerUsername": query.user}};
       sortParams = {"$sort": {"creationDate": DESCENDING_ORDER}};
     } else {
       sortParams = getSortParams(query.orderBy);
