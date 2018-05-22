@@ -25,8 +25,10 @@ export class TimelineComponent implements OnInit {
   public filteredGenres : Array<String>;
   private NO_FILTERED_GENRES = 0;
   public ORDER_BY_MOST_RECENT = 1;
-  public ORDER_BY_MOST_POPULAR = 2;
-  public ORDER_BY_LESS_POPULAR = 3;
+  public ORDER_BY_LESS_RECENT = 2;
+  public ORDER_BY_MOST_POPULAR = 3;
+  public ORDER_BY_LESS_POPULAR = 4;
+  private skip;
   private selectedOrder;
 
   constructor(private publicationService: PublicationService,
@@ -35,6 +37,8 @@ export class TimelineComponent implements OnInit {
     this.listGenres = this.publicationService.getListGenres();
     this.initGenreSelectedProperty();
     this.filteredGenres = [];
+    this.events = [];
+    this.skip = 0;
     this.selectedOrder = this.ORDER_BY_MOST_RECENT;
   }
 
@@ -52,20 +56,26 @@ export class TimelineComponent implements OnInit {
 
   public classifyBy(orderByParam) {
 
-    if ([1,2,3].indexOf(orderByParam) !== -1) {
+    if ([1,2,3,4].indexOf(orderByParam) !== -1) {
       this.selectedOrder = orderByParam;
+      this.skip = 0;
       this.search();
     }
   }
 
   public search() {
     let params = {};
+
     params["orderBy"] = this.selectedOrder;
     params["filterByGenres"] = this.filteredGenres;
+    params["textSearch"] = [];
+    params["skip"] = this.skip;
+    params["user"];
 
     this.publicationService.search(params).subscribe(
       data => {
-        this.events = data;
+        this.events = this.skip === 0 ? data : this.events.concat(data);
+        this.skip = this.events.length;
         this.selectedLabel = "todos";
         this.shownEvents = this.events;
       }, err => {
@@ -78,6 +88,9 @@ export class TimelineComponent implements OnInit {
     return this.userService.getColor(genre);
   }
 
+  public onScroll() {
+    this.search();
+  }
   /**
    * Filter events according with selected genres.
    * Save the genres filtered index to future operations.
@@ -95,6 +108,7 @@ export class TimelineComponent implements OnInit {
       genre.genreSelected = false;
     }
 
+    this.skip = 0;
     this.search();
   };
 
@@ -105,6 +119,7 @@ export class TimelineComponent implements OnInit {
   public clearFilter() {
     this.filteredGenres = [];
     this.listGenres.map(genre => genre.genreSelected = false);
+    this.skip = 0;
     this.search();
   }
 

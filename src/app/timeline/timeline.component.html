@@ -1,5 +1,8 @@
 <app-load-indication></app-load-indication>
-<div class="ui container ">
+<div class="ui container "
+            infiniteScroll
+            [infiniteScrollDistance]="1"
+            (scrolled)="onScroll()">
   <div class="ui brown segment clearing">
     <app-create-post-home (search)="search()"></app-create-post-home>
   </div>
@@ -12,7 +15,13 @@
           <div class="field">
             <div class="ui radio checkbox">
               <input  (click)="classifyBy(ORDER_BY_MOST_RECENT)" type="radio" name="frequency" checked="checked">
-              <label>{{ 'HIPSTER.CLASS_RECENT' | translate }}</label>
+              <label>{{ 'HIPSTER.CLASS_M_RECENT' | translate }}</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input  (click)="classifyBy(ORDER_BY_LESS_RECENT)" type="radio" name="frequency">
+              <label>{{ 'HIPSTER.CLASS_L_RECENT' | translate }}</label>
             </div>
           </div>
           <div class="field">
@@ -31,12 +40,12 @@
       </div>
     </div>
     <div class="ui divided items">
-      <div id="labelTodos" (click)="clearFilter()" class="ui basic large label"
+      <div id="labelTodos" (click)="clearFilter()" class="ui basic large label label-container"
            [ngClass]="isSelected(undefined)">
         <a class="ui empty circular label grey"></a>
         Todos
       </div>
-      <div id="label{{i}}" (click)="filterEvents(genre)" class="ui basic large label"
+      <div id="label{{i}}" (click)="filterEvents(genre)" class="ui basic large label label-container"
             *ngFor="let genre of listGenres;" [ngClass]="isSelected(genre)">
         <a class="ui empty circular large label" [ngClass]="getClass(genre.value)"></a>
         {{ genre.value }}
