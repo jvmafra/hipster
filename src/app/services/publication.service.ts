@@ -20,9 +20,12 @@ export class PublicationService {
     });
   }
 
-  public getPublication(id) {
+  public getPublication(id, loggedUser) {
     return this.http.get(this.serverHost + 'v1/publicacao/' + id, {
-      headers: this.headers
+      headers: this.headers,
+      params: {
+        user: loggedUser
+      }
     });
   }
 

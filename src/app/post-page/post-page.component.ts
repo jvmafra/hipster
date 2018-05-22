@@ -44,9 +44,11 @@ export class PostPageComponent implements OnInit {
 
     this.route.params.subscribe(params => {
         let postId = params['id'];
+        let loggedUser = this.userService.getStoreUsername();
 
-        this.publicationService.getPublication(postId).subscribe(
+        this.publicationService.getPublication(postId, loggedUser).subscribe(
           data => {
+            data = data[0];
             this.post = data;
             let titles = this.post.title.split(" HIPSTER_FLAG ")
             this.post.music_name = titles[this.MUSIC_NAME];
@@ -118,7 +120,6 @@ export class PostPageComponent implements OnInit {
 
   private seeMoreComments() {
     this.seeMore = !this.seeMore;
-    console.log(this.post);
   }
 
   /**
@@ -147,7 +148,7 @@ export class PostPageComponent implements OnInit {
         creationDate: new Date()
       };
 
-      this.post.comments.push(newComment);
+      this.post.comments.unshift(newComment);
 
       let updatedPost = {
         _id: this.post._id,

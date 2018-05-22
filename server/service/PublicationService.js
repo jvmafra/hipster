@@ -6,6 +6,16 @@ const ORDER_BY_MOST_POPULAR = 2;
 const ORDER_BY_LESS_POPULAR = 3;
 const ASCENDING_ORDER = 1;
 const DESCENDING_ORDER = -1;
+const PROJECT_QUERY = { "$project": {_id: 1, videoID: 1, ownerUsername: 1, description: 1, url: 1,
+                        likes: 1, title : 1, genres: 1, artist: 1, creationDate: 1, comments: 1}};
+
+const UNWIND_QUERY = { "$unwind": {"path": "$comments", "preserveNullAndEmptyArrays": true}};
+const GROUP_QUERY =     {"$group": {"_id": "$_id", "url": {"$first": "$url"}, "videoID": {"$first": "$videoID"},
+        "ownerUsername": {"$first": "$ownerUsername"}, "description": {"$first": "$description"}, "artist": {"$first": "$artist"},
+        "genres": {"$first": "$genres"}, "title": {"$first": "$title"}, "creationDate": {"$first": "$creationDate"},
+        "likes": {"$first": "$likes"}, "comments": {"$push": "$comments"}}};
+
+const SORT_COMMENT_QUERY =  {"$sort": {"orderByUser": -1, "comments.likes": -1}};
 
 /**
  * Service responsavel pela lógica de usuário
@@ -22,8 +32,14 @@ export class PublicationService {
    * @returns {Promise}  Promise resolvida com o objeto Publicação
    * da forma que o mongo retorna.
    */
-  static retrievePublication(id) {
-    return Publication.findOne({_id: id}).exec();
+  static retrievePublication(id, query) {
+    var ObjectID = require("mongodb").ObjectID;
+    let projectQuery = setConditionQuery(query.user);
+    let findParams = {"$match": {_id: ObjectID(id)}};
+
+    return Publication.aggregate([
+      UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, GROUP_QUERY, findParams
+      ]).exec()
   }
 
    /**
@@ -34,21 +50,26 @@ export class PublicationService {
    * ordenação e filtering.
    */
   static search(query) {
-    let sortParams = getSortParams(query.orderBy);
-    let findParams = getFindParams(query.filterByGenres, query.user);
 
-    return Publication.find(findParams).sort(sortParams)
-            .limit(7).skip(parseInt(query.skip)).exec();
-  }
 
-   /**
-   * Consulta todos as Publicações de um usuário
-   *
-   * @returns {Promise}  Promise resolvida com uma lista de objetos Usuario
-   * da forma que o mongo retorna.
-   */
-  static retrieveUserPublications(ownerUsername) {
-    return Publication.find({ownerUsername: ownerUsername}).sort({creationDate: 1}).exec();
+    let projectQuery = setConditionQuery(query.user);
+    let skip =  {"$skip": parseInt(query.skip)}
+    let limit = {"$limit": 10}
+    let findParams = {};
+    let sortParams = {};
+
+    //When user is acessing his home page
+    if(!query.orderBy) {
+      findParams = {"$match": {"ownerUsername": "henrique"}};
+      sortParams = {"$sort": {"creationDate": DESCENDING_ORDER}};
+    } else {
+      sortParams = getSortParams(query.orderBy);
+      findParams = getFindParams(query.filterByGenres, query.user);
+    }
+
+    return Publication.aggregate([
+      UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, GROUP_QUERY, findParams, sortParams, skip, limit
+      ]).exec()
   }
 
 
@@ -108,32 +129,39 @@ export class PublicationService {
 }
 
 function getFindParams(filteredByGenreParam, userParam) {
-  let find = {};
-
-  if (userParam != "undefined") {
-    find["ownerUsername"] = userParam;
-  }
+  let find = {"$match": {}};
 
   if (filteredByGenreParam instanceof Array) {
-    find["genres"] = { $in : filteredByGenreParam}
+    find["$match"]["genres"] = { $in : filteredByGenreParam}
   } else if (filteredByGenreParam != undefined) {
     var auxArray = [];
     auxArray.push(filteredByGenreParam)
-    find["genres"] = { $in : auxArray}
+    find["$match"]["genres"] = { $in : auxArray}
   }
 
   return find;
+}
+
+function setConditionQuery(userParam) {
+  let projectQuery = PROJECT_QUERY;
+
+  projectQuery["$project"]["orderByUser"] = {$cond: { if: { $eq: [ "$comments.ownerUsername", userParam ] }, then: 1, else: 0 }}
+
+  return projectQuery;
 }
 
 function getSortParams(orderByParam) {
   let sort = {};
 
   if (orderByParam == ORDER_BY_MOST_RECENT) {
-    sort = { "creationDate": DESCENDING_ORDER };
+    sort["$sort"] = {};
+    sort["$sort"]["creationDate"] = DESCENDING_ORDER;
   } else if (orderByParam == ORDER_BY_MOST_POPULAR) {
-    sort = { "likes": DESCENDING_ORDER };
+    sort["$sort"] = {};
+    sort["$sort"]["likes"] = DESCENDING_ORDER;
   } else if (orderByParam == ORDER_BY_LESS_POPULAR) {
-    sort = { "likes": ASCENDING_ORDER };
+    sort["$sort"] = {};
+    sort["$sort"]["likes"] = ASCENDING_ORDER;
   }
 
   return sort;
