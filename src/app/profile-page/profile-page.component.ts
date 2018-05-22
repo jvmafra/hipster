@@ -79,7 +79,6 @@ export class ProfilePageComponent implements OnInit {
 
     this.publicationService.search(params).subscribe(
       data => {
-        console.log(data);
         this.events = this.skip === 0 ? data : this.events.concat(data);
         this.skip = this.events.length;
       }, err => {
