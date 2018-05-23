@@ -84,6 +84,11 @@ export class TimelineComponent implements OnInit {
     );
   }
 
+  public updateTimeline() {
+    this.skip = 0;
+    this.search();
+  }
+
   public getClass(genre) {
     return this.userService.getColor(genre);
   }
