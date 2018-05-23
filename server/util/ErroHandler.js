@@ -49,6 +49,10 @@ _.REPORT = {
     VALIDACAO_REPORT_YOURSELF: "VALIDACAO_REPORT_YOURSELF"
 }
 
+_.CONFIRMATION = {
+    CONFIRMATION_ERROR_EMAIL: "CONFIRMATION_ERROR_EMAIL"
+}
+
 const INFO_DUPLICADA = {
     USERNAME: 'Esse username já existe',
     EMAIL: 'Esse e-mail já foi cadastrado'

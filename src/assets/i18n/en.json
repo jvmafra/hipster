@@ -79,7 +79,8 @@
   "CONFIRMATION": {
     "CONFIRMATION_TITLE": "Last Step",
     "CONFIRMATION_SUCCESS": "Your register was confirmed with success. Now on you are a trully Hipster signin and enjoy our plataform!",
-    "CONFIRMATION_ERROR": "You have failed this city! Ops, wrong tv show! Something has failed, contact our support!"
+    "CONFIRMATION_ERROR": "You have failed this city! Ops, wrong tv show! Something has failed, contact our support!",
+    "CONFIRMATION_ERROR_EMAIL": "A user already verified a account on hipster with this email address. Please, contact our suport!"
   },
   "DELETEMODAL": {
     "DELETE_ACCOUNT": "Delete account",
