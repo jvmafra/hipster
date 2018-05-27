@@ -164,6 +164,10 @@ export class PostPageComponent implements OnInit {
 
   }
 
+  /**
+   * Retorna um json com os valores default para um post
+   */
+
   private initPost(){
     return {"_id":undefined, "url":undefined, "year":undefined, "ownerUsername":undefined, 
     "title":undefined, "videoID":undefined, "__v":undefined, "comments":0, "likes":0, "genres":0, 
