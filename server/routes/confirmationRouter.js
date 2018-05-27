@@ -18,7 +18,7 @@ router.get('/:uuid', async (req, res) => {
        
     } else {      
       const usuarioNovo = {active: true};
-      UsuarioService.editaUsuario(usuario.username, usuarioNovo);
+      await UsuarioService.editaUsuario(usuario.username, usuarioNovo);
       await ConfirmationService.deleteToken(uuid);      
       
       res.status(200).json(token);
