@@ -84,6 +84,10 @@ export class TimelineComponent implements OnInit {
     );
   }
 
+  /**
+   * Update timeline starting at position 0
+   */
+
   public updateTimeline() {
     this.skip = 0;
     this.search();
