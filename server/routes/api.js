@@ -1,6 +1,7 @@
 import express from 'express';
 import {UserValidator} from '../util/UserValidator'
 import { UsuarioService }  from '../service/UsuarioService';
+import { PublicationService }  from '../service/PublicationService';
 import auth from './auth';
 import token from '../service/tokenService';
 /*
@@ -35,7 +36,7 @@ router.get('/v1/usuario', async (req, res) => {
  * GET consulta usuário por username
  */
 router.get('/v1/usuario/:username', async (req, res) => {
-  const username = req.params.username;        
+  const username = req.params.username;
   try {
     const retorno = await UsuarioService.consultaUsuario(username);
     res.status(200).json(retorno);
@@ -64,7 +65,7 @@ router.post('/login', auth.login);
  * PUT edita usuário
  */
 router.put('/v1/usuario', async (req, res) => {
-  const usuario = req.body;  
+  const usuario = req.body;
 
   let result;
   let validacao;
@@ -72,7 +73,7 @@ router.put('/v1/usuario', async (req, res) => {
   result = validacao.retorno;
 
   if (!result) res.status(400).json(validacao.mensagem);
-  else{    
+  else{
     const username = token.getUsername(req);
     try {
       const retorno = await UsuarioService.editaUsuario(username, usuario);
@@ -92,6 +93,20 @@ router.delete('/v1/usuario', async (req, res) => {
   try {
     const retorno = await UsuarioService.removeUsuario(username);
     res.status(200).json(retorno);
+  } catch(err) {
+    res.status(400).json(err.message);
+  }
+});
+
+router.get('/v1/search', async (req, res) => {
+  const query = req.query;
+
+  try {
+    const dataP = await PublicationService.searchByText(query);
+    const dataU = await UsuarioService.searchByText(query);
+    const data = dataU.concat(dataP)
+
+    res.status(200).json(data);
   } catch(err) {
     res.status(400).json(err.message);
   }

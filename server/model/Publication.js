@@ -72,8 +72,6 @@ const publicationSchema = new Schema({
 
 });
 
-publicationSchema.index( { title: "text" } );
-
 publicationSchema.pre("save", async function(next) {
   let usuario = {}
   try {
@@ -94,5 +92,25 @@ publicationSchema.post('save', (err, doc, next) => {
   return next(err);
 });
 
+var Publication = mongoose.model('Publication', publicationSchema);
 
-module.exports = mongoose.model('Publication', publicationSchema);
+Publication.collection.dropIndexes();
+
+Publication.collection.createIndex(
+  {
+   videoID: "text",
+   ownerUsername: "text",
+   artist: "text",
+   title: "text"
+  },
+  {
+    weights: {
+      videoID: 5,
+      ownerUsername: 8,
+      artist: 8,
+      title: 10
+    }
+  }
+);
+
+module.exports = Publication;

@@ -7,11 +7,13 @@
     "PROFILE": "Profile",
     "LANGUAGE": "Language",
     "CLASS": "Classify Posts",
+    "CLEAR": "Without Classify",
     "CLASS_M_RECENT": "Most Recent",
     "CLASS_L_RECENT": "Less Recent",
     "CLASS_L_POPULAR": "Less Popular",
     "CLASS_M_POPULAR": "Most Popular",
     "SEND_REPORT": "Send Report",
+    "RESULTS_NOT_FOUND": "Oops! No results found for ",
     "REPORT": "Report",
     "LANGUAGES": {
       "PT": "Português",

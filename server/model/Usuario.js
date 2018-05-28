@@ -88,4 +88,25 @@ usuarioSchema.options.toJSON = {
   transform: (doc, ret) => {delete ret.senha;}
 };
 
-module.exports = mongoose.model('Usuario', usuarioSchema);
+var Usuario = mongoose.model('Usuario', usuarioSchema);
+
+Usuario.collection.dropIndexes();
+
+Usuario.collection.createIndex(
+  {
+    youtubeURL: "text",
+    spotifyURL: "text",
+    username: "text",
+    name: "text"
+  },
+  {
+    weights: {
+      youtubeURL: 5,
+      spotifyURL: 5,
+      username: 8,
+      name: 10
+    }
+  }
+);
+
+module.exports = Usuario;

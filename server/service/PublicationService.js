@@ -1,6 +1,5 @@
 import Publication from '../model/Publication'
 
-
 const ORDER_BY_MOST_RECENT = 1;
 const ORDER_BY_LESS_RECENT = 2;
 const ORDER_BY_MOST_POPULAR = 3;
@@ -36,16 +35,25 @@ export class PublicationService {
    */
   static search(query) {
     let sortParams = getSortParams(query.orderBy);
-    let genreParams = getFindParams(query.filterByGenres, query.user);
-    let textSearchParams = getTextSearchParams(query.textSearch);
-
-    if (genreParams["genres"]) { textSearchParams["genres"] = genreParams["genres"] }
-
-    let findParams = textSearchParams;
+    let findParams = getFindParams(query.filterByGenres, query.user);
 
     return Publication.find(findParams).sort(sortParams)
             .limit(7).skip(parseInt(query.skip)).exec();
   }
+
+
+  /**
+  * Consulta todos as Publicações dado um texto.
+  *
+  * @returns {Promise}  Promise resolvida com uma lista de objetos Publication
+  * da forma que o mongo retorna. Recebe uma query com informações de busca textual.
+  */
+ static searchByText(query) {
+   const findParams = getTextSearchParams(query.textSearch);
+
+   return Publication.find(findParams)
+           .limit(7).skip(parseInt(query.skip)).exec();
+ }
 
    /**
    * Consulta todos as Publicações de um usuário
