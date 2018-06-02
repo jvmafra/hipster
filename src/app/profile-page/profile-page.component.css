@@ -22,3 +22,11 @@
 .ui.sub.header {
   padding-left: 4.5%;
 }
+
+.descricao{
+  display: none;
+}
+
+.image:hover .descricao{
+  display: block;
+}

@@ -3,6 +3,9 @@ import {UserValidator} from '../util/UserValidator'
 import { UsuarioService }  from '../service/UsuarioService';
 import auth from './auth';
 import token from '../service/tokenService';
+import Multer from 'multer';
+import { UploadService } from '../service/UploadService';
+
 /*
  |--------------------------------------
  | API Routes
@@ -10,6 +13,12 @@ import token from '../service/tokenService';
  */
 
 const router = express.Router();
+const multer = Multer({
+  storage: Multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024 // File size limit: 5mb
+  }
+});
 
 /* GET api listing. */
 router.get('/', (req, res) => {
@@ -21,6 +30,26 @@ router.get('/', (req, res) => {
  * para ser criado seus respectivos documentos de acordo com o módulo
  * ao qual pertence. Por exemplo: userRote.js (todas as rotas de usuario)
  */
+
+
+router.post('/v1/usuario/uploadPhoto', multer.single('photo'), async(req, res) => {
+  let file = req.file;
+  
+  if (file) {
+    console.log(file)
+    try {
+      const retorno = await UploadService.uploadImageToStorage(file);
+      res.status(200).json(retorno);
+    } catch (err){
+      console.log("efdasd")
+      res.status(400).json(err.message);
+    }
+  } else {
+    res.status(400).json(err.message);
+  }
+
+
+});
 
 /**
  * GET consulta todos os usuários
@@ -96,5 +125,6 @@ router.delete('/v1/usuario', async (req, res) => {
     res.status(400).json(err.message);
   }
 });
+
 
 module.exports = router;

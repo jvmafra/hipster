@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "hipster-acadf",
+  "private_key_id": "023c20bb6e71fa1d84d60c73f41a65ec85dc1ab9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDbdkN+usNzn02c\nO0dc9O4YIdTm6gifUzdyfqFPvAVbpnzldDgy5r3cta/ouXLe6tnAHF43J2CwTkIh\ntOgStUyVqKJGrIe+b+hZC1oT3224rxJnvBos913nXXCFmwVhHDrHuSuKyDJ8rTSG\nQOpV19lfU1MGXQNsQyJkkRnp1Nzm42MRGAdJOJG0y+0EmUh4IWlCVlXbPwc5bUyQ\nE6+SGtDzwkwsMjymeTO+bsyHyfgqiHEUEVZvOMuUjtzNBxaWLBg3I3p/M7wJRrN2\n0II3YnVc1MINiNDTpOtMv9YONt2csaSL05sg80gH03Mbgon25Cnj6Cn7owSqw1m+\ngvqLM+mjAgMBAAECggEAC5OMceXmI3Y2wNP7qrKc0JcQRPH5bHYWSarWVX9khPYe\nRng/8qdrQnYvBkaqAYo/3Dti2OPx3Lr0EBUb3MjFdmuDy9iT/H6osfHAWaYCgqhx\nfxlUBCU0Rd0O721C9mFn1Fs3KcXvq9XzHFXWRprxM28QxRgo8xADg2yIAmahFGi3\nKpM/ZsjLDe2hx+jgwyn+0gNSwLsSm5o6M8Q3xEky3BuZMDTGW697ZlVy5nwhbEb+\nLweUuW/waZC/mqg3/fJa/LlwQOgun7ofM42dC55zYrVZYD/VTnvc0+6uCHmCWaZM\n0uzhlVzY3PP63Gj4vLf0A/o4m2SkSywVsdQNwUlrCQKBgQD5F59gJdaG7EeexjSc\nFf6HO+bEietV6kP5Qi+PYGuo3r/Jh7llr2zWkTv7OhQclWXtMHf+d7ZAsV0DImCq\nR8vGtM9NyQazxUo3ppF9utJ7DJqPlZXmHedguCAPkXhvCKy5h6KFyFTFvXrg58Wa\nc5q9r7Bb3pgk8Akf+/UHvfLgvQKBgQDhjEl7qrye1cujzvgi8ELf83e7FFIJ04F2\nZ9o8vbhnAQ5DRJOa386+8I+DoJKwhxurD62BEJCMs5EkudgQd/fVwt8GZpxxNHQ7\naWaXY8rGdvn8vG6eHbKh7B3jugTxat8wrueo10qXMCSZlBfJi/lRQQL2WkP94fKD\n95hFyiGJ3wKBgCf7Aaq2CAvZ6tjyKUmQQi1EkRKkrHA6zLQ6SlXx/PW64v+e2EQY\n9xgtcXouZUH9PMHoUKo4XrldfnddUjSil3OKW+e5R2kdVn8+LgYHMXdsm3ZGZSvt\nStD8XLEDAViZBNg2jAB7GhgvBIUKzm2u9nxRsbXdMYBkQqKulzKp60zlAoGBAI7S\n4wVojKCYCaflO8QEGJTv+3V/3KNUR7rO8KdeDBNN29ZE6qM77hODCZ30ZG9cXuzn\ntJrx/lbarqJu/J8RGONHzyqid5ZH/QJSMCDVlGYwmQSt3e5KJ//ZIOQ/uzmUz1ho\nqVGFYzpxxftqh9WcyXfmjxWo+z0dgxCGDOrEoJBJAoGBAKUxkifEtURVAqJxKtIW\nYbqO9WGdZhKZtEk4cmfBdLStvwb5Anr3lGIlqxUP+Ra//Xnf5DJMQ69R6BvaYWbX\nF4yZyBN7z5dx89XLyu8IntQ2JQk5osdFTKBCH/MiYpESiIFa7nlU4uN0nHXzld5g\nhl3+xcqGqJhEqtYmP16e+WnQ\n-----END PRIVATE KEY-----\n",
+  "client_email": "hipster-teste@hipster-acadf.iam.gserviceaccount.com",
+  "client_id": "101487608909957986122",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/hipster-teste%40hipster-acadf.iam.gserviceaccount.com"
+}

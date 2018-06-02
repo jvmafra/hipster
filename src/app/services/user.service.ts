@@ -95,6 +95,12 @@ export class UserService {
     return this.storageService.getStoreUsername();
   }
 
+  public uploadPhoto(photo) {
+    const fd = new FormData();
+    fd.append("photo", photo, photo.name);
+    return this.http.post(this.serverHost + 'v1/usuario/uploadPhoto', fd);
+  }
+
   public logoutUser() {
     this.storageService.removeUser();
     this.router.navigateByUrl('/register');

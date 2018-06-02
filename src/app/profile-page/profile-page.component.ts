@@ -7,6 +7,8 @@ import { PublicationService } from '../services/publication.service';
 import { Router } from '@angular/router';
 import { FormValidationService } from '../services/form-validation.service';
 import { AlertService } from '../services/alert.service';
+import { UploadPhotoModalComponent } from './upload-photo-modal/upload-photo-modal.component';
+import { ViewChild } from '@angular/core';
 
 declare var jquery:any;
 declare var $ :any;
@@ -18,6 +20,9 @@ declare var $ :any;
   encapsulation: ViewEncapsulation.None
 })
 export class ProfilePageComponent implements OnInit {
+  @ViewChild(UploadPhotoModalComponent)
+  public uploadPhotoModal: UploadPhotoModalComponent;
+
   private $ : any;
   private profile: any;
   private events: any;
@@ -43,6 +48,7 @@ export class ProfilePageComponent implements OnInit {
   public ORDER_BY_MOST_RECENT = 1;
   private filteredGenres : Array<String>;
   private selectedOrder;
+  imageSRC = "../assets/neutro.png";
 
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
@@ -67,6 +73,18 @@ export class ProfilePageComponent implements OnInit {
 
   public onScroll() {
     this.search(this.profile.name);
+  }
+
+  public onFileChange(event) {
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        let gg = e.target["result"]
+        this.uploadPhotoModal.createModal(event, e.target["result"], file);
+      };
+    }
   }
 
   public search(username) {
