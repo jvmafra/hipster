@@ -16,7 +16,7 @@ const GROUP_QUERY =     {"$group": {"_id": "$_id", "url": {"$first": "$url"}, "v
         "genres": {"$first": "$genres"}, "title": {"$first": "$title"}, "creationDate": {"$first": "$creationDate"},
         "likes": {"$first": "$likes"}, "comments": {"$push": "$comments"}}};
 
-const SORT_COMMENT_QUERY =  {"$sort": {"orderByUser": -1, "comments.likes": -1}};
+const SORT_COMMENT_QUERY =  {"$sort": {"orderByUser": -1, "number_likes": -1, }};
 
 /**
  * Service responsavel pela lógica de usuário
@@ -167,7 +167,8 @@ function getFindParams(filteredByGenreParam, userParam) {
 
  /**
    * Serve basicamente para que os comentários do usuário(logado) apareçam no topo. Basicamente
-   * a ideia é se o comentário for do usuário, tem peso 1. Se não, peso 0.
+   * a ideia é se o comentário for do usuário, tem peso 1. Se não, peso 0. Além disso, projeta
+   * o número de likes. Assim, como ordenação secundária, teremos o número de likes
    *
    * @return  {Object} Objeto necessário para fazer a projeção na minha pesquisa
    */
@@ -175,6 +176,7 @@ function setConditionQuery(userParam) {
   let projectQuery = PROJECT_QUERY;
 
   projectQuery["$project"]["orderByUser"] = {$cond: { if: { $eq: [ "$comments.ownerUsername", userParam ] }, then: 1, else: 0 }}
+  projectQuery["$project"]["number_likes"] = {$size: { "$ifNull": [ "$comments.likes", [] ]}}
 
   return projectQuery;
 }
