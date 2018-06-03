@@ -16,7 +16,8 @@
     "LANGUAGES": {
       "PT": "Português",
       "EN": "English"
-    }
+    },
+    "SETTINGS": "Configurações"
   },
   "FILTER_OPTIONS": {
     "FILTER_OPTIONS": "Filtrar resultados",
