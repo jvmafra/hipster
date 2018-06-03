@@ -47,43 +47,22 @@ export class PublicationService {
   }
 
    /**
-<<<<<<< HEAD
    * Consulta todos as Publicações. Neste método é feito todo o search inicial de publicações do sistema.
-   * Ordenando as publicações de acordo com a query pesquisada. 
-   * 
+   * Ordenando as publicações de acordo com a query pesquisada.
+   *
    * @param {Object} query.
    * query.skip: Serve para a paginação da search. Ele pula um certo número de objetos. Ou seja, se query.skip
    * for igual a 10, a pesquisa pulará os primerios 10 elementos da pesquisa.
    * query.user: O usuário que fez a pesquisa
-   * query.orderBy: O tipo de ordenação que as publicações devem estar(ORDER_BY_MOST_RECENT, 
+   * query.orderBy: O tipo de ordenação que as publicações devem estar(ORDER_BY_MOST_RECENT,
    * ORDER_BY_MOST_POPULAR, ORDER_BY_LESS_POPULAR)
-   * query.filterByGenres: Lista de generos filtrados pelo usuário                                                               
-   * 
-   * @returns {Promise}  Promise resolvida com uma lista de objetos Usuario
-=======
-   * Consulta todos as Publicações.
+   * query.filterByGenres: Lista de generos filtrados pelo usuário
    *
-   * @returns {Promise}  Promise resolvida com uma lista de objetos Publication
->>>>>>> master
+   * @returns {Promise}  Promise resolvida com uma lista de objetos Usuario
    * da forma que o mongo retorna. Recebe uma query com informações sobre
    * ordenação e filtering.
    */
   static search(query) {
-<<<<<<< HEAD
-=======
-    let sortParams = getSortParams(query.orderBy);
-    let genreParams = getFindParams(query.filterByGenres, query.user);
-    let textSearchParams = getTextSearchParams(query.textSearch);
-
-    if (genreParams["genres"]) { textSearchParams["genres"] = genreParams["genres"] }
-
-    let findParams = textSearchParams;
-
-    return Publication.find(findParams).sort(sortParams)
-            .limit(7).skip(parseInt(query.skip)).exec();
-  }
->>>>>>> master
-
     //Faz com os comentários do usuário apareçam primeiro
     let projectQuery = setConditionQuery(query.user);
     let skip =  {"$skip": parseInt(query.skip)}
@@ -204,14 +183,8 @@ function getSortParams(orderByParam) {
   let sort = {};
 
   if (orderByParam == ORDER_BY_MOST_RECENT) {
-<<<<<<< HEAD
     sort["$sort"] = {};
     sort["$sort"]["creationDate"] = DESCENDING_ORDER;
-=======
-    sort = { "creationDate": DESCENDING_ORDER };
-  } if (orderByParam == ORDER_BY_LESS_RECENT) {
-    sort = { "creationDate": ASCENDING_ORDER };
->>>>>>> master
   } else if (orderByParam == ORDER_BY_MOST_POPULAR) {
     sort["$sort"] = {};
     sort["$sort"]["likes"] = DESCENDING_ORDER;
