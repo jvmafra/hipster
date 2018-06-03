@@ -32,20 +32,20 @@ router.get('/', (req, res) => {
  */
 
 
-router.post('/v1/usuario/uploadPhoto', multer.single('photo'), async(req, res) => {
-  let file = req.file;
+router.post('/v1/usuario/:username/uploadPhoto', multer.single('photo'), async(req, res) => {
+  const username = req.params.username;        
+  const file = req.file;
   
   if (file) {
-    console.log(file)
     try {
-      const retorno = await UploadService.uploadImageToStorage(file);
-      res.status(200).json(retorno);
+      const username = token.getUsername(req);
+      const photoUrl = await UploadService.uploadImageToStorage(file, username);
+      res.status(200).json(photoUrl);
     } catch (err){
-      console.log("efdasd")
       res.status(400).json(err.message);
     }
   } else {
-    res.status(400).json(err.message);
+    res.status(400).json("No file found");
   }
 
 

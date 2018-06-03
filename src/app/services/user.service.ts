@@ -75,12 +75,20 @@ export class UserService {
     this.storageService.storeName(name);
   }
 
+  public storePhotoUrl(photoUrl) {
+    this.storageService.storePhotoUrl(photoUrl);
+  }
+
   public compareUsername(username) {
     return this.getStoreUsername() === username;
   }
 
   public getStoreName() {
     return this.storageService.getStoreName();
+  }
+
+  public getStorePhotoUrl() {
+    return this.storageService.getStorePhotoUrl();
   }
 
   public deleteUser() {
@@ -97,8 +105,9 @@ export class UserService {
 
   public uploadPhoto(photo) {
     const fd = new FormData();
+    const username = this.getStoreUsername();
     fd.append("photo", photo, photo.name);
-    return this.http.post(this.serverHost + 'v1/usuario/uploadPhoto', fd);
+    return this.http.post(this.serverHost + 'v1/usuario/' + username + '/uploadPhoto', fd);
   }
 
   public logoutUser() {

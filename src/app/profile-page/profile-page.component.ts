@@ -48,7 +48,7 @@ export class ProfilePageComponent implements OnInit {
   public ORDER_BY_MOST_RECENT = 1;
   private filteredGenres : Array<String>;
   private selectedOrder;
-  imageSRC = "../assets/neutro.png";
+  private imageSRC: string;
 
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
@@ -69,6 +69,7 @@ export class ProfilePageComponent implements OnInit {
     this.events = '';
     this.filteredGenres = [];
     this.selectedOrder = this.ORDER_BY_MOST_RECENT;
+    this.imageSRC = "../assets/neutro.png"
   }
 
   public onScroll() {
@@ -81,7 +82,6 @@ export class ProfilePageComponent implements OnInit {
       let file = event.target.files[0];
       reader.readAsDataURL(file);
       reader.onload = (e) => {
-        let gg = e.target["result"]
         this.uploadPhotoModal.createModal(event, e.target["result"], file);
       };
     }
@@ -205,7 +205,9 @@ export class ProfilePageComponent implements OnInit {
             this.spotifyURL = this.profile.spotifyURL || "";
             this.username = this.profile.username;
             this.initDate(this.profile.birthDate);
+            this.imageSRC = this.profile.photoUrl;
 
+            this.userService.storePhotoUrl(this.imageSRC);
             this.email = this.profile.email;
 
           }, err => {

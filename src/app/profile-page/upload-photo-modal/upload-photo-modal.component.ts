@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, ViewEncapsulation, EventEmitter} from '@angular/core';
+import { Component, ViewEncapsulation, Input, Output, EventEmitter} from '@angular/core';
 import { UserService } from '../../services/user.service';
 
 declare var jquery:any;
@@ -10,16 +10,17 @@ declare var $ :any;
   styleUrls: ['./upload-photo-modal.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class UploadPhotoModalComponent implements OnInit {
-  @Output() search = new EventEmitter<string>();
-  imageSRC = "../assets/neutro.png";
+export class UploadPhotoModalComponent {
+  
+  @Input() imgSrc: string;
+  @Output() imgSrcChange : EventEmitter<string>; 
 
   private userPhotoFile: File;
-
+  private src: string;
+  
   constructor(private userService: UserService) {
-  }
-
-  ngOnInit() {
+    this.src = "../assets/neutro.png";
+    this.imgSrcChange = new EventEmitter<string>();
   }
 
   public createModal(event, src, file) {
@@ -28,7 +29,7 @@ export class UploadPhotoModalComponent implements OnInit {
       onApprove : () => {this.uploadPhoto()}
     })
     .modal('show');
-    this.imageSRC = src;
+    this.src = src;
     this.userPhotoFile = file;
     event.stopPropagation();
   }
@@ -36,9 +37,10 @@ export class UploadPhotoModalComponent implements OnInit {
   private uploadPhoto() {
     this.userService.uploadPhoto(this.userPhotoFile).subscribe(
       data => {
-       console.log("here");
+       this.imgSrc = data.toString();
+       this.imgSrcChange.emit(this.imgSrc);
       }, err => {
-       console.log("wrong")
+       console.log(err)
       });
   }
 

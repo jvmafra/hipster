@@ -7,11 +7,11 @@
     <div class="five wide column">
       <div class="ui card centered">
         <a class="image">
-          <img width="500" height="600" src="{{imageSRC}}">
-          <div class="">
-              <label for="file" class="ui icon button">
+          <img class="photo-height" [src]="imageSRC">
+          <div *ngIf="this.isMyProfile" class="upload-button">
+              <label for="file" class="ui button label-configurations">
                   <i class="file icon"></i>
-                  Open File</label>
+               Upload a new Photo</label>
               <input type="file" id="file" (change)="onFileChange($event)" style="display:none">
           </div>
         </a>
@@ -138,4 +138,4 @@
     </div>
   </div>
 </div>
-<app-upload-photo-modal view-model.ref="uploadPhotoModal"> </app-upload-photo-modal>
+<app-upload-photo-modal [(imgSrc)]="imageSRC"> </app-upload-photo-modal>

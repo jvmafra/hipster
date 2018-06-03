@@ -23,10 +23,19 @@
   padding-left: 4.5%;
 }
 
-.descricao{
+.upload-button {
   display: none;
 }
 
-.image:hover .descricao{
+.image:hover .upload-button{
   display: block;
+}
+
+.photo-height {
+  height: 22em !important;
+}
+
+.label-configurations {
+  width: 100% !important;
+  opacity: 0.5;
 }
