@@ -6,7 +6,7 @@ import { UsuarioService } from './UsuarioService';
 
 const storage = googleStorage({
   projectId: "hipster-acadf",
-  keyFilename: "teste.json",
+  keyFilename: "firebase.json",
 });
 
 
