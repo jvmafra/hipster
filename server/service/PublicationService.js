@@ -26,9 +26,12 @@ export class PublicationService {
 
 
   /**
-   * Consulta uma Publicação dado um id.
+   * Consulta uma Publicação dado um id e retorna ela com os comentários ordenados da forma
+   * que os comentários do usuário logado apareçam primeiro
    *
    * @param   {String}  id da publicação no qual quer recuperar.
+   * @param {Object} query
+   * query.user: O usuário que fez a pesquisa
    * @returns {Promise}  Promise resolvida com o objeto Publicação
    * da forma que o mongo retorna.
    */
@@ -43,15 +46,24 @@ export class PublicationService {
   }
 
    /**
-   * Consulta todos as Publicações.
-   *
+   * Consulta todos as Publicações. Neste método é feito todo o search inicial de publicações do sistema.
+   * Ordenando as publicações de acordo com a query pesquisada. 
+   * 
+   * @param {Object} query.
+   * query.skip: Serve para a paginação da search. Ele pula um certo número de objetos. Ou seja, se query.skip
+   * for igual a 10, a pesquisa pulará os primerios 10 elementos da pesquisa.
+   * query.user: O usuário que fez a pesquisa
+   * query.orderBy: O tipo de ordenação que as publicações devem estar(ORDER_BY_MOST_RECENT, 
+   * ORDER_BY_MOST_POPULAR, ORDER_BY_LESS_POPULAR)
+   * query.filterByGenres: Lista de generos filtrados pelo usuário                                                               
+   * 
    * @returns {Promise}  Promise resolvida com uma lista de objetos Usuario
    * da forma que o mongo retorna. Recebe uma query com informações sobre
    * ordenação e filtering.
    */
   static search(query) {
 
-
+    //Faz com os comentários do usuário apareçam primeiro
     let projectQuery = setConditionQuery(query.user);
     let skip =  {"$skip": parseInt(query.skip)}
     let limit = {"$limit": 10}
@@ -142,6 +154,12 @@ function getFindParams(filteredByGenreParam, userParam) {
   return find;
 }
 
+ /**
+   * Serve basicamente para que os comentários do usuário(logado) apareçam no topo. Basicamente
+   * a ideia é se o comentário for do usuário, tem peso 1. Se não, peso 0.
+   *
+   * @return  {Object} Objeto necessário para fazer a projeção na minha pesquisa
+   */
 function setConditionQuery(userParam) {
   let projectQuery = PROJECT_QUERY;
 
