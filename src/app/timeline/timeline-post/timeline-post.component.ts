@@ -78,7 +78,7 @@ export class TimelinePostComponent implements OnInit {
         creationDate: new Date()
       };
 
-      this.event.comments.push(newComment);
+      this.event.comments.unshift(newComment);
 
       let updatedPost = {
         _id: this.event._id,

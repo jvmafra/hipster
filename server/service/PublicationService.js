@@ -7,6 +7,16 @@ const ORDER_BY_MOST_POPULAR = 3;
 const ORDER_BY_LESS_POPULAR = 4;
 const ASCENDING_ORDER = 1;
 const DESCENDING_ORDER = -1;
+const PROJECT_QUERY = { "$project": {_id: 1, videoID: 1, ownerUsername: 1, description: 1, url: 1,
+                        likes: 1, title : 1, genres: 1, artist: 1, creationDate: 1, comments: 1}};
+
+const UNWIND_QUERY = { "$unwind": {"path": "$comments", "preserveNullAndEmptyArrays": true}};
+const GROUP_QUERY =     {"$group": {"_id": "$_id", "url": {"$first": "$url"}, "videoID": {"$first": "$videoID"},
+        "ownerUsername": {"$first": "$ownerUsername"}, "description": {"$first": "$description"}, "artist": {"$first": "$artist"},
+        "genres": {"$first": "$genres"}, "title": {"$first": "$title"}, "creationDate": {"$first": "$creationDate"},
+        "likes": {"$first": "$likes"}, "comments": {"$push": "$comments"}}};
+
+const SORT_COMMENT_QUERY =  {"$sort": {"orderByUser": -1, "number_likes": -1, }};
 
 /**
  * Service responsavel pela lógica de usuário
@@ -17,44 +27,61 @@ export class PublicationService {
 
 
   /**
-   * Consulta uma Publicação dado um id.
+   * Consulta uma Publicação dado um id e retorna ela com os comentários ordenados da forma
+   * que os comentários do usuário logado apareçam primeiro
    *
    * @param   {String}  id da publicação no qual quer recuperar.
+   * @param {Object} query
+   * query.user: O usuário que fez a pesquisa
    * @returns {Promise}  Promise resolvida com o objeto Publicação
    * da forma que o mongo retorna.
    */
-  static retrievePublication(id) {
-    return Publication.findOne({_id: id}).exec();
+  static retrievePublication(id, query) {
+    var ObjectID = require("mongodb").ObjectID;
+    let projectQuery = setConditionQuery(query.user);
+    let findParams = {"$match": {_id: ObjectID(id)}};
+
+    return Publication.aggregate([
+      UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, GROUP_QUERY, findParams
+      ]).exec()
   }
 
    /**
-   * Consulta todos as Publicações.
+   * Consulta todos as Publicações. Neste método é feito todo o search inicial de publicações do sistema.
+   * Ordenando as publicações de acordo com a query pesquisada.
    *
-   * @returns {Promise}  Promise resolvida com uma lista de objetos Publication
+   * @param {Object} query.
+   * query.skip: Serve para a paginação da search. Ele pula um certo número de objetos. Ou seja, se query.skip
+   * for igual a 10, a pesquisa pulará os primerios 10 elementos da pesquisa.
+   * query.user: O usuário que fez a pesquisa
+   * query.orderBy: O tipo de ordenação que as publicações devem estar(ORDER_BY_MOST_RECENT,
+   * ORDER_BY_MOST_POPULAR, ORDER_BY_LESS_POPULAR)
+   * query.filterByGenres: Lista de generos filtrados pelo usuário
+   *
+   * @returns {Promise}  Promise resolvida com uma lista de objetos Usuario
    * da forma que o mongo retorna. Recebe uma query com informações sobre
    * ordenação e filtering.
    */
   static search(query) {
-    let sortParams = getSortParams(query.orderBy);
-    let genreParams = getFindParams(query.filterByGenres, query.user);
-    let textSearchParams = getTextSearchParams(query.textSearch);
+    //Faz com os comentários do usuário apareçam primeiro
+    let projectQuery = setConditionQuery(query.user);
+    let skip =  {"$skip": parseInt(query.skip)}
+    let limit = {"$limit": 10}
+    let findParams = {};
+    let sortParams = {};
 
-    if (genreParams["genres"]) { textSearchParams["genres"] = genreParams["genres"] }
+    //When user is acessing his home page
+    if(!query.orderBy) {
+      findParams = {"$match": {"ownerUsername": query.user}};
+      sortParams = {"$sort": {"creationDate": DESCENDING_ORDER}};
+    } else {
+      sortParams = getSortParams(query.orderBy);
+      findParams = getFindParams(query.filterByGenres, query.user);
+    }
 
-    let findParams = textSearchParams;
-
-    return Publication.find(findParams).sort(sortParams)
-            .limit(7).skip(parseInt(query.skip)).exec();
-  }
-
-   /**
-   * Consulta todos as Publicações de um usuário
-   *
-   * @returns {Promise}  Promise resolvida com uma lista de objetos Usuario
-   * da forma que o mongo retorna.
-   */
-  static retrieveUserPublications(ownerUsername) {
-    return Publication.find({ownerUsername: ownerUsername}).sort({creationDate: 1}).exec();
+    return Publication.aggregate([
+      UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, GROUP_QUERY, findParams, sortParams, skip, limit
+      ]).exec()
   }
 
 
@@ -125,34 +152,47 @@ function getTextSearchParams(textSearch) {
 }
 
 function getFindParams(filteredByGenreParam, userParam) {
-  let find = {};
-
-  if (userParam != "undefined") {
-    find["ownerUsername"] = userParam;
-  }
+  let find = {"$match": {}};
 
   if (filteredByGenreParam instanceof Array) {
-    find["genres"] = { $in : filteredByGenreParam}
+    find["$match"]["genres"] = { $in : filteredByGenreParam}
   } else if (filteredByGenreParam != undefined) {
     var auxArray = [];
     auxArray.push(filteredByGenreParam)
-    find["genres"] = { $in : auxArray}
+    find["$match"]["genres"] = { $in : auxArray}
   }
 
   return find;
+}
+
+ /**
+   * Serve basicamente para que os comentários do usuário(logado) apareçam no topo. Basicamente
+   * a ideia é se o comentário for do usuário, tem peso 1. Se não, peso 0. Além disso, projeta
+   * o número de likes. Assim, como ordenação secundária, teremos o número de likes
+   *
+   * @return  {Object} Objeto necessário para fazer a projeção na minha pesquisa
+   */
+function setConditionQuery(userParam) {
+  let projectQuery = PROJECT_QUERY;
+
+  projectQuery["$project"]["orderByUser"] = {$cond: { if: { $eq: [ "$comments.ownerUsername", userParam ] }, then: 1, else: 0 }}
+  projectQuery["$project"]["number_likes"] = {$size: { "$ifNull": [ "$comments.likes", [] ]}}
+
+  return projectQuery;
 }
 
 function getSortParams(orderByParam) {
   let sort = {};
 
   if (orderByParam == ORDER_BY_MOST_RECENT) {
-    sort = { "creationDate": DESCENDING_ORDER };
-  } if (orderByParam == ORDER_BY_LESS_RECENT) {
-    sort = { "creationDate": ASCENDING_ORDER };
+    sort["$sort"] = {};
+    sort["$sort"]["creationDate"] = DESCENDING_ORDER;
   } else if (orderByParam == ORDER_BY_MOST_POPULAR) {
-    sort = { "likes": DESCENDING_ORDER };
+    sort["$sort"] = {};
+    sort["$sort"]["likes"] = DESCENDING_ORDER;
   } else if (orderByParam == ORDER_BY_LESS_POPULAR) {
-    sort = { "likes": ASCENDING_ORDER };
+    sort["$sort"] = {};
+    sort["$sort"]["likes"] = ASCENDING_ORDER;
   }
 
   return sort;
