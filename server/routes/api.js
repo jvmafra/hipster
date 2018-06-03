@@ -35,7 +35,7 @@ router.get('/', (req, res) => {
 router.post('/v1/usuario/:username/uploadPhoto', multer.single('photo'), async(req, res) => {
   const username = req.params.username;        
   const file = req.file;
-  
+
   if (file) {
     try {
       const username = token.getUsername(req);

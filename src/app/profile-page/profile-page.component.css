@@ -31,11 +31,11 @@
   display: block;
 }
 
-.photo-height {
-  height: 22em !important;
-}
-
 .label-configurations {
   width: 100% !important;
   opacity: 0.5;
+}
+
+.photo-height {
+  max-width: 300px !important;
 }

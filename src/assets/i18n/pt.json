@@ -40,7 +40,8 @@
     "EVENT_POST": "Você postou",
     "FAVORITE": "Favoritar",
     "POSTS": "Postagens",
-    "PROFILE": "Perfil"
+    "PROFILE": "Perfil",
+    "UPLOADPHOTO": "Upload uma nova foto"
   },
   "POST": {
     "BY": "Por ",
@@ -94,6 +95,10 @@
   "DELETEMODAL": {
     "DELETE_ACCOUNT": "Deletar conta",
     "DELETE_MESSAGE": "Você tem certeza que você quer deletar sua conta? Todas suas postagens e informações serão deletadas permanentemente.",
+    "CANCEL": "Cancelar"
+  },
+  "UPLOADPHOTOMODAL": {
+    "PHOTO": "Nova Foto",
     "CANCEL": "Cancelar"
   },
   "ERRORS": {

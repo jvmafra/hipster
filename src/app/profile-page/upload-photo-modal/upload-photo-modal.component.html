@@ -1,12 +1,15 @@
 <div class="ui modal" id="upload-photo-modal">
   <div class="image content">
-    <img style="height: 35em;" [src]="src">
+    <img [src]="src" id="photo">
     <div class="description">
       <p></p>
     </div>
   </div>
   <div class="actions">
-    <div class="ui button red deny">{{ 'DELETEMODAL.CANCEL' | translate }}</div>
+    <label  for="file" class="ui button">
+        <i class="camera retro icon"></i>{{ 'UPLOADPHOTOMODAL.PHOTO' | translate }}</label>
+      <input type="file" id="file" (change)="onFileChange($event)" style="display:none">
+    <div class="ui button red deny">{{ 'UPLOADPHOTOMODAL.CANCEL' | translate }}</div>
     <div class="ui button green approve">OK</div>
   </div>
 </div>

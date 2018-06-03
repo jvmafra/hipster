@@ -69,22 +69,11 @@ export class ProfilePageComponent implements OnInit {
     this.events = '';
     this.filteredGenres = [];
     this.selectedOrder = this.ORDER_BY_MOST_RECENT;
-    this.imageSRC = "../assets/neutro.png"
+    this.imageSRC = this.userService.getStorePhotoUrl() ? this.userService.getStorePhotoUrl() : "../assets/neutro.png";
   }
 
   public onScroll() {
     this.search(this.profile.name);
-  }
-
-  public onFileChange(event) {
-    let reader = new FileReader();
-    if(event.target.files && event.target.files.length > 0) {
-      let file = event.target.files[0];
-      reader.readAsDataURL(file);
-      reader.onload = (e) => {
-        this.uploadPhotoModal.createModal(event, e.target["result"], file);
-      };
-    }
   }
 
   public search(username) {
