@@ -96,6 +96,7 @@ export class PublicationService {
       params: {
         orderBy: params.orderBy,
         filterByGenres: params.filterByGenres,
+        textSearch: params.textSearch,
         skip: params.skip,
         user: params.user
       }

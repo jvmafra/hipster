@@ -6,6 +6,10 @@
   color: #DED3D2 !important;
 }
 
+.hip-search-icon {
+  color: white
+}
+
 .field {
   width: 100% !important;
   padding-bottom: 4px !important;
@@ -23,7 +27,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0){
   .hipster-login-form {
     margin-top: 2.5%;
-  }  
+  }
 }
 
 @-moz-document url-prefix() {
