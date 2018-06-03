@@ -14,6 +14,7 @@ _.CADASTRO = {
     VALIDACAO_USERNAME: 'Usuário deve ter um username',
     VALIDACAO_DATA_NASCIMENTO_FORMATO: 'A data não é valida',
     VALIDACAO_DATA_NASCIMENTO: 'Usuário deve ter uma data de nascimento',
+    VALIDACAO_ACTIVE_EMAIL: "VALIDACAO_ACTIVE_EMAIL",
 
     VALIDACAO_OWNER: "Publicação deve ter um criador",
     VALIDACAO_URL: "Publicação deve ter uma url vinculada a ela",

@@ -105,7 +105,10 @@
       "EMAIL": "An email need to be informed",
       "DAY": "A day need to be informed",
       "MONTH": "A day need to be informed",
-      "YEAR": "A day need to be informed"
+      "YEAR": "A day need to be informed",
+      "VALIDACAO_ACTIVE_EMAIL": "Email has already been registered and confirmed by Hipster.",
+      "ERROR_MESSAGE": "Please check the information you entered and try again.",
+      "ERROR_MESSAGE_TITLE": "Error in registration"
     },
     "PUBLICATION": {
       "URL": "An url need to be informed"

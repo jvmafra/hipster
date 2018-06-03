@@ -3,6 +3,7 @@ import {UserValidator} from '../util/UserValidator'
 import { UsuarioService }  from '../service/UsuarioService';
 import auth from './auth';
 import token from '../service/tokenService';
+import * as erro from '../util/ErroHandler';
 /*
  |--------------------------------------
  | API Routes
@@ -51,8 +52,14 @@ router.get('/v1/usuario/:username', async (req, res) => {
 router.post('/usuario', async (req, res) => {
   const usuario = req.body;
   try {
-    const data = await UsuarioService.registerUser(usuario);
-    res.status(200).json(data);
+    let usuariosAtivos = await UsuarioService.retrieveActivedUserByEmail(usuario.email);
+    
+    if (typeof usuariosAtivos !== 'undefined' && usuariosAtivos.length > 0) {
+      throw Error(erro.CADASTRO.VALIDACAO_ACTIVE_EMAIL); 
+    } else {
+      const data = await UsuarioService.registerUser(usuario);
+      res.status(200).json(data);
+    }    
   } catch(err) {
     res.status(400).json(err.message);
   }

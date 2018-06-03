@@ -141,7 +141,7 @@ export class UsuarioService {
    *
    * @returns {Promise}  Promise resolvida com uma lista de objetos Usuario
    */
-  static async retrieveActivedUserByEmail(email) {
-    return await Usuario.find({email: email, active: true}).exec();
+  static retrieveActivedUserByEmail(email) {
+    return Usuario.find({email: email, active: true}).exec();
   }
 }
