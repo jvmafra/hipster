@@ -2,6 +2,7 @@ import express from 'express';
 import { PublicationService }  from '../service/PublicationService';
 import auth from './auth';
 import {PublicationValidator} from '../util/PublicationValidator'
+import token from '../service/tokenService';
 
 const router = express.Router();
 
@@ -82,9 +83,11 @@ router.post('/', async (req, res) => {
   if (!validacao.return) {res.status(400).json(validacao.message);}
   else{
     try {
-      const data = await PublicationService.registerPublication(publication);
+      const username = token.getUsername(req);
+      const data = await PublicationService.registerPublication(publication, username);
       res.status(200).json(data);
     } catch(err) {
+      console.log(err.message)
       res.status(400).json(err.message);
     }
   }

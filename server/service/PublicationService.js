@@ -107,7 +107,8 @@ export class PublicationService {
    * @return  {Promise} Promise resolvida com o objeto Usuario
    * da forma que o mongo retorna
    */
-  static registerPublication(publication) {
+  static registerPublication(publication, username) {
+    publication["ownerUsername"] = username;
     const publicationMongoose = new Publication(publication);
     return publicationMongoose.save();
   }
