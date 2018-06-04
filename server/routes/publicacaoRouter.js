@@ -82,7 +82,8 @@ router.post('/', async (req, res) => {
   if (!validacao.return) {res.status(400).json(validacao.message);}
   else{
     try {
-      const data = await PublicationService.registerPublication(publication);
+      const username = token.getUsername(req);
+      const data = await PublicationService.registerPublication(publication, username);
       res.status(200).json(data);
     } catch(err) {
       res.status(400).json(err.message);

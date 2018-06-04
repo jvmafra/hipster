@@ -175,10 +175,13 @@ export class ProfilePageComponent implements OnInit {
     this.initSemanticValidationForm();
 
     this.route.params.subscribe(params => {
+        console.log(this.username);
+        console.log(params.username);
         let username = params['username'];
 
         this.isMyProfile = this.userService.compareUsername(username);
-
+        
+        this.skip = 0;
         this.search(username);
 
         this.userService.retrieveUser(username).subscribe(
