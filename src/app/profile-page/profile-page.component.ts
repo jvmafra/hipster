@@ -131,6 +131,11 @@ export class ProfilePageComponent implements OnInit {
     }
 
   }
+  
+  public updateTimeline() {
+    this.skip = 0;
+    this.search(this.username);
+  }
 
   private isFormValid() {
     return $('.ui.form').form('is valid');
@@ -180,7 +185,8 @@ export class ProfilePageComponent implements OnInit {
         let username = params['username'];
 
         this.isMyProfile = this.userService.compareUsername(username);
-
+        
+        this.skip = 0;
         this.search(username);
 
         this.userService.retrieveUser(username).subscribe(
