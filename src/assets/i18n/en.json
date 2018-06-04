@@ -16,7 +16,8 @@
     "LANGUAGES": {
       "PT": "Português",
       "EN": "English"
-    }
+    },
+    "SETTINGS": "Settings"
   },
   "FILTER_OPTIONS": {
     "FILTER_OPTIONS": "Filter results",
@@ -80,7 +81,8 @@
   "CONFIRMATION": {
     "CONFIRMATION_TITLE": "Last Step",
     "CONFIRMATION_SUCCESS": "Your register was confirmed with success. Now on you are a trully Hipster signin and enjoy our plataform!",
-    "CONFIRMATION_ERROR": "You have failed this city! Ops, wrong tv show! Something has failed, contact our support!"
+    "CONFIRMATION_ERROR": "You have failed this city! Ops, wrong tv show! Something has failed, contact our support!",
+    "CONFIRMATION_ERROR_EMAIL": "A user already verified a account on hipster with this email address. Please, contact our suport!"
   },
   "DELETEMODAL": {
     "DELETE_ACCOUNT": "Delete account",
@@ -109,7 +111,10 @@
       "EMAIL": "An email need to be informed",
       "DAY": "A day need to be informed",
       "MONTH": "A day need to be informed",
-      "YEAR": "A day need to be informed"
+      "YEAR": "A day need to be informed",
+      "VALIDACAO_ACTIVE_EMAIL": "Email has already been registered and confirmed by Hipster.",
+      "ERROR_MESSAGE": "Please check the information you entered and try again.",
+      "ERROR_MESSAGE_TITLE": "Error in registration"
     },
     "PUBLICATION": {
       "URL": "An url need to be informed"

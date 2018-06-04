@@ -5,6 +5,7 @@ import auth from './auth';
 import token from '../service/tokenService';
 import Multer from 'multer';
 import { UploadService } from '../service/UploadService';
+import * as erro from '../util/ErroHandler';
 
 /*
  |--------------------------------------
@@ -33,7 +34,7 @@ router.get('/', (req, res) => {
 
 
 router.post('/v1/usuario/:username/uploadPhoto', multer.single('photo'), async(req, res) => {
-  const username = req.params.username;        
+  const username = req.params.username;
   const file = req.file;
 
   if (file) {
@@ -64,7 +65,7 @@ router.get('/v1/usuario', async (req, res) => {
  * GET consulta usuário por username
  */
 router.get('/v1/usuario/:username', async (req, res) => {
-  const username = req.params.username;        
+  const username = req.params.username;
   try {
     const retorno = await UsuarioService.consultaUsuario(username);
     res.status(200).json(retorno);
@@ -80,8 +81,14 @@ router.get('/v1/usuario/:username', async (req, res) => {
 router.post('/usuario', async (req, res) => {
   const usuario = req.body;
   try {
-    const data = await UsuarioService.registerUser(usuario);
-    res.status(200).json(data);
+    let usuariosAtivos = await UsuarioService.retrieveActivedUserByEmail(usuario.email);
+
+    if (typeof usuariosAtivos !== 'undefined' && usuariosAtivos.length > 0) {
+      throw Error(erro.CADASTRO.VALIDACAO_ACTIVE_EMAIL);
+    } else {
+      const data = await UsuarioService.registerUser(usuario);
+      res.status(200).json(data);
+    }
   } catch(err) {
     res.status(400).json(err.message);
   }
@@ -93,7 +100,7 @@ router.post('/login', auth.login);
  * PUT edita usuário
  */
 router.put('/v1/usuario', async (req, res) => {
-  const usuario = req.body;  
+  const usuario = req.body;
 
   let result;
   let validacao;
@@ -101,7 +108,7 @@ router.put('/v1/usuario', async (req, res) => {
   result = validacao.retorno;
 
   if (!result) res.status(400).json(validacao.mensagem);
-  else{    
+  else{
     const username = token.getUsername(req);
     try {
       const retorno = await UsuarioService.editaUsuario(username, usuario);

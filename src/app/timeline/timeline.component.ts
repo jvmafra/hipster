@@ -70,7 +70,7 @@ export class TimelineComponent implements OnInit {
     params["filterByGenres"] = this.filteredGenres;
     params["textSearch"] = [];
     params["skip"] = this.skip;
-    params["user"];
+    params["user"] = this.userService.getStoreUsername()
 
     this.publicationService.search(params).subscribe(
       data => {

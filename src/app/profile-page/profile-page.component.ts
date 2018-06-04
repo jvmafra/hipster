@@ -48,7 +48,7 @@ export class ProfilePageComponent implements OnInit {
   public ORDER_BY_MOST_RECENT = 1;
   private filteredGenres : Array<String>;
   private selectedOrder;
-  private imageSRC: string;
+  public imageSRC: string;
 
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,

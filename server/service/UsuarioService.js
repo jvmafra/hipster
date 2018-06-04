@@ -148,4 +148,13 @@ export class UsuarioService {
       })
     );
   }
+
+  /**
+   * Recupera lista de usuarios ativos a partir de um email
+   *
+   * @returns {Promise}  Promise resolvida com uma lista de objetos Usuario
+   */
+  static retrieveActivedUserByEmail(email) {
+    return Usuario.find({email: email, active: true}).exec();
+  }
 }

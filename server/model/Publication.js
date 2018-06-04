@@ -11,7 +11,6 @@ const self = this;
  * validações adicionadas para manter a consistencia dos dados
  * que iremos guardar.
  *
- * @author Gustavo Oliveira
  */
 const publicationSchema = new Schema({
   ownerUsername : {

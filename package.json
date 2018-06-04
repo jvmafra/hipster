@@ -45,7 +45,7 @@
     "node-cron": "^1.2.1",
     "nodemailer": "^4.6.0",
     "nodemailer-express-handlebars": "^3.0.0",
-    "npm": "^5.8.0",
+    "npm": "^5.10.0",
     "rxjs": "^5.5.2",
     "uuid": "^3.2.1",
     "youtube-info": "~1.1.2",
