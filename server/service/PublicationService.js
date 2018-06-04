@@ -1,4 +1,5 @@
 import Publication from '../model/Publication'
+import token from './tokenService';
 
 
 const ORDER_BY_MOST_RECENT = 1;
@@ -54,7 +55,8 @@ export class PublicationService {
    * @param {Object} query.
    * query.skip: Serve para a paginação da search. Ele pula um certo número de objetos. Ou seja, se query.skip
    * for igual a 10, a pesquisa pulará os primerios 10 elementos da pesquisa.
-   * query.user: O usuário que fez a pesquisa
+   * query.user: O usuário. Que pode ser o usuário logado ou o usuário do perfil que o usuário
+   * logado está usando.
    * query.orderBy: O tipo de ordenação que as publicações devem estar(ORDER_BY_MOST_RECENT,
    * ORDER_BY_MOST_POPULAR, ORDER_BY_LESS_POPULAR)
    * query.filterByGenres: Lista de generos filtrados pelo usuário
@@ -63,19 +65,23 @@ export class PublicationService {
    * da forma que o mongo retorna. Recebe uma query com informações sobre
    * ordenação e filtering.
    */
-  static async search(query) {
-    //Faz com os comentários do usuário apareçam primeiro
-    let projectQuery = setConditionQuery(query.user);
+  static async search(query, username) {
+    //Faz com os comentários do usuário logado apareçam primeiro
+    let projectQuery = setConditionQuery(username);
     let skip =  {"$skip": parseInt(query.skip)}
     let limit = {"$limit": 10}
     let findParams = {};
     let sortParams = {};
 
-    //When user is acessing his home page
     if(!query.orderBy) {
+      /** When user is accessing his homepage or someone else home page, query.user is equal 
+       * to the username of the profile which is being visited by the 
+       * user authenticated
+       */
       findParams = {"$match": {"ownerUsername": query.user}};
       sortParams = {"$sort": {"creationDate": DESCENDING_ORDER}};
     } else {
+      //When user is visiting general timeline
       sortParams = getSortParams(query.orderBy);
       findParams = getFindParams(query.filterByGenres, query.user);
     }

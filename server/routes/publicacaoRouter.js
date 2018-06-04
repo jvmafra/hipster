@@ -13,7 +13,8 @@ router.get('/', async (req, res) => {
   const query = req.query;
 
   try {
-    const data = await PublicationService.search(query);
+    const username = token.getUsername(req)
+    const data = await PublicationService.search(query, username);
     res.status(200).json(data);
   } catch(err) {
     res.status(400).json(err.message);
