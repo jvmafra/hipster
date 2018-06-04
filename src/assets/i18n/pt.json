@@ -101,7 +101,9 @@
   },
   "UPLOADPHOTOMODAL": {
     "PHOTO": "Nova Foto",
-    "CANCEL": "Cancelar"
+    "CANCEL": "Cancelar",
+    "ALERTHEADER": "Alerta",
+    "ALERTMESSAGE": "Por favor, forneça uma foto"
   },
   "ERRORS": {
     "REGISTER": {

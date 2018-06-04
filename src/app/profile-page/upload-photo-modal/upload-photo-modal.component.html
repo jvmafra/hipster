@@ -5,12 +5,24 @@
       <p></p>
     </div>
   </div>
-  <div class="actions">
-    <label  for="file" class="ui button">
-        <i class="camera retro icon"></i>{{ 'UPLOADPHOTOMODAL.PHOTO' | translate }}</label>
+  <div class="actions adjust-actions">
+    <div>
+      <label for="file" class="ui button upload-photo-button-color">
+      <i class="camera retro icon"></i>{{ 'UPLOADPHOTOMODAL.PHOTO' | translate }}</label>
       <input type="file" id="file" (change)="onFileChange($event)" style="display:none">
+    </div>
     <div class="ui button red deny">{{ 'UPLOADPHOTOMODAL.CANCEL' | translate }}</div>
     <div class="ui button green approve">OK</div>
   </div>
 </div>
-  
+
+
+<div class="ui tiny modal" id="error-modal">
+  <div class="header">{{ 'UPLOADPHOTOMODAL.ALERTHEADER' | translate }}</div>
+  <div class="content">
+      {{ 'UPLOADPHOTOMODAL.ALERTMESSAGE' | translate }}
+  </div>
+  <div class="actions">
+    <div class="ui approve button">OK</div>
+  </div>
+</div>

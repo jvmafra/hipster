@@ -33,13 +33,16 @@ export class UploadPhotoModalComponent {
   public createModal(event) {
     $('#upload-photo-modal').modal({
       onDeny    : function() { return true;},
-      onApprove : () => {this.uploadPhoto()}
+      onApprove : () => {
+        this.uploadPhoto()
+      }
     })
     .modal('show');
 
     if (!this.croppie) {
       this.startCroppie();
     }
+    
     event.stopPropagation();
   }
 
@@ -78,9 +81,14 @@ export class UploadPhotoModalComponent {
 
 
   private uploadPhoto() {
-    this.croppie.result('blob').then((blob) => {
-      this.uploadToApi(blob);
-    });
+    if (this.src !== "../assets/neutro.png") {
+      this.croppie.result('blob').then((blob) => {
+        this.uploadToApi(blob);
+      });
+    } else {
+      $('#error-modal').modal('show');
+    }
+    
   }
 
   private uploadToApi(blob) {

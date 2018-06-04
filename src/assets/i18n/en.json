@@ -91,7 +91,9 @@
   },
   "UPLOADPHOTOMODAL": {
     "PHOTO": "New Photo",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "ALERTHEADER": "Alert",
+    "ALERTMESSAGE": "Please, provide a photo"
   },
   "PUBLICATION": {
     "SHARE_MESSAGE":"Share a new music",
