@@ -6,11 +6,14 @@ import { Router } from '@angular/router';
 import { FormValidationService } from '../services/form-validation.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService } from '../services/alert.service';
+import { HipsterTranslate } from "../services/hipster-translate.service";
 import { TermsConditionsModalComponent } from '../terms-conditions-modal/terms-conditions-modal.component'
 
 declare let jquery: any;
 declare let $: any;
 declare let firebase: any;
+
+const REGISTER_TRANSLATE = "ERRORS.REGISTER.";
 
 @Component({
   selector: 'app-register',
@@ -38,6 +41,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               private userService: UserService,
               private formValidation: FormValidationService,
               private translateService: TranslateService,
+              private hipsterTranslate: HipsterTranslate,
               private router: Router,
               private alertService: AlertService) {
     this.user = {};
@@ -83,7 +87,14 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       data => {
         this.registering = true;
       }, err => {
-        this.alertService.showErrorAlert("Registrar Usuário", "Verifique as informações inseridas e tente novamente.")
+        let message = "";
+        if (err.error === "VALIDACAO_ACTIVE_EMAIL") {
+          message = this.hipsterTranslate.translateItem(REGISTER_TRANSLATE + err.error);                      
+        } else {
+          message = this.hipsterTranslate.translateItem(REGISTER_TRANSLATE + "ERROR_MESSAGE");
+        }
+        let errorTitle = this.hipsterTranslate.translateItem(REGISTER_TRANSLATE + "ERROR_MESSAGE_TITLE");
+        this.alertService.showErrorAlert(errorTitle, message);
       }
     );
   }

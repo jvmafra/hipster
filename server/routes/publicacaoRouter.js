@@ -23,9 +23,10 @@ router.get('/', async (req, res) => {
  */
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
+  const query = req.query;
 
   try {
-    const data = await PublicationService.retrievePublication(id);
+    const data = await PublicationService.retrievePublication(id, query);
     res.status(200).json(data);
   } catch(err) {
     res.status(400).json(err.message);
@@ -36,7 +37,8 @@ router.get('/:id', async (req, res) => {
  * GET consulta todas publicaçoes de um usuário
  */
 router.get('/user/:username', async (req, res) => {
-  const ownerUsername = req.params.username;
+  const query = req.query;
+
   try {
     const data = await PublicationService.retrieveUserPublications(ownerUsername);
     res.status(200).json(data);
