@@ -41,7 +41,8 @@
     "EVENT_POST": "You posted",
     "FAVORITE": "Favorite",
     "POSTS": "Posts",
-    "PROFILE": "Profile"
+    "PROFILE": "Profile",
+    "UPLOADPHOTO": "Upload a New Photo"
   },
   "POST": {
     "BY": "By ",
@@ -87,6 +88,12 @@
     "DELETE_ACCOUNT": "Delete account",
     "DELETE_MESSAGE": "Do you have sure that you want to delete your account? All your posts and information gonna be deleted permanently.",
     "CANCEL": "Cancel"
+  },
+  "UPLOADPHOTOMODAL": {
+    "PHOTO": "New Photo",
+    "CANCEL": "Cancel",
+    "ALERTHEADER": "Alert",
+    "ALERTMESSAGE": "Please, provide a photo"
   },
   "PUBLICATION": {
     "SHARE_MESSAGE":"Share a new music",

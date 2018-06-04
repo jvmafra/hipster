@@ -120,6 +120,19 @@ export class UsuarioService {
 
   }
 
+   /**
+   * Update o filePhotoName e a photoUrl de um Usuario
+   *
+   * @param   {username}  username do usuário que vai ser feito o update
+   * @param   {filePhotoName}  É o nome do file(foto) que está salvo no firebase
+   * @param   {photoUrl}  É a url necessário para acessar o file(foto) que está salva no firebase
+   * @return  {Promise} Promise própria do mongoose
+   */
+  static updatePhotoInfo(username, filePhotoName, photoUrl) {
+    return Usuario.update({ username: username },{username: username, filePhotoName: filePhotoName, 
+                            photoUrl: photoUrl},{ upsert: true }).exec();
+  }
+
   /**
    * Remove um Usuario
    *

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { UploadPhotoModalComponent } from './profile-page/upload-photo-modal/upload-photo-modal.component';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -59,7 +60,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoadIndicationComponent,
     CreatePostHomeComponent,
     ConfirmationPageComponent,
-    SearchComponent
+    SearchComponent,
+    UploadPhotoModalComponent
   ],
   providers: [
     {

@@ -1,4 +1,5 @@
 import Publication from '../model/Publication'
+import token from './tokenService';
 
 
 const ORDER_BY_MOST_RECENT = 1;
@@ -14,10 +15,11 @@ const UNWIND_QUERY = { "$unwind": {"path": "$comments", "preserveNullAndEmptyArr
 const GROUP_QUERY =     {"$group": {"_id": "$_id", "url": {"$first": "$url"}, "videoID": {"$first": "$videoID"},
         "ownerUsername": {"$first": "$ownerUsername"}, "description": {"$first": "$description"}, "artist": {"$first": "$artist"},
         "genres": {"$first": "$genres"}, "title": {"$first": "$title"}, "creationDate": {"$first": "$creationDate"},
-        "likes": {"$first": "$likes"}, "comments": {"$push": "$comments"}}};
+        "likes": {"$first": "$likes"}, "comments": {"$push": "$comments"}, "user_photos": {"$push": "$user_photos.photoUrl"}}};
 
 const SORT_COMMENT_QUERY =  {"$sort": {"orderByUser": -1, "number_likes": -1, }};
-
+const lookup = {"$lookup":{from: "usuarios", localField: "comments.ownerUsername", foreignField: "username",
+                as: "user_photos"}};
 /**
  * Service responsavel pela lógica de usuário
  *
@@ -53,7 +55,8 @@ export class PublicationService {
    * @param {Object} query.
    * query.skip: Serve para a paginação da search. Ele pula um certo número de objetos. Ou seja, se query.skip
    * for igual a 10, a pesquisa pulará os primerios 10 elementos da pesquisa.
-   * query.user: O usuário que fez a pesquisa
+   * query.user: O usuário. Que pode ser o usuário logado ou o usuário do perfil que o usuário
+   * logado está usando.
    * query.orderBy: O tipo de ordenação que as publicações devem estar(ORDER_BY_MOST_RECENT,
    * ORDER_BY_MOST_POPULAR, ORDER_BY_LESS_POPULAR)
    * query.filterByGenres: Lista de generos filtrados pelo usuário
@@ -62,25 +65,29 @@ export class PublicationService {
    * da forma que o mongo retorna. Recebe uma query com informações sobre
    * ordenação e filtering.
    */
-  static search(query) {
-    //Faz com os comentários do usuário apareçam primeiro
-    let projectQuery = setConditionQuery(query.user);
+  static async search(query, username) {
+    //Faz com os comentários do usuário logado apareçam primeiro
+    let projectQuery = setConditionQuery(username);
     let skip =  {"$skip": parseInt(query.skip)}
     let limit = {"$limit": 10}
     let findParams = {};
     let sortParams = {};
 
-    //When user is acessing his home page
     if(!query.orderBy) {
+      /** When user is accessing his homepage or someone else home page, query.user is equal 
+       * to the username of the profile which is being visited by the 
+       * user authenticated
+       */
       findParams = {"$match": {"ownerUsername": query.user}};
       sortParams = {"$sort": {"creationDate": DESCENDING_ORDER}};
     } else {
+      //When user is visiting general timeline
       sortParams = getSortParams(query.orderBy);
       findParams = getFindParams(query.filterByGenres, query.user);
     }
-
+  
     return Publication.aggregate([
-      UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, GROUP_QUERY, findParams, sortParams, skip, limit
+      UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, lookup, GROUP_QUERY, findParams, sortParams, skip, limit
       ]).exec()
   }
 

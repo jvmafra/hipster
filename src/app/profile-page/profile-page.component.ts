@@ -7,6 +7,8 @@ import { PublicationService } from '../services/publication.service';
 import { Router } from '@angular/router';
 import { FormValidationService } from '../services/form-validation.service';
 import { AlertService } from '../services/alert.service';
+import { UploadPhotoModalComponent } from './upload-photo-modal/upload-photo-modal.component';
+import { ViewChild } from '@angular/core';
 
 declare var jquery:any;
 declare var $ :any;
@@ -18,6 +20,9 @@ declare var $ :any;
   encapsulation: ViewEncapsulation.None
 })
 export class ProfilePageComponent implements OnInit {
+  @ViewChild(UploadPhotoModalComponent)
+  public uploadPhotoModal: UploadPhotoModalComponent;
+
   private $ : any;
   private profile: any;
   private events: any;
@@ -43,6 +48,7 @@ export class ProfilePageComponent implements OnInit {
   public ORDER_BY_MOST_RECENT = 1;
   private filteredGenres : Array<String>;
   private selectedOrder;
+  public imageSRC: string;
 
   constructor(private sanitizer: DomSanitizer,
               private route: ActivatedRoute,
@@ -63,6 +69,7 @@ export class ProfilePageComponent implements OnInit {
     this.events = '';
     this.filteredGenres = [];
     this.selectedOrder = this.ORDER_BY_MOST_RECENT;
+    this.imageSRC = this.userService.getStorePhotoUrl() ? this.userService.getStorePhotoUrl() : "../assets/neutro.png";
   }
 
   public onScroll() {
@@ -193,6 +200,7 @@ export class ProfilePageComponent implements OnInit {
             this.spotifyURL = this.profile.spotifyURL || "";
             this.username = this.profile.username;
             this.initDate(this.profile.birthDate);
+            this.imageSRC = this.profile.photoUrl ? this.profile.photoUrl : "../assets/neutro.png";;
 
             this.email = this.profile.email;
 
