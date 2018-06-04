@@ -124,6 +124,11 @@ export class ProfilePageComponent implements OnInit {
     }
 
   }
+  
+  public updateTimeline() {
+    this.skip = 0;
+    this.search(this.username);
+  }
 
   private isFormValid() {
     return $('.ui.form').form('is valid');
