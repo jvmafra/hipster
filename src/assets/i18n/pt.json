@@ -109,7 +109,8 @@
       "YEAR": "Um ano precisa ser informado",
       "VALIDACAO_ACTIVE_EMAIL": "Email informado já foi cadastrado e confirmado pelo Hipster",
       "ERROR_MESSAGE": "Verifique as informações inseridas e tente novamente.",
-      "ERROR_MESSAGE_TITLE": "Erro no registro"
+      "ERROR_MESSAGE_TITLE": "Erro no registro",
+      "DUPLICATED_USERNAME": "O nome de usuário já foi obtido. Por favor, escolha outro nome de usuário."
     },
     "PUBLICATION": {
       "URL": "Uma url precisa ser informada"
