@@ -14,10 +14,11 @@ const UNWIND_QUERY = { "$unwind": {"path": "$comments", "preserveNullAndEmptyArr
 const GROUP_QUERY =     {"$group": {"_id": "$_id", "url": {"$first": "$url"}, "videoID": {"$first": "$videoID"},
         "ownerUsername": {"$first": "$ownerUsername"}, "description": {"$first": "$description"}, "artist": {"$first": "$artist"},
         "genres": {"$first": "$genres"}, "title": {"$first": "$title"}, "creationDate": {"$first": "$creationDate"},
-        "likes": {"$first": "$likes"}, "comments": {"$push": "$comments"}}};
+        "likes": {"$first": "$likes"}, "comments": {"$push": "$comments"}, "user_photos": {"$push": "$user_photos.photoUrl"}}};
 
 const SORT_COMMENT_QUERY =  {"$sort": {"orderByUser": -1, "number_likes": -1, }};
-
+const lookup = {"$lookup":{from: "usuarios", localField: "comments.ownerUsername", foreignField: "username",
+                as: "user_photos"}};
 /**
  * Service responsavel pela lógica de usuário
  *
@@ -62,7 +63,7 @@ export class PublicationService {
    * da forma que o mongo retorna. Recebe uma query com informações sobre
    * ordenação e filtering.
    */
-  static search(query) {
+  static async search(query) {
     //Faz com os comentários do usuário apareçam primeiro
     let projectQuery = setConditionQuery(query.user);
     let skip =  {"$skip": parseInt(query.skip)}
@@ -78,9 +79,15 @@ export class PublicationService {
       sortParams = getSortParams(query.orderBy);
       findParams = getFindParams(query.filterByGenres, query.user);
     }
-
+  
+    
+    let teste = await Publication.aggregate([
+      UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, lookup, GROUP_QUERY, findParams, sortParams, skip, limit
+      ]).exec()
+      
+     console.log(teste); 
     return Publication.aggregate([
-      UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, GROUP_QUERY, findParams, sortParams, skip, limit
+      UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, lookup, GROUP_QUERY, findParams, sortParams, skip, limit
       ]).exec()
   }
 

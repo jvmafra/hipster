@@ -139,6 +139,7 @@ export class TimelinePostComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.event);
     var url = this.event.url;
     let date = new Date(this.event.creationDate);
     this.creationDate = date.toLocaleString();
