@@ -80,12 +80,6 @@ export class PublicationService {
       findParams = getFindParams(query.filterByGenres, query.user);
     }
   
-    
-    let teste = await Publication.aggregate([
-      UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, lookup, GROUP_QUERY, findParams, sortParams, skip, limit
-      ]).exec()
-      
-     console.log(teste); 
     return Publication.aggregate([
       UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, lookup, GROUP_QUERY, findParams, sortParams, skip, limit
       ]).exec()

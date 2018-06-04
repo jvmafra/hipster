@@ -15,10 +15,11 @@ declare var $ :any;
 export class UploadPhotoModalComponent {
   
   @Input() imgSrc: string;
+  @Output() updateTimeline = new EventEmitter<string>();
   @Output() imgSrcChange : EventEmitter<string>; 
 
   private userPhotoFile: File;
-  private src: string;
+  public src: string;
   private croppieResult;
   private fileName: string;
   croppie: any;
@@ -90,6 +91,7 @@ export class UploadPhotoModalComponent {
        this.imgSrcChange.emit(this.imgSrc);
        this.userService.storePhotoUrl(this.imgSrc);
        this.alertService.hideLoadIndication();
+       this.updateTimeline.emit();
       }, err => {
        console.log(err);
        this.alertService.hideLoadIndication();

@@ -13,9 +13,11 @@ export class PostCommentComponent implements OnInit {
 
   @Input() comment;
   @Input() post;
+  @Input() photoUrl;
+
   public isMyProfile: boolean;
   public creationDate: string;
-  public imageSRC: string;
+  public defaultImageSRC: string;
 
   constructor(private publicationService: PublicationService,
               private userService: UserService,
@@ -25,9 +27,9 @@ export class PostCommentComponent implements OnInit {
   ngOnInit() {
     let date = new Date(this.comment.creationDate);
     this.creationDate = date.toLocaleString();
-    this.imageSRC = '../assets/neutro.png';
+    this.defaultImageSRC = '../assets/neutro.png';
     let username = window.localStorage.username
-
+    
     this.isMyProfile = (username === this.comment.ownerUsername);
   }
 

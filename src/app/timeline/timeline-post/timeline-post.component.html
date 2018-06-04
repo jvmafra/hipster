@@ -50,12 +50,12 @@
               <a *ngIf="seeMore" (click)="seeMoreComments()" class="reply">{{ 'POST.HIDE' | translate }}</a>
             </div>
             <div *ngIf="!seeMore">
-              <app-post-comment *ngIf="event.comments.length > 0" [post]="event" [comment]="event.comments[0]"></app-post-comment>
-              <app-post-comment *ngIf="event.comments.length > 1" [post]="event" [comment]="event.comments[1]"></app-post-comment>
+              <app-post-comment *ngIf="event.comments.length > 0" [post]="event" [comment]="event.comments[0]" [photoUrl]="event.user_photos[0]"></app-post-comment>
+              <app-post-comment *ngIf="event.comments.length > 1" [post]="event" [comment]="event.comments[1]" [photoUrl]="event.user_photos[1]"></app-post-comment>
             </div>
             <div *ngIf="seeMore">
-              <div *ngFor="let comment of event.comments">
-                <app-post-comment [post]="event" [comment]="comment"></app-post-comment>
+              <div *ngFor="let comment of event.comments; let i = index" [attr.data-index]="i">
+                <app-post-comment [post]="event" [comment]="comment" [photoUrl]="event.user_photos[i]"></app-post-comment>
               </div>
             </div>
             <form class="ui reply form hip-margin" >

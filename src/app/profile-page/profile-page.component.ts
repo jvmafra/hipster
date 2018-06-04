@@ -200,9 +200,8 @@ export class ProfilePageComponent implements OnInit {
             this.spotifyURL = this.profile.spotifyURL || "";
             this.username = this.profile.username;
             this.initDate(this.profile.birthDate);
-            this.imageSRC = this.profile.photoUrl;
+            this.imageSRC = this.profile.photoUrl ? this.profile.photoUrl : "../assets/neutro.png";;
 
-            this.userService.storePhotoUrl(this.imageSRC);
             this.email = this.profile.email;
 
           }, err => {
