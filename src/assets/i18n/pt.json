@@ -80,7 +80,8 @@
   "CONFIRMATION": {
     "CONFIRMATION_TITLE": "Ultimo Passo",
     "CONFIRMATION_SUCCESS": "Seu cadastro foi confirmado com sucesso. Agora voce é um verdadeiro Hispter faça login e se divirta em nossa plataforma!",
-    "CONFIRMATION_ERROR": "You have failed this city! Ops, seriado errado! Alguma coisa não deu certo, entre em contato com nosso suporte!"
+    "CONFIRMATION_ERROR": "You have failed this city! Ops, seriado errado! Alguma coisa não deu certo, entre em contato com nosso suporte!",
+    "CONFIRMATION_ERROR_EMAIL": "Um usuário já confirmou cadastro no hipster usando esta conta de email. Por favor, contate nosso suporte!"
   },
   "PUBLICATION": {
     "SHARE_MESSAGE":"Compartilha uma nova música",
@@ -105,7 +106,10 @@
       "EMAIL": "Um email precisa ser informado",
       "DAY": "Um dia precisa ser informado",
       "MONTH": "Um mês precisa ser informado",
-      "YEAR": "Um ano precisa ser informado"
+      "YEAR": "Um ano precisa ser informado",
+      "VALIDACAO_ACTIVE_EMAIL": "Email informado já foi cadastrado e confirmado pelo Hipster",
+      "ERROR_MESSAGE": "Verifique as informações inseridas e tente novamente.",
+      "ERROR_MESSAGE_TITLE": "Erro no registro"
     },
     "PUBLICATION": {
       "URL": "Uma url precisa ser informada"
