@@ -17,7 +17,7 @@ export class PostCommentComponent implements OnInit {
 
   public isMyProfile: boolean;
   public creationDate: string;
-  public defaultImageSRC: string;
+  private defaultImageSRC: string;
 
   constructor(private publicationService: PublicationService,
               private userService: UserService,
@@ -30,6 +30,9 @@ export class PostCommentComponent implements OnInit {
     this.defaultImageSRC = '../assets/neutro.png';
     let username = window.localStorage.username
     
+    if (!this.photoUrl || !this.photoUrl.toString()) {
+      this.photoUrl = this.defaultImageSRC;
+    }
     this.isMyProfile = (username === this.comment.ownerUsername);
   }
 
