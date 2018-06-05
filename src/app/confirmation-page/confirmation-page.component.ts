@@ -20,6 +20,7 @@ export class ConfirmationPageComponent implements OnInit {
   constructor(private confirmationService: ConfirmationService,
               private route: ActivatedRoute,
               private translateService: TranslateService,
+              private hipsterTranslate: HipsterTranslate,
               private alertService: AlertService) {
 
         this.classIcon = true;
@@ -45,6 +46,7 @@ export class ConfirmationPageComponent implements OnInit {
       });
     });
   }
+
 
   getClass() {
     return this.classIcon;
