@@ -74,7 +74,6 @@ export class TimelineComponent implements OnInit {
 
     this.publicationService.search(params).subscribe(
       data => {
-        console.log(this.events);
         this.events = this.skip === 0 ? data : this.events.concat(data);
         this.skip = this.events.length;
         this.selectedLabel = "todos";
