@@ -88,11 +88,15 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         this.registering = true;
       }, err => {
         let message = "";
+
         if (err.error === "VALIDACAO_ACTIVE_EMAIL") {
-          message = this.hipsterTranslate.translateItem(REGISTER_TRANSLATE + err.error);                      
+          message = this.hipsterTranslate.translateItem(REGISTER_TRANSLATE + err.error);
+        } else if (err.error === "DUPLICATED_USERNAME") {
+          message = this.hipsterTranslate.translateItem(REGISTER_TRANSLATE + err.error);
         } else {
           message = this.hipsterTranslate.translateItem(REGISTER_TRANSLATE + "ERROR_MESSAGE");
         }
+
         let errorTitle = this.hipsterTranslate.translateItem(REGISTER_TRANSLATE + "ERROR_MESSAGE_TITLE");
         this.alertService.showErrorAlert(errorTitle, message);
       }

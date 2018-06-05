@@ -55,7 +55,7 @@ _.CONFIRMATION = {
 }
 
 const INFO_DUPLICADA = {
-    USERNAME: 'Esse username já existe',
+    USERNAME: 'DUPLICATED_USERNAME',
     EMAIL: 'Esse e-mail já foi cadastrado'
 };
 
@@ -79,11 +79,11 @@ _.handleValidationError = (err, next) => {
 };
 
 _.handleMongoError = (err, next) => {
-    let message = _.REQUISICAO.ERRO_CRIACAO;
+    var message = _.REQUISICAO.ERRO_CRIACAO;
     if (err.code === 11000) { // duplicate key error
-        message += INFO_DUPLICADA.USERNAME;
+        message = INFO_DUPLICADA.USERNAME;
     }
-    message += ".";
+
     return next(new Error(message));
 };
 

@@ -116,7 +116,8 @@
       "YEAR": "A day need to be informed",
       "VALIDACAO_ACTIVE_EMAIL": "Email has already been registered and confirmed by Hipster.",
       "ERROR_MESSAGE": "Please check the information you entered and try again.",
-      "ERROR_MESSAGE_TITLE": "Error in registration"
+      "ERROR_MESSAGE_TITLE": "Error in registration",
+      "DUPLICATED_USERNAME": "Username has already been taken. Please choose another Username."
     },
     "PUBLICATION": {
       "URL": "An url need to be informed"
