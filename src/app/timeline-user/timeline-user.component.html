@@ -1,0 +1,26 @@
+<div class="ui items">
+  <div class="item">
+    <div class="ui small circular image">
+      <img src="../assets/neutro.png">
+    </div>
+    <div class="content">
+     <div class="header" (click)="seeProfile()"> {{ event.name }} </div>
+     <div class="meta" (click)="seeProfile()">
+       <a class="date hip-ownerusername">{{ event.username }}</a>
+     </div>
+     <div class="meta">
+       <a class="date">{{ birthDate }}</a>
+     </div>
+     <div class="extra">
+       <div class="ui compact menu">
+          <a class="item" *ngIf="event.youtubeURL">
+            <i class="red large youtube play icon"></i> /{{ event.youtubeURL }}
+          </a>
+          <a class="item" *ngIf="event.spotifyURL">
+            <i class="green large spotify icon"></i> /{{ event.spotifyURL }}
+          </a>
+       </div>
+     </div>
+    </div>
+  </div>
+</div>

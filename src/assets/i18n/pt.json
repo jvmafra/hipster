@@ -7,11 +7,13 @@
     "PROFILE": "Perfil",
     "LANGUAGE": "Idioma",
     "CLASS": "Classificar Postagens",
+    "CLEAR": "Sem Classificar",
     "CLASS_M_RECENT": "Mais recentes",
     "CLASS_L_RECENT": "Menos recentes",
     "CLASS_L_POPULAR": "Menos populares",
     "CLASS_M_POPULAR": "Mais populares",
     "SEND_REPORT": "Enviar Denúncia",
+    "RESULTS_NOT_FOUND": "Oops! Nenhum resultado encontrado para ",
     "REPORT": "Denunciar",
     "LANGUAGES": {
       "PT": "Português",

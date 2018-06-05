@@ -32,6 +32,20 @@ export class UsuarioService {
   }
 
   /**
+  * Consulta todos os Usuários dado um texto.
+  *
+  * @returns {Promise}  Promise resolvida com uma lista de objetos Usuario
+  * da forma que o mongo retorna. Recebe uma query com informações de busca textual.
+  */
+   static searchByText(query) {
+     const findParams = getTextSearchParams(query.textSearch);
+
+     return Usuario.find(findParams, { "password" : 0 })
+             .limit(7).skip(parseInt(query.skip)).exec();
+   }
+
+
+  /**
    * Auth and user by passing username and password.
    *
    * @param   {String}  username from the user who needs to auth.
@@ -157,4 +171,15 @@ export class UsuarioService {
   static retrieveActivedUserByEmail(email) {
     return Usuario.find({email: email, active: true}).exec();
   }
+}
+
+function getTextSearchParams(textSearch) {
+  let find = {};
+
+  if (textSearch) {
+    find = { $text: { $search: textSearch } }
+  }
+
+  return find;
+
 }

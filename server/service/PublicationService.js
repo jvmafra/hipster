@@ -1,7 +1,6 @@
 import Publication from '../model/Publication'
 import token from './tokenService';
 
-
 const ORDER_BY_MOST_RECENT = 1;
 const ORDER_BY_LESS_RECENT = 2;
 const ORDER_BY_MOST_POPULAR = 3;
@@ -48,6 +47,32 @@ export class PublicationService {
       ]).exec()
   }
 
+    /**
+    * Consulta todos as Publicações dado um texto.
+    *
+    * @returns {Promise}  Promise resolvida com uma lista de objetos Publication
+    * da forma que o mongo retorna. Recebe uma query com informações de busca textual.
+    */
+   static searchByText(query, username) {
+     //Faz com os comentários do usuário logado apareçam primeiro
+     let projectQuery = setConditionQuery(username);
+     const findParams = getTextSearchParams(query.textSearch);
+     let skip =  {"$skip": parseInt(query.skip)};
+     let limit = {"$limit": 10};
+     let sortParams = {};
+     let filterByGenres = {};
+     let aggregation = [findParams, UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, lookup, 
+                        GROUP_QUERY, skip, limit]
+    if (query.orderBy && query.filterByGenres) {
+      sortParams = getSortParams(query.orderBy);
+      filterByGenres = getFindParams(query.filterByGenres);
+      aggregation.splice(6,0,sortParams)
+      aggregation.splice(6,0,filterByGenres)
+
+    }
+
+     return Publication.aggregate(aggregation).exec()
+   }
    /**
    * Consulta todos as Publicações. Neste método é feito todo o search inicial de publicações do sistema.
    * Ordenando as publicações de acordo com a query pesquisada.
@@ -74,8 +99,8 @@ export class PublicationService {
     let sortParams = {};
 
     if(!query.orderBy) {
-      /** When user is accessing his homepage or someone else home page, query.user is equal 
-       * to the username of the profile which is being visited by the 
+      /** When user is accessing his homepage or someone else home page, query.user is equal
+       * to the username of the profile which is being visited by the
        * user authenticated
        */
       findParams = {"$match": {"ownerUsername": query.user}};
@@ -85,7 +110,7 @@ export class PublicationService {
       sortParams = getSortParams(query.orderBy);
       findParams = getFindParams(query.filterByGenres, query.user);
     }
-  
+
     return Publication.aggregate([
       UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, lookup, GROUP_QUERY, findParams, sortParams, skip, limit
       ]).exec()
@@ -152,7 +177,7 @@ function getTextSearchParams(textSearch) {
   let find = {};
 
   if (textSearch) {
-    find = { $text: { $search: textSearch } }
+    find = { $match: { $text: { $search: textSearch} } }
   }
 
   return find;
@@ -201,7 +226,7 @@ function getSortParams(orderByParam) {
   } else if (orderByParam == ORDER_BY_LESS_POPULAR) {
     sort["$sort"] = {};
     sort["$sort"]["likes"] = ASCENDING_ORDER;
-  }
+  }  
 
   return sort;
 }

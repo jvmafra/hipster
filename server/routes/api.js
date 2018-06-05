@@ -1,6 +1,7 @@
 import express from 'express';
 import {UserValidator} from '../util/UserValidator'
 import { UsuarioService }  from '../service/UsuarioService';
+import { PublicationService }  from '../service/PublicationService';
 import auth from './auth';
 import token from '../service/tokenService';
 import Multer from 'multer';
@@ -133,5 +134,21 @@ router.delete('/v1/usuario', async (req, res) => {
   }
 });
 
+router.get('/v1/search', async (req, res) => {
+  const query = req.query;
+
+  try {
+    const username = token.getUsername(req);
+    const dataP = await PublicationService.searchByText(query,username);
+    const dataU = await UsuarioService.searchByText(query);
+
+    const data = dataU.concat(dataP)
+
+    res.status(200).json(data);
+  } catch(err) {
+    console.log(err.message);
+    res.status(400).json(err.message);
+  }
+});
 
 module.exports = router;

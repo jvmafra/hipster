@@ -96,8 +96,20 @@ export class PublicationService {
       params: {
         orderBy: params.orderBy,
         filterByGenres: params.filterByGenres,
-        textSearch: params.textSearch,
         skip: params.skip,
+        user: params.user
+      }
+    });
+  }
+
+  public searchByText (params) {
+    return this.http.get(this.serverHost + 'v1/publicacao/searchByText', {
+      headers: this.headers,
+      params: {
+        orderBy: params.orderBy,
+        filterByGenres: params.filterByGenres,
+        skip: params.skip,
+        textSearch: params.textSearch,
         user: params.user
       }
     });
