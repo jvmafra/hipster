@@ -138,12 +138,14 @@ router.get('/v1/search', async (req, res) => {
   const query = req.query;
 
   try {
-    const dataP = await PublicationService.searchByText(query);
+    const username = token.getUsername(req);
+    const dataP = await PublicationService.searchByText(query,username);
     const dataU = await UsuarioService.searchByText(query);
     const data = dataU.concat(dataP)
 
     res.status(200).json(data);
   } catch(err) {
+    console.log(err.message);
     res.status(400).json(err.message);
   }
 });

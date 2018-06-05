@@ -53,11 +53,16 @@ export class PublicationService {
     * @returns {Promise}  Promise resolvida com uma lista de objetos Publication
     * da forma que o mongo retorna. Recebe uma query com informações de busca textual.
     */
-   static searchByText(query) {
+   static searchByText(query, username) {
+     //Faz com os comentários do usuário logado apareçam primeiro
+     let projectQuery = setConditionQuery(username);
      const findParams = getTextSearchParams(query.textSearch);
+     let skip =  {"$skip": parseInt(query.skip)}
+     let limit = {"$limit": 10}
 
-     return Publication.find(findParams)
-             .limit(10).skip(parseInt(query.skip)).exec();
+     return Publication.aggregate([
+      findParams, UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, lookup, GROUP_QUERY, skip, limit
+      ]).exec()
    }
    /**
    * Consulta todos as Publicações. Neste método é feito todo o search inicial de publicações do sistema.
@@ -163,7 +168,7 @@ function getTextSearchParams(textSearch) {
   let find = {};
 
   if (textSearch) {
-    find = { $text: { $search: textSearch } }
+    find = { $match: { $text: { $search: textSearch} } }
   }
 
   return find;
