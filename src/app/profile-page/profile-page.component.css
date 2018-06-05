@@ -22,3 +22,20 @@
 .ui.sub.header {
   padding-left: 4.5%;
 }
+
+.upload-button {
+  display: none;
+}
+
+.image:hover .upload-button{
+  display: block;
+}
+
+.label-configurations {
+  width: 100% !important;
+  color: white !important;
+}
+
+.photo-height {
+  max-width: 300px !important;
+}

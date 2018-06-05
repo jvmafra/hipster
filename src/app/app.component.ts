@@ -58,6 +58,12 @@ export class AppComponent implements OnInit {
     return this.userService.getStoreName();
   }
 
+  public getPhotoUrl() {
+    const photoUrl = this.userService.getStorePhotoUrl();
+
+    return photoUrl !== 'undefined' ? photoUrl : './assets/neutro.png';
+  }
+
   private getUsername() {
     return this.userService.getStoreUsername();
   }

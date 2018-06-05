@@ -32,6 +32,16 @@ const usuarioSchema = new Schema({
       required: [true, erro.CADASTRO.VALIDACAO_SENHA]
     },
 
+    filePhotoName: {
+      type: String,
+      required: [false]
+    },
+
+    photoUrl : {
+      type: String,
+      required: [false]
+    },
+
     username : {
       type: String,
       required:[true, erro.CADASTRO.VALIDACAO_USERNAME],

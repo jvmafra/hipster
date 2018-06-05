@@ -1,0 +1,21 @@
+.upload-photo-button-color {
+  color: white !important;
+  white-space: nowrap;
+}
+
+.adjust-actions {
+  display: flex;
+  float: right;
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.modal {
+    width: 80% !important;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .cr-boundary {
+    margin-left: -20px !important;
+  }
+}

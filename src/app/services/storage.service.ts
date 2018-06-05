@@ -13,10 +13,16 @@ export class StorageService {
     localStorage.setItem('access_token', authUser.token);
     localStorage.setItem('username', authUser.user.username);
     localStorage.setItem('name', authUser.user.name);
+    localStorage.setItem('photoUrl', authUser.user.photoUrl);
+
   }
 
   public storeName(name) {
     localStorage.setItem('name', name);
+  }
+
+  public storePhotoUrl(photoUrl) {
+    localStorage.setItem('photoUrl', photoUrl);
   }
 
   public getStoreName() {
@@ -27,10 +33,15 @@ export class StorageService {
     return localStorage.getItem('username');
   }
 
+  public getStorePhotoUrl() {
+    return localStorage.getItem('photoUrl');
+  }
+
   public removeUser() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('name');
     localStorage.removeItem('username');
+    localStorage.removeItem('photoUrl');
   }
 
 }

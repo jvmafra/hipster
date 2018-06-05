@@ -2,6 +2,7 @@ import express from 'express';
 import { PublicationService }  from '../service/PublicationService';
 import auth from './auth';
 import {PublicationValidator} from '../util/PublicationValidator'
+import token from '../service/tokenService';
 
 const router = express.Router();
 
@@ -12,7 +13,8 @@ router.get('/', async (req, res) => {
   const query = req.query;
 
   try {
-    const data = await PublicationService.search(query);
+    const username = token.getUsername(req)
+    const data = await PublicationService.search(query, username);
     res.status(200).json(data);
   } catch(err) {
     res.status(400).json(err.message);
@@ -23,9 +25,10 @@ router.get('/', async (req, res) => {
  */
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
+  const query = req.query;
 
   try {
-    const data = await PublicationService.retrievePublication(id);
+    const data = await PublicationService.retrievePublication(id, query);
     res.status(200).json(data);
   } catch(err) {
     res.status(400).json(err.message);
@@ -36,7 +39,8 @@ router.get('/:id', async (req, res) => {
  * GET consulta todas publicaçoes de um usuário
  */
 router.get('/user/:username', async (req, res) => {
-  const ownerUsername = req.params.username;
+  const query = req.query;
+
   try {
     const data = await PublicationService.retrieveUserPublications(ownerUsername);
     res.status(200).json(data);
@@ -80,9 +84,11 @@ router.post('/', async (req, res) => {
   if (!validacao.return) {res.status(400).json(validacao.message);}
   else{
     try {
-      const data = await PublicationService.registerPublication(publication);
+      const username = token.getUsername(req);
+      const data = await PublicationService.registerPublication(publication, username);
       res.status(200).json(data);
     } catch(err) {
+      console.log(err.message)
       res.status(400).json(err.message);
     }
   }

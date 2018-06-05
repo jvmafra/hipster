@@ -7,7 +7,12 @@
     <div class="five wide column">
       <div class="ui card centered">
         <a class="image">
-          <img src="../assets/neutro.png">
+          <img class="photo-height" [src]="imageSRC" width="300" height="300">
+          <div *ngIf="this.isMyProfile" class="upload-button">
+              <label (click)="uploadPhotoModal.createModal($event)"  class="ui button label-configurations">
+                  <i class="retro icon"></i>
+                {{ 'PROFILEPAGE.UPLOADPHOTO' | translate }}</label>
+          </div>
         </a>
         <div class="content">
           <div class="header">{{ profile.name }}'s {{ 'PROFILEPAGE.PROFILE' | translate }}</div>
@@ -42,7 +47,7 @@
       </div>
 
       <div class="ui brown segment clearing" *ngIf="this.selected_tab === 0">
-        <app-create-post-home (search)="search()"></app-create-post-home>
+        <app-create-post-home *ngIf="this.isMyProfile" (search)="updateTimeline()"></app-create-post-home>
       </div>
 
       <div class="ui segment">
@@ -132,3 +137,4 @@
     </div>
   </div>
 </div>
+<app-upload-photo-modal view-model.ref="uploadPhotoModal" [(imgSrc)]="imageSRC" (updateTimeline)="updateTimeline()"> </app-upload-photo-modal>
