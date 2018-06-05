@@ -20,6 +20,21 @@ router.get('/', async (req, res) => {
     res.status(400).json(err.message);
   }
 });
+
+/**
+ * GET consulta todas publicaçoes por text. Essa consulta pode ter params de: ordenação e fitler
+ */
+router.get('/searchByText', async (req, res) => {
+  const query = req.query;
+
+  try {
+    const username = token.getUsername(req)
+    const data = await PublicationService.searchByText(query, username);
+    res.status(200).json(data);
+  } catch(err) {
+    res.status(400).json(err.message);
+  }
+});
 /**
  * GET consulta uma publicacao especifica
  */
@@ -88,7 +103,6 @@ router.post('/', async (req, res) => {
       const data = await PublicationService.registerPublication(publication, username);
       res.status(200).json(data);
     } catch(err) {
-      console.log(err.message)
       res.status(400).json(err.message);
     }
   }

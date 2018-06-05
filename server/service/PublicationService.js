@@ -57,12 +57,21 @@ export class PublicationService {
      //Faz com os comentários do usuário logado apareçam primeiro
      let projectQuery = setConditionQuery(username);
      const findParams = getTextSearchParams(query.textSearch);
-     let skip =  {"$skip": parseInt(query.skip)}
-     let limit = {"$limit": 10}
+     let skip =  {"$skip": parseInt(query.skip)};
+     let limit = {"$limit": 10};
+     let sortParams = {};
+     let filterByGenres = {};
+     let aggregation = [findParams, UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, lookup, 
+                        GROUP_QUERY, skip, limit]
+    if (query.orderBy && query.filterByGenres) {
+      sortParams = getSortParams(query.orderBy);
+      filterByGenres = getFindParams(query.filterByGenres);
+      aggregation.splice(6,0,sortParams)
+      aggregation.splice(6,0,filterByGenres)
 
-     return Publication.aggregate([
-      findParams, UNWIND_QUERY, projectQuery, SORT_COMMENT_QUERY, lookup, GROUP_QUERY, skip, limit
-      ]).exec()
+    }
+
+     return Publication.aggregate(aggregation).exec()
    }
    /**
    * Consulta todos as Publicações. Neste método é feito todo o search inicial de publicações do sistema.
@@ -217,7 +226,7 @@ function getSortParams(orderByParam) {
   } else if (orderByParam == ORDER_BY_LESS_POPULAR) {
     sort["$sort"] = {};
     sort["$sort"]["likes"] = ASCENDING_ORDER;
-  }
+  }  
 
   return sort;
 }

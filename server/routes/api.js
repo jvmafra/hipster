@@ -141,6 +141,7 @@ router.get('/v1/search', async (req, res) => {
     const username = token.getUsername(req);
     const dataP = await PublicationService.searchByText(query,username);
     const dataU = await UsuarioService.searchByText(query);
+
     const data = dataU.concat(dataP)
 
     res.status(200).json(data);

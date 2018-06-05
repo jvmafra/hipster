@@ -153,9 +153,8 @@ export class SearchComponent implements OnInit {
     myParams["skip"] = skip;
     myParams["user"];
 
-    this.publicationService.search(myParams).subscribe(
+    this.publicationService.searchByText(myParams).subscribe(
       data => {
-
         this.events = this.skip === 0 ? data : this.events.concat(data);
         this.events = data;
         this.shownEvents = this.events;
