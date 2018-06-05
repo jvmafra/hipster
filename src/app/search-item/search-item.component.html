@@ -1,0 +1,7 @@
+<div *ngIf="event.isUser" >
+  <app-timeline-user class="hip-full-width" [event]="event"></app-timeline-user>
+</div>
+
+<div *ngIf="!event.isUser" >
+  <app-timeline-post class="hip-full-width" [event]="event"></app-timeline-post>
+</div>

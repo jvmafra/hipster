@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { UploadPhotoModalComponent } from './profile-page/upload-photo-modal/upload-photo-modal.component';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -13,6 +14,7 @@ import { HipsterTranslate } from './services/hipster-translate.service';
 import { UserPostComponent } from './user-post/user-post.component';
 import { UserService } from './services/user.service';
 import { ReportService } from './services/report.service';
+import { SearchService } from './services/search.service';
 import { GlobalService} from './services/global.service';
 import { FormValidationService } from './services/form-validation.service';
 import { AuthService } from './services/auth.service';
@@ -36,6 +38,8 @@ import { ConfirmationPageComponent } from './confirmation-page/confirmation-page
 import {ConfirmationService} from "./services/confirmation.service";
 import { SearchComponent } from './search/search.component';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { TimelineUserComponent } from './timeline-user/timeline-user.component';
+import { SearchItemComponent } from './search-item/search-item.component';
 
 PublicationService
 export function HttpLoaderFactory(http: HttpClient) {
@@ -59,7 +63,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoadIndicationComponent,
     CreatePostHomeComponent,
     ConfirmationPageComponent,
-    SearchComponent
+    SearchComponent,
+    TimelineUserComponent,
+    SearchItemComponent,
+    UploadPhotoModalComponent
   ],
   providers: [
     {
@@ -82,7 +89,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     PublicationService,
     ReportService,
     AlertService,
-    ConfirmationService
+    ConfirmationService,
+    PublicationService,
+    SearchService
   ],
   imports: [
     BrowserModule,

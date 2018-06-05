@@ -1,4 +1,7 @@
-<div class="ui container">
+<div class="ui container"
+            infiniteScroll
+            [infiniteScrollDistance]="1"
+            (scrolled)="onScroll()">
   <div class="ui grid post-container">
     <div class="sixteen wide mobile four wide tablet four wide computer column">
       <div class="ui segment extra">
@@ -24,7 +27,13 @@
           <div class="ui sub header"> {{ 'FILTER_OPTIONS.CLASSIFY_POSTS' | translate }} </div>
           <div class="field">
             <div class="ui radio checkbox">
-              <input  (click)="classifyBy(ORDER_BY_MOST_RECENT)" type="radio" name="frequency" checked="checked">
+              <input  (click)="clearFilter()" type="radio" name="frequency" checked="checked">
+              <label>{{ 'HIPSTER.CLEAR' | translate }}</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input  (click)="classifyBy(ORDER_BY_MOST_RECENT)" type="radio" name="frequency">
               <label>{{ 'HIPSTER.CLASS_M_RECENT' | translate }}</label>
             </div>
           </div>
@@ -53,8 +62,12 @@
       <div class="ui stacked segment extra">
         <div class="ui labels">
           <div class="ui divided items">
+            <div class="ui negative message" *ngIf="!found" >
+              <i class="search icon"></i>
+              {{ 'HIPSTER.RESULTS_NOT_FOUND' | translate }} "{{ queryText }}"
+            </div>
             <div class="item" *ngFor="let event of shownEvents">
-              <app-timeline-post class="hip-full-width" [event]="event"></app-timeline-post>
+              <app-search-item *ngIf="found" class="hip-full-width" [event]="event"></app-search-item>
             </div>
           </div>
         </div>

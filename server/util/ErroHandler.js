@@ -14,6 +14,7 @@ _.CADASTRO = {
     VALIDACAO_USERNAME: 'Usuário deve ter um username',
     VALIDACAO_DATA_NASCIMENTO_FORMATO: 'A data não é valida',
     VALIDACAO_DATA_NASCIMENTO: 'Usuário deve ter uma data de nascimento',
+    VALIDACAO_ACTIVE_EMAIL: "VALIDACAO_ACTIVE_EMAIL",
 
     VALIDACAO_OWNER: "Publicação deve ter um criador",
     VALIDACAO_URL: "Publicação deve ter uma url vinculada a ela",
@@ -49,8 +50,12 @@ _.REPORT = {
     VALIDACAO_REPORT_YOURSELF: "VALIDACAO_REPORT_YOURSELF"
 }
 
+_.CONFIRMATION = {
+    CONFIRMATION_ERROR_EMAIL: "CONFIRMATION_ERROR_EMAIL"
+}
+
 const INFO_DUPLICADA = {
-    USERNAME: 'Esse username já existe',
+    USERNAME: 'DUPLICATED_USERNAME',
     EMAIL: 'Esse e-mail já foi cadastrado'
 };
 
@@ -74,11 +79,11 @@ _.handleValidationError = (err, next) => {
 };
 
 _.handleMongoError = (err, next) => {
-    let message = _.REQUISICAO.ERRO_CRIACAO;
+    var message = _.REQUISICAO.ERRO_CRIACAO;
     if (err.code === 11000) { // duplicate key error
-        message += INFO_DUPLICADA.USERNAME;
+        message = INFO_DUPLICADA.USERNAME;
     }
-    message += ".";
+
     return next(new Error(message));
 };
 

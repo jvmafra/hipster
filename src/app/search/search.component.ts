@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PublicationService } from '../services/publication.service';
+import { SearchService } from '../services/search.service';
 import { UserService } from "../services/user.service";
 import { ActivatedRoute } from "@angular/router";
 
@@ -23,15 +24,21 @@ export class SearchComponent implements OnInit {
   public ORDER_BY_LESS_POPULAR = 4;
   public found: boolean = true;
   public queryText: string;
+  public oldQuery: string;
+  private skip;
   private selectedOrder;
 
   constructor(private publicationService: PublicationService,
+              private searchService: SearchService,
               private router: Router,
               private userService: UserService,
               private route: ActivatedRoute) {
     this.listGenres = this.publicationService.getListGenres();
     this.initGenreSelectedProperty();
     this.filteredGenres = [];
+    this.skip = 0;
+    this.events = [];
+    this.shownEvents = [];
     this.selectedOrder = this.ORDER_BY_MOST_RECENT;
   }
 
@@ -52,7 +59,14 @@ export class SearchComponent implements OnInit {
       genre.genreSelected = false;
     }
 
-    this.search();
+    if (this.filteredGenres.length > 0) {
+      this.searchPublications(0);
+    } else {
+      this.events = [];
+      this.shownEvents = []; 
+      this.searchAll(0);
+    }
+
   };
 
   public getClass(genre) {
@@ -62,7 +76,7 @@ export class SearchComponent implements OnInit {
   public classifyBy(orderByParam) {
     if ([1,2,3,4].indexOf(orderByParam) !== -1) {
       this.selectedOrder = orderByParam;
-      this.search();
+      this.searchPublications(0);
     }
   }
 
@@ -81,28 +95,72 @@ export class SearchComponent implements OnInit {
        let queryTextSearch = params["params"].q;
        this.queryText = queryTextSearch;
 
-       this.search();
+       if (this.queryText != this.oldQuery) {
+         this.events = [];
+         this.shownEvents = [];
+       }
+
+       this.found = true;
+       this.searchAll(0);
     });
   }
 
   public clearFilter() {
     this.filteredGenres = [];
     this.listGenres.map(genre => genre.genreSelected = false);
-    this.search();
+    this.searchAll(0);
+    this.skip = 0;
   }
 
-  public search() {
+  public searchAll(skip) {
+    let myParams = {};
+
+    this.oldQuery = this.queryText;
+    myParams["textSearch"] = this.queryText;
+    myParams["skip"] = skip;
+    myParams["user"];
+
+    this.searchService.search(myParams).subscribe(
+      data => {
+
+        this.events = this.skip === 0 ? data : this.events.concat(data);
+        this.skip = this.events.length;
+        this.shownEvents = this.events;
+
+        if (this.events.length === 0) { this.found = false; }
+        else { this.found = true; }
+
+      }, err => {
+        this.found = false;
+        console.log(err)
+      }
+    );
+  }
+
+  public onScroll() {
+    if (this.filteredGenres.length > 0) {
+      this.searchPublications(this.skip);
+    } else {
+      this.searchAll(this.skip);
+    }
+  }
+
+  public searchPublications(skip) {
     let myParams = {};
     myParams["orderBy"] = this.selectedOrder;
     myParams["filterByGenres"] = this.filteredGenres;
     myParams["textSearch"] = this.queryText;
+    myParams["skip"] = skip;
+    myParams["user"];
 
-    this.publicationService.search(myParams).subscribe(
+    this.publicationService.searchByText(myParams).subscribe(
       data => {
+        this.events = this.skip === 0 ? data : this.events.concat(data);
         this.events = data;
         this.shownEvents = this.events;
 
         if (this.events.length == 0) { this.found = false; }
+        else { this.found = true };
 
       }, err => {
         this.found = false;
